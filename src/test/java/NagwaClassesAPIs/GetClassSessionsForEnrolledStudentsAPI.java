@@ -24,7 +24,7 @@ public class GetClassSessionsForEnrolledStudentsAPI {
     public TestBase object = new TestBase();
 
     public String access_token1 = object.access_token;
-
+    public String access_token3 = object.access_token2;
     public String student_id1 = object.student_id;
 
     public String access_token_2 = object.access_token2;
@@ -78,7 +78,7 @@ public class GetClassSessionsForEnrolledStudentsAPI {
     public void check_response(){
         Response res3 = RestAssured.given().spec(build_request1()).when().get("/students/{studentId}/classes/{classId}/sessions");
         res3.prettyPrint();
-        ValidatableResponse validateRespons3 = res3.then().statusCode(HttpStatus.SC_OK).assertThat().body("class_id", hasToString("[270160879432]"), "classes_sessions[0].session_id[]", empty());
+        ValidatableResponse validateRespons3 = res3.then().statusCode(HttpStatus.SC_OK).assertThat().body("class_id", hasToString("[459109472810]"), "classes_sessions[0].session_id[]", empty());
 
     }
 
@@ -101,6 +101,47 @@ public class GetClassSessionsForEnrolledStudentsAPI {
         response1.prettyPrint();
         ValidatableResponse validate_response = response1.then().statusCode(HttpStatus.SC_UNAUTHORIZED).assertThat().body("message", equalTo("Unauthorized"));
 
+    }
+
+    @Given("User Enter Invalid Student Id And Valid ClassId")
+    public RequestSpecification Invalid_student_id_andValid_classId(){
+        RequestSpecBuilder builder7 = new RequestSpecBuilder();
+        RequestSpecification request7;
+        builder7.addHeader("Content-Type", "application/json");
+        builder7.addHeader("Authorization",access_token_2);
+        builder7.addPathParam("studentId",student_idd2);
+        builder7.addPathParam("classId",class_id);
+        request7 = builder7.build();
+        return request7;
+
+    }
+    @Then("User Should Get 403 Response Code And Error Message In Response Body")
+    public void check_response4(){
+
+        Response response1 = RestAssured.given().spec(Invalid_student_id_andValid_classId()).when().get("/students/{studentId}/classes/{classId}/sessions");
+        response1.prettyPrint();
+        ValidatableResponse validate_response = response1.then().statusCode(HttpStatus.SC_FORBIDDEN).assertThat().body("error_id", hasToString("4035"));
+
+    }
+
+    @Given("User Enter Valid StudentId And Invalid ClassId")
+
+    public RequestSpecification Invalid_class_id(){
+        RequestSpecBuilder builder8 = new RequestSpecBuilder();
+        RequestSpecification request8;
+        builder8.addHeader("Content-Type", "application/json");
+        builder8.addHeader("Authorization",access_token1);
+        builder8.addPathParam("studentId",student_id1);
+        builder8.addPathParam("classId","123456789000");
+        request8 = builder8.build();
+        return request8;
+    }
+    @Then("User  Should Get 404 Response Code And Error Message In Response Body")
+    public void check_Response0(){
+
+        Response response1 = RestAssured.given().spec(Invalid_class_id()).when().get("/students/{studentId}/classes/{classId}/sessions");
+        response1.prettyPrint();
+        ValidatableResponse validate_response = response1.then().statusCode(HttpStatus.SC_NOT_FOUND).assertThat().body("error_id", hasToString("4046"));
     }
 
 }
