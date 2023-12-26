@@ -1,0 +1,603 @@
+{
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "class_id": {
+          "type": "integer"
+        },
+        "class_title": {
+          "type": "string"
+        },
+        "class_educators": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "educator_id": {
+                  "type": "integer"
+                },
+                "educator_first_name": {
+                  "type": "string"
+                },
+                "educator_last_name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "educator_id",
+                "educator_first_name",
+                "educator_last_name"
+              ]
+            }
+          ]
+        },
+        "classes_sessions": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "integer"
+                },
+                "session_title": {
+                  "type": "string"
+                },
+                "session_start_date": {
+                  "type": "string"
+                },
+                "session_end_date": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "session_id",
+                "session_title",
+                "session_start_date",
+                "session_end_date"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "class_id",
+        "class_title",
+        "class_educators",
+        "classes_sessions"
+      ]
+    }
+  ]
+}
