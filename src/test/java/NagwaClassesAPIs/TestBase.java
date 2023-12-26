@@ -20,6 +20,11 @@ public class TestBase {
     public static  String student_id2 = "209105216186";
 
 
+    public  static  String class_id_contains_sessions = "270160879432";
+
+    public static String class_id_contains_nosessions = "459109472810";
+
+
     @Given("Generate Token For The Student")
     @BeforeAll
     public static void generate_access_token(){
