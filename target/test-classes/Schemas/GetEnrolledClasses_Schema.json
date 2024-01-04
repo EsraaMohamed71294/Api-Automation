@@ -1,0 +1,102 @@
+{
+  "type": "object",
+  "properties": {
+    "classes": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "class_id": {
+              "type": "integer"
+            },
+            "class_title": {
+              "type": "string"
+            },
+            "educators": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "educator_id": {
+                      "type": "integer"
+                    },
+                    "educator_first_name": {
+                      "type": "string"
+                    },
+                    "educator_last_name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "educator_id",
+                    "educator_first_name",
+                    "educator_last_name"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "class_id",
+            "class_title",
+            "educators"
+          ]
+        }
+      ]
+    },
+    "upcoming_sessions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "class_id": {
+              "type": "integer"
+            },
+            "class_title": {
+              "type": "string"
+            },
+            "session_id": {
+              "type": "integer"
+            },
+            "session_title": {
+              "type": "string"
+            },
+            "session_start_date": {
+              "type": "string"
+            },
+            "session_end_date": {
+              "type": "string"
+            },
+            "educator_id": {
+              "type": "integer"
+            },
+            "educator_first_name": {
+              "type": "string"
+            },
+            "educator_last_name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "class_id",
+            "class_title",
+            "session_id",
+            "session_title",
+            "session_start_date",
+            "session_end_date",
+            "educator_id",
+            "educator_first_name",
+            "educator_last_name"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "classes",
+    "upcoming_sessions"
+  ]
+}
