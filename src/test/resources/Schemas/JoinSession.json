@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string"
+    },
+    "agora_resource_id": {
+      "type": ["null","string"]
+    },
+    "agora_sid": {
+      "type": ["null","string"]
+    },
+    "agora_token": {
+      "type": ["null","string"]
+    }
+  },
+  "required": [
+    "session_id",
+    "agora_resource_id",
+    "agora_sid",
+    "agora_token"
+  ]
+}
