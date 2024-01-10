@@ -3,10 +3,12 @@
   <groupId>NagwaClasses</groupId>
   <artifactId>studentClasses</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
-   <properties>
-	 <junit.version>5.10.1</junit.version>
-  </properties>
+
+    <properties>
+        <junit.version>5.10.1</junit.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
   
   <dependencies>
 	  <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
@@ -88,5 +90,17 @@
     <artifactId>postgresql</artifactId>
     <version>42.6.0</version>
 </dependency>
+      <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>cucumber-java</artifactId>
+          <version>7.14.0</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>cucumber-testng</artifactId>
+          <version>7.14.0</version>
+      </dependency>
   </dependencies>
 </project>

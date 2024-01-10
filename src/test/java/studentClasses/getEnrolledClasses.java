@@ -15,7 +15,7 @@ import io.restassured.specification.RequestSpecification;
 import static org.hamcrest.Matchers.*;
 
 
-public class getEnrolledClasses extends TestBase {
+public class getEnrolledClasses   {
 	
 	TestBase object = new TestBase();
 	String user_token = object.access_token;

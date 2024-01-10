@@ -4,22 +4,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+public class Database_Connection  {
 
-public class Database_Connection {
-	
-	
-	    
-	    @Test
-	    public void connect() {
-
-	        try {
-				   DriverManager.getConnection(host, user, password);
-
-	                   
-	        } catch (SQLException e) {
-	            System.out.println(e.getMessage());
-	        }
-	        	
-	    }
+	TestBase Test =new TestBase();
+	    public String Database_Connection (String SQL_Query) {
+		try {
+			Connection connect = DriverManager.getConnection(Test.host, Test.user, Test.password);
+			PreparedStatement pst = connect.prepareStatement(SQL_Query);
+			ResultSet rs = pst.executeQuery();
+			rs.next() ;
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
 	    }

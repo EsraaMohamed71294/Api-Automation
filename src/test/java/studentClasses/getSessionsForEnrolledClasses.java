@@ -1,11 +1,6 @@
 package studentClasses;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,12 +13,11 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import static org.hamcrest.Matchers.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 
 
-public class getSessionsForEnrolledClasses extends TestBase {
+
+public class getSessionsForEnrolledClasses   {
 	
 	TestBase object = new TestBase();
 	Database_Connection Connect =new Database_Connection();
@@ -47,20 +41,7 @@ public class getSessionsForEnrolledClasses extends TestBase {
 			.get("/students/{studentId}/classes/{classId}/sessions");;
 		return response;
 	}
-	
-	public Void Database_Connection (String SQL_Query) {
-		try {
-			Connection connect = DriverManager.getConnection(object.host, object.user, object.password);
-			 PreparedStatement pst = connect.prepareStatement(SQL_Query);
-	         ResultSet rs = pst.executeQuery();
-	         rs.next() ;
-	         }
-			catch(SQLException e){
-	            System.out.println(e.getMessage());
-			}
 
-	}
-	
 	
 	@DisplayName("Get sessions for Enrolled user into class")
     @Test
@@ -95,7 +76,7 @@ public class getSessionsForEnrolledClasses extends TestBase {
 	
     }
 	
-	@DisplayName("student is not enroled in the class")
+	@DisplayName("student is not enrolled in the class")
     @Test
     public void unauthorized_student () {
 		
