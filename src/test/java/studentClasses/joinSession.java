@@ -22,19 +22,19 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 public class joinSession {
-    TestBase object = new TestBase();
-    String user_token = object.refresh_token;
-    String student_Id = object.student_Id;
-    String class_id = object.class_Id;
-    String session_id = object.session_id;
-    String expensive_session_id = object.expensive_session_id;
-    String class_id_for_join_session = object.class_id_for_join_session;
-    String fully_Paid_class =object.fully_Paid_class;
-    String fully_Paid_class_Session =object.fully_Paid_class_Session;
+    TestBase test = new TestBase();
+    String user_token = test.refresh_token;
+    String student_Id = test.student_Id;
+    String class_id = test.class_Id;
+    String session_id = test.session_id;
+    String expensive_session_id = test.expensive_session_id;
+    String class_id_for_join_session = test.class_id_for_join_session;
+    String fully_Paid_class =test.fully_Paid_class;
+    String fully_Paid_class_Session =test.fully_Paid_class_Session;
 
-    String NotActive_student_Id =object.NotActive_student_Id;
-    String ended_Session = object.ended_Session;
-    String Not_Started_Session = object.Not_Started_Session;
+    String NotActive_student_Id =test.NotActive_student_Id;
+    String ended_Session = test.ended_Session;
+    String Not_Started_Session = test.Not_Started_Session;
     Map<String,Object> pathParams = new HashMap<String, Object>();
 
 
@@ -48,7 +48,7 @@ public class joinSession {
 
     @When("Performing the Api of Joining Session")
     public Response Join_Session() {
-        String access_token = object.generate_access_token(user_token);
+        String access_token = test.generate_access_token(user_token);
         RequestSpecification request = RestAssured.
                 given()
                 .pathParams(pathParams)
@@ -106,8 +106,8 @@ public class joinSession {
     }
     @Given("User Send InActive StudentId")
     public RequestSpecification Student_Not_Found_OR_NotActive () {
-        String Not_Activate_Student_Refresh_Token = object.Not_Activate_Student_Refresh_Token;
-        String Not_Activate_Student_access_token = object.generate_access_token(Not_Activate_Student_Refresh_Token);
+        String Not_Activate_Student_Refresh_Token = test.Not_Activate_Student_Refresh_Token;
+        String Not_Activate_Student_access_token = test.generate_access_token(Not_Activate_Student_Refresh_Token);
         pathParams.put("student_id", "430192963192");
         pathParams.put("class_id", class_id);
         pathParams.put("session_id",session_id);
