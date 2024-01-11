@@ -1,7 +1,7 @@
   Feature: Test all scenarios of the api of joining session
 
     Background: Generating New Access Token
-      Given   Send "refresh_token" To Generate Token For The User And Set BaseURL
+      Given   Send "refresh_token" To Generate Access Token for user
 
     Scenario: Verify session joined successfully for valid user
       Given   User Send The Post Request Of join_session_In_Enrolled_Class

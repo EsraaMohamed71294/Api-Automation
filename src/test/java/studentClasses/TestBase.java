@@ -22,6 +22,8 @@ public class TestBase {
 	public static String Not_Started_Session = "786905435678";
 	public  static  String class_Title = "Mathematics";
 	public static String NotActive_student_Id = "430192963192";
+	public static String class_id_has_no_sessions = "624185604856";
+	public static String class_title_has_no_sessions= "اللغة العربية";
 	public  static  String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTAxMSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNDU1NDA5Ni41MzM2NjQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZDNjYjdmMzQ5OTZiNDljN2FmYzEzYmU2ZTI4ZTJiOTgifQ.ACMZH37FekpeR89hkZrVLfq1abvkpm12I01YJdZL1Ek";
 	public static String Not_Activate_Student_Refresh_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6NDMwMTkyOTYzMTkyLCJyb2xlIjoic3R1ZGVudCJ9LCJleHAiOjE3MTUxNjA2NjkuODU3NzIsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNGUwMjNhODFjYzRhNGIxNGIyNWQ2MDFhZTQzZjFlNWYifQ.srh63EoINMYdaFzVVzRxG0qATPD7sW30OvCTgo_0E8U";
 
@@ -31,7 +33,7 @@ public class TestBase {
     public final String password = "8yZ%`6!e?~0q6<MM?hHO";
 
 
-	@Given("Send {string} To Generate Token For The User And Set BaseURL")
+	@Given("Send {string} To Generate Access Token for user")
 	public static String  generate_access_token( String refresh_token ) {
 		RestAssured.baseURI ="https://aevkujc65i.execute-api.us-east-1.amazonaws.com";
 		RestAssured.basePath ="/beta/v1";
