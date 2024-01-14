@@ -13,9 +13,10 @@ import java.sql.SQLException;
 public class Database_Connection  {
 
 	TestBase Test =new TestBase();
+	TestData data = new TestData();
 	    public String Database_Connection (String SQL_Query) {
 		try {
-			Connection connect = DriverManager.getConnection(Test.host, Test.user, Test.password);
+			Connection connect = DriverManager.getConnection(data.host, data.user, data.password);
 			PreparedStatement pst = connect.prepareStatement(SQL_Query);
 			ResultSet rs = pst.executeQuery();
 			rs.next() ;

@@ -19,13 +19,14 @@ import static org.hamcrest.Matchers.*;
 public class getSessionsForEnrolledClasses{
 	
 	TestBase test = new TestBase();
+	TestData data = new TestData();
 	Database_Connection Connect =new Database_Connection();
-	String user_token = test.refresh_token;
-	String student_id = test.student_Id;
-	String class_id = test.class_Id;
-	String class_title = test.class_Title;
-	String class_id_has_no_sessions = test.class_id_has_no_sessions;
-	String class_title_has_no_sessions= test.class_title_has_no_sessions;
+	String user_token = data.refresh_token;
+	String student_id = data.student_Id;
+	String class_id = data.class_Id;
+	String class_title = data.class_Title;
+	String class_id_has_no_sessions = data.class_id_has_no_sessions;
+	String class_title_has_no_sessions= data.class_title_has_no_sessions;
 	Map <String,Object> pathParams = new HashMap<String, Object>();
 	
 	@When("Perform then api of get_sessions_for_enrolled_class")
@@ -41,13 +42,7 @@ public class getSessionsForEnrolledClasses{
 			.get("/students/{studentId}/classes/{classId}/sessions");;
 		return response;
 	}
-	public void Validate_Error_Messages (Integer statusCode , String error_message ,Integer error_id ) {
-		get_sessions_for_enrolled_class ().prettyPrint();
-		get_sessions_for_enrolled_class ().then()
-				.statusCode(statusCode)
-				.assertThat()
-				.body("error_message" ,containsString(error_message) ,"error_id" ,equalTo(error_id) );
-	}
+	Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class ();
 	@Given("user send class contains sessions that user enrolled in")
     public void Get_Sessions_for_Enrolled_Classes () {
 		pathParams.put("studentId", student_id);
@@ -84,7 +79,7 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 403 and user unauthorized")
 	public void Validate_Response_For_Student_NotEnrolled () {
-		Validate_Error_Messages(HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+		test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
 	}
 	@Given("user send class is not exist")
     public void Class_Not_Found () {
@@ -93,7 +88,7 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 404 and class not found")
 	public void Validate_Response_of_Class_Not_Found(){
-		Validate_Error_Messages(HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
+		test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
 	}
 
 }

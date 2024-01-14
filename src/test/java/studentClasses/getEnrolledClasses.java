@@ -20,17 +20,11 @@ import static org.hamcrest.Matchers.*;
 
 public class getEnrolledClasses{
 	TestBase test = new TestBase();
-	String user_token = test.refresh_token;
-	String student_id = test.student_Id;
+	TestData data = new TestData();
+	String user_token = data.refresh_token;
+	String student_id = data.student_Id;
 	Map <String,Object> pathParams = new HashMap<String, Object>();
 
-	public void Validate_Error_Messages (Integer statusCode , String error_message ,Integer error_id ) {
-		Get_Enrolled_Classes().prettyPrint();
-		Get_Enrolled_Classes().then()
-				.statusCode(statusCode)
-				.assertThat()
-				.body("error_message" ,containsString(error_message) ,"error_id" ,equalTo(error_id) );
-	}
 	@When("Perform the api of Get_Enrolled_Classes")
 	public Response Get_Enrolled_Classes() {
 		String access_token = test.generate_access_token(user_token);
@@ -46,6 +40,7 @@ public class getEnrolledClasses{
 					
 					return response;
 	}
+	Response getEnrolledClassesResponse = Get_Enrolled_Classes();
 	@Given("user send user id to get all upcoming sessions")
 	public void get_Enrolled_Classes_And_Upcoming_Sessions() {
 		pathParams.put("studentId", student_id);
@@ -66,6 +61,6 @@ public class getEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 403 and user unauthorized")
 	public void Validate_Response_of_unauthorized_user() {
-		Validate_Error_Messages(HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+		test.Validate_Error_Messages(getEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
 	}
 }

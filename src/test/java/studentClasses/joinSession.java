@@ -23,28 +23,20 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class joinSession {
     TestBase test = new TestBase();
-    String user_token = test.refresh_token;
-    String student_Id = test.student_Id;
-    String class_id = test.class_Id;
-    String session_id = test.session_id;
-    String expensive_session_id = test.expensive_session_id;
-    String class_id_for_join_session = test.class_id_for_join_session;
-    String fully_Paid_class =test.fully_Paid_class;
-    String fully_Paid_class_Session =test.fully_Paid_class_Session;
+    TestData data = new TestData();
+    String user_token = data.refresh_token;
+    String student_Id = data.student_Id;
+    String class_id = data.class_Id;
+    String session_id = data.session_id;
+    String expensive_session_id = data.expensive_session_id;
+    String class_id_for_join_session = data.class_id_for_join_session;
+    String fully_Paid_class =data.fully_Paid_class;
+    String fully_Paid_class_Session =data.fully_Paid_class_Session;
 
-    String NotActive_student_Id =test.NotActive_student_Id;
-    String ended_Session = test.ended_Session;
-    String Not_Started_Session = test.Not_Started_Session;
+    String NotActive_student_Id =data.NotActive_student_Id;
+    String ended_Session = data.ended_Session;
+    String Not_Started_Session = data.Not_Started_Session;
     Map<String,Object> pathParams = new HashMap<String, Object>();
-
-
-    public void Validate_Error_Messages (Integer statusCode , String error_message ,Integer error_id ) {
-        Join_Session().prettyPrint();
-        Join_Session().then()
-                .statusCode(statusCode)
-                .assertThat()
-                .body("error_message" ,containsString(error_message) ,"error_id" ,equalTo(error_id) );
-    }
 
     @When("Performing the Api of Joining Session")
     public Response Join_Session() {
@@ -59,6 +51,7 @@ public class joinSession {
                 .post("/students/{student_id}/classes/{class_id}/sessions/{session_id}/join\n" + "\n");
         return response;
     }
+    Response joinSessionResponse = Join_Session();
     @Given("User Send The Post Request Of join_session_In_Enrolled_Class")
     public void join_session_In_Enrolled_Class() {
         pathParams.put("student_id", student_Id);
@@ -82,7 +75,7 @@ public class joinSession {
     }
     @Then("The Response Should Contain Status Code 403 And Error Message Unauthorized")
     public void Validate_Response_unauthorized_student (){
-        Validate_Error_Messages(HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
    @Given("Student Join Session IS not Exist")
     public void Session_Not_Found () {
@@ -92,7 +85,7 @@ public class joinSession {
     }
     @Then("The Response Should Contain Status Code 404 And Error Message That Session Doesnt Exist")
     public void Validate_Response_For_Not_Found_Session (){
-        Validate_Error_Messages(HttpStatus.SC_NOT_FOUND,"session not found or not eligible for display.",4048);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_NOT_FOUND,"session not found or not eligible for display.",4048);
     }
     @Given("User send class id that not exist")
     public void Class_Not_Found () {
@@ -102,11 +95,11 @@ public class joinSession {
     }
     @Then("The Response Should Contain Status Code 404 And Error Message That Class Doesnt Exist")
     public void Validate_Response_For_Class_Not_Exist (){
-        Validate_Error_Messages(HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
     }
     @Given("User Send InActive StudentId")
     public RequestSpecification Student_Not_Found_OR_NotActive () {
-        String Not_Activate_Student_Refresh_Token = test.Not_Activate_Student_Refresh_Token;
+        String Not_Activate_Student_Refresh_Token = data.Not_Activate_Student_Refresh_Token;
         String Not_Activate_Student_access_token = test.generate_access_token(Not_Activate_Student_Refresh_Token);
         pathParams.put("student_id", "430192963192");
         pathParams.put("class_id", class_id);
@@ -137,7 +130,7 @@ public class joinSession {
     }
     @Then("The Response Should Contains Status Code 422 And Error Message Session Is Ended")
     public void Validate_Response_For_Ended_Session (){
-        Validate_Error_Messages(HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. session is ended.",4224);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. session is ended.",4224);
     }
     @Given("User Send NotStarted SessionId")
     public void Not_Started_Session () {
@@ -147,7 +140,7 @@ public class joinSession {
     }
     @Then("The Response Should Contains Status Code 422 And Error Message Session Havent Started")
     public void Validate_Response_For_Not_Started_Session (){
-        Validate_Error_Messages(HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. session not started yet.",4227);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. session not started yet.",4227);
     }
     @Given("User Send KickedOut StudentId")
     public void Kicked_Out_Student_From_Session () {
@@ -157,7 +150,7 @@ public class joinSession {
     }
     @Then("The Response Should Contains StatusCode 422 And Error Message Student Is KickedOut")
     public void Validate_Response_For_KickOut_Student (){
-        Validate_Error_Messages(HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. student kicked out from session.",4225);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. student kicked out from session.",4225);
     }
     @Given("User Send SessionId That Doesnt Related To Class Or Student")
     public void Session_Not_Related_To_Student () {
@@ -167,7 +160,7 @@ public class joinSession {
     }
     @Then("The Response Should Contains Status Code 422 And Error Message Session Isnt Related To Class Or Student")
     public void Validate_Response_Session_Not_Related_To_Student (){
-        Validate_Error_Messages(HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. session not related to this class or this student",4223);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. session not related to this class or this student",4223);
     }
     @Given("User Send ClassId That Doesnt Allow PayPerSession And SessionId That Doesnt Have AccessRight On")
     public void Pay_Per_Session_Not_Allowed () {
@@ -177,7 +170,7 @@ public class joinSession {
     }
     @Then("The Response Should Contains Status Code 422 And Error Message The Class Doesnt Allow PayPerSession")
     public void Validate_Response_For_Pay_Per_Session_Not_Allowed (){
-        Validate_Error_Messages(HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. pay per session not allowed for this class",4222);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. pay per session not allowed for this class",4222);
     }
     @Given("User Send StudentId With InSufficient Balance")
     public void Insufficient_Student_Wallet () {
@@ -187,6 +180,6 @@ public class joinSession {
     }
     @Then("The Response Should Contains Status Code 422 And Error Message Student Wallet Is Insufficient")
     public void Validate_Response_For_Insufficient_Balance (){
-        Validate_Error_Messages(HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. insufficient student wallet balance.",4226);
+        test.Validate_Error_Messages(joinSessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. insufficient student wallet balance.",4226);
     }
 }
