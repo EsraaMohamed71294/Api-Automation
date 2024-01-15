@@ -20,14 +20,14 @@
                   "type": "object",
                   "properties": {
                     "educator_id": {
-                      "type": "integer"
+                      "type": ["integer",null]
                     },
                     "educator_first_name": {
-                      "type": "string"
+                      "type": ["string", null]
                     },
                     "educator_last_name": {
-                      "type": "string"
-                    }
+                      "type": ["string", null]
+                  }
                   },
                   "required": [
                     "educator_id",

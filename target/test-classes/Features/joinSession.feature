@@ -4,14 +4,14 @@
       Given   Send "refresh_token" To Generate Access Token for user
 
     Scenario: Verify session joined successfully for valid user
-      Given   User Send The Post Request Of join_session_In_Enrolled_Class
+      Given   User Send The Post Request Of join session
       When    Performing the Api of Joining Session
       Then    The Response should contains status code 200 and correct session id
 
     Scenario: Verify that student can't join session in class that he haven't enrolled in
       Given   User Send Valid StudentId And ClassId That He Haven't Enrolled In
       When    Performing the Api of Joining Session
-      Then    The Response Should Contain Status Code 403 And Error Message Unauthorized
+      Then    The Response for join session Should Contain Status Code 403 And Error Message Unauthorized
 
     Scenario: Verify that student cant join session that doesnt exist
       Given   Student Join Session IS not Exist

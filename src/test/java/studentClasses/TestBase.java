@@ -9,32 +9,22 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+
 public class TestBase {
+
+	TestData data =new TestData();
 	public static String access_token;
-	public  static  String student_Id = "123456789011";
-	public  static  String class_Id = "270160879432";
-	public static  String class_id_for_join_session = "102345678999";
-	public static String fully_Paid_class = "123452349098";
-	public static String fully_Paid_class_Session = "123451234562";
-	public static String session_id = "123451234566";
-	public static String expensive_session_id ="556787678976";
-	public static String ended_Session = "978609054123";
-	public static String Not_Started_Session = "786905435678";
-	public  static  String class_Title = "Mathematics";
-	public static String NotActive_student_Id = "430192963192";
-	public static String class_id_has_no_sessions = "624185604856";
-	public static String class_title_has_no_sessions= "اللغة العربية";
-	public  static  String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTAxMSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNDU1NDA5Ni41MzM2NjQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZDNjYjdmMzQ5OTZiNDljN2FmYzEzYmU2ZTI4ZTJiOTgifQ.ACMZH37FekpeR89hkZrVLfq1abvkpm12I01YJdZL1Ek";
-	public static String Not_Activate_Student_Refresh_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6NDMwMTkyOTYzMTkyLCJyb2xlIjoic3R1ZGVudCJ9LCJleHAiOjE3MTUxNjA2NjkuODU3NzIsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNGUwMjNhODFjYzRhNGIxNGIyNWQ2MDFhZTQzZjFlNWYifQ.srh63EoINMYdaFzVVzRxG0qATPD7sW30OvCTgo_0E8U";
 
-	//DataBase connection
-	public final String host = "jdbc:postgresql://nagwa-classes-beta.cluster-c4iigfolsbo7.us-east-1.rds.amazonaws.com:5432/nagwa_classes";
-    public final String user = "testing_readwrite";
-    public final String password = "8yZ%`6!e?~0q6<MM?hHO";
-
+	public  String refresh_token = data.refresh_token;
+	Map<String,Object> pathParams = new HashMap<String, Object>();
 
 	@Given("Send {string} To Generate Access Token for user")
-	public static String  generate_access_token( String refresh_token ) {
+	public static String  generate_access_token(String refresh_token) {
 		RestAssured.baseURI ="https://aevkujc65i.execute-api.us-east-1.amazonaws.com";
 		RestAssured.basePath ="/beta/v1";
 		RequestSpecification request = 
@@ -46,6 +36,36 @@ public class TestBase {
 			.post("/token/refresh");
 
 		return access_token = response.then().extract().path("access_token");
+	}
+
+//	public Response sendRequest(String method, String endpoint) {
+//		String access_token = generate_access_token(refresh_token);
+//
+//		RequestSpecification request = RestAssured.given()
+//				.pathParams(pathParams)
+//				.header("Content-Type", "application/json")
+//				.header("Authorization", access_token);
+//
+//		switch (method.toUpperCase()) {
+//			case "POST":
+//				 return request.when().post(endpoint);
+//			case "PUT":
+//				return request.when().put(endpoint);
+//			case "DELETE":
+//				return request.when().delete(endpoint);
+//			case "PATCH":
+//				 return request.when().patch(endpoint);
+//			default:
+//				throw new IllegalArgumentException("Unsupported HTTP method: " + method);
+//		}
+//	}
+
+	public void Validate_Error_Messages (Response response,Integer statusCode , String error_message ,Integer error_id ) {
+		response.prettyPrint();
+		response.then()
+				.statusCode(statusCode)
+				.assertThat()
+				.body("error_message" ,containsString(error_message) ,"error_id" ,equalTo(error_id) );
 	}
 
 
