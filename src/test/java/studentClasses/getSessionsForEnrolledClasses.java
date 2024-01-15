@@ -21,11 +21,11 @@ public class getSessionsForEnrolledClasses{
 	TestBase test = new TestBase();
 	TestData data = new TestData();
 	Database_Connection Connect =new Database_Connection();
-	String user_token = data.refresh_token;
+	String user_token = test.refresh_token;
 	String student_id = data.student_Id;
 	String class_id = data.class_Id;
 	String class_title = data.class_Title;
-	String class_id_has_no_sessions = data.class_id_has_no_sessions;
+	Long class_id_has_no_sessions = data.class_id_has_no_sessions;
 	String class_title_has_no_sessions= data.class_title_has_no_sessions;
 	Map <String,Object> pathParams = new HashMap<String, Object>();
 
@@ -42,7 +42,6 @@ public class getSessionsForEnrolledClasses{
 			.get("/students/{studentId}/classes/{classId}/sessions");;
 		return response;
 	}
-	Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class ();
 	@Given("user send class contains sessions that user enrolled in")
     public void Get_Sessions_for_Enrolled_Classes () {
 		pathParams.put("studentId", student_id);
@@ -69,8 +68,8 @@ public class getSessionsForEnrolledClasses{
 		get_sessions_for_enrolled_class ().then()
 				.statusCode(HttpStatus.SC_OK)
 				.assertThat()
-				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/eclipse-workspace/NagwaClasses/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
-				.body("class_id", hasToString(class_id_has_no_sessions),"class_title", hasToString(class_title_has_no_sessions),"sessions",empty());
+				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
+				.body("[0].class_id", equalTo(class_id_has_no_sessions),"[0].class_title", hasToString(class_title_has_no_sessions),"[0].classes_sessions",empty());
 	}
 	@Given("user send student is not enrolled in the class")
     public void unauthorized_student () {
@@ -79,7 +78,8 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 403 and user unauthorized")
 	public void Validate_Response_For_Student_NotEnrolled () {
-		test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+        Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class ();
+        test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
 	}
 	@Given("user send class is not exist")
     public void Class_Not_Found () {
@@ -88,7 +88,8 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 404 and class not found")
 	public void Validate_Response_of_Class_Not_Found(){
-		test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
+        Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class ();
+        test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
 	}
 
 }

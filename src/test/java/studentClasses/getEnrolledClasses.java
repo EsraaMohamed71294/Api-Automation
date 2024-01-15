@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.*;
 public class getEnrolledClasses{
 	TestBase test = new TestBase();
 	TestData data = new TestData();
-	String user_token = data.refresh_token;
+	String user_token = test.refresh_token;
 	String student_id = data.student_Id;
 	Map <String,Object> pathParams = new HashMap<String, Object>();
 
@@ -40,7 +40,6 @@ public class getEnrolledClasses{
 
 					return response;
 	}
-	Response getEnrolledClassesResponse = Get_Enrolled_Classes();
 	@Given("user send user id to get all upcoming sessions")
 	public void get_Enrolled_Classes_And_Upcoming_Sessions() {
 		pathParams.put("studentId", student_id);
@@ -61,6 +60,7 @@ public class getEnrolledClasses{
     }
 	@Then("I verify the appearance of  status code 403 and user unauthorized in getEnrolledClasses")
 	public void Validate_Response_of_unauthorized_user() {
+		Response getEnrolledClassesResponse = Get_Enrolled_Classes();
 		test.Validate_Error_Messages(getEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
 	}
 }

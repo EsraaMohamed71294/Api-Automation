@@ -21,11 +21,12 @@ public class pay_for_full_class {
     TestData data = new TestData();
     String user_token = data.refresh_token;
     String student_Id = data.student_Id;
-    String class_id = data.class_Id;
-
-    String session_id = data.session_id;
-    String amount_paid;
-    String currency;
+    String Full_Capacity_Class = data.Full_Capacity_Class;
+    String Archived_Class = data.Archived_Class;
+    String amount_paid_for_class= data.amount_paid_for_class;
+    String class_currency = data.class_currency;
+    String valid_fullPayment_class = data.valid_fullPayment_class;
+    String expensive_class = data.expensive_class;
     Map<String,Object> pathParams = new HashMap<String, Object>();
 
     @When("Performing the Api of pay_for_full_class")
@@ -42,56 +43,64 @@ public class pay_for_full_class {
         return response;
     }
 
-    Response PayForFullClass = pay_for_full_class();
-
     @Given("User enrolled into fully paid class")
     public void successful_payment_for_full_class() {
         pathParams.put("student_id", student_Id);
-        pathParams.put("class_id", class_id);
+        pathParams.put("class_id",valid_fullPayment_class);
     }
     @Then("I verify the appearance of status code 200 and Full class payment successful.")
-    public void Validate_Response_of_unlocked_session () {
+    public void Validate_Response_of_success_payment_fullClass () {
         pay_for_full_class().prettyPrint();
         pay_for_full_class().then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/pay_for_full_class.json")))
-                .body("class_id" ,  equalTo(class_id) ,"amount_paid",equalTo(amount_paid),"currency",equalTo(currency), "message" ,containsString("Full class payment successful."));
+                .body("class_id" ,  equalTo(valid_fullPayment_class) ,"amount_paid",equalTo(amount_paid_for_class),"currency",equalTo(class_currency), "message" ,containsString("Full class payment successful."));
+    }
+
+    @Then("I verify the appearance of status code 400 and class already purchased")
+    public void Validate_Response_already_purchased_Class () {
+         Response PayForFullClass = pay_for_full_class();
+        test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"Class already purchased.",4004);
     }
     @Given("User Send unauthorized user id")
     public void unauthorized_user() {
         pathParams.put("student_id", "123456789987");
-        pathParams.put("class_id", class_id);
+        pathParams.put("class_id", valid_fullPayment_class);
     }
     @Then("The Response Should Contain Status Code 403 And Error Message Unauthorized")
     public void Validate_Response_unauthorized_student (){
+        Response PayForFullClass = pay_for_full_class();
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
-    @Given("student's wallet does not have sufficient funds")
+    @Given("student's wallet does not have sufficient funds for full class")
     public void Insufficient_wallet_for_full_class() {
         pathParams.put("student_id", student_Id);
-        pathParams.put("class_id", class_id);
+        pathParams.put("class_id", expensive_class);
     }
-    @Then("The Response Should Contain Status Code 400 And Error Message Insufficient balance")
+    @Then("The Response Should Contain Status Code 400 And Error Message Insufficient balance for full class")
     public void Validate_Response_Insufficient_wallet_for_full_class (){
+        Response PayForFullClass = pay_for_full_class();
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"Insufficient wallet balance for full class payment.",4008);
     }
-    @Given("user try to enroll in class that not available or not listed")
-    public void class_not_available() {
+    @Given("user try to enroll in class that not available or Archived")
+    public void class_is_archived() {
         pathParams.put("student_id", student_Id);
-        pathParams.put("class_id", class_id);
+        pathParams.put("class_id", Archived_Class);
     }
-    @Then("The Response Should Contain Status Code 400 And Error Message Class not available.")
+    @Then("The Response Should Contain Status Code 404 And Error Message Class not available.")
     public void Validate_Response_class_not_available(){
-        test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"Class not available for full payment.",4007);
+        Response PayForFullClass = pay_for_full_class();
+        test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
     }
     @Given("user try to enroll in class have full capacity")
     public void full_capacity_class() {
         pathParams.put("student_id", student_Id);
-        pathParams.put("class_id", class_id);
+        pathParams.put("class_id", Full_Capacity_Class);
     }
     @Then("The Response Should Contain Status Code 400 And Error Message This class has reached full capacity.")
     public void Validate_Response_full_capacity_class(){
+        Response PayForFullClass = pay_for_full_class();
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"This class has reached full capacity, and no seats are currently open.",4006);
     }
 

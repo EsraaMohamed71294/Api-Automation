@@ -9,21 +9,19 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 public class TestBase {
+
+	TestData data =new TestData();
 	public static String access_token;
-	public  static String student_Id = "123456789011";
-	public static String class_id_for_join_session = "102345678999";
-	public static String class_Id = "270160879432";
-	public static String session_id = "123451234566";
-	public static String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTAxMSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNDU1NDA5Ni41MzM2NjQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZDNjYjdmMzQ5OTZiNDljN2FmYzEzYmU2ZTI4ZTJiOTgifQ.ACMZH37FekpeR89hkZrVLfq1abvkpm12I01YJdZL1Ek";
 
-
-	static TestData data = new TestData();
-
-//	public static String refresh_token = data.refresh_token;
+	public  String refresh_token = data.refresh_token;
+	Map<String,Object> pathParams = new HashMap<String, Object>();
 
 	@Given("Send {string} To Generate Access Token for user")
 	public static String  generate_access_token(String refresh_token) {
@@ -40,6 +38,27 @@ public class TestBase {
 		return access_token = response.then().extract().path("access_token");
 	}
 
+//	public Response sendRequest(String method, String endpoint) {
+//		String access_token = generate_access_token(refresh_token);
+//
+//		RequestSpecification request = RestAssured.given()
+//				.pathParams(pathParams)
+//				.header("Content-Type", "application/json")
+//				.header("Authorization", access_token);
+//
+//		switch (method.toUpperCase()) {
+//			case "POST":
+//				 return request.when().post(endpoint);
+//			case "PUT":
+//				return request.when().put(endpoint);
+//			case "DELETE":
+//				return request.when().delete(endpoint);
+//			case "PATCH":
+//				 return request.when().patch(endpoint);
+//			default:
+//				throw new IllegalArgumentException("Unsupported HTTP method: " + method);
+//		}
+//	}
 
 	public void Validate_Error_Messages (Response response,Integer statusCode , String error_message ,Integer error_id ) {
 		response.prettyPrint();
