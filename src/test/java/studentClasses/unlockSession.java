@@ -61,18 +61,18 @@ public class unlockSession {
         pathParams.put("class_id", class_id);
         pathParams.put("session_id", session_id);
     }
-    @Then("The Response Should Contain Status Code 403 And Error Message Unauthorized")
-    public void Validate_Response_unauthorized_student (){
+    @Then("The Response of unlockSession Should Contain Status Code 403 And Error Message Unauthorized")
+    public void Validate_Response_unlockSession_unauthorized_student (){
         test.Validate_Error_Messages(unlockSession,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
-    @Given("student's wallet does not have sufficient funds")
+    @Given("student's wallet does not have sufficient wallet")
     public void insufficient_student_wallet() {
         pathParams.put("student_id", "");
         pathParams.put("class_id", class_id);
         pathParams.put("session_id", session_id);
     }
-    @Then("The Response Should Contain Status Code 422 And Error Message insufficient student wallet balance")
-    public void Validate_Response_insufficient_student_wallet (){
+    @Then("The Response of unlockSession Should Contain Status Code 422 And Error Message insufficient student wallet balance")
+    public void Validate_Response_unlockSession_insufficient_student_wallet (){
         test.Validate_Error_Messages(unlockSession,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot unlock the session. insufficient student wallet balance.",4228);
     }
     @Given("class does not allow pay per session")

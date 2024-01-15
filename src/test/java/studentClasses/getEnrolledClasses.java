@@ -28,7 +28,7 @@ public class getEnrolledClasses{
 	@When("Perform the api of Get_Enrolled_Classes")
 	public Response Get_Enrolled_Classes() {
 		String access_token = test.generate_access_token(user_token);
-		RequestSpecification request =  
+		RequestSpecification request =
 				RestAssured.
 					given()
 						.pathParams(pathParams)
@@ -37,7 +37,7 @@ public class getEnrolledClasses{
 					Response response = request
 					.when()
 					.get("/students/{studentId}/enrolled-classes");
-					
+
 					return response;
 	}
 	Response getEnrolledClassesResponse = Get_Enrolled_Classes();
@@ -59,7 +59,7 @@ public class getEnrolledClasses{
     public void Invalid_User_ID() {
 		pathParams.put("studentId", "123456789111");
     }
-	@Then("I verify the appearance of status code 403 and user unauthorized")
+	@Then("I verify the appearance of  status code 403 and user unauthorized in getEnrolledClasses")
 	public void Validate_Response_of_unauthorized_user() {
 		test.Validate_Error_Messages(getEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
 	}

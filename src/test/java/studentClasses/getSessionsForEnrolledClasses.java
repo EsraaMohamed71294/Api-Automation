@@ -17,7 +17,7 @@ import io.restassured.specification.RequestSpecification;
 import static org.hamcrest.Matchers.*;
 
 public class getSessionsForEnrolledClasses{
-	
+
 	TestBase test = new TestBase();
 	TestData data = new TestData();
 	Database_Connection Connect =new Database_Connection();
@@ -28,7 +28,7 @@ public class getSessionsForEnrolledClasses{
 	String class_id_has_no_sessions = data.class_id_has_no_sessions;
 	String class_title_has_no_sessions= data.class_title_has_no_sessions;
 	Map <String,Object> pathParams = new HashMap<String, Object>();
-	
+
 	@When("Perform then api of get_sessions_for_enrolled_class")
 	public Response get_sessions_for_enrolled_class () {
 		String access_token = test.generate_access_token(user_token);

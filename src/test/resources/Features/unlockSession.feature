@@ -11,12 +11,12 @@ Feature: Test all scenarios of the api of unlock session
   Scenario: Verify can't unlock session for user not authorized
     Given   User Send unauthorized session id
     When    Performing the Api of Unlock Session
-    Then    The Response Should Contain Status Code 403 And Error Message Unauthorized
+    Then    The Response of unlockSession Should Contain Status Code 403 And Error Message Unauthorized
 
   Scenario: Verify sending student doesn't have sufficient wallet
-    Given   student's wallet does not have sufficient funds
+    Given   student's wallet does not have sufficient wallet
     When    Performing the Api of Unlock Session
-    Then    The Response Should Contain Status Code 422 And Error Message insufficient student wallet balance
+    Then    The Response of unlockSession Should Contain Status Code 422 And Error Message insufficient student wallet balance
 
   Scenario: Verify sending class does not allow pay per session
     Given   class does not allow pay per session
