@@ -1,0 +1,105 @@
+{
+  "type": "object",
+  "properties": {
+    "class_id": {
+      "type": "integer"
+    },
+    "class_title": {
+      "type": "string"
+    },
+    "pay_per_session_allowed": {
+      "type": "boolean"
+    },
+    "educator_id": {
+      "type": "integer"
+    },
+    "educator_first_name": {
+      "type": "string"
+    },
+    "educator_last_name": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "integer"
+    },
+    "session_title": {
+      "type": "string"
+    },
+    "student_has_access": {
+      "type": "boolean"
+    },
+    "session_price": {
+      "type": "number"
+    },
+    "currency_iso_code": {
+      "type": "string"
+    },
+    "educational_resources": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "educational_resource_type_id": {
+              "type": "integer"
+            },
+            "educational_resource_type": {
+              "type": "string"
+            },
+            "educational_resources": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "educational_resource_id": {
+                      "type": "integer"
+                    },
+                    "educational_resource_name": {
+                      "type": "string"
+                    },
+                    "educational_resource_md5": {
+                      "type": "string"
+                    },
+                    "file_type_id": {
+                      "type": "integer"
+                    },
+                    "file_type_icon_url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "educational_resource_id",
+                    "educational_resource_name",
+                    "educational_resource_md5",
+                    "file_type_id",
+                    "file_type_icon_url"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "educational_resource_type_id",
+            "educational_resource_type",
+            "educational_resources"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "class_id",
+    "class_title",
+    "pay_per_session_allowed",
+    "educator_id",
+    "educator_first_name",
+    "educator_last_name",
+    "session_id",
+    "session_title",
+    "student_has_access",
+    "session_price",
+    "currency_iso_code",
+    "educational_resources"
+  ]
+}
