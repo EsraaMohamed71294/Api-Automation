@@ -3,14 +3,14 @@ package studentClasses;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 
 import java.io.File;
-import java.util.HashMap;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+
 import java.util.Map;
 
 import static org.hamcrest.Matchers.containsString;
@@ -19,7 +19,6 @@ import static org.hamcrest.Matchers.equalTo;
 public class pay_for_full_class {
     TestBase test = new TestBase();
     TestData data = new TestData();
-    String user_token = data.refresh_token;
     String student_Id = data.student_Id;
     String Full_Capacity_Class = data.Full_Capacity_Class;
     String Archived_Class = data.Archived_Class;
@@ -30,9 +29,11 @@ public class pay_for_full_class {
     Map<String,Object> pathParams = test.pathParams;
     public Response pay_for_full_class ;
 
+
+
     @When("Performing the Api of pay_for_full_class")
     public void pay_for_full_class() {
-        pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full");
+        pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full",null);
     }
 
     @Given("User enrolled into fully paid class")
@@ -94,6 +95,15 @@ public class pay_for_full_class {
     public void Validate_Response_full_capacity_class(){
         Response PayForFullClass = pay_for_full_class;
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"This class has reached full capacity, and no seats are currently open.",4006);
+    }
+    @Given("user connect to database")
+    public void get_data() throws SQLException {
+        ResultSet resultSet = test.connect_to_database("select * from public.classes c where c.class_id = 624185604856");
+        while(resultSet.next()){
+            String class_id = resultSet.getString("class_id");
+		    System.out.println(class_id);
+
+        }
     }
 
 }
