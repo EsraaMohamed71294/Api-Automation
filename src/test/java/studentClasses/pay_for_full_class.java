@@ -32,7 +32,7 @@ public class pay_for_full_class {
 
     @When("Performing the Api of pay_for_full_class")
     public void pay_for_full_class() {
-        pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full");
+        pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full",null);
     }
 
     @Given("User enrolled into fully paid class")

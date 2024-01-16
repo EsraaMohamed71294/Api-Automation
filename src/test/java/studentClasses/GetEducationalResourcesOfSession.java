@@ -23,7 +23,7 @@ public class GetEducationalResourcesOfSession {
     String student_id = data.student_Id;
     String class_id =   data.class_id_for_join_session;
     String session_id = data.session_id;
-    Long resource_id = data.resource_id;
+    String resource_id = data.resource_id;
     String user_token = data.refresh_token;
 
     String session_with_no_Educational_resources = data.expensive_session_id;
@@ -32,7 +32,7 @@ public class GetEducationalResourcesOfSession {
     public Response get_Educational_resource_of_Session;
     @When("Performing The Api Of GetEducationalResources")
     public void get_Educational_resource_of_Session(){
-        get_Educational_resource_of_Session = test.sendRequest("GET" ,"/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources" );
+        get_Educational_resource_of_Session = test.sendRequest("GET" ,"/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources" , null );
     }
     @Given("User Send Valid Parameters To The Request")
     public void get_EducationalResource(){
@@ -49,7 +49,7 @@ public class GetEducationalResourcesOfSession {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/GetEducationalResourcesOfSession.json")))
                 .body("educational_resources.educational_resource_type", hasItems(hasToString("handouts")))
                 .body("class_id", hasToString(class_id),"session_id" , hasToString(session_id),
-                        "educational_resources.educational_resources.educational_resource_id", hasItems(hasItem(equalTo(resource_id))));
+                        "educational_resources.educational_resources.educational_resource_id", hasItems(hasItem(hasToString(resource_id))));
         }
     @Given("User Send Invalid UserId In The Request")
     public void unAuthorized_User(){

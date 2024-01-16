@@ -32,7 +32,7 @@ public class unlockSession {
 
     @When("Performing the Api of Unlock Session")
     public void Unlock_Session() {
-        Unlock_Session =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/unlock");
+        Unlock_Session =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/unlock", null);
     }
     @Given("User Send Session Id to unlock session for user")
     public void unlock_session_for_user() {
