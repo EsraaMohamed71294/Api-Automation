@@ -8,7 +8,7 @@ Feature: Test all scenarios of the api of unlock session
     When    Performing the Api of Unlock Session
     Then    I verify the appearance of status code 201 and Session successfully unlocked
 
-  Scenario: Verify unlock session for already unlocked session
+  Scenario: Verify unlock session for student successfully
     Given   User Send Session Id to unlock session for user
     When    Performing the Api of Unlock Session
     Then    I verify the appearance of status code 200 and Session already unlocked
@@ -29,5 +29,6 @@ Feature: Test all scenarios of the api of unlock session
     Then    The Response Should Contain Status Code 422 And Error Message pay per session not allowed
 
   Scenario: lock the already used session from database
+
 
 

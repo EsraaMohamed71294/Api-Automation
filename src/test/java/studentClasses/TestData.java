@@ -25,11 +25,7 @@ public class TestData {
     public  static  String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTAxMSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNDU1NDA5Ni41MzM2NjQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZDNjYjdmMzQ5OTZiNDljN2FmYzEzYmU2ZTI4ZTJiOTgifQ.ACMZH37FekpeR89hkZrVLfq1abvkpm12I01YJdZL1Ek";
     public static String Not_Activate_Student_Refresh_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6NDMwMTkyOTYzMTkyLCJyb2xlIjoic3R1ZGVudCJ9LCJleHAiOjE3MTUxNjA2NjkuODU3NzIsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNGUwMjNhODFjYzRhNGIxNGIyNWQ2MDFhZTQzZjFlNWYifQ.srh63EoINMYdaFzVVzRxG0qATPD7sW30OvCTgo_0E8U";
 
-    // DataBase connection
-    public final String host = "jdbc:postgresql://nagwa-classes-beta.cluster-c4iigfolsbo7.us-east-1.rds.amazonaws.com:5432/nagwa_classes";
 
-    public final String user = "testing_readwrite";
-    public final String password = "8yZ%`6!e?~0q6<MM?hHO";
 
 
 

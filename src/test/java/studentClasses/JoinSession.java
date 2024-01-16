@@ -36,7 +36,7 @@ public class JoinSession {
     public Response joinSession ;
     @When("Performing the Api of Joining Session")
     public void Join_Session() {
-        joinSession =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/join");
+        joinSession =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/join",null);
     }
     @Given("User Send The Post Request Of join session")
     public void join_session_In_Enrolled_Class() {
