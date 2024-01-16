@@ -38,27 +38,29 @@ public class TestBase {
 		return access_token = response.then().extract().path("access_token");
 	}
 
-//	public Response sendRequest(String method, String endpoint) {
-//		String access_token = generate_access_token(refresh_token);
-//
-//		RequestSpecification request = RestAssured.given()
-//				.pathParams(pathParams)
-//				.header("Content-Type", "application/json")
-//				.header("Authorization", access_token);
-//
-//		switch (method.toUpperCase()) {
-//			case "POST":
-//				 return request.when().post(endpoint);
-//			case "PUT":
-//				return request.when().put(endpoint);
-//			case "DELETE":
-//				return request.when().delete(endpoint);
-//			case "PATCH":
-//				 return request.when().patch(endpoint);
-//			default:
-//				throw new IllegalArgumentException("Unsupported HTTP method: " + method);
-//		}
-//	}
+	public Response sendRequest(String method, String endpoint ) {
+		String access_token = generate_access_token(refresh_token);
+
+		RequestSpecification request = RestAssured.given()
+				.pathParams(pathParams)
+				.header("Content-Type", "application/json")
+				.header("Authorization", access_token);
+
+		switch (method.toUpperCase()) {
+			case "POST":
+				 return request.when().post(endpoint);
+			case "GET":
+				return request.when().get(endpoint);
+			case "PUT":
+				return request.when().put(endpoint);
+			case "DELETE":
+				return request.when().delete(endpoint);
+			case "PATCH":
+				return request.when().patch(endpoint);
+			default:
+				throw new IllegalArgumentException("Unsupported HTTP method: " + method);
+		}
+	}
 
 	public void Validate_Error_Messages (Response response,Integer statusCode , String error_message ,Integer error_id ) {
 		response.prettyPrint();

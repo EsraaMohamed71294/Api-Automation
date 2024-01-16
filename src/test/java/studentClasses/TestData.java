@@ -31,6 +31,9 @@ public class TestData {
     public final String user = "testing_readwrite";
     public final String password = "8yZ%`6!e?~0q6<MM?hHO";
 
+   public Long resource_id = 123456543221L;
+
+
 
 
 }
