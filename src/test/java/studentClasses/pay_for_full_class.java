@@ -19,6 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class pay_for_full_class {
     TestBase test = new TestBase();
     TestData data = new TestData();
+    Database_Connection Connect = new Database_Connection();
     String student_Id = data.student_Id;
     String Full_Capacity_Class = data.Full_Capacity_Class;
     String Archived_Class = data.Archived_Class;
@@ -98,7 +99,7 @@ public class pay_for_full_class {
     }
     @Given("user connect to database")
     public void get_data() throws SQLException {
-        ResultSet resultSet = test.connect_to_database("select * from public.classes c where c.class_id = 624185604856");
+        ResultSet resultSet = Connect.connect_to_database("select * from public.classes c where c.class_id = 624185604856");
         while(resultSet.next()){
             String class_id = resultSet.getString("class_id");
 		    System.out.println(class_id);
