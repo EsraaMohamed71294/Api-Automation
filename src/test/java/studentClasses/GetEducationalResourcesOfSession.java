@@ -32,7 +32,7 @@ public class GetEducationalResourcesOfSession {
     public Response get_Educational_resource_of_Session;
     @When("Performing The Api Of GetEducationalResources")
     public void get_Educational_resource_of_Session(){
-        get_Educational_resource_of_Session = test.sendRequest("GET" ,"/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources" );
+        get_Educational_resource_of_Session = test.sendRequest("GET" ,"/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources" ,null);
     }
     @Given("User Send Valid Parameters To The Request")
     public void get_EducationalResource(){

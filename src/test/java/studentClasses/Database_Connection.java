@@ -1,29 +1,29 @@
 package studentClasses;
 
+import java.sql.*;
+
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.junit.jupiter.api.Test;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+public class Database_Connection {
+	public final String host = "jdbc:postgresql://nagwa-classes-beta.cluster-c4iigfolsbo7.us-east-1.rds.amazonaws.com:5432/nagwa_classes";
 
-public class Database_Connection  {
-//
-//	TestBase Test =new TestBase();
-//	TestData data = new TestData();
-//	    public String Database_Connection (String SQL_Query) {
-//		try {
-//			Connection connect = DriverManager.getConnection(data.host, data.user, data.password);
-//			PreparedStatement pst = connect.prepareStatement(SQL_Query);
-//			ResultSet rs = pst.executeQuery();
-//			rs.next() ;
-//		}
-//		catch(SQLException e){
-//			System.out.println(e.getMessage());
-//		}
-//		return null;
-//	}
-	    }
+	public final String user = "testing_readwrite";
+	public final String password = "8yZ%`6!e?~0q6<MM?hHO";
+	public ResultSet resultSet;
+	public Connection connection;
+	public Statement statement;
+
+	public ResultSet connect_to_database (String query) {
+		try {
+			connection = DriverManager.getConnection(host, user, password);
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultSet;
+	}
+}

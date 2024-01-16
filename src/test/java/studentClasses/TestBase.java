@@ -22,19 +22,10 @@ import java.sql.ResultSet;
 public class TestBase {
 
 	TestData data =new TestData();
-	// DataBase connection
-	public final String host = "jdbc:postgresql://nagwa-classes-beta.cluster-c4iigfolsbo7.us-east-1.rds.amazonaws.com:5432/nagwa_classes";
-
-	public final String user = "testing_readwrite";
-	public final String password = "8yZ%`6!e?~0q6<MM?hHO";
-
 	public static String access_token;
 
 	public  String refresh_token = data.refresh_token;
 	Map<String,Object> pathParams = new HashMap<String, Object>();
-	public ResultSet resultSet;
-	public Connection connection;
-	public Statement statement;
 
 	@Given("Send {string} To Generate Access Token for user")
 	public static String  generate_access_token(String refresh_token) {
@@ -95,19 +86,6 @@ public class TestBase {
 				.statusCode(statusCode)
 				.assertThat()
 				.body("error_message" ,containsString(error_message) ,"error_id" ,equalTo(error_id) );
-	}
-
-	public ResultSet connect_to_database (String query){
-		try {
-			 connection = DriverManager.getConnection(host, user, password);
-			 statement = connection.createStatement();
-			 resultSet = statement.executeQuery(query);
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return resultSet;
-
 	}
 
 
