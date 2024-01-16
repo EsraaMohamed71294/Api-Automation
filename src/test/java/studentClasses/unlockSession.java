@@ -27,20 +27,12 @@ public class unlockSession {
     String fully_Paid_class_Session = data.fully_Paid_class_Session;
     String expensive_session_id= data.expensive_session_id;
     String class_id_for_join_session = data.class_id_for_join_session;
-    Map<String,Object> pathParams = new HashMap<String, Object>();
+    Map<String,Object> pathParams = test.pathParams;
+    public Response Unlock_Session ;
 
     @When("Performing the Api of Unlock Session")
-    public Response Unlock_Session() {
-        String access_token = test.generate_access_token(user_token);
-        RequestSpecification request = RestAssured.
-                given()
-                .pathParams(pathParams)
-                .header("Content-Type", "application/json")
-                .header("Authorization", access_token);
-        Response response = request
-                .when()
-                .post("/students/{student_id}/classes/{class_id}/sessions/{session_id}/unlock");
-        return response;
+    public void Unlock_Session() {
+        Unlock_Session =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/unlock");
     }
     @Given("User Send Session Id to unlock session for user")
     public void unlock_session_for_user() {
@@ -50,8 +42,8 @@ public class unlockSession {
     }
     @Then("I verify the appearance of status code 201 and Session successfully unlocked")
     public void Validate_Response_of_unlocked_session () {
-        Unlock_Session().prettyPrint();
-        Unlock_Session().then()
+        Unlock_Session.prettyPrint();
+        Unlock_Session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/unlockSession.json")))
@@ -60,8 +52,8 @@ public class unlockSession {
 
     @Then("I verify the appearance of status code 200 and Session already unlocked")
     public void Validate_Response_of_Session_already_unlocked () {
-        Unlock_Session().prettyPrint();
-        Unlock_Session().then()
+        Unlock_Session.prettyPrint();
+        Unlock_Session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/unlockSession.json")))
@@ -75,7 +67,7 @@ public class unlockSession {
     }
     @Then("The Response of unlockSession Should Contain Status Code 403 And Error Message Unauthorized")
     public void Validate_Response_unlockSession_unauthorized_student (){
-        Response unlockSession = Unlock_Session();
+        Response unlockSession = Unlock_Session;
         test.Validate_Error_Messages(unlockSession,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
     @Given("student's wallet does not have sufficient wallet for unlock session")
@@ -86,7 +78,7 @@ public class unlockSession {
     }
     @Then("The Response of unlockSession Should Contain Status Code 422 And Error Message insufficient student wallet balance")
     public void Validate_Response_unlockSession_insufficient_student_wallet (){
-        Response unlockSession = Unlock_Session();
+        Response unlockSession = Unlock_Session;
         test.Validate_Error_Messages(unlockSession,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot unlock the session. insufficient student wallet balance.",4228);
     }
     @Given("class does not allow pay per session")
@@ -97,7 +89,7 @@ public class unlockSession {
     }
     @Then("The Response Should Contain Status Code 422 And Error Message pay per session not allowed")
     public void Validate_Response_class_not_allow_pay_per_session (){
-        Response unlockSession = Unlock_Session();
+        Response unlockSession = Unlock_Session;
         test.Validate_Error_Messages(unlockSession,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot unlock the session. pay per session not allowed for this class.",4227);
     }
 

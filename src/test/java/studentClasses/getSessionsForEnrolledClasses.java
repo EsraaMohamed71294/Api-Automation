@@ -27,20 +27,12 @@ public class getSessionsForEnrolledClasses{
 	String class_title = data.class_Title;
 	Long class_id_has_no_sessions = data.class_id_has_no_sessions;
 	String class_title_has_no_sessions= data.class_title_has_no_sessions;
-	Map <String,Object> pathParams = new HashMap<String, Object>();
+	Map<String,Object> pathParams = test.pathParams;
+	public Response get_sessions_for_enrolled_class;
 
 	@When("Perform then api of get_sessions_for_enrolled_class")
-	public Response get_sessions_for_enrolled_class () {
-		String access_token = test.generate_access_token(user_token);
-		RequestSpecification request = RestAssured.
-			given()
-				.pathParams(pathParams)
-				.header("Content-Type", "application/json")
-				.header("Authorization", access_token);
-			Response response = request
-			.when()
-			.get("/students/{studentId}/classes/{classId}/sessions");;
-		return response;
+	public void get_sessions_for_enrolled_class () {
+		get_sessions_for_enrolled_class =  test.sendRequest("GET", "/students/{studentId}/classes/{classId}/sessions");
 	}
 	@Given("user send class contains sessions that user enrolled in")
     public void Get_Sessions_for_Enrolled_Classes () {
@@ -49,8 +41,8 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 200 and all sessions of enrolled class")
 	public void Validate_Response_of_Get_Sessions_for_Enrolled_Classes (){
-		get_sessions_for_enrolled_class ().prettyPrint();
-		get_sessions_for_enrolled_class ().then()
+		get_sessions_for_enrolled_class.prettyPrint();
+		get_sessions_for_enrolled_class.then()
 				.statusCode(HttpStatus.SC_OK)
 				.assertThat()
 				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/eclipse-workspace/NagwaClasses/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
@@ -64,8 +56,8 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 200 and empty list of classes")
 	public void Validate_Response_for_Class_has_no_sessions () {
-		get_sessions_for_enrolled_class ().prettyPrint();
-		get_sessions_for_enrolled_class ().then()
+		get_sessions_for_enrolled_class.prettyPrint();
+		get_sessions_for_enrolled_class.then()
 				.statusCode(HttpStatus.SC_OK)
 				.assertThat()
 				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
@@ -78,7 +70,7 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 403 and user unauthorized")
 	public void Validate_Response_For_Student_NotEnrolled () {
-        Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class ();
+        Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class;
         test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
 	}
 	@Given("user send class is not exist")
@@ -88,7 +80,7 @@ public class getSessionsForEnrolledClasses{
     }
 	@Then("I verify the appearance of status code 404 and class not found")
 	public void Validate_Response_of_Class_Not_Found(){
-        Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class ();
+        Response GetSessionForEnrolledClassesResponse = get_sessions_for_enrolled_class;
         test.Validate_Error_Messages(GetSessionForEnrolledClassesResponse,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
 	}
 

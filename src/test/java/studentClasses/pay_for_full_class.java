@@ -27,20 +27,12 @@ public class pay_for_full_class {
     String class_currency = data.class_currency;
     String valid_fullPayment_class = data.valid_fullPayment_class;
     String expensive_class = data.expensive_class;
-    Map<String,Object> pathParams = new HashMap<String, Object>();
+    Map<String,Object> pathParams = test.pathParams;
+    public Response pay_for_full_class ;
 
     @When("Performing the Api of pay_for_full_class")
-    public Response pay_for_full_class() {
-        String access_token = test.generate_access_token(user_token);
-        RequestSpecification request = RestAssured.
-                given()
-                .pathParams(pathParams)
-                .header("Content-Type", "application/json")
-                .header("Authorization", access_token);
-        Response response = request
-                .when()
-                .post("/students/{student_id}/classes/{class_id}/pay-full");
-        return response;
+    public void pay_for_full_class() {
+        pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full");
     }
 
     @Given("User enrolled into fully paid class")
@@ -50,8 +42,8 @@ public class pay_for_full_class {
     }
     @Then("I verify the appearance of status code 200 and Full class payment successful.")
     public void Validate_Response_of_success_payment_fullClass () {
-        pay_for_full_class().prettyPrint();
-        pay_for_full_class().then()
+        pay_for_full_class.prettyPrint();
+        pay_for_full_class.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/pay_for_full_class.json")))
@@ -60,7 +52,7 @@ public class pay_for_full_class {
 
     @Then("I verify the appearance of status code 400 and class already purchased")
     public void Validate_Response_already_purchased_Class () {
-         Response PayForFullClass = pay_for_full_class();
+         Response PayForFullClass = pay_for_full_class;
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"Class already purchased.",4004);
     }
     @Given("User Send unauthorized user id")
@@ -70,7 +62,7 @@ public class pay_for_full_class {
     }
     @Then("The Response Should Contain Status Code 403 And Error Message Unauthorized")
     public void Validate_Response_unauthorized_student (){
-        Response PayForFullClass = pay_for_full_class();
+        Response PayForFullClass = pay_for_full_class;
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
     @Given("student's wallet does not have sufficient funds for full class")
@@ -80,7 +72,7 @@ public class pay_for_full_class {
     }
     @Then("The Response Should Contain Status Code 400 And Error Message Insufficient balance for full class")
     public void Validate_Response_Insufficient_wallet_for_full_class (){
-        Response PayForFullClass = pay_for_full_class();
+        Response PayForFullClass = pay_for_full_class;
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"Insufficient wallet balance for full class payment.",4008);
     }
     @Given("user try to enroll in class that not available or Archived")
@@ -90,7 +82,7 @@ public class pay_for_full_class {
     }
     @Then("The Response Should Contain Status Code 404 And Error Message Class not available.")
     public void Validate_Response_class_not_available(){
-        Response PayForFullClass = pay_for_full_class();
+        Response PayForFullClass = pay_for_full_class;
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
     }
     @Given("user try to enroll in class have full capacity")
@@ -100,7 +92,7 @@ public class pay_for_full_class {
     }
     @Then("The Response Should Contain Status Code 400 And Error Message This class has reached full capacity.")
     public void Validate_Response_full_capacity_class(){
-        Response PayForFullClass = pay_for_full_class();
+        Response PayForFullClass = pay_for_full_class;
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"This class has reached full capacity, and no seats are currently open.",4006);
     }
 
