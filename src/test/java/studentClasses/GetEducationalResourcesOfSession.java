@@ -23,7 +23,7 @@ public class GetEducationalResourcesOfSession {
     String student_id = data.student_Id;
     String class_id =   data.class_id_for_join_session;
     String session_id = data.session_id;
-    Long resource_id = data.resource_id;
+    String resource_id = data.resource_id;
     String user_token = data.refresh_token;
 
     String session_with_no_Educational_resources = data.expensive_session_id;

@@ -11,9 +11,9 @@ Feature:  Test All Scenarios For Get Download URLs For Educational Resources
   Scenario: Verify Sending Invalid UserId To GetDwonloadEducationalResources Request
     Given User Send Invalid UserId To GetDownloadEducationalResources Request
     When  Performing The APi Of GetDownload URLs Of Educational Resources
-    Then  Response Status Code Is 403 And Response Body Contains Error Message And No Links Returns In Body
+    Then  Response Status Code Is 403 And Response Body Contains Error Message And No Links Returns
 
   Scenario: Verify Sending SessionId That Student Doesn't Have Access To
     Given    User Send SessionId That Student Doesn't Hae Access To
     When     Performing The APi Of GetDownload URLs Of Educational Resources
-    Then     Response Status Code Is 403 And Body Returns With Error Message That Student Have No Access To It
+    Then     Response Status Code Is 403 And Body Returns With Error Message That Student Have No Access
