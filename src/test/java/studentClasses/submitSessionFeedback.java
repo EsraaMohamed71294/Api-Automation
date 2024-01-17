@@ -19,9 +19,7 @@ public class submitSessionFeedback {
     String student_Id = data.student_Id;
     String class_Id = data.class_id_for_join_session;
     String session_id = data.session_id;
-
     String not_participate_session = data.expensive_session_id;
-
     String kickedOut_session = data.kickedOut_Session;
     Map<String,Object> pathParams = test.pathParams;
     public Response submit_session_feedback ;
@@ -47,7 +45,7 @@ public class submitSessionFeedback {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/submitSessionFeedback.json")))
-                .body("feedback_score" ,  equalTo(1),"session_id",equalTo(session_id),"message",hasToString("Feedback successfully submitted."));
+                .body("feedback_score" ,  equalTo(1),"session_id",hasToString(session_id),"message",hasToString("Feedback successfully submitted."));
     }
 
     @When("Performing the Api of submit session feedback with invalid score")
