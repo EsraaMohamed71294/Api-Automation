@@ -22,12 +22,16 @@ public class TestData {
     public String amount_paid_for_class = "5";
     public String expensive_class = "456789098765";
     public String class_currency ="EGP";
+    public String kickedOut_Session = "657894356765";
     public Integer Student_Learning_Record_Id = 24;
     public String resource_id = "123456543221";
     public String resource_id_with_Deleted_student_learning_Record = "999876543212";
 
     public static  String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTAxMSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNDU1NDA5Ni41MzM2NjQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZDNjYjdmMzQ5OTZiNDljN2FmYzEzYmU2ZTI4ZTJiOTgifQ.ACMZH37FekpeR89hkZrVLfq1abvkpm12I01YJdZL1Ek";
     public static String Not_Activate_Student_Refresh_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6NDMwMTkyOTYzMTkyLCJyb2xlIjoic3R1ZGVudCJ9LCJleHAiOjE3MTUxNjA2NjkuODU3NzIsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNGUwMjNhODFjYzRhNGIxNGIyNWQ2MDFhZTQzZjFlNWYifQ.srh63EoINMYdaFzVVzRxG0qATPD7sW30OvCTgo_0E8U";
+
+
+
 
 
 

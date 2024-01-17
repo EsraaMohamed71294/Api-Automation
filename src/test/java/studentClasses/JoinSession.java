@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.equalTo;
 public class JoinSession {
     TestBase test = new TestBase();
     TestData data = new TestData();
-    String user_token = data.refresh_token;
     String student_Id = data.student_Id;
     String class_Id = data.class_Id;
     String session_id = data.session_id;
@@ -31,6 +30,8 @@ public class JoinSession {
 
     String NotActive_student_Id =data.NotActive_student_Id;
     String ended_Session = data.ended_Session;
+
+    String kickedOut_Session = data.kickedOut_Session;
     String Not_Started_Session = data.Not_Started_Session;
     Map<String,Object> pathParams = test.pathParams;
     public Response joinSession ;
@@ -137,7 +138,7 @@ public class JoinSession {
     public void Kicked_Out_Student_From_Session () {
         pathParams.put("student_id", student_Id);
         pathParams.put("class_id", class_id_for_join_session);
-        pathParams.put("session_id","657894356765");
+        pathParams.put("session_id",kickedOut_Session);
     }
     @Then("The Response Should Contains StatusCode 422 And Error Message Student Is KickedOut")
     public void Validate_Response_For_KickOut_Student (){

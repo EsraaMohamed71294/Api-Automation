@@ -16,7 +16,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-public class pay_for_full_class {
+public class payForFullClass {
     TestBase test = new TestBase();
     TestData data = new TestData();
     Database_Connection Connect = new Database_Connection();
@@ -48,7 +48,7 @@ public class pay_for_full_class {
         pay_for_full_class.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/pay_for_full_class.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/payForFullClass.json")))
                 .body("class_id" ,  equalTo(valid_fullPayment_class) ,"amount_paid",equalTo(amount_paid_for_class),"currency",equalTo(class_currency), "message" ,containsString("Full class payment successful."));
     }
 
