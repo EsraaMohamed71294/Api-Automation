@@ -16,6 +16,8 @@ import static org.hamcrest.Matchers.hasToString;
 public class submitSessionFeedback {
     TestBase test = new TestBase();
     TestData data = new TestData();
+
+    String user_token = test.refresh_token;
     String student_Id = data.student_Id;
     String class_Id = data.class_id_for_join_session;
     String session_id = data.session_id;
@@ -28,7 +30,7 @@ public class submitSessionFeedback {
 
     @When("Performing the Api of submit session feedback with valid score")
     public void submit_session_feedback() {
-        submit_session_feedback =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/feedback",valid_request_body);
+        submit_session_feedback =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/feedback",valid_request_body,user_token);
     }
 
     @Given("User Send feedback for session")
@@ -50,7 +52,7 @@ public class submitSessionFeedback {
 
     @When("Performing the Api of submit session feedback with invalid score")
     public void submit_session_feedback_With_invalid_score() {
-        submit_session_feedback =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/feedback",Invalid_request_body);
+        submit_session_feedback =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/feedback",Invalid_request_body,user_token);
     }
 
     @Then("The Response should contains status code 400 and message Invalid feedback score")

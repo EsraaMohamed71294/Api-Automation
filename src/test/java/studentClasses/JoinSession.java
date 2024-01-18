@@ -20,6 +20,8 @@ import static org.hamcrest.Matchers.equalTo;
 public class JoinSession {
     TestBase test = new TestBase();
     TestData data = new TestData();
+    String user_token = test.refresh_token;
+
     String student_Id = data.student_Id;
     String class_Id = data.class_Id;
     String session_id = data.session_id;
@@ -37,7 +39,7 @@ public class JoinSession {
     public Response joinSession ;
     @When("Performing the Api of Joining Session")
     public void Join_Session() {
-        joinSession =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/join",null);
+        joinSession =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/join",null,user_token);
     }
     @Given("User Send The Post Request Of join session")
     public void join_session_In_Enrolled_Class() {

@@ -19,6 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class payForFullClass {
     TestBase test = new TestBase();
     TestData data = new TestData();
+    String user_token = test.refresh_token;
     Database_Connection Connect = new Database_Connection();
     String student_Id = data.student_Id;
     String Full_Capacity_Class = data.Full_Capacity_Class;
@@ -34,7 +35,7 @@ public class payForFullClass {
 
     @When("Performing the Api of pay_for_full_class")
     public void pay_for_full_class() {
-        pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full",null);
+        pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full",null,user_token);
     }
 
     @Given("User enrolled into fully paid class")
