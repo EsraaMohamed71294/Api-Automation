@@ -38,7 +38,6 @@ public class TestBase {
 
 			Response response = request.when()
 			.post("/token/refresh");
-
 		return access_token = response.then().extract().path("access_token");
 	}
 

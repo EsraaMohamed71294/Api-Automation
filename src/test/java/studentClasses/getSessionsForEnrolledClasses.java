@@ -45,9 +45,9 @@ public class getSessionsForEnrolledClasses{
 		get_sessions_for_enrolled_class.then()
 				.statusCode(HttpStatus.SC_OK)
 				.assertThat()
-				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/eclipse-workspace/NagwaClasses/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
-				.body("[0].class_id", hasToString(class_id),"[0].class_title", hasToString(class_title))
-				.body("[0].classes_sessions.findAll{it.session_id==197178626527L}",hasItems(hasEntry("session_title","Session 18: Inequality in One Triangle: Angle Comparison"),hasEntry("session_start_date","2023-11-29T18:00:00")));
+				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
+				.body("class_id", hasToString(class_id),"class_title", hasToString(class_title))
+				.body("sessions.findAll{it.session_id==197178626527L}",hasItems(hasEntry("session_title","Session 18: Inequality in One Triangle: Angle Comparison"),hasEntry("session_start_date","2023-11-29T18:00:00")));
 	}
 	@Given("User Send Class that has no sessions")
     public void Get_Class_has_no_sessions () {
@@ -60,8 +60,8 @@ public class getSessionsForEnrolledClasses{
 		get_sessions_for_enrolled_class.then()
 				.statusCode(HttpStatus.SC_OK)
 				.assertThat()
-				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
-				.body("[0].class_id", equalTo(class_id_has_no_sessions),"[0].class_title", hasToString(class_title_has_no_sessions),"[0].classes_sessions",empty());
+				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
+				.body("class_id", equalTo(class_id_has_no_sessions),"class_title", hasToString(class_title_has_no_sessions),"sessions",empty());
 	}
 	@Given("user send student is not enrolled in the class")
     public void unauthorized_student () {
