@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasToString;
 public class GetEducatorProfile {
     Educator_TestData data = new Educator_TestData();
@@ -121,13 +120,12 @@ public class GetEducatorProfile {
     }
     @When("performing the api with invalid token")
     public void send_unauthorized_educator(){
-        String not_correct_token ="unauthorizedEducator";
-        unauthorized_Educator = test.sendRequest("GET", "/educators/{educator_id}/profile", null,not_correct_token);
+        unauthorized_Educator = test.sendRequest("GET", "/educators/{educator_id}/profile", null, notActive_educator_token);
     }
     @Then("I verify the appearance of status code 403 and Educator is unauthorized")
     public void Validate_Response_of_unauthorized_EducatorId() {
         Response unauthorizedEducator = unauthorized_Educator;
-        test.Validate_Error_Messages(unauthorizedEducator,HttpStatus.SC_FORBIDDEN,"Unauthorized.",4031);
+        test.Validate_Error_Messages(unauthorizedEducator,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
 
 }
