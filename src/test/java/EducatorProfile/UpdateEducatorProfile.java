@@ -26,19 +26,16 @@ public class UpdateEducatorProfile {
     public String educatorLastName = profile.educatorLastName; ;
     public Response Update_Educator_Profile;
 
-
     @When("Performing the Api of Update Educator Profile with valid data")
     public void Update_Educator_Profile() {
         Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", Valid_body_request,Educator_refresh_token);
     }
-
     @And("validate data saved successfully into db")
     public void validate_educator_data_update_into_db() throws SQLException {
         profile.Get_Educator_info_from_Database();
         educatorFirstName.contains("Test") ;
         educatorLastName.contains("Account");
     }
-
     @Then("I verify the appearance of status code 200 and Educator data updated")
     public void Validate_Response_of_update_Educator_Profile_successfully() {
         Update_Educator_Profile.prettyPrint();
@@ -48,17 +45,14 @@ public class UpdateEducatorProfile {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/EducatorProfileSchemas/UpdateEducatorProfile.json")))
                 .body("message", hasToString("Profile updated successfully."));
     }
-
     @When("Performing the Api of Update Educator Profile with special char")
     public void Update_Educator_Profile_with_special_char() {
         Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", body_with_special_char,Educator_refresh_token);
     }
-
     @When("Performing the Api of Update Educator Profile with empty body")
     public void Update_Educator_Profile_with_empty_fields() {
         Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", Empty_fields_of_body,Educator_refresh_token);
     }
-
     @Then("I verify the appearance of status code 400 and Invalid request message")
     public void Validate_Response_of_update_Educator_with_EmptyFields() {
         Response Educator_With_Empty_Fields = Update_Educator_Profile;
