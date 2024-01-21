@@ -27,7 +27,6 @@ public class GetEducatorProfile {
     String deleted_educator_token = data.refresh_token_for_deletedEducator;
     String notActive_educator_token = data.refresh_token_for_notActiveEducator;
     String Educator_refresh_token = data.refresh_token;
-
     public String educatorFirstName ;
     public String educatorLastName ;
     public String educatorEmail;
@@ -81,18 +80,17 @@ public class GetEducatorProfile {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/EducatorProfileSchemas/EducatorProfile.json")))
                 .body("educator_first_name", hasToString(educatorFirstName), "educator_last_name", hasToString(educatorLastName), "educator_email", hasToString(educatorEmail));
     }
-
     @Given("User Send Invalid educator Id")
     public void user_send_invalid_educatorId() {pathParams.put("educator_id", "34325678622222");
     }
     @Then("I verify the appearance of status code 400 and Educator Id not correct")
     public void Validate_Response_of_Invalid_EducatorId() {
-        test.Validate_Error_Messages(Get_Educator_Profile,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
+        Response Educator_Profile = Get_Educator_Profile;
+        test.Validate_Error_Messages(Educator_Profile,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
     }
     @Given("User Send not active educator")
     public void user_send_notActive_educatorId() {pathParams.put("educator_id", NotActive_Educator);
     }
-
     @When("performing the api with notActive educator token")
     public void send_notActive_educator_token(){
         NotActive_Educator_token = test.sendRequest("GET", "/educators/{educator_id}/profile", null,notActive_educator_token);
@@ -109,7 +107,6 @@ public class GetEducatorProfile {
     public void send_deleted_educator_token(){
         Deleted_Educator_token = test.sendRequest("GET", "/educators/{educator_id}/profile", null,deleted_educator_token);
     }
-
     @Then("I verify the appearance of status code 404 and Educator Id is deleted")
     public void Validate_Response_of_deleted_EducatorId() {
         Response DeletedEducator =Deleted_Educator_token;
