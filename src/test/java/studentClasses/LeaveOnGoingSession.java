@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class LeaveOnGoingSession {
     TestBase test = new TestBase();
     TestData data = new TestData();
+    String user_token = test.refresh_token;
     String student_Id = data.student_Id;
     String class_Id = data.class_id_for_join_session;
     String session_id = data.session_id;
@@ -27,7 +28,7 @@ public class LeaveOnGoingSession {
 
     @When("Performing the Api leave on going session")
     public void leaveOngoingSession() {
-        Leave_onGoing_session =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/leave",null);
+        Leave_onGoing_session =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/leave",null,user_token);
     }
 
     @Given("User left the session")

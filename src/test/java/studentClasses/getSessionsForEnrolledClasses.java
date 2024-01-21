@@ -32,7 +32,7 @@ public class getSessionsForEnrolledClasses{
 
 	@When("Perform then api of get_sessions_for_enrolled_class")
 	public void get_sessions_for_enrolled_class () {
-		get_sessions_for_enrolled_class =  test.sendRequest("GET", "/students/{studentId}/classes/{classId}/sessions",null);
+		get_sessions_for_enrolled_class =  test.sendRequest("GET", "/students/{studentId}/classes/{classId}/sessions",null,user_token);
 	}
 	@Given("user send class contains sessions that user enrolled in")
     public void Get_Sessions_for_Enrolled_Classes () {

@@ -18,6 +18,8 @@ public class GetStudentLearningRecord {
     TestBase test = new TestBase();
     TestData data = new TestData();
     String student_id = data.student_Id;
+    String user_token = test.refresh_token;
+
     String class_id =   data.class_id_for_join_session;
     String session_id = data.session_id;
     String resource_id = data.resource_id;
@@ -28,7 +30,7 @@ public class GetStudentLearningRecord {
     public Response Get_Student_Learning_Record;
     @When("Performing The API Of GetStudentLearningRecord")
     public void get_student_learning_record(){
-       Get_Student_Learning_Record = test.sendRequest("GET" , "/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources/{resource_id}/record" , null);
+       Get_Student_Learning_Record = test.sendRequest("GET" , "/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources/{resource_id}/record" , null,user_token);
    }
    @Given("User Send Valid Parameters To GetStudentLearningRecords API")
    public void send_valid_data(){

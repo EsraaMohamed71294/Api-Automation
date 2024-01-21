@@ -29,7 +29,7 @@ public class GetDownloadURLsForEducationalResources {
 
    @When("Performing The APi Of GetDownload URLs Of Educational Resources")
       public void Get_Download_URLs(){
-       Get_download_URLs_Of_Educational_Resources = test.sendRequest("POST","/students/{student_id}/classes/{class_id}/sessions/{session_id}/download-resources",request_body);
+       Get_download_URLs_Of_Educational_Resources = test.sendRequest("POST","/students/{student_id}/classes/{class_id}/sessions/{session_id}/download-resources",request_body,user_token);
        }
     @Given("User Send Valid Parameters To GetDownloadURLs Request")
     public void Get_Download_URLs_Of_Educational_Resources() {

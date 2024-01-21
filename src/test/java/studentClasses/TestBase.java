@@ -25,9 +25,8 @@ public class TestBase {
 	public static String access_token;
 
 	public  String refresh_token = data.refresh_token;
-	Map<String,Object> pathParams = new HashMap<String, Object>();
+	public Map<String,Object> pathParams = new HashMap<String, Object>();
 
-	@Given("Send {string} To Generate Access Token for user")
 	public static String  generate_access_token(String refresh_token) {
 		RestAssured.baseURI ="https://aevkujc65i.execute-api.us-east-1.amazonaws.com";
 		RestAssured.basePath ="/beta/v1";
@@ -41,7 +40,7 @@ public class TestBase {
 		return access_token = response.then().extract().path("access_token");
 	}
 
-	public Response sendRequest(String method, String endpoint,Object requestBody ) {
+	public Response sendRequest(String method, String endpoint,Object requestBody,String refresh_token) {
 		String access_token = generate_access_token(refresh_token);
 		RequestSpecification request = RestAssured.given()
 				.header("Content-Type", "application/json")

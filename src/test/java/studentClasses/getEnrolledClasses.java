@@ -28,7 +28,7 @@ public class getEnrolledClasses{
 
 	@When("Perform the api of Get_Enrolled_Classes")
 	public void Get_Enrolled_Classes() {
-		Get_Enrolled_Classes =  test.sendRequest("GET", "/students/{studentId}/enrolled-classes", null);
+		Get_Enrolled_Classes =  test.sendRequest("GET", "/students/{studentId}/enrolled-classes", null,user_token);
 	}
 	@Given("user send user id to get all upcoming sessions")
 	public void get_Enrolled_Classes_And_Upcoming_Sessions() {
