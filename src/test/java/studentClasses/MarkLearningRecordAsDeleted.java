@@ -48,7 +48,7 @@ public class MarkLearningRecordAsDeleted {
     }
     @When("Performing The API Of Mark Learning Record As Deleted API")
     public void perform_mark_learning_record_as_deleted() {
-        Mark_Student_Learning_Record_As_Deleted = test.sendRequest("DELETE", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/records/{record_id}", null);
+        Mark_Student_Learning_Record_As_Deleted = test.sendRequest("DELETE", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/records/{record_id}", null,"");
     }
     @Given("User Send Valid Data To MarkLearningRecordAsDeleted API")
     public void delete_student_learning_record() {

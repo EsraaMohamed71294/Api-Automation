@@ -16,7 +16,7 @@ Feature: Test all scenarios of the api Get educator profile
       When    performing the api with notActive educator token
       Then    I verify the appearance of status code 404 and Educator Id is not active
 
-    Scenario: Verify sending not active educator id
+    Scenario: Verify sending deleted educator id
       Given   User Send deleted educator
       When    performing the api with deleted educator token
       Then    I verify the appearance of status code 404 and Educator Id is deleted
