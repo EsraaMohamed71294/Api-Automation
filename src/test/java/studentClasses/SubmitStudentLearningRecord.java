@@ -31,7 +31,7 @@ public class SubmitStudentLearningRecord {
     @When("Performing The API Of SubmitStudentLearningRecord")
     public void submit_student_learning_Record_request(){
         Submit_Student_Learning_Record = test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources/{resource_id}/record\n" +
-                "\n" , request_body);
+                "\n" , request_body,"");
     }
     @Given("User Send Valid Data To SubmitStudentLearningRecord Request")
     public void submit_student_learning_record(){
@@ -80,7 +80,7 @@ public class SubmitStudentLearningRecord {
     @When("Performing The API With Empty Body")
     public void Execute_Request_With_Empty_Body(){
         Submit_Student_Learning_Record = test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources/{resource_id}/record\n" +
-                "\n" ,invalid_request_body );
+                "\n" ,invalid_request_body,"" );
     }
     @Then("Response Code Is 400 And Body Have Clear Error Message")
     public void Validate_invalid_body_Request(){

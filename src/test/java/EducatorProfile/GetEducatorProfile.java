@@ -69,7 +69,7 @@ public class GetEducatorProfile {
         Get_Educator_Profile = test.sendRequest("GET", "/educators/{educator_id}/profile", null,Educator_refresh_token);
     }
     @And("User Send valid educator Id")
-    public void successful_submission_of_feedback() {
+    public void Sending_valid_EducatorId() {
         pathParams.put("educator_id", Educator_Id);
     }
     @Then("I verify the appearance of status code 200 and Educator data returned")
