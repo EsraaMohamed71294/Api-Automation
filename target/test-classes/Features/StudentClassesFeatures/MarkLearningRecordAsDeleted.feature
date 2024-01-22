@@ -1,7 +1,7 @@
 Feature:  Testing All Scenarios For Mark Learning Record API
 
-  Background: Generating New Access Token
-    Given   Send "refresh_token" To Generate Access Token for user
+#  Background: Generating New Access Token
+#    Given   Send "refresh_token" To Generate Access Token for user
 
   Scenario: Verify Sending Valid Data To Mark Learning Record As Deleted Request
     Given   User Send Valid Data To MarkLearningRecordAsDeleted API

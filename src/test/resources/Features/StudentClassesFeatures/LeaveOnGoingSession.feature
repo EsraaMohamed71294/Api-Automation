@@ -1,7 +1,7 @@
 Feature: Test all scenarios of the api of leave ongoing session
 
-  Background: Generating New Access Token
-    Given   Send "refresh_token" To Generate Access Token for user
+#  Background: Generating New Access Token
+#    Given   Send "refresh_token" To Generate Access Token for user
 
   Scenario: Verify user can leave the joined session successfully
     Given   User left the session

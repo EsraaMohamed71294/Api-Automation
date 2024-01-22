@@ -1,7 +1,7 @@
 Feature: Test all scenarios of the api of unlock session
 
-  Background: Generating New Access Token
-    Given   Send "refresh_token" To Generate Access Token for user
+#  Background: Generating New Access Token
+#    Given   Send "refresh_token" To Generate Access Token for user
 
   Scenario: Verify user enrolled into fully paid class successfully
     Given   User enrolled into fully paid class
