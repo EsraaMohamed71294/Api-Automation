@@ -1,7 +1,7 @@
 Feature:  All Scenarios For GetStudentLearningRecords API
 
-  Background: Generating New Access Token
-    Given   Send "refresh_token" To Generate Access Token for user
+#  Background: Generating New Access Token
+#    Given   Send "refresh_token" To Generate Access Token for user
 
   Scenario: Verify That Student Learning Records Return In Response Body After Enter Valid Parameters
     Given  User Send Valid Parameters To GetStudentLearningRecords API

@@ -1,7 +1,7 @@
   Feature:  Test All Scenarios Of GetEducationalResourcesOfSession API
 
-    Background:  Generate New Access Token
-      Given  Send "refresh_token" To Generate Access Token for user
+#    Background:  Generate New Access Token
+#      Given  Send "refresh_token" To Generate Access Token for user
 
     Scenario: Verify That EducationalResources Of Session Return After Enter Valid Paramters
       Given   User Send Valid Parameters To The Request

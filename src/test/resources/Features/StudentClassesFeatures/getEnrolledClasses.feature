@@ -1,7 +1,7 @@
 Feature: Test all scenarios of the api of Getting upcoming sessions for enrolled classes
 
-  Background: Generating New Access Token
-    Given   Send "refresh_token" To Generate Access Token for user
+#  Background: Generating New Access Token
+#    Given   Send "refresh_token" To Generate Access Token for user
 
   Scenario: Verify Getting all upcoming sessions for user
     Given   user send user id to get all upcoming sessions
