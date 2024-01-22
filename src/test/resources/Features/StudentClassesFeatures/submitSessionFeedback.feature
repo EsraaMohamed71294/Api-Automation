@@ -1,8 +1,5 @@
 Feature: Test all scenarios of the api of submit session feedback
 
-    Background: Generating New Access Token
-        Given   Send "refresh_token" To Generate Access Token for user
-
     Scenario: Verify sending session feedback with valid score
         Given   User Send feedback for session
         When    Performing the Api of submit session feedback with valid score

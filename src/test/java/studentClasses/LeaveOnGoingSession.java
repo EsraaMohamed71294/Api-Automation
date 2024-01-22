@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class LeaveOnGoingSession {
     TestBase test = new TestBase();
     TestData data = new TestData();
-    String user_token = test.refresh_token;
+    String user_token = data.refresh_token;
     String student_Id = data.student_Id;
     String class_Id = data.class_id_for_join_session;
     String session_id = data.session_id;
@@ -44,7 +44,7 @@ public class LeaveOnGoingSession {
         Leave_onGoing_session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/LeaveOnGoingSession.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/LeaveOnGoingSession.json")))
                 .body("student_id" ,  hasToString(student_Id),"session_id",hasToString(session_id),"message",hasToString("Successfully left the session."));
     }
 

@@ -1,8 +1,5 @@
 Feature:  Test All Scenarios For Get Download URLs For Educational Resources
 
-  Background:  Generate New Access Token
-    Given  Send "refresh_token" To Generate Access Token for user
-
   Scenario: Verify That ResourceId And DownloadLink Return In Response Body After Enter Valid Parameters
     Given User Send Valid Parameters To GetDownloadURLs Request
     When  Performing The APi Of GetDownload URLs Of Educational Resources

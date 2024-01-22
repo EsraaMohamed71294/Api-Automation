@@ -20,6 +20,8 @@ public class MarkLearningRecordAsDeleted {
     String student_id = data.student_Id;
     String class_id = data.class_id_for_join_session;
     String session_id = data.session_id;
+
+    String refresh_Token =data.refresh_token;
     Database_Connection Connect = new Database_Connection();
     String archived_class = data.Archived_Class;
     Integer newStudentLearningRecordId;
@@ -48,7 +50,7 @@ public class MarkLearningRecordAsDeleted {
     }
     @When("Performing The API Of Mark Learning Record As Deleted API")
     public void perform_mark_learning_record_as_deleted() {
-        Mark_Student_Learning_Record_As_Deleted = test.sendRequest("DELETE", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/records/{record_id}", null,"");
+        Mark_Student_Learning_Record_As_Deleted = test.sendRequest("DELETE", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/records/{record_id}", null,refresh_Token);
     }
     @Given("User Send Valid Data To MarkLearningRecordAsDeleted API")
     public void delete_student_learning_record() {
@@ -62,7 +64,7 @@ public class MarkLearningRecordAsDeleted {
         Mark_Student_Learning_Record_As_Deleted.prettyPrint();
         Mark_Student_Learning_Record_As_Deleted.then()
                 .statusCode(HttpStatus.SC_OK)
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/MarkLearningRecordAsDeleted.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/MarkLearningRecordAsDeleted.json")))
                 .body("message", containsString("Learning record successfully marked as deleted"))
                 .body("record_id", equalTo((studentLearningRecordId)));
     }

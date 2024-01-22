@@ -23,15 +23,17 @@ public class SubmitStudentLearningRecord {
     String class_id =   data.class_id_for_join_session;
     String session_id = data.session_id;
     String invalid_request_body = null;
+
+    String refresh_Token = data.refresh_token;
     Long resource_id = Long.valueOf(data.resource_id);
     Integer Student_learning_Record_id = data.Student_Learning_Record_Id;
     Map<String,Object> PathParams = test.pathParams;
     Response Submit_Student_Learning_Record;
-    String request_body = "{\"student_learning_record\":\"{\\\"hello\\\":\\\"world\\\"}\",\"student_learning_record_metadata\":\"{\\\"helloagain\\\":\\\"world\\\"}\"}";
+    String request_body = "{\"student_learning_record\":\"{\\\"Submit\\\":\\\"studentLearningRecord\\\"}\",\"student_learning_record_metadata\":\"{\\\"Updated\\\":\\\"StudentLearningRecord\\\"}\"}";
     @When("Performing The API Of SubmitStudentLearningRecord")
     public void submit_student_learning_Record_request(){
         Submit_Student_Learning_Record = test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources/{resource_id}/record\n" +
-                "\n" , request_body,"");
+                "\n" , request_body,refresh_Token);
     }
     @Given("User Send Valid Data To SubmitStudentLearningRecord Request")
     public void submit_student_learning_record(){
@@ -45,7 +47,7 @@ public class SubmitStudentLearningRecord {
         Submit_Student_Learning_Record.prettyPrint();
         Submit_Student_Learning_Record.then().assertThat()
                 .statusCode(HttpStatus.SC_CREATED)
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/SubmitStudentLearningRecord.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/SubmitStudentLearningRecord.json")))
                 .body("educational_resource_id",equalTo(Student_learning_Record_id));
     }
    @Given("User Send Invalid UserId To SubmitStudentLearningRecord Request")

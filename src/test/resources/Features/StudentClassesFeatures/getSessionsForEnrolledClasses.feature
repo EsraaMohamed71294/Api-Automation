@@ -1,8 +1,5 @@
 Feature: Test all scenarios of the api of Getting sessions for enrolled classes
 
-  Background: Generating New Access Token
-    Given   Send "refresh_token" To Generate Access Token for user
-
   Scenario: Verify Getting sessions for Enrolled user into class
     Given   user send class contains sessions that user enrolled in
     When    Perform then api of get_sessions_for_enrolled_class

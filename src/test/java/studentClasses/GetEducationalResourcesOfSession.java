@@ -46,7 +46,7 @@ public class GetEducationalResourcesOfSession {
         get_Educational_resource_of_Session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/GetEducationalResourcesOfSession.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/GetEducationalResourcesOfSession.json")))
                 .body("educational_resources.educational_resource_type", hasItems(hasToString("handouts")))
                 .body("class_id", hasToString(class_id),"session_id" , hasToString(session_id),
                         "educational_resources.educational_resources.educational_resource_id", hasItems(hasItem(hasToString(resource_id))));

@@ -17,7 +17,7 @@ public class submitSessionFeedback {
     TestBase test = new TestBase();
     TestData data = new TestData();
 
-    String user_token = test.refresh_token;
+    String user_token = data.refresh_token;
     String student_Id = data.student_Id;
     String class_Id = data.class_id_for_join_session;
     String session_id = data.session_id;
@@ -46,7 +46,7 @@ public class submitSessionFeedback {
         submit_session_feedback.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/submitSessionFeedback.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/submitSessionFeedback.json")))
                 .body("feedback_score" ,  equalTo(1),"session_id",hasToString(session_id),"message",hasToString("Feedback successfully submitted."));
     }
 

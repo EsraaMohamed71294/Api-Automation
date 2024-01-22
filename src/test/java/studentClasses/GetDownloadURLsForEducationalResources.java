@@ -43,7 +43,7 @@ public class GetDownloadURLsForEducationalResources {
         Get_download_URLs_Of_Educational_Resources.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/GetDownloadURLsForEducationalResources.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/GetDownloadURLsForEducationalResources.json")))
                 .body("resources.educational_resource_id",hasItems(hasToString(resource_id)),"resources.educational_resource_type",hasItems(hasToString("handouts")));
     }
 

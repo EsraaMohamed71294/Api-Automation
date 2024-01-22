@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class JoinSession {
     TestBase test = new TestBase();
     TestData data = new TestData();
-    String user_token = test.refresh_token;
+    String user_token = data.refresh_token;
 
     String student_Id = data.student_Id;
     String class_Id = data.class_Id;
@@ -53,7 +53,7 @@ public class JoinSession {
         joinSession.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/JoinSession.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/JoinSession.json")))
                 .body("session_id" ,  equalTo(session_id));
     }
     @Given("User Send Valid StudentId And ClassId That He Haven't Enrolled In")

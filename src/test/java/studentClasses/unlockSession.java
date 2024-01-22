@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class unlockSession {
     TestBase test = new TestBase();
     TestData data = new TestData();
-    String user_token = test.refresh_token;
+    String user_token = data.refresh_token;
     String student_Id = data.student_Id;
     String class_id = data.class_Id;
     String locked_session = data.locked_session;
@@ -46,7 +46,7 @@ public class unlockSession {
         Unlock_Session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/unlockSession.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/unlockSession.json")))
                 .body("session_id" ,  equalTo(locked_session) ,"message",containsString("Session successfully unlocked."),"message_id",equalTo(201), "student_id" ,equalTo(student_Id),"class_id",equalTo(class_id_for_join_session));
     }
 

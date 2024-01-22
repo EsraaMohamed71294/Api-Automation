@@ -1,8 +1,5 @@
 Feature:  All Scenarios Of SubmitStudentLearningRecord API
 
-  Background: Generating New Access Token
-    Given   Send "refresh_token" To Generate Access Token for user
-
   Scenario: Verify Sending Valid Data In Request
     Given User Send Valid Data To SubmitStudentLearningRecord Request
     When  Performing The API Of SubmitStudentLearningRecord

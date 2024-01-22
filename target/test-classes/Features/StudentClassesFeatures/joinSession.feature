@@ -1,8 +1,5 @@
   Feature: Test all scenarios of the api of joining session
 
-    Background: Generating New Access Token
-      Given   Send "refresh_token" To Generate Access Token for user
-
     Scenario: Verify session joined successfully for valid user
       Given   User Send The Post Request Of join session
       When    Performing the Api of Joining Session

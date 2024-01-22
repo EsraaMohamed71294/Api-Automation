@@ -6,8 +6,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;
@@ -18,7 +17,7 @@ public class GetStudentLearningRecord {
     TestBase test = new TestBase();
     TestData data = new TestData();
     String student_id = data.student_Id;
-    String user_token = test.refresh_token;
+    String user_token = data.refresh_token;
 
     String class_id =   data.class_id_for_join_session;
     String session_id = data.session_id;
@@ -44,7 +43,7 @@ public class GetStudentLearningRecord {
        Get_Student_Learning_Record.prettyPrint();
        Get_Student_Learning_Record.then()
                .statusCode(HttpStatus.SC_OK)
-               .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/GetStudentLearningRecord.json")))
+               .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/GetStudentLearningRecord.json")))
                .body("student_learning_record_id",equalTo(Student_learning_Record_id),"session_educational_resource_id", equalTo(16));
    }
    @Given("User Send Invalid UserId To GetStudentLearning Record API")
