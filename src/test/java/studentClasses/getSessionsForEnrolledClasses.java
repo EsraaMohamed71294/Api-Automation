@@ -21,7 +21,7 @@ public class getSessionsForEnrolledClasses{
 	TestBase test = new TestBase();
 	TestData data = new TestData();
 	Database_Connection Connect =new Database_Connection();
-	String user_token = test.refresh_token;
+	String user_token = data.refresh_token;
 	String student_id = data.student_Id;
 	String class_id = data.class_Id;
 	String class_title = data.class_Title;
@@ -45,7 +45,7 @@ public class getSessionsForEnrolledClasses{
 		get_sessions_for_enrolled_class.then()
 				.statusCode(HttpStatus.SC_OK)
 				.assertThat()
-				.body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/user/Api_Automation/src/test/resources/Schemas/GetSessionsForEnrolledClasses.json")))
+				.body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/GetSessionsForEnrolledClasses.json")))
 				.body("class_id", hasToString(class_id),"class_title", hasToString(class_title))
 				.body("sessions.findAll{it.session_id==197178626527L}",hasItems(hasEntry("session_title","Session 18: Inequality in One Triangle: Angle Comparison"),hasEntry("session_start_date","2023-11-29T18:00:00")));
 	}

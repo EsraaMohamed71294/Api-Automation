@@ -1,8 +1,5 @@
 Feature: Test all scenarios of the api of unlock session
 
-#  Background: Generating New Access Token
-#    Given   Send "refresh_token" To Generate Access Token for user
-
   Scenario: Verify unlock session for student successfully
     Given   User Send Session Id to unlock session for user
     When    Performing the Api of Unlock Session

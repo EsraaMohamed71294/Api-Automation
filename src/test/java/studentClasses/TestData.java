@@ -1,8 +1,8 @@
 package studentClasses;
 
 public class TestData {
-    public String student_Id = "123456789011";
-    public String class_Id = "270160879432";
+    public String student_Id = "653172829211";
+    public String class_Id = "173189286333";
     public String class_id_for_join_session = "102345678999";
     public String locked_session = "987543567854";
     public String fully_Paid_class = "123452349098";
@@ -13,7 +13,7 @@ public class TestData {
     public String ended_Session = "978609054123";
     public String Not_Started_Session = "786905435678";
     public String class_Title = "Mathematics";
-    public String NotActive_student_Id = "430192963192";
+    public String NotActive_student_Id = "657132504423";
     public Long class_id_has_no_sessions = 624185604856L;
     public String class_title_has_no_sessions= "اللغة العربية";
     public String Archived_Class = "999876432145";
@@ -27,8 +27,8 @@ public class TestData {
     public String resource_id = "123456543221";
     public String resource_id_with_Deleted_student_learning_Record = "999876543212";
 
-    public static  String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTAxMSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNDU1NDA5Ni41MzM2NjQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZDNjYjdmMzQ5OTZiNDljN2FmYzEzYmU2ZTI4ZTJiOTgifQ.ACMZH37FekpeR89hkZrVLfq1abvkpm12I01YJdZL1Ek";
-    public static String Not_Activate_Student_Refresh_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6NDMwMTkyOTYzMTkyLCJyb2xlIjoic3R1ZGVudCJ9LCJleHAiOjE3MTUxNjA2NjkuODU3NzIsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNGUwMjNhODFjYzRhNGIxNGIyNWQ2MDFhZTQzZjFlNWYifQ.srh63EoINMYdaFzVVzRxG0qATPD7sW30OvCTgo_0E8U";
+    public static  String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjY1MzE3MjgyOTIxMSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNjIxMDcyMS42NzU1MjIsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiMjc5NGIwMmYyZDI0NDBmOGFlYTcyZjExMzNmNDMzNzQifQ.LzaZ-elr2Hylxytw35jZiRmWZD-3UHhuZ4gPIUH414g";
+    public static String Not_Activate_Student_Refresh_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjY1NzEzMjUwNDQyMyIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNjIxMDgyNi4yODk2MzUsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZjQyOGRlNTQyNzc2NDRkYjk2MTkxZjY4MmJkYzRiM2UifQ.x531NqNxk37b92mtIeyhO5B_B4GPsU3Y9eiTCM42HPY";
 
 
 

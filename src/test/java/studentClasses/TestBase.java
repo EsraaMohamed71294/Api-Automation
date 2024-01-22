@@ -24,7 +24,6 @@ public class TestBase {
 	TestData data =new TestData();
 	public static String access_token;
 
-	public  String refresh_token = data.refresh_token;
 	public Map<String,Object> pathParams = new HashMap<String, Object>();
 
 	public static String  generate_access_token(String refresh_token) {

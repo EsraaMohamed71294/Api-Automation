@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class payForFullClass {
     TestBase test = new TestBase();
     TestData data = new TestData();
-    String user_token = test.refresh_token;
+    String user_token = data.refresh_token;
     Database_Connection Connect = new Database_Connection();
     String student_Id = data.student_Id;
     String Full_Capacity_Class = data.Full_Capacity_Class;
@@ -49,7 +49,7 @@ public class payForFullClass {
         pay_for_full_class.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/payForFullClass.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/payForFullClass.json")))
                 .body("class_id" ,  equalTo(valid_fullPayment_class) ,"amount_paid",equalTo(amount_paid_for_class),"currency",equalTo(class_currency), "message" ,containsString("Full class payment successful."));
     }
 
