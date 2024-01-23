@@ -3,6 +3,7 @@ package studentClasses;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.List;
 import java.util.Map;
 import java.io.File;
 
@@ -25,13 +26,17 @@ public class getEnrolledClasses{
 	TestData data = new TestData();
 	public String class_Id;
 	public String class_title;
-	public  String session_Id;
+	public String session_Id;
 	public String session_title;
 	Database_Connection connect = new Database_Connection();
 	String user_token = data.refresh_token;
 	String student_id = data.student_Id;
 	Map<String,Object> pathParams = test.pathParams;
 	public Response Get_Enrolled_Classes;
+
+	public getEnrolledClasses()throws SQLException{
+		get_sessions_data();
+	}
 
 	public void get_sessions_data() throws SQLException {
 		ResultSet resultSet = connect.connect_to_database("\n" +
@@ -42,15 +47,10 @@ public class getEnrolledClasses{
 			while(resultSet.next()){
 				class_Id = resultSet.getString("class_id");
 				class_title = resultSet.getString("class_title");
-				session_Id= resultSet.getString("session_id");
+				session_Id=  resultSet.getString("session_id");
 				session_title = resultSet.getString("session_title");
 			}
 		}
-
-    @And("Getting session data from database")
-		public void getting_student_sessions_from_db() throws SQLException {
-		get_sessions_data();
-	}
 	@When("Perform the api of Get_Enrolled_Classes")
 	public void Get_Enrolled_Classes(){
 		Get_Enrolled_Classes =  test.sendRequest("GET", "/students/{studentId}/enrolled-classes", null,user_token);

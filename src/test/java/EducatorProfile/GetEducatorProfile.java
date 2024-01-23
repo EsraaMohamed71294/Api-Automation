@@ -20,13 +20,12 @@ public class GetEducatorProfile {
     Educator_TestData data = new Educator_TestData();
     TestBase test = new TestBase();
     Database_Connection Connect = new Database_Connection();
-    Map<String, Object> pathParams = test.pathParams;
-    String Educator_Id = data.educator_id;
-    String NotActive_Educator = data.notActive_educator;
-    String Deleted_Educator = data.deleted_educator;
-    String deleted_educator_token = data.refresh_token_for_deletedEducator;
-    String notActive_educator_token = data.refresh_token_for_notActiveEducator;
-    String Educator_refresh_token = data.refresh_token;
+    public String Educator_Id = data.educator_id;
+    public  String NotActive_Educator = data.notActive_educator;
+    public String Deleted_Educator = data.deleted_educator;
+    public  String deleted_educator_token = data.refresh_token_for_deletedEducator;
+     public String notActive_educator_token = data.refresh_token_for_notActiveEducator;
+    public String Educator_refresh_token = data.refresh_token;
     public String educatorFirstName ;
     public String educatorLastName ;
     public String educatorEmail;
@@ -34,6 +33,9 @@ public class GetEducatorProfile {
     public Response Deleted_Educator_token;
     public Response NotActive_Educator_token;
     public Response unauthorized_Educator;
+
+    public Map<String, Object> pathParams = test.pathParams;
+
 
     public void get_educator_data_from_database() throws SQLException {
         ResultSet resultSet = Connect.connect_to_database("select  educator_first_name, educator_last_name, educator_email from public.educators where educator_id =343256786543");
@@ -67,9 +69,9 @@ public class GetEducatorProfile {
     public void Get_Educator_Profile() {
         Get_Educator_Profile = test.sendRequest("GET", "/educators/{educator_id}/profile", null,Educator_refresh_token);
     }
-    @And("User Send valid educator Id")
+    @Given("User Send valid educator Id")
     public void Sending_valid_EducatorId() {
-        pathParams.put("educator_id", Educator_Id);
+        pathParams.put("educator_id",Educator_Id);
     }
     @Then("I verify the appearance of status code 200 and Educator data returned")
     public void Validate_Response_of_Getting_Educator_Profile() {
@@ -81,7 +83,8 @@ public class GetEducatorProfile {
                 .body("educator_first_name", hasToString(educatorFirstName), "educator_last_name", hasToString(educatorLastName), "educator_email", hasToString(educatorEmail));
     }
     @Given("User Send Invalid educator Id")
-    public void user_send_invalid_educatorId() {pathParams.put("educator_id", "34325678622222");
+    public void user_send_invalid_educatorId()
+    {pathParams.put("educator_id", "34325678622222");
     }
     @Then("I verify the appearance of status code 400 and Educator Id not correct")
     public void Validate_Response_of_Invalid_EducatorId() {
