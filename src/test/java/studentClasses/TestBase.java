@@ -68,7 +68,7 @@ public class TestBase {
 				return request.when().delete(endpoint);
 			case "PATCH":
 				if (requestBody != null ) {
-					return request.body(requestBody).when().post(endpoint);
+					return request.body(requestBody).when().patch(endpoint);
 				} else {
 					return request.when().patch(endpoint);
 				}

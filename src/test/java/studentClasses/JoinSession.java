@@ -1,5 +1,6 @@
 package studentClasses;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,6 +12,8 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import java.io.File;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,13 +25,14 @@ public class JoinSession {
     TestData data = new TestData();
     String user_token = data.refresh_token;
 
+    Database_Connection connect = new Database_Connection();
     String student_Id = data.student_Id;
     String class_Id = data.class_Id;
     String session_id = data.session_id;
     String expensive_session_id = data.expensive_session_id;
     String class_id_for_join_session = data.class_id_for_join_session;
-    String fully_Paid_class =data.fully_Paid_class;
-    String fully_Paid_class_Session =data.fully_Paid_class_Session;
+    public String fully_Paid_class= data.fully_Paid_class_Session;
+    public  String fully_Paid_class_Session = data.fully_Paid_class_Session;
 
     String NotActive_student_Id =data.NotActive_student_Id;
     String ended_Session = data.ended_Session;
@@ -37,6 +41,26 @@ public class JoinSession {
     String Not_Started_Session = data.Not_Started_Session;
     Map<String,Object> pathParams = test.pathParams;
     public Response joinSession ;
+
+
+
+//    public void get_sessions_data() throws SQLException {
+//        ResultSet resultSet = connect.connect_to_database("\n" +
+//                "select * from public.classes_subjects_sessions css join sessions s ON  s.session_id = css.session_id join public.classes_subjects cs on\n" +
+//                "cs.class_subject_id = css.class_subject_id join classes c on c.class_id = cs.class_id join classes_students cs2 on cs2.class_id \n" +
+//                "= c.class_id  where cs2.student_id =653172829211 and c.pay_full_class_allowed = true and s.session_started_date notnull  and s.session_ended_date isnull");
+//
+//        while(resultSet.next()){
+//            fully_Paid_class = resultSet.getString("class_id");
+//            fully_Paid_class_Session=  resultSet.getString("session_id");
+//        }
+//    }
+
+//    @And("Get Data Of Sessions")
+//    public void get_sessions_data_for_join_API()throws  SQLException{
+//        get_sessions_data();
+//    }
+
     @When("Performing the Api of Joining Session")
     public void Join_Session() {
         joinSession =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/join",null,user_token);

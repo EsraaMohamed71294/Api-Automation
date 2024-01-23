@@ -9,11 +9,12 @@ import studentClasses.TestBase;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Map;
 
 
 import static org.hamcrest.Matchers.hasToString;
 
-public class UpdateEducatorProfile {
+public class UpdateEducatorProfile{
     Educator_TestData data = new Educator_TestData();
     TestBase test = new TestBase();
     GetEducatorProfile profile = new GetEducatorProfile();
@@ -26,10 +27,13 @@ public class UpdateEducatorProfile {
     public String educatorLastName = profile.educatorLastName; ;
     public Response Update_Educator_Profile;
 
+    public Map<String, Object> pathParams = profile.pathParams;
+
 
     @When("Performing the Api of Update Educator Profile with valid data")
     public void Update_Educator_Profile() {
         Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", Valid_body_request,Educator_refresh_token);
+//        profile.Sending_valid_EducatorId_to_api();
     }
 
     @And("validate data saved successfully into db")
