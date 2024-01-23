@@ -60,7 +60,7 @@ public class TestBase {
 				return request.when().get(endpoint);
 			case "PUT":
 				if (requestBody != null ) {
-					return request.body(requestBody).when().post(endpoint);
+					return request.body(requestBody).when().put(endpoint);
 				} else {
 					return request.when().put(endpoint);
 				}
@@ -68,7 +68,7 @@ public class TestBase {
 				return request.when().delete(endpoint);
 			case "PATCH":
 				if (requestBody != null ) {
-					return request.body(requestBody).when().post(endpoint);
+					return request.body(requestBody).when().patch(endpoint);
 				} else {
 					return request.when().patch(endpoint);
 				}
