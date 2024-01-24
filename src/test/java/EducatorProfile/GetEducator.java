@@ -42,4 +42,20 @@ public class GetEducator {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/GetEducator.json")))
                 .body("educator_first_name", hasToString(educator.firstName),"educator_last_name",hasToString(educator.lastName),"educator_email",hasToString(educator.email));
     }
+
+    @When("Performing the Api of Get Educator with invalid educator id")
+    public void Get_Educator_with_invalid_ID() {
+        Get_Educator = test.sendRequest("GET", "/admin/educators/{educator_id}", null,Admin_token);
+    }
+
+    @Given("User Send invalid educator Id to get educator data")
+    public void user_send_Invalid_educatorId() {
+        pathParams.put("educator_id", "11122334455678");
+    }
+
+    @Then("I verify the appearance of status code 400 and path is incorrect")
+    public void Validate_Response_of_invalid_EducatorID() {
+        Response Invalid_ID = Get_Educator;
+        test.Validate_Error_Messages(Invalid_ID, HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
+    }
 }
