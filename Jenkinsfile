@@ -17,7 +17,7 @@ pipeline {
     }
 
     environment {
-        S3_BUCKET = 'testreport.html'
+        S3_BUCKET = 'test-report-nagwa'
         FILE_TO_UPLOAD = 'src/test/java/TestReport/'
         REPO_URL = "https://dev.azure.com/nagwa-limited/Nagwa%20Classes%20Backend/_git/Api_Automation"
     }
