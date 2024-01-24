@@ -3,7 +3,6 @@ package EducatorProfile;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -15,20 +14,17 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasToString;
 
 public class CreateEducator {
-
     TestBase test = new TestBase();
     Educator_TestData data = new Educator_TestData();
-
     Faker fakeDate =new Faker();
+    String Admin_token = data.Admin_Token;
+    Response Create_Educator;
+    Response Unauth_Educator;
+    public Long Educator_ID;
     String firstName = fakeDate.name().firstName();
     String lastName = fakeDate.name().lastName();
     String email = fakeDate.internet().emailAddress();
-    String Admin_token = data.Admin_Token;
-    public Response Create_Educator;
-
-    public Response Unauth_Educator;
-    public Long Educator_ID;
-    public  String Valid_body_request = "{\"educator_first_name\":\""+ firstName +"\",\"educator_first_last\":\""+ lastName +"\",\"educator_email\":\""+ email +"\"," +
+    String Valid_body_request = "{\"educator_first_name\":\""+ firstName +"\",\"educator_first_last\":\""+ lastName +"\",\"educator_email\":\""+ email +"\"," +
             "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
             "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}" ;
     @Given("Performing the Api of Create Educator With valid data")
