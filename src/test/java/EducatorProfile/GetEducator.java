@@ -22,6 +22,10 @@ public class GetEducator {
     Map<String, Object> pathParams = test.pathParams;
     Long educatorID;
     Response Get_Educator;
+    Response GetEducator_with_Invalid_token;
+    Response NotActive_Educator_token;
+    Response Deleted_Educator_token;
+
 
     @When("Performing the Api of Get Educator")
     public void Get_Educator() {
@@ -53,9 +57,53 @@ public class GetEducator {
         pathParams.put("educator_id", "11122334455678");
     }
 
+    @Given("User Send special char in educator Id")
+    public void user_send_Invalid_educatorId_with_special_char() {
+        pathParams.put("educator_id", "?????");
+    }
+
     @Then("I verify the appearance of status code 400 and path is incorrect")
     public void Validate_Response_of_invalid_EducatorID() {
         Response Invalid_ID = Get_Educator;
-        test.Validate_Error_Messages(Invalid_ID, HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
+        test.Validate_Error_Messages(Invalid_ID,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
     }
+
+    @Given("User Send unauthorized educatorID to GetEducator Api")
+    public void send_unauthorized_educatorId() {pathParams.put("educator_id",data.deleted_educator);
+    }
+    @When("performing the api of GetEducator with invalid token")
+    public void send_unauthorized_educator(){
+        GetEducator_with_Invalid_token = test.sendRequest("GET", "/educators/{educator_id}/profile", null, data.refresh_token_for_notActiveEducator);
+    }
+    @Then("I verify the appearance of status code 403 and EducatorID is unauthorized")
+    public void Validate_Response_of_unauthorized_EducatorId() {
+        Response unauthorizedEducator = GetEducator_with_Invalid_token;
+        test.Validate_Error_Messages(unauthorizedEducator,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+    }
+
+    @Given("User Send not active educatorID to GetEducator")
+    public void user_send_notActive_educatorId() {pathParams.put("educator_id", data.notActive_educator);
+    }
+    @When("performing the api of GetEducator with notActive educator token")
+    public void send_notActive_educator_token(){
+         NotActive_Educator_token = test.sendRequest("GET", "/educators/{educator_id}/profile", null,data.refresh_token_for_notActiveEducator);
+    }
+    @Then("I verify the appearance of status code 404 and Educator is not active")
+    public void Validate_Response_of_notActive_EducatorId() {
+        Response InActiveEducator = NotActive_Educator_token;
+        test.Validate_Error_Messages(InActiveEducator,HttpStatus.SC_NOT_FOUND,"Educator with the specified ID does not exist or is not active.",40413);
+    }
+    @Given("User Send deleted educatorID")
+    public void user_send_deleted_educatorId() {pathParams.put("educator_id", data.deleted_educator);
+    }
+    @When("performing the api of GetEducator with deleted educator")
+    public void send_deleted_educator_token(){
+        Deleted_Educator_token = test.sendRequest("GET", "/educators/{educator_id}/profile", null,data.refresh_token_for_deletedEducator);
+    }
+    @Then("I verify the appearance of status code 404 and EducatorID is deleted")
+    public void Validate_Response_of_deleted_EducatorId() {
+        Response DeletedEducator =Deleted_Educator_token;
+        test.Validate_Error_Messages(DeletedEducator,HttpStatus.SC_NOT_FOUND,"Educator with the specified ID does not exist or is not active.",40413);
+    }
+
 }
