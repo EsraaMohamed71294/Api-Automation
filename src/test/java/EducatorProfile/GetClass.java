@@ -11,12 +11,12 @@ import studentClasses.Database_Connection;
 import studentClasses.TestBase;
 
 import java.io.File;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.*;
 
 public class GetClass {
     TestBase test = new TestBase();
@@ -37,18 +37,21 @@ public class GetClass {
     String pay_per_session_allowed;
     String class_seats_limit;
     String class_seats_reserved;
+    Long Subjects;
+    Long EducatorID;
     Response Get_Class;
     Response GetClass_Invalid_token;
 
 
     @When("Performing the Api of Get Class")
-    public void Get_Educator() {
+    public void Get_Class() {
         Get_Class = test.sendRequest("GET", "/admin/classes/{class_id}", null,data.Admin_Token);
     }
     @Given("User Send valid Class Id to get class data")
     public void user_send_valid_classId() {
         Class.Create_Class_per_session();
         classID = Class.Class_ID;
+        EducatorID = Class.EducatorId;
         System.out.println(classID);
         pathParams.put("class_id", classID);
     }
@@ -75,7 +78,8 @@ public class GetClass {
             pay_per_session_allowed = resultSet.getString("pay_per_session_allowed");
             class_seats_limit = resultSet.getString("class_seats_limit");
             class_seats_reserved = resultSet.getString("class_seats_reserved");
-            System.out.println("class Title: " + classTitle + "pay_per_session_allowed: " + pay_per_session_allowed + "class_seats_limit: " + class_seats_limit);
+            Subjects = resultSet.getLong("subject_id");
+            System.out.println("class Title: " + classTitle + "pay_per_session_allowed: " + pay_per_session_allowed + "class_seats_limit: " + class_seats_limit + "Subjects: " + Subjects);
         }
     }
 
@@ -90,7 +94,7 @@ public class GetClass {
                         "class_order",hasToString(classOrder),"class_public_listing_date",hasToString(classPublicListing),"class_public_delist_date",hasToString(classPublicDelistDate),
                         "class_enrollment_end_date",hasToString(classEnrollmentEndDate),"class_archive_date",hasToString(classArchiveDate),
                         "pay_full_class_allowed",hasToString(payFullClassAllowed),"pay_per_session_allowed",hasToString(pay_per_session_allowed),
-                        "class_seats_limit",hasToString(class_seats_limit),"class_seats_reserved",hasToString(class_seats_reserved));
+                        "class_seats_limit",hasToString(class_seats_limit),"class_seats_reserved",hasToString(class_seats_reserved),"subjects.subject_id",equalTo(Subjects));
     }
 
     @Given("User Send Invalid Class Id to get class data")

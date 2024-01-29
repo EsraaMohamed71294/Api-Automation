@@ -19,8 +19,8 @@ public class CreateClass {
     CreateEducator educator = new CreateEducator();
     Faker fakeDate =new Faker();
     String classTitle = fakeDate.name().title();
-    public Long EducatorId;
-    public Long Class_ID;
+    Long EducatorId;
+    Long Class_ID;
     Response Create_class_per_session;
     Response unauthorized_user;
     Response Invalid_body_data;
