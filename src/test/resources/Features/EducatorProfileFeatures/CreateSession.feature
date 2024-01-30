@@ -5,10 +5,10 @@ Feature: Test all scenarios of the api Create Session
     Then    I verify the appearance of status code 200 and create session successfully
 
   Scenario: Verify create new session with class not exist
-    Given   Performing the Api of create session With not existing class
-    Then    I verify the appearance of status code 404 and class notFound
+    Given   Performing the Api of create session With class id not exist
+    Then    I verify the appearance of status code 404 and class id not found
 
-  Scenario: Verify create new session with invalid subject
+  Scenario: Verify create new session with invalid subject char.
     Given   Performing the Api of create session With Invalid subject
     Then    I verify the appearance of status code 404 and subject is Invalid
 
@@ -16,7 +16,7 @@ Feature: Test all scenarios of the api Create Session
     Given   Performing the Api of create session With Invalid data
     Then    I verify the appearance of status code 400 and invalid data
 
-  Scenario: Verify create new session without sending subject
+  Scenario: Verify create new session with subject not exist
     Given   Performing the Api of create session Without sending subject
     Then    I verify the appearance of status code 404 and there is no subject
 

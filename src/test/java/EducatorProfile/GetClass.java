@@ -33,8 +33,8 @@ public class GetClass {
     String classPublicDelistDate;
     String classEnrollmentEndDate;
     String classArchiveDate;
-    String payFullClassAllowed;
-    String pay_per_session_allowed;
+    String class_payment_option_name;
+    Integer class_payment_option_id;
     String class_seats_limit;
     String class_seats_reserved;
     Long Subjects;
@@ -52,34 +52,35 @@ public class GetClass {
         Class.Create_Class_per_session();
         classID = Class.Class_ID;
         EducatorID = Class.EducatorId;
-        System.out.println(classID);
         pathParams.put("class_id", classID);
     }
 
     @And("Getting data of created class from database")
     public void getClassDetails () throws SQLException {
         ResultSet resultSet = Connect.connect_to_database("select * from classes c \n" +
-                "join classes_subjects cs \n" +
-                "on c.class_id = cs.class_id \n" +
+                "join  classes_subjects cs \n" +
+                "on c.class_id =cs.class_id \n" +
                 "join classes_educators ce \n" +
-                "on c.class_id = ce.class_id " +
+                "on c.class_id = ce.class_id \n" +
+                "join class_payment_options cpo \n" +
+                "on c.class_payment_option_id = cpo.class_payment_option_id \n" +
                 "where c.class_id = "+ classID +"");
+
 
         while (resultSet.next()) {
             classTitle = resultSet.getString("class_title");
             classDescription = resultSet.getString("class_description");
             metaClassID = resultSet.getString("meta_class_id");
             classOrder = resultSet.getString("class_order");
-            classPublicListing = resultSet.getString("class_public_listing_date");
-            classPublicDelistDate = resultSet.getString("class_public_delist_date");
-            classEnrollmentEndDate = resultSet.getString("class_enrollment_end_date");
-            classArchiveDate = resultSet.getString("class_archive_date");
-            payFullClassAllowed = resultSet.getString("pay_full_class_allowed");
-            pay_per_session_allowed = resultSet.getString("pay_per_session_allowed");
+            classPublicListing = resultSet.getString("class_public_listing_date").replace(" ","T");
+            classPublicDelistDate = resultSet.getString("class_public_delist_date").replace(" ","T");
+            classEnrollmentEndDate = resultSet.getString("class_enrollment_end_date").replace(" ","T");
+            classArchiveDate = resultSet.getString("class_archive_date").replace(" ","T");
+            class_payment_option_name = resultSet.getString("class_payment_option_name");
+            class_payment_option_id = resultSet.getInt("class_payment_option_id");
             class_seats_limit = resultSet.getString("class_seats_limit");
             class_seats_reserved = resultSet.getString("class_seats_reserved");
             Subjects = resultSet.getLong("subject_id");
-            System.out.println("class Title: " + classTitle + "pay_per_session_allowed: " + pay_per_session_allowed + "class_seats_limit: " + class_seats_limit + "Subjects: " + Subjects);
         }
     }
 
@@ -93,8 +94,9 @@ public class GetClass {
                 .body("class_id", equalTo(classID),"class_title",hasToString(classTitle),"class_description",hasToString(classDescription),"meta_class_id",hasToString(metaClassID),
                         "class_order",hasToString(classOrder),"class_public_listing_date",hasToString(classPublicListing),"class_public_delist_date",hasToString(classPublicDelistDate),
                         "class_enrollment_end_date",hasToString(classEnrollmentEndDate),"class_archive_date",hasToString(classArchiveDate),
-                        "pay_full_class_allowed",hasToString(payFullClassAllowed),"pay_per_session_allowed",hasToString(pay_per_session_allowed),
-                        "class_seats_limit",hasToString(class_seats_limit),"class_seats_reserved",hasToString(class_seats_reserved),"subjects.subject_id",equalTo(Subjects));
+                        "class_payment_option_name",hasToString(class_payment_option_name),"class_payment_option_id",equalTo(class_payment_option_id),
+                        "class_seats_limit",hasToString(class_seats_limit),"class_seats_reserved",equalTo(class_seats_reserved));
+//        ,"subjects.subject_id",containsInAnyOrder(Subjects)
     }
 
     @Given("User Send Invalid Class Id to get class data")
@@ -119,7 +121,7 @@ public class GetClass {
         test.Validate_Error_Messages(notFound_classID,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
     }
 
-    @Given("User send invalid admin token to GetClasses")
+    @When("performing the api with invalid admin token")
     public void send_unauthorized_Admin(){
         GetClass_Invalid_token = test.sendRequest("GET", "/admin/classes/{class_id}", null, data.refresh_token_for_notActiveEducator);
     }

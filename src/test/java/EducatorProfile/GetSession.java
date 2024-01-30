@@ -15,8 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.*;
 
 public class GetSession {
     TestBase test = new TestBase();
@@ -49,7 +48,7 @@ public class GetSession {
         Classid =session.Class_ID;
         educatorID = session.EducatorId;
         System.out.println(SessionID);
-        pathParams.put("SessionID", SessionID);
+        pathParams.put("session_id", SessionID);
     }
 
     @And("Getting data of created session from database")
@@ -59,12 +58,12 @@ public class GetSession {
                 "on ce.educator_id = s.educator_id \n" +
                 "join classes_subjects cs \n" +
                 "on ce.class_id = cs.class_id \n" +
-                "where s.session_id ="+ SessionID +"  and s.educator_id = "+ educatorID +" and ce.class_id = " + Classid+ " ");
+                "where s.session_id ="+ SessionID +"  and s.educator_id = "+ educatorID +" and ce.class_id = " + Classid+ "");
 
         while (resultSet.next()) {
             session_title = resultSet.getString("session_title");
-            session_start_date = resultSet.getString("session_start_date");
-            session_end_date = resultSet.getString("session_end_date");
+            session_start_date = resultSet.getString("session_start_date").replace(" ","T")+ "Z";
+            session_end_date = resultSet.getString("session_end_date").replace(" ","T")+ "Z";
             session_duration_in_minutes = resultSet.getInt("session_duration_in_minutes");
             educator_id = resultSet.getLong("educator_id");
             class_id = resultSet.getLong("class_id");
@@ -80,6 +79,6 @@ public class GetSession {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/GetSession.json")))
                 .body("session_id", equalTo(SessionID),"session_title",hasToString(session_title),"session_start_date",hasToString(session_start_date),
                         "session_end_date",hasToString(session_end_date), "session_duration_in_minutes",equalTo(session_duration_in_minutes),"educator_id",equalTo(educator_id),
-                        "class_id",equalTo(class_id), "subject_id",equalTo(subject_id));
+                        "classes_subjects.class_id",hasItem(class_id), "classes_subjects.subject_id",hasItem(subject_id));
     }
 }

@@ -10,17 +10,17 @@
     "class_description": {
       "type": "string"
     },
-    "pay_full_class_allowed": {
-      "type": "boolean"
+    "class_payment_option_name": {
+      "type": "string"
     },
-    "pay_per_session_allowed": {
-      "type": "boolean"
+    "class_payment_option_id": {
+      "type": "integer"
     },
     "class_seats_limit": {
-      "type": "null"
+      "type": ["integer","null"]
     },
     "class_seats_reserved": {
-      "type": "null"
+      "type": ["integer","null"]
     },
     "class_order": {
       "type": "integer"
@@ -56,7 +56,7 @@
               "type": "integer"
             },
             "class_subject_full_price": {
-              "type": "null"
+              "type": ["integer","null"]
             }
           },
           "required": [
@@ -105,8 +105,8 @@
     "class_id",
     "class_title",
     "class_description",
-    "pay_full_class_allowed",
-    "pay_per_session_allowed",
+    "class_payment_option_name",
+    "class_payment_option_id",
     "class_seats_limit",
     "class_seats_reserved",
     "class_order",

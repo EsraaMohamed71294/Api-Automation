@@ -17,7 +17,7 @@ Feature: Test all scenarios of the api Get Class
     Then    I verify the appearance of status code 400 and class is not found
 
   Scenario: Verify get class with invalid admin token
-    Given   User send invalid admin token to GetClasses
-    When    Performing the Api of Get Class
+    Given   User Send valid Class Id to get class data
+    When    performing the api with invalid admin token
     Then    I verify the appearance of status code 403 and Admin is unauthorized
 

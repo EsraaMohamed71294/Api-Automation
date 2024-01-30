@@ -13,12 +13,6 @@ import java.util.Map;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
 public class TestBase {
 
 	TestData data =new TestData();
