@@ -1,0 +1,121 @@
+{
+  "type": "object",
+  "properties": {
+    "class_id": {
+      "type": "integer"
+    },
+    "class_title": {
+      "type": "string"
+    },
+    "class_description": {
+      "type": "string"
+    },
+    "class_payment_option_name": {
+      "type": "string"
+    },
+    "class_payment_option_id": {
+      "type": "integer"
+    },
+    "class_seats_limit": {
+      "type": ["integer","null"]
+    },
+    "class_seats_reserved": {
+      "type": ["integer","null"]
+    },
+    "class_order": {
+      "type": "integer"
+    },
+    "meta_class_id": {
+      "type": "integer"
+    },
+    "class_enrollment_end_date": {
+      "type": "string"
+    },
+    "class_public_delist_date": {
+      "type": "string"
+    },
+    "class_archive_date": {
+      "type": "string"
+    },
+    "class_public_listing_date": {
+      "type": "string"
+    },
+    "subjects": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "subject_id": {
+              "type": "integer"
+            },
+            "subject_name": {
+              "type": "string"
+            },
+            "grade_id": {
+              "type": "integer"
+            },
+            "class_subject_full_price": {
+              "type": ["integer","null"]
+            }
+          },
+          "required": [
+            "subject_id",
+            "subject_name",
+            "grade_id",
+            "class_subject_full_price"
+          ]
+        }
+      ]
+    },
+    "educators": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "educator_id": {
+              "type": "integer"
+            },
+            "educator_first_name": {
+              "type": "string"
+            },
+            "educator_last_name": {
+              "type": "string"
+            },
+            "educator_is_active": {
+              "type": "boolean"
+            },
+            "educator_is_deleted": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "educator_id",
+            "educator_first_name",
+            "educator_last_name",
+            "educator_is_active",
+            "educator_is_deleted"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "class_id",
+    "class_title",
+    "class_description",
+    "class_payment_option_name",
+    "class_payment_option_id",
+    "class_seats_limit",
+    "class_seats_reserved",
+    "class_order",
+    "meta_class_id",
+    "class_enrollment_end_date",
+    "class_public_delist_date",
+    "class_archive_date",
+    "class_public_listing_date",
+    "subjects",
+    "educators"
+  ]
+}
