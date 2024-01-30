@@ -1,12 +1,13 @@
-package EducatorProfile;
+package AdminArea;
 
+import EducatorProfile.Educator_TestData;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.TestBase;
+import TestConfig.TestBase;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -57,7 +58,7 @@ public class CreateSession {
         Create_Session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/CreateSession.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateSession.json")))
                 .body("message", hasToString("Session created successfully."),"session_id",equalTo(sessionId));
     }
 

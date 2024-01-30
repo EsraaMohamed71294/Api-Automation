@@ -1,4 +1,4 @@
-package studentClasses;
+package TestConfig;
 
 import java.sql.*;
 

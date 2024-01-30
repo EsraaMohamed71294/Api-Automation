@@ -1,12 +1,13 @@
-package EducatorProfile;
+package AdminArea;
 
+import EducatorProfile.Educator_TestData;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.TestBase;
+import TestConfig.TestBase;
 
 import java.io.File;
 
@@ -71,7 +72,7 @@ public class CreateClass {
         Create_class_per_session.then()
                 .statusCode(HttpStatus.SC_CREATED)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/CreateClass.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateClass.json")))
                 .body("message", hasToString("Class created successfully."),"class_id",equalTo(Class_ID));
     }
 

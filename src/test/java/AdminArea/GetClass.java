@@ -1,5 +1,6 @@
-package EducatorProfile;
+package AdminArea;
 
+import EducatorProfile.Educator_TestData;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,11 +8,10 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.Database_Connection;
-import studentClasses.TestBase;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 
 import java.io.File;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -90,7 +90,7 @@ public class GetClass {
         Get_Class.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/GetClass.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/GetClass.json")))
                 .body("class_id", equalTo(classID),"class_title",hasToString(classTitle),"class_description",hasToString(classDescription),"meta_class_id",hasToString(metaClassID),
                         "class_order",hasToString(classOrder),"class_public_listing_date",hasToString(classPublicListing),"class_public_delist_date",hasToString(classPublicDelistDate),
                         "class_enrollment_end_date",hasToString(classEnrollmentEndDate),"class_archive_date",hasToString(classArchiveDate),

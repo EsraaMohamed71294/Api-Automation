@@ -5,7 +5,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.TestBase;
+import TestConfig.TestBase;
 
 import java.io.File;
 

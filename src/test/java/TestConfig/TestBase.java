@@ -1,4 +1,4 @@
-package studentClasses;
+package TestConfig;
 
 import io.cucumber.java.en.Given;
 
@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import studentClasses.TestData;
 
 import java.util.HashMap;
 import java.util.Map;
