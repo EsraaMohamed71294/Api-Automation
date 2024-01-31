@@ -35,7 +35,6 @@ public class GetSession {
     Long educator_id;
     Long class_id;
     Long subject_id;
-
     Response Get_Session;
 
     @When("Performing the Api of Get session")
@@ -51,7 +50,6 @@ public class GetSession {
         System.out.println(SessionID);
         pathParams.put("session_id", SessionID);
     }
-
     @And("Getting data of created session from database")
     public void getSessionDetails () throws SQLException {
         ResultSet resultSet = Connect.connect_to_database("select * from sessions s \n" +
@@ -82,35 +80,28 @@ public class GetSession {
                         "session_end_date",hasToString(session_end_date), "session_duration_in_minutes",equalTo(session_duration_in_minutes),"educator_id",equalTo(educator_id),
                         "classes_subjects.class_id",hasItem(class_id), "classes_subjects.subject_id",hasItem(subject_id));
     }
-
     @Given("send invalid session id in the path")
     public void user_send_invalid_sessionID() {
         pathParams.put("session_id", "SessionID");
     }
-
     @Then("I verify the appearance of status code 400 and invalid path")
     public void Validate_Response_of_Get_Session_with_invalid_path() {
         Response invalid_path = Get_Session;
         test.Validate_Error_Messages(invalid_path,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
     }
-
     @Given("send session id is not exist")
     public void user_send_sessionID_not_exist() {
         pathParams.put("session_id", "123456789012");
     }
-
     @Then("I verify the appearance of status code 404 and session is eligible to display")
     public void Validate_Response_of_Get_Session_notExist() {
         Response invalid_session = Get_Session;
         test.Validate_Error_Messages(invalid_session,HttpStatus.SC_NOT_FOUND,"Session not found or not eligible for display.",4048);
     }
-
-
     @When("Performing the Api of Get session with invalid token")
     public void Get_Session_invalid_token() {
         Get_Session = test.sendRequest("GET", "/admin/sessions/{session_id}", null,data.refresh_token_for_notActiveEducator);
     }
-
     @Then("I verify the appearance of status code 403 and Unauthorized")
     public void Validate_Response_of_Get_Session_unauthorized_token() {
         Response invalid_session_unauthorized_token = Get_Session;
