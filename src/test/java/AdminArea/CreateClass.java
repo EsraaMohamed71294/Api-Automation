@@ -66,7 +66,7 @@ public class CreateClass {
         return Class_ID = Create_class_per_session.then().extract().path("class_id");
     }
 
-    @Then("I verify the appearance of status code 200 and class created successfully")
+    @Then("I verify the appearance of status code 201 and class created successfully")
     public void Validate_Response_of_create_class_successfully() {
         Create_class_per_session.prettyPrint();
         Create_class_per_session.then()

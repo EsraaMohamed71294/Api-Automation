@@ -2,11 +2,11 @@ Feature: Test all scenarios of the api Create Class
 
   Scenario: Verify create new full pay class successfully
     Given   Performing the Api of Create class full pay With valid data
-    Then    I verify the appearance of status code 200 and class created successfully
+    Then    I verify the appearance of status code 201 and class created successfully
 
   Scenario: Verify create new class per session successfully
     Given   Performing the Api of Create class per session With valid data
-    Then    I verify the appearance of status code 200 and class created successfully
+    Then    I verify the appearance of status code 201 and class created successfully
 
   Scenario: Verify create new class with invalid token
     Given   Performing the Api of Create class With invalid token
