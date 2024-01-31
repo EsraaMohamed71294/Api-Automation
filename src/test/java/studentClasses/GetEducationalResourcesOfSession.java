@@ -1,20 +1,15 @@
 package studentClasses;
+import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
-import org.hamcrest.object.HasToString;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Map;
 public class GetEducationalResourcesOfSession {
 

@@ -1,14 +1,13 @@
 package EducatorProfile;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.Database_Connection;
-import studentClasses.TestBase;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -71,6 +70,7 @@ public class GetEducatorProfile {
     }
     @Given("User Send valid educator Id")
     public void Sending_valid_EducatorId() {
+
         pathParams.put("educator_id",Educator_Id);
     }
     @Then("I verify the appearance of status code 200 and Educator data returned")

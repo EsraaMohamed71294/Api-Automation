@@ -1,5 +1,6 @@
-package EducatorProfile;
+package AdminArea;
 
+import EducatorProfile.Educator_TestData;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,8 +8,8 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.Database_Connection;
-import studentClasses.TestBase;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -76,7 +77,7 @@ public class GetSession {
         Get_Session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/GetSession.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/GetSession.json")))
                 .body("session_id", equalTo(SessionID),"session_title",hasToString(session_title),"session_start_date",hasToString(session_start_date),
                         "session_end_date",hasToString(session_end_date), "session_duration_in_minutes",equalTo(session_duration_in_minutes),"educator_id",equalTo(educator_id),
                         "classes_subjects.class_id",hasItem(class_id), "classes_subjects.subject_id",hasItem(subject_id));

@@ -3,16 +3,15 @@ package studentClasses;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.List;
 import java.util.Map;
 import java.io.File;
 
-import io.cucumber.java.en.And;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;

@@ -1,6 +1,7 @@
 package studentClasses;
 
-import io.cucumber.java.en.And;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -12,9 +13,6 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import java.io.File;
 
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.containsString;

@@ -1,12 +1,13 @@
-package EducatorProfile;
+package AdminArea;
 
+import EducatorProfile.Educator_TestData;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.TestBase;
+import TestConfig.TestBase;
 
 import java.io.File;
 
@@ -32,13 +33,16 @@ public class CreateEducator {
         Create_Educator = test.sendRequest("POST", "/admin/educators", Valid_body_request,Admin_token);
         return Educator_ID = Create_Educator.then().extract().path("educator_id");
     }
+    public String getEducatorEmail () {
+        return email;
+    }
     @Then("I verify the appearance of status code 200 and Educator created successfully")
     public void Validate_Response_of_create_Educator_successfully() {
         Create_Educator.prettyPrint();
         Create_Educator.then()
                 .statusCode(HttpStatus.SC_CREATED)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/CreateEducator.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateEducator.json")))
                 .body("message", hasToString("Educator created successfully."),"educator_id",equalTo(Educator_ID));
     }
     @Given("Performing the Api of Create Educator With Invalid email")
