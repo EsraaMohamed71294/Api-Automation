@@ -84,7 +84,7 @@ public class AssignEducationalResources {
     }
 
     @Then("I verify the appearance of status code 404 and resource not found")
-    public void Validate_Response_of_recource_notFound() {
+    public void Validate_Response_of_resource_notFound() {
         Response InvalidResourceBody = Assign_Resource_InvalidResource;
         test.Validate_Error_Messages(InvalidResourceBody,HttpStatus.SC_NOT_FOUND,"No educational resources found.",4049);
     }
