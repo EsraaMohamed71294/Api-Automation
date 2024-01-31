@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "student_first_name": {
+      "type": "string"
+    },
+    "student_last_name": {
+      "type": "string"
+    },
+    "student_email": {
+      "type": "string"
+    },
+    "grade_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "student_first_name",
+    "student_last_name",
+    "student_email",
+    "grade_id"
+  ]
+}
