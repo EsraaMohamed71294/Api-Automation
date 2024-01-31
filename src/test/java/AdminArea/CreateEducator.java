@@ -33,6 +33,9 @@ public class CreateEducator {
         Create_Educator = test.sendRequest("POST", "/admin/educators", Valid_body_request,Admin_token);
         return Educator_ID = Create_Educator.then().extract().path("educator_id");
     }
+    public String getEducatorEmail () {
+        return email;
+    }
     @Then("I verify the appearance of status code 200 and Educator created successfully")
     public void Validate_Response_of_create_Educator_successfully() {
         Create_Educator.prettyPrint();

@@ -70,6 +70,7 @@ public class GetEducatorProfile {
     }
     @Given("User Send valid educator Id")
     public void Sending_valid_EducatorId() {
+
         pathParams.put("educator_id",Educator_Id);
     }
     @Then("I verify the appearance of status code 200 and Educator data returned")
