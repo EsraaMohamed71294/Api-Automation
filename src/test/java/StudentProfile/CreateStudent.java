@@ -1,5 +1,6 @@
 package StudentProfile;
 
+import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import com.github.javafaker.Faker;
@@ -20,6 +21,8 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class CreateStudent {
     TestBase test = new TestBase();
+
+    Educator_TestData data =new Educator_TestData();
     Database_Connection Connect = new Database_Connection();
     Faker fakeDate =new Faker();
     String firstName = fakeDate.name().firstName();
@@ -57,7 +60,7 @@ public class CreateStudent {
     public Long Create_Student() {
         Valid_body_request = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"student_email\":\""+ email +"\"" +
                 ",\"grade_id\":"+ Grade_ID +",\"social_media_id\":null}" ;
-        Create_Student = test.sendRequest("POST", "/students/create", Valid_body_request,null);
+        Create_Student = test.sendRequest("POST", "/students/create", Valid_body_request,data.Admin_Token);
         return studentId;
     }
     @Then("I verify the appearance of status code 201 and Student created successfully")
