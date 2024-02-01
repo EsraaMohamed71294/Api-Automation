@@ -1,5 +1,12 @@
 Feature: Test all scenarios of the api verify student OTP
 
-#  Scenario: Verify student OTP
-#    Given   Performing the Api of verify Student OTP with valid data
-#    Then    I verify the appearance of status code 200 and OTP sent to student mail
+  Scenario: Verify student OTP with valid data
+    Given   Get Student OTP and mail from database
+    When    Performing the Api of Verify Student OTP with valid data
+    Then    I verify the appearance of status code 200 and student authenticated
+
+  Scenario: Verify student OTP with invalid OTP
+    Given   Get Student OTP and mail from database
+    When    Performing the Api of Verify Student OTP with Invalid OTP
+    Then    I verify the appearance of status code 401 and Invalid student OTP
+

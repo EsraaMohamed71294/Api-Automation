@@ -2,7 +2,7 @@
   "type": "object",
   "properties": {
     "message_id": {
-      "type": "string"
+      "type": "integer"
     },
     "message": {
       "type": "string"

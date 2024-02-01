@@ -23,7 +23,7 @@ public class SendEmailOTP {
     Response Send_Student_OTP ;
 
     @When("Performing the Api of Send Student OTP with valid data")
-    public void Send_Educator_OTP() {
+    public void Send_Student_OTP() {
         Valid_body_request = "{\"email\":\"test.automation@nagwa.com\",\"language\":\"en\"}";
         Send_Student_OTP = test.sendRequest("POST", "/auth/send-otp", Valid_body_request,data.Admin_Token);
     }
@@ -34,8 +34,8 @@ public class SendEmailOTP {
         Send_Student_OTP.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Features/StudentParentAuthFeatures/SendStudentMailOTP.feature")))
-                .body("message", hasToString("OTP sent to email"),"message_id",equalTo(2001),"duration",equalTo(300),"resend_duration",equalTo(60));
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentParentAuthSchemas/SendStudentOTP.json")))
+                .body("message", hasToString("OTP sent to email"),"message_id",equalTo(2001),"duration",equalTo(300),"resending_duration",equalTo(60));
     }
 
     @Then("I verify the appearance of status code 429 and rate exceeds")
