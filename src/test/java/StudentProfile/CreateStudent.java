@@ -1,6 +1,7 @@
 package StudentProfile;
 
 import EducatorProfile.Educator_TestData;
+import StudentParentAuth.VerifyEmailOTP;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import com.github.javafaker.Faker;
@@ -28,6 +29,7 @@ public class CreateStudent {
     String firstName = fakeDate.name().firstName();
     String lastName = fakeDate.name().lastName();
     String email = fakeDate.internet().emailAddress();
+    VerifyEmailOTP token = new VerifyEmailOTP();
     Long studentId;
     Long Grade_ID;
     Long walletId;
@@ -58,9 +60,10 @@ public class CreateStudent {
     }
     @When("Performing the Api of Create Student With valid data")
     public Long Create_Student() {
+        token.Verify_Student_OTP();
         Valid_body_request = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"student_email\":\""+ email +"\"" +
                 ",\"grade_id\":"+ Grade_ID +",\"social_media_id\":null}" ;
-        Create_Student = test.sendRequest("POST", "/students/create", Valid_body_request,data.Admin_Token);
+        Create_Student = test.sendRequest("POST", "/students/create", Valid_body_request,token.create_account_token);
         return studentId;
     }
     @Then("I verify the appearance of status code 201 and Student created successfully")

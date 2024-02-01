@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ public class VerifyEmailOTP {
     String OTP;
     String Email;
     boolean IsVerified;
-    String create_account_token;
+    public String create_account_token;
     String access_token;
     public String studentFirstName ;
     public String studentLastName ;
@@ -61,12 +62,13 @@ public class VerifyEmailOTP {
         get_Student_OTP_from_database();
         get_Student_data_from_database();
 }
+
     @When("Performing the Api of Verify Student OTP with valid data")
     public String Verify_Student_OTP() {
         send.Send_Student_OTP();
         String Valid_body_request = "{\"email\":\""+ Email +"\",\"otp\":\"" + OTP + "\"}";
         Verify_Student_OTP = test.sendRequest("POST", "/auth/verify-otp", Valid_body_request,data.Admin_Token);
-        String MessageId = (Verify_Student_OTP.then().extract().path("message_id")).toString();
+        String MessageId = Verify_Student_OTP.then().extract().path("message_id").toString();
         System.out.println("message id "+  MessageId);
         if (MessageId == "2002") {
             return create_account_token = Verify_Student_OTP.then().extract().path("create_account_token");
