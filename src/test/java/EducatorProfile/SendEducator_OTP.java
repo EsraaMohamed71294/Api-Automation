@@ -27,7 +27,7 @@ public class SendEducator_OTP {
         Send_Educator_OTP = test.sendRequest("POST", "/educators/auth/send-otp", Valid_body_request,Educator_Token);
     }
     @Then("I verify the appearance of status code 200 and OTP sent to email")
-    public void Validate_Response_of_update_Educator_Profile_successfully() {
+    public void Validate_Response_of_Send_Educator_OTP() {
         Send_Educator_OTP.prettyPrint();
         Send_Educator_OTP.then()
                 .statusCode(HttpStatus.SC_OK)
@@ -55,6 +55,7 @@ public class SendEducator_OTP {
     }
     @When("Performing the Api of Send Educator OTP with missing email input")
     public void Send_Educator_OTP_With_Empty_Email() {
+
         Send_Educator_OTP = test.sendRequest("POST", "/educators/auth/send-otp", body_with_missing_email,Educator_Token);
     }
     @Then("I verify the appearance of status code 400 and Invalid email format")
