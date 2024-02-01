@@ -27,12 +27,12 @@ public class SendEducator_OTP {
         Send_Educator_OTP = test.sendRequest("POST", "/educators/auth/send-otp", Valid_body_request,Educator_Token);
     }
     @Then("I verify the appearance of status code 200 and OTP sent to email")
-    public void Validate_Response_of_update_Educator_Profile_successfully() {
+    public void Validate_Response_of_Send_Educator_OTP() {
         Send_Educator_OTP.prettyPrint();
         Send_Educator_OTP.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/EducatorProfileSchemas/SendEducator_OTP.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("/src/test/resources/Schemas/EducatorProfileSchemas/SendEducator_OTP.json")))
                 .body("message", hasToString("OTP sent to email"),"message_id",equalTo(2001),"duration",equalTo(300),"resend_duration",equalTo(60));
     }
     @Then("I verify the appearance of status code 429 and Rate Limit Exceeds")
@@ -55,6 +55,7 @@ public class SendEducator_OTP {
     }
     @When("Performing the Api of Send Educator OTP with missing email input")
     public void Send_Educator_OTP_With_Empty_Email() {
+
         Send_Educator_OTP = test.sendRequest("POST", "/educators/auth/send-otp", body_with_missing_email,Educator_Token);
     }
     @Then("I verify the appearance of status code 400 and Invalid email format")

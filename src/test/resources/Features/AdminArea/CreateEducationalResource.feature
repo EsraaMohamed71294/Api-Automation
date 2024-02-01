@@ -2,7 +2,7 @@ Feature: Test all scenarios of the api of Create Educational Resources
 
   Scenario: Verify create new educational resources successfully
     Given   Performing the Api of Create Educational Resources
-    And     Getting educational resource type from database
+    And     Getting educational resource from database
     Then    I verify the appearance of status code 200 and educational resource created successfully
 
   Scenario: Verify create educational resources with invalid data

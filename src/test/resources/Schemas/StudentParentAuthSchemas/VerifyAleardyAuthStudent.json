@@ -1,0 +1,91 @@
+{
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "message_id": {
+      "type": "integer"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "grade_id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "mobile_number": {
+          "type": "string"
+        },
+        "country_requires_mobile": {
+          "type": "boolean"
+        },
+        "country_iso_code": {
+          "type": "string"
+        },
+        "country_id": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "user_id",
+        "first_name",
+        "last_name",
+        "email",
+        "grade_id",
+        "role",
+        "mobile_number",
+        "country_requires_mobile",
+        "country_iso_code",
+        "country_id",
+        "is_active"
+      ]
+    },
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "access_token_exp": {
+          "type": "number"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "refresh_token_exp": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "access_token",
+        "access_token_exp",
+        "refresh_token",
+        "refresh_token_exp"
+      ]
+    }
+  },
+  "required": [
+    "message",
+    "message_id",
+    "data",
+    "tokens"
+  ]
+}
