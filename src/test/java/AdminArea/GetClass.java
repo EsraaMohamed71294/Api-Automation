@@ -24,7 +24,7 @@ public class GetClass {
     Database_Connection Connect = new Database_Connection();
     Educator_TestData data = new Educator_TestData();
     Map<String, Object> pathParams = test.pathParams;
-    Long classID;
+    public Long classID;
     String classTitle;
     String classDescription;
     String metaClassID;
@@ -37,8 +37,8 @@ public class GetClass {
     Integer class_payment_option_id;
     String class_seats_limit;
     String class_seats_reserved;
-    Long Subjects;
-    Long EducatorID;
+    public Long Subjects;
+    public Long EducatorID;
     Response Get_Class;
     Response GetClass_Invalid_token;
 

@@ -25,16 +25,16 @@ public class CreateClass {
     Response Create_class_per_session;
     Response unauthorized_user;
     Response Invalid_body_data;
-    String valid_body = "{\"class_title\":\""+ classTitle +"\",\"meta_class_id\":123123123123,\"class_order\":1," +
+    String valid_body = "{\"class_title\":\""+classTitle+"\",\"meta_class_id\":123123123123,\"class_order\":1," +
             "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
             "\"class_public_delist_date\":\"2028-02-10T00:00:00Z\",\"class_enrollment_end_date\":\"2025-02-05T23:59:59Z\",\"class_archive_date\":\"2026-03-01T00:00:00Z\"," +
-            "\"pay_full_class_allowed\":false,\"pay_per_session_allowed\":true,\"class_seats_limit\":50,\"is_test_class\":true,\"subjects\":[{\"subject_id\":872198392582," +
-            "\"class_subject_full_price\":2},{\"subject_id\":659167252305,\"class_subject_full_price\":1}],\"educators\":[]}" ;
-    String invalid_body = "{\"class_title\":\"\",\"meta_class_id\":,\"class_order\":1," +
-            "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
+            "\"class_payment_option_id\":1,\"class_seats_limit\":50,\"is_test_class\":true,\"subjects\":[{\"subject_id\":793174170262,\"class_subject_full_price\":2}," +
+            "{\"subject_id\":708151485254,\"class_subject_full_price\":1}],\"educators\":[{\"educator_id\":513147265404,\"educator_order\":20}]}" ;
+    String invalid_body ="{\"class_title\":\"\",\"meta_class_id\":,\"class_order\":1," +
+            "\"class_description\":\"Thisclassprovidesanintroductiontoprogrammingconcepts.\",\"class_public_listing_date\":\"\"," +
             "\"class_public_delist_date\":\"\",\"class_enrollment_end_date\":\"\",\"class_archive_date\":\"\"," +
-            "\"pay_full_class_allowed\":false,\"pay_per_session_allowed\":true,\"class_seats_limit\":50,\"is_test_class\":true,\"subjects\":[{\"subject_id\":872198392582," +
-            "\"class_subject_full_price\":2},{\"subject_id\":659167252305,\"class_subject_full_price\":1}],\"educators\":[]}" ;
+            "\"class_payment_option_id\":1,\"class_seats_limit\":50,\"is_test_class\":true,\"subjects\":[{\"subject_id\":793174170262,\"class_subject_full_price\":2}," +
+            "{\"subject_id\":708151485254,\"class_subject_full_price\":1}],\"educators\":[{\"educator_id\":,\"educator_order\":20}]}" ;
 
 
 
@@ -42,11 +42,13 @@ public class CreateClass {
     public Long Create_Class_full_pay() {
         educator.Create_Educator();
         EducatorId = educator.Educator_ID;
-        String body_for_pay_full_class = "{\"class_title\":\""+ classTitle +"\",\"meta_class_id\":123123123123,\"class_order\":1," +
+        System.out.println("educator " +EducatorId);
+        System.out.println("class" +classTitle);
+        String body_for_pay_full_class = "{\"class_title\":\""+classTitle+"\",\"meta_class_id\":123123123123,\"class_order\":1," +
                 "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2028-02-10T00:00:00Z\",\"class_enrollment_end_date\":\"2025-02-05T23:59:59Z\",\"class_archive_date\":\"2026-03-01T00:00:00Z\"," +
                 "\"class_payment_option_id\":1,\"class_seats_limit\":50,\"is_test_class\":true,\"subjects\":[{\"subject_id\":793174170262," +
-                "\"class_subject_full_price\":2},{\"subject_id\":708151485254,\"class_subject_full_price\":1}],\"educators\":["+ EducatorId +"]}" ;
+                "\"class_subject_full_price\":2},{\"subject_id\":708151485254,\"class_subject_full_price\":1}],\"educators\":[{\"educator_id\":"+EducatorId+",\"educator_order\":20}]}" ;
 
         Create_class_per_session = test.sendRequest("POST", "/admin/classes", body_for_pay_full_class, data.Admin_Token);
         return Class_ID = Create_class_per_session.then().extract().path("class_id");
@@ -60,7 +62,7 @@ public class CreateClass {
                 "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2028-02-10T00:00:00Z\",\"class_enrollment_end_date\":\"2025-02-05T23:59:59Z\",\"class_archive_date\":\"2026-03-01T00:00:00Z\"," +
                 "\"class_payment_option_id\":1,\"class_seats_limit\":50,\"is_test_class\":true,\"subjects\":[{\"subject_id\":793174170262," +
-                "\"class_subject_full_price\":2},{\"subject_id\":708151485254,\"class_subject_full_price\":1}],\"educators\":["+ EducatorId +"]}" ;
+                "\"class_subject_full_price\":2},{\"subject_id\":708151485254,\"class_subject_full_price\":1}],\"educators\":[{\"educator_id\":"+EducatorId+",\"educator_order\":20}]}" ;
 
         Create_class_per_session = test.sendRequest("POST", "/admin/classes", body_for_per_session_class, data.Admin_Token);
         return Class_ID = Create_class_per_session.then().extract().path("class_id");

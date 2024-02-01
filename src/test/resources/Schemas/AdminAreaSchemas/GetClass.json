@@ -56,7 +56,7 @@
               "type": "integer"
             },
             "class_subject_full_price": {
-              "type": ["integer","null"]
+              "type": ["number","null"]
             }
           },
           "required": [

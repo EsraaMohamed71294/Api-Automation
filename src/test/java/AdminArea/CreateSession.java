@@ -43,10 +43,12 @@ public class CreateSession {
         EducatorId = Class.EducatorID;
         subject = Class.Subjects;
 
+        System.out.println("class " + Class_ID + " Edu " + EducatorId + " sub "+ subject);
+
         valid_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-02-01T18:00:00Z\"," +
                 "\"session_end_date\":\"2024-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
-                "\"subject_id\":"+ subject +",\"class_subject_session_price\":100}]}";
+                "\"subject_id\":"+ subject +",\"class_subject_session_price\":10}]}";
 
         Create_Session = test.sendRequest("POST", "/admin/sessions", valid_body, data.Admin_Token);
         return sessionId = Create_Session.then().extract().path("session_id");
