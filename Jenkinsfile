@@ -37,8 +37,7 @@ pipeline {
                 script {
 
                     // Trim leading and trailing spaces from FILE_TO_UPLOAD
-                    // Use double $$ to escape the $ in Groovy
-                    sh "FILE_TO_UPLOAD_TRIMMED=\$$(echo \"${FILE_TO_UPLOAD}\" | xargs)"
+                    sh 'FILE_TO_UPLOAD_TRIMMED=$(echo "${FILE_TO_UPLOAD}" | xargs)'
             
 
                     // Upload the file to S3
