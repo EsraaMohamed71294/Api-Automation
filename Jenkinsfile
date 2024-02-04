@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        cd ${FOLDER_TO_UPLOAD}"
+                        cd ${FOLDER_TO_UPLOAD}
                         for file in *; do
                             # Check if the file is 'TestReport.html' with a leading space
                             if [[ "\$file" == " TestReport.html" ]]; then
