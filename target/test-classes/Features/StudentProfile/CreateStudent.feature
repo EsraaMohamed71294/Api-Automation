@@ -5,7 +5,7 @@ Feature: Test all scenarios of the api of Create Student
     When    Performing the Api of Create Student With valid data
     And     Get student data from database
     Then    I verify the appearance of status code 201 and Student created successfully
-    And Performing the Api of Verify Student OTP with already Auth Student
+    And     Performing the Api of Verify Student OTP with already Auth Student
     Then    I verify the appearance of status code 200 and student already authenticated
 
   Scenario: Verify create student with invalid grade

@@ -78,7 +78,7 @@ public class CreateStudent {
                 .body(Valid_body_request)
                 .when()
                 .post("/students/create");
-        return studentId;
+        return studentId = Create_Student.then().extract().path("data.student_id") ;
     }
     @Then("I verify the appearance of status code 201 and Student created successfully")
     public void Validate_Response_of_create_Student_successfully() {

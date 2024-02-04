@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "integer"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "mobile_number": {
+      "type": "string"
+    },
+    "country_id": {
+      "type": "string"
+    },
+    "grade_id": {
+      "type": "string"
+    },
+    "grade_title": {
+      "type": "string"
+    },
+    "grade_localization_key": {
+      "type": "string"
+    },
+    "country_iso_code": {
+      "type": "string"
+    },
+    "country_requires_mobile": {
+      "type": "boolean"
+    },
+    "role": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "first_name",
+    "last_name",
+    "email",
+    "mobile_number",
+    "country_id",
+    "grade_id",
+    "grade_title",
+    "grade_localization_key",
+    "country_iso_code",
+    "country_requires_mobile",
+    "role"
+  ]
+}

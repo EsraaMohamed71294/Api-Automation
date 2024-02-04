@@ -29,7 +29,6 @@ public class VerifyEmailOTP {
     public String Email;
     boolean IsVerified;
     public String create_account_token;
-    String student_refresh_token;
     public String studentFirstName ;
     public String studentLastName ;
     public String studentEmail;
