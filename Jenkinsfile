@@ -18,7 +18,7 @@ pipeline {
 
     environment {
         S3_BUCKET = 'test-report-nagwa'
-        FILE_TO_UPLOAD = 'target/Reports/'
+        FILE_TO_UPLOAD = 'target/Reports'
         REPO_URL = "https://dev.azure.com/nagwa-limited/Nagwa%20Classes%20Backend/_git/Api_Automation"
     }
 
@@ -36,10 +36,13 @@ pipeline {
             steps {
                 script {
 
+                    // Trim leading and trailing spaces from FILE_TO_UPLOAD
+                    sh "FILE_TO_UPLOAD_TRIMMED=$(echo \"${FILE_TO_UPLOAD}\" | xargs)"
+
                     // Upload the file to S3
                     sh "aws s3 rm s3://\"${env.S3_BUCKET}\"/ --recursive"
-                    sh "aws s3 cp ${FILE_TO_UPLOAD} s3://${S3_BUCKET}/ --acl public-read --recursive"
-                    echo "File uploaded to S3: s3://${S3_BUCKET}/${FILE_TO_UPLOAD}"
+                    sh "aws s3 cp ${FILE_TO_UPLOAD_TRIMMED} s3://${S3_BUCKET}/ --acl public-read --recursive"
+                    echo "File uploaded to S3: s3://${S3_BUCKET}/${FILE_TO_UPLOAD_TRIMMED}"
                 }
             }
         }
