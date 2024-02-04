@@ -9,6 +9,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -28,13 +29,17 @@ public class CreateStudent {
     Faker fakeDate =new Faker();
     String firstName = fakeDate.name().firstName();
     String lastName = fakeDate.name().lastName();
-    String email = fakeDate.internet().emailAddress();
-    VerifyEmailOTP token = new VerifyEmailOTP();
+    String email ;
+    VerifyEmailOTP verifyEmail = new VerifyEmailOTP();
     Long studentId;
     Long Grade_ID;
     Long walletId;
+    String OTP;
     String Valid_body_request ;
+    public String student_refresh_token;
+    String CreateToken;
     Response Create_Student;
+    Response Verify_Student_OTP;
     @Given("Get grades from database")
     public void get_grade_from_database () throws SQLException {
         ResultSet GradeResult = Connect.connect_to_database("SELECT * FROM public.grades g\n" +
@@ -59,11 +64,20 @@ public class CreateStudent {
 
     }
     @When("Performing the Api of Create Student With valid data")
-    public Long Create_Student() {
-        token.Verify_Student_OTP();
+    public Long Create_Student() throws SQLException {
+        verifyEmail.Verify_Student_OTP();
+        CreateToken = verifyEmail.create_account_token;
+        email = verifyEmail.Email;
+        OTP = verifyEmail.OTP;
+        System.out.println(email + OTP);
         Valid_body_request = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"student_email\":\""+ email +"\"" +
                 ",\"grade_id\":"+ Grade_ID +",\"social_media_id\":null}" ;
-        Create_Student = test.sendRequest("POST", "/students/create", Valid_body_request,token.create_account_token);
+        Create_Student =  RestAssured.given()
+                .header("Content-Type", "application/json")
+                .header("Authorization", CreateToken)
+                .body(Valid_body_request)
+                .when()
+                .post("/students/create");
         return studentId;
     }
     @Then("I verify the appearance of status code 201 and Student created successfully")
@@ -75,4 +89,96 @@ public class CreateStudent {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentProfile/CreateStudent.json")))
                 .body("message", hasToString("Student account created successfully."),"student_id",equalTo(studentId),"student_wallet_id",equalTo(walletId));
     }
+
+    @When("Performing the Api of Create Student With grade not exist")
+    public Long Create_Student_with_InvalidGrade() throws SQLException {
+        verifyEmail.Verify_Student_OTP();
+        CreateToken = verifyEmail.create_account_token;
+        email = verifyEmail.Email;
+        System.out.println(CreateToken);
+        Valid_body_request = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"student_email\":\""+ email +"\"" +
+                ",\"grade_id\":183108573333,\"social_media_id\":null}" ;
+        Create_Student =  RestAssured.given()
+                .header("Content-Type", "application/json")
+                .header("Authorization", CreateToken)
+                .body(Valid_body_request)
+                .when()
+                .post("/students/create");
+        return studentId;
+    }
+
+    @Then("I verify the appearance of status code 400 and Invalid Grade")
+    public void Validate_Response_Invalid_Grade() {
+        Response Invalid_Grade = Create_Student;
+        test.Validate_Error_Messages(Invalid_Grade,HttpStatus.SC_BAD_REQUEST,"Grade with the specified ID is not active.",40012);
+    }
+
+    @When("Performing the Api of Create Student With invalid data")
+    public Long Create_Student_with_InvalidData() throws SQLException {
+        verifyEmail.Verify_Student_OTP();
+        CreateToken = verifyEmail.create_account_token;
+        email = verifyEmail.Email;
+        System.out.println(CreateToken);
+        Valid_body_request = "{\"student_first_name\":\"\",\"student_last_name\":\"\",\"student_email\":\"\"" +
+                ",\"grade_id\":183108573333,\"social_media_id\":null}" ;
+        Create_Student =  RestAssured.given()
+                .header("Content-Type", "application/json")
+                .header("Authorization", CreateToken)
+                .body(Valid_body_request)
+                .when()
+                .post("/students/create");
+        return studentId;
+    }
+
+    @Then("I verify the appearance of status code 400 and Invalid data")
+    public void Validate_Response_Invalid_Data() {
+        Response Invalid_Grade = Create_Student;
+        test.Validate_Error_Messages(Invalid_Grade,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
+    }
+
+    @When("Performing the Api of Create Student With unauthorized student")
+    public Long Create_Student_with_duplicated_Email() throws SQLException {
+        verifyEmail.Verify_Student_OTP();
+        CreateToken = verifyEmail.create_account_token;
+        email = verifyEmail.Email;
+        System.out.println(CreateToken);
+        Valid_body_request = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"student_email\":\"nicolo.bazzi@nagwa.com\"" +
+                ",\"grade_id\":183108573333,\"social_media_id\":null}" ;
+        Create_Student =  RestAssured.given()
+                .header("Content-Type", "application/json")
+                .header("Authorization", CreateToken)
+                .body(Valid_body_request)
+                .when()
+                .post("/students/create");
+        return studentId;
+    }
+
+    @Then("I verify the appearance of status code 400 and student is unauthorized")
+    public void Validate_Response_duplicated_email() {
+        Response duplicated_email = Create_Student;
+        test.Validate_Error_Messages(duplicated_email,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+    }
+
+
+    @And("Performing the Api of Verify Student OTP with already Auth Student")
+    public String Verify_Student_OTP_already_Auth() {
+        String Valid_body_request = "{\"email\":\""+ email +"\",\"otp\":\"" + OTP + "\"}";
+        Verify_Student_OTP = test.sendRequest("POST", "/auth/verify-otp", Valid_body_request,data.Admin_Token);
+            System.out.println(email + OTP);
+        return student_refresh_token = Verify_Student_OTP.then().extract().path("tokens.refresh_token");
+    }
+
+    @Then("I verify the appearance of status code 200 and student already authenticated")
+    public void Validate_Response_of_verify_Student_OTP_already_auth() {
+        System.out.println(student_refresh_token + verifyEmail.studentEmail);
+        Verify_Student_OTP.prettyPrint();
+        Verify_Student_OTP.then()
+                .statusCode(HttpStatus.SC_OK)
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentParentAuthSchemas/VerifyAleardyAuthStudent.json")))
+                .body("message", hasToString("Existing user authenticated."),"message_id",equalTo(2001),
+                        "data.email",hasToString(email),"data.first_name",hasToString(firstName),"data.last_name",hasToString(lastName),
+                        "data.role",hasToString("student"));
+    }
+
 }

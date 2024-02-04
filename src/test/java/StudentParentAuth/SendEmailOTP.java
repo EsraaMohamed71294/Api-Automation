@@ -18,14 +18,16 @@ public class SendEmailOTP {
     TestBase test = new TestBase();
     Educator_TestData data = new Educator_TestData();
     Faker fakeDate =new Faker();
-    String student_email = fakeDate.internet().emailAddress();
+    String student_userName = fakeDate.name().username();
+    String student_email =student_userName + "@nagwa.com" ;
     String Valid_body_request;
     Response Send_Student_OTP ;
 
     @When("Performing the Api of Send Student OTP with valid data")
-    public void Send_Student_OTP() {
-        Valid_body_request = "{\"email\":\"test.automation@nagwa.com\",\"language\":\"en\"}";
+    public String Send_Student_OTP() {
+        Valid_body_request = "{\"email\":\""+ student_email +"\",\"language\":\"en\"}";
         Send_Student_OTP = test.sendRequest("POST", "/auth/send-otp", Valid_body_request,data.Admin_Token);
+        return student_email;
     }
 
     @Then("I verify the appearance of status code 200 and OTP sent to student mail")

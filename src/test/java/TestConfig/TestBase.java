@@ -34,7 +34,7 @@ public class TestBase {
 		return access_token = response.then().extract().path("access_token");
 	}
 
-	public Response sendRequest(String method, String endpoint,Object requestBody,String refresh_token) {
+	public Response sendRequest(String method, String endpoint,Object requestBody,String refresh_token ) {
 		String access_token = generate_access_token(refresh_token);
 		RequestSpecification request = RestAssured.given()
 				.header("Content-Type", "application/json")

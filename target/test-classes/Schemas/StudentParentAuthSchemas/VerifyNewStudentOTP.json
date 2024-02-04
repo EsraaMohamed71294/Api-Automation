@@ -11,7 +11,7 @@
       "type": "string"
     },
     "message_id": {
-      "type": "string"
+      "type": "integer"
     }
   },
   "required": [
