@@ -37,7 +37,7 @@ pipeline {
                 script {
                     sh """
                         cd ${FOLDER_TO_UPLOAD}
-                        for file in ${FOLDER_TO_UPLOAD}; do
+                        for file in .; do
                             # Check if the file is 'TestReport.html' with a leading space
                             if [[ "\$file" == " TestReport.html" ]]; then
                                 mv "\$file" "\${file## }"  # This removes the leading space
