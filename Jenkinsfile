@@ -37,7 +37,8 @@ pipeline {
                 script {
 
                     // Trim leading and trailing spaces from FILE_TO_UPLOAD
-                    sh "FILE_TO_UPLOAD_TRIMMED=$(echo \"${FILE_TO_UPLOAD}\" | xargs)"
+                    // Escape the $ character to avoid Groovy interpreting it
+                    sh "FILE_TO_UPLOAD_TRIMMED=\\$(echo \"${FILE_TO_UPLOAD}\" | xargs)"
 
                     // Upload the file to S3
                     sh "aws s3 rm s3://\"${env.S3_BUCKET}\"/ --recursive"
