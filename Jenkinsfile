@@ -35,10 +35,11 @@ pipeline {
         stage('Upload to S3') {
             steps {
                 script {
+                    def trimmedFilePath = FILE_TO_UPLOAD.trim()
                     // Upload the file to S3
                     sh "aws s3 rm s3://\"${env.S3_BUCKET}\"/ --recursive"
-                    sh "aws s3 cp ${FILE_TO_UPLOAD}.trim() s3://${S3_BUCKET}/ --acl public-read --recursive"
-                    echo "File uploaded to S3: s3://${S3_BUCKET}/${FILE_TO_UPLOAD}"
+                    sh "aws s3 cp ${trimmedFilePath}.trim() s3://${S3_BUCKET}/ --acl public-read --recursive"
+                    echo "File uploaded to S3: s3://${S3_BUCKET}/${trimmedFilePath}"
                 }
             }
         }
