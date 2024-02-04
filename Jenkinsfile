@@ -38,10 +38,10 @@ pipeline {
                     sh """
                         cd ${FOLDER_TO_UPLOAD}"
                         for file in *; do
-                        # Check if the file is 'TestReport.html' with a leading space
-                        if [[ "\$file" == " TestReport.html" ]]; then
-                            mv "\$file" "\${file## }"  # This removes the leading space
-                        fi
+                            # Check if the file is 'TestReport.html' with a leading space
+                            if [[ "\$file" == " TestReport.html" ]]; then
+                                mv "\$file" "\${file## }"  # This removes the leading space
+                            fi
                         done
                     """
                     // Upload the file to S3
