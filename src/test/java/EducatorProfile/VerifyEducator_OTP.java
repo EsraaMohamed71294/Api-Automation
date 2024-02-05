@@ -24,8 +24,8 @@ public class VerifyEducator_OTP {
     Database_Connection Connect = new Database_Connection();
     GetEducatorProfile profile = new GetEducatorProfile();
     String Educator_Token = data.refresh_token;
-    String firstNameEducator = profile.educatorFirstName;
-    String lastNameEducator = profile.educatorLastName;
+    String firstNameEducator;
+    String lastNameEducator ;
     String OTP;
     String Email;
 
@@ -52,6 +52,8 @@ public class VerifyEducator_OTP {
         profile.Get_Educator_info_from_Database();
         Email = getEmailForEducator();
         OTP =getOTPForEducator();
+        firstNameEducator = profile.educatorFirstName;
+        lastNameEducator =profile.educatorLastName;
     }
 
     @When("Performing the Api of Verify Educator OTP with valid data")
