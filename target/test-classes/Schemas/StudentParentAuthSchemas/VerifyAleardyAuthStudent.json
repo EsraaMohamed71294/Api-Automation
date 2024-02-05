@@ -1,12 +1,7 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "message": {
-      "type": "string"
-    },
-    "message_id": {
-      "type": "integer"
-    },
     "data": {
       "type": "object",
       "properties": {
@@ -22,22 +17,22 @@
         "email": {
           "type": "string"
         },
-        "grade_id": {
-          "type": "string"
-        },
         "role": {
           "type": "string"
         },
         "mobile_number": {
-          "type": "string"
+          "type": "null"
         },
         "country_requires_mobile": {
           "type": "boolean"
         },
-        "country_iso_code": {
-          "type": "string"
-        },
         "country_id": {
+          "type": "integer"
+        },
+        "grade_id": {
+          "type": "integer"
+        },
+        "country_iso_code": {
           "type": "string"
         },
         "is_active": {
@@ -49,12 +44,12 @@
         "first_name",
         "last_name",
         "email",
-        "grade_id",
         "role",
         "mobile_number",
         "country_requires_mobile",
-        "country_iso_code",
         "country_id",
+        "grade_id",
+        "country_iso_code",
         "is_active"
       ]
     },
@@ -72,20 +67,30 @@
         },
         "refresh_token_exp": {
           "type": "number"
+        },
+        "firebase_token": {
+          "type": "string"
         }
       },
       "required": [
         "access_token",
         "access_token_exp",
         "refresh_token",
-        "refresh_token_exp"
+        "refresh_token_exp",
+        "firebase_token"
       ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "message_id": {
+      "type": "integer"
     }
   },
   "required": [
-    "message",
-    "message_id",
     "data",
-    "tokens"
+    "tokens",
+    "message",
+    "message_id"
   ]
 }
