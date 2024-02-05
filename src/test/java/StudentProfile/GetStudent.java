@@ -5,6 +5,7 @@ import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasToString;
 
 public class GetStudent {
@@ -30,7 +32,7 @@ public class GetStudent {
     public Map<String, Object> pathParams = test.pathParams;
 
     public void get_student_data_from_database() throws SQLException {
-        ResultSet resultSet = Connect.connect_to_database("select * from students s where student_id ="+ StudentID +"");
+        ResultSet resultSet = Connect.connect_to_database("select student_first_name,student_last_name,student_email from students s where student_id ="+ StudentID +"");
 
         while (resultSet.next()) {
             studentFirstName = resultSet.getString("student_first_name");
@@ -62,6 +64,47 @@ public class GetStudent {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentProfile/GetStudent.json")))
-                .body("first_name", hasToString(studentFirstName), "last_name", hasToString(studentLastName), "email", hasToString(studentEmail),"user_id", equals(StudentID));
+                .body("first_name", hasToString(studentFirstName), "last_name", hasToString(studentLastName), "email", hasToString(studentEmail),"user_id", equalTo(StudentID));
     }
+
+    @Given("User Send Invalid student Id")
+    public void Sending_Invalid_StudentId() throws SQLException {
+        student.Create_Student();
+        pathParams.put("student_id","12345678987666");
+    }
+    @Then("I verify the appearance of status code 422 and Id is incorrect")
+    public void Validate_Response_of_invalid_student_ID() throws SQLException {
+        Response Invalid_StudentID = Get_Student_Profile;
+        test.Validate_Error_Messages(Invalid_StudentID,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Entity ID must be a 12-digit number.",4221);
+    }
+    @Given("User Send unauthorized student Id")
+    public void Sending_unauthorized_StudentId() throws SQLException {
+        student.Create_Student();
+        pathParams.put("student_id","123456789879");
+    }
+
+    @Then("I verify the appearance of status code 403 and Id is unauthorized")
+    public void Validate_Response_of_unauth_student_ID() throws SQLException {
+        Response unauth_StudentID = Get_Student_Profile;
+        test.Validate_Error_Messages(unauth_StudentID,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+    }
+
+    @Given("User Send inactive student Id")
+    public void Sending_inactive_StudentId() throws SQLException {
+        pathParams.put("student_id","589109586999");
+    }
+
+    @When("Performing the Api of Get Student Profile with inactive student")
+    public void Get_Student_Profile_with_InactiveStudent() {
+        String InactiveStudent_refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjU4OTEwOTU4Njk5OSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNzQ5MjE0MS4zNDA1NzksInR5cGUiOiJyZWZyZXNoIiwianRpIjoiYTM3MzBhNmM3NGIzNDcyMGJhZWJjYjhjZTg1NzUxM2EifQ.LUilV0jINIQzbKpWglXaQ6_k3hamyPfQxTkHyXRVTk4";
+        Get_Student_Profile = test.sendRequest("GET", "/students/{student_id}/profile", null,InactiveStudent_refreshToken);
+    }
+
+    @Then("I verify the appearance of status code 404 and Id is inactive")
+    public void Validate_Response_of_Inactive_student_ID() throws SQLException {
+        Response Inactive_StudentID = Get_Student_Profile;
+        test.Validate_Error_Messages(Inactive_StudentID,HttpStatus.SC_NOT_FOUND,"Student with the specified ID does not exist or is not active.",4041);
+    }
+
+
 }

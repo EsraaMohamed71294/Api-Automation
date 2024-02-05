@@ -31,7 +31,7 @@ public class CreateStudent {
     String lastName = fakeDate.name().lastName();
     String email ;
     VerifyEmailOTP verifyEmail = new VerifyEmailOTP();
-    Long studentId;
+    public Long studentId;
     Long Grade_ID;
     Long walletId;
     String OTP;
@@ -59,12 +59,14 @@ public class CreateStudent {
                 "where s.student_id ="+ studentId +"");
         while (Student_Result.next()) {
             walletId = Student_Result.getLong("student_wallet_id");
+            System.out.println(walletId);
         }
 
 
     }
     @When("Performing the Api of Create Student With valid data")
     public Long Create_Student() throws SQLException {
+        get_grade_from_database ();
         verifyEmail.Verify_Student_OTP();
         CreateToken = verifyEmail.create_account_token;
         email = verifyEmail.Email;
@@ -78,7 +80,9 @@ public class CreateStudent {
                 .body(Valid_body_request)
                 .when()
                 .post("/students/create");
-        return studentId = Create_Student.then().extract().path("data.student_id") ;
+        Create_Student.prettyPrint();
+        return studentId = Create_Student.then().extract().path("data.user_id") ;
+
     }
     @Then("I verify the appearance of status code 201 and Student created successfully")
     public void Validate_Response_of_create_Student_successfully() {
@@ -87,7 +91,7 @@ public class CreateStudent {
                 .statusCode(HttpStatus.SC_CREATED)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentProfile/CreateStudent.json")))
-                .body("message", hasToString("Student account created successfully."),"student_id",equalTo(studentId),"student_wallet_id",equalTo(walletId));
+                .body("message", hasToString("Student account created successfully."),"data.user_id",equalTo(studentId),"data.student_wallet_id",equalTo(walletId));
     }
 
     @When("Performing the Api of Create Student With grade not exist")
