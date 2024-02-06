@@ -2,7 +2,7 @@ Feature: Test all scenarios of the api Create Session
 
   Scenario: Verify create new session successfully
     Given   Performing the Api of Create session With valid data
-#    Then    I verify the appearance of status code 200 and create session successfully
+    Then    I verify the appearance of status code 200 and create session successfully
 
   Scenario: Verify create new session with class not exist
     Given   Performing the Api of create session With class id not exist

@@ -49,7 +49,7 @@ public class CreateSession {
                 "\"session_end_date\":\"2024-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
                 "\"subject_id\":"+ subject +",\"class_subject_session_price\":10}]}";
-//        System.out.println(valid_body);
+                System.out.println(valid_body);
 
 
         Create_Session = test.sendRequest("POST", "/admin/sessions", valid_body, data.Admin_Token);
