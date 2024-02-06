@@ -23,7 +23,6 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class CreateStudent {
     TestBase test = new TestBase();
-
     Educator_TestData data =new Educator_TestData();
     Database_Connection Connect = new Database_Connection();
     Faker fakeDate =new Faker();

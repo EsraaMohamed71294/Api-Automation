@@ -24,20 +24,22 @@ public class GetStudent {
     Database_Connection Connect = new Database_Connection();
     Response Get_Student_Profile;
     String refreshToken;
-    String studentFirstName;
-    String studentLastName;
-    String studentEmail;
+    public String studentFirstName;
+    public String studentLastName;
+    public String studentEmail;
     Long StudentID;
+    public Long gradeId;
 
     public Map<String, Object> pathParams = test.pathParams;
 
     public void get_student_data_from_database() throws SQLException {
-        ResultSet resultSet = Connect.connect_to_database("select student_first_name,student_last_name,student_email from students s where student_id ="+ StudentID +"");
+        ResultSet resultSet = Connect.connect_to_database("select student_first_name,student_last_name,student_email,grade_id from students s where student_id ="+ StudentID +"");
 
         while (resultSet.next()) {
             studentFirstName = resultSet.getString("student_first_name");
             studentLastName = resultSet.getString("student_last_name");
             studentEmail = resultSet.getString("student_email");
+            gradeId = resultSet.getLong("grade_id");
         }}
 
         @When("Performing the Api of Get Student Profile")
