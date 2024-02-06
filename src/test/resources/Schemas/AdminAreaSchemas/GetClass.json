@@ -16,14 +16,20 @@
     "class_payment_option_id": {
       "type": "integer"
     },
+    "class_block_count": {
+      "type": "integer"
+    },
     "class_seats_limit": {
-      "type": ["integer","null"]
+      "type": "integer"
     },
     "class_seats_reserved": {
-      "type": ["integer","null"]
+      "type": "null"
     },
     "class_order": {
       "type": "integer"
+    },
+    "is_test_class": {
+      "type": "boolean"
     },
     "meta_class_id": {
       "type": "integer"
@@ -55,15 +61,180 @@
             "grade_id": {
               "type": "integer"
             },
-            "class_subject_full_price": {
-              "type": ["number","null"]
+            "class_subject_retail_price": {
+              "type": "number"
+            },
+            "class_subject_discounted_price": {
+              "type": "number"
+            },
+            "class_subject_session_price": {
+              "type": "number"
+            },
+            "blocks": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_discounted_price",
+                    "class_block_retail_price"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_discounted_price",
+                    "class_block_retail_price"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_discounted_price",
+                    "class_block_retail_price"
+                  ]
+                }
+              ]
             }
           },
           "required": [
             "subject_id",
             "subject_name",
             "grade_id",
-            "class_subject_full_price"
+            "class_subject_retail_price",
+            "class_subject_discounted_price",
+            "class_subject_session_price",
+            "blocks"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "subject_id": {
+              "type": "integer"
+            },
+            "subject_name": {
+              "type": "string"
+            },
+            "grade_id": {
+              "type": "integer"
+            },
+            "class_subject_retail_price": {
+              "type": "number"
+            },
+            "class_subject_discounted_price": {
+              "type": "number"
+            },
+            "class_subject_session_price": {
+              "type": "number"
+            },
+            "blocks": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_discounted_price",
+                    "class_block_retail_price"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_discounted_price",
+                    "class_block_retail_price"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_discounted_price",
+                    "class_block_retail_price"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "subject_id",
+            "subject_name",
+            "grade_id",
+            "class_subject_retail_price",
+            "class_subject_discounted_price",
+            "class_subject_session_price",
+            "blocks"
           ]
         }
       ]
@@ -83,6 +254,9 @@
             "educator_last_name": {
               "type": "string"
             },
+            "class_educator_order": {
+              "type": "integer"
+            },
             "educator_is_active": {
               "type": "boolean"
             },
@@ -94,6 +268,7 @@
             "educator_id",
             "educator_first_name",
             "educator_last_name",
+            "class_educator_order",
             "educator_is_active",
             "educator_is_deleted"
           ]
@@ -107,9 +282,11 @@
     "class_description",
     "class_payment_option_name",
     "class_payment_option_id",
+    "class_block_count",
     "class_seats_limit",
     "class_seats_reserved",
     "class_order",
+    "is_test_class",
     "meta_class_id",
     "class_enrollment_end_date",
     "class_public_delist_date",

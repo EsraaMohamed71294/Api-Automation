@@ -49,7 +49,7 @@ public class GetClass {
     }
     @Given("User Send valid Class Id to get class data")
     public void user_send_valid_classId() {
-        Class.Create_Class_per_session();
+        Class.Create_Class_Block_Payment();
         classID = Class.Class_ID;
         EducatorID = Class.EducatorId;
         pathParams.put("class_id", classID);
