@@ -45,8 +45,8 @@ public class CreateSession {
 
         System.out.println("class " + Class_ID + " Edu " + EducatorId + " sub "+ subject);
 
-        valid_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-02-01T18:00:00Z\"," +
-                "\"session_end_date\":\"2024-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
+        valid_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+                "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
                 "\"subject_id\":"+ subject +",\"class_subject_session_price\":10}]}";
                 System.out.println(valid_body);
@@ -60,7 +60,7 @@ public class CreateSession {
     public void Validate_Response_of_create_session_successfully() {
         Create_Session.prettyPrint();
         Create_Session.then()
-                .statusCode(HttpStatus.SC_OK)
+                .statusCode(HttpStatus.SC_CREATED)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateSession.json")))
                 .body("message", hasToString("Session created successfully."),"session_id",equalTo(sessionId));
@@ -75,8 +75,8 @@ public class CreateSession {
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
         subject = Class.Subjects;
-        String InvalidClass_into_body = "{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-02-01T18:00:00Z\"," +
-                "\"session_end_date\":\"2024-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
+        String InvalidClass_into_body = "{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+                "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":123456789123," +
                 "\"subject_id\":"+ subject +",\"class_subject_session_price\":100}]}";
 
@@ -97,8 +97,8 @@ public class CreateSession {
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
         subject = Class.Subjects;
-        String InvalidClass_into_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-02-01T18:00:00Z\"," +
-                "\"session_end_date\":\"2024-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
+        String InvalidClass_into_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+                "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
                 "\"subject_id\":??????,\"class_subject_session_price\":100}]}" ;
 
@@ -134,8 +134,8 @@ public class CreateSession {
         Class.getClassDetails ();
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
-        String body_without_subject ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-02-01T18:00:00Z\"," +
-                "\"session_end_date\":\"2024-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
+        String body_without_subject ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+                "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
                 "\"subject_id\":123456789098,\"class_subject_session_price\":100}]}" ;
 
@@ -156,8 +156,8 @@ public class CreateSession {
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
         subject = Class.Subjects;
-        String body_request ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-02-01T18:00:00Z\"," +
-                "\"session_end_date\":\"2024-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
+        String body_request ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+                "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
                 "\"subject_id\":"+ subject +",\"class_subject_session_price\":100}]}";
 
