@@ -51,6 +51,7 @@ public class GetClass {
     public void user_send_valid_classId() {
         Class.Create_Class_Block_Payment();
         classID = Class.Class_ID;
+        System.out.println(classID);
         EducatorID = Class.EducatorId;
         pathParams.put("class_id", classID);
     }
