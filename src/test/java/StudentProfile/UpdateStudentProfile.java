@@ -1,5 +1,6 @@
 package StudentProfile;
 
+import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import com.github.javafaker.Faker;
@@ -22,6 +23,7 @@ public class UpdateStudentProfile {
     TestBase test = new TestBase();
     GetStudent studentData = new GetStudent();
     CreateStudent student = new CreateStudent();
+    Educator_TestData data = new Educator_TestData();
     Faker fakeDate =new Faker();
     String firstName = fakeDate.name().firstName();
     String lastName = fakeDate.name().lastName();
@@ -60,7 +62,7 @@ public class UpdateStudentProfile {
         Update_Student.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentProfile/GetStudent.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentProfile/UpdateStudent.json")))
                 .body("message", hasToString("Profile updated successfully."));
     }
 
@@ -105,6 +107,44 @@ public class UpdateStudentProfile {
         Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,refreshToken);
     }
 
+    @Then("I verify the appearance of status code 422 and grade id Invalid")
+    public void Validate_Response_of_update_student_Profile_invalidGrade() {
+        Response invalid_data = Update_Student;
+        test.Validate_Error_Messages(invalid_data,HttpStatus.SC_UNPROCESSABLE_ENTITY,"The specified grade ID does not exist in our system.",42211);
+    }
+    @Given("User Send Invalid student Id to update profile")
+    public void Sending_Invalid_StudentId_update_profile() throws SQLException {
+        pathParams.put("student_id","123456789045");
+    }
 
+    @When("Performing the Api of Update Student with invalid student id")
+    public void Update_Student_Profile_invalid_studentId() throws SQLException {
+        student.get_grade_from_database ();
+        grade = student.Grade_ID.toString();
+        System.out.println(grade);
+        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":\""+ grade +"\"}";
+        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,data.refresh_token_for_notActiveEducator);
+    }
+    @Then("I verify the appearance of status code 403 and student is unauthorized")
+    public void Validate_Response_of_update_student_Profile_invalid_student() {
+        Response invalid_data = Update_Student;
+        test.Validate_Error_Messages(invalid_data,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+    }
+
+    @When("Performing the Api of Update Student Profile with student not exist")
+    public void Update_Student_Profile_student_not_exist() throws SQLException {
+        student.get_grade_from_database ();
+        grade = student.Grade_ID.toString();
+        System.out.println(grade);
+        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":\""+ grade +"\"}";
+        String refreshToken_notFound = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTA0NSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNzY2NDczMC4xNDkxMDksInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNDU5YTExZjAzYzhlNDBhMThiMjJlMWEwYTBjZGJiMTcifQ.zKkIqWNquXalosQOGOrzzOXuqZ4UNBl7_9-nveghj0Y";
+        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,refreshToken_notFound);
+    }
+
+    @Then("I verify the appearance of status code 404 and student is not found")
+    public void Validate_Response_of_update_student_Profile_NotFound_student() {
+        Response invalid_data = Update_Student;
+        test.Validate_Error_Messages(invalid_data,HttpStatus.SC_NOT_FOUND,"Student with the specified ID does not exist or is not active.",4041);
+    }
 
 }
