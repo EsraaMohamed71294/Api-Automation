@@ -5,7 +5,6 @@ import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -50,7 +49,7 @@ public class GetStudent {
             Get_Student_Profile = test.sendRequest("GET", "/students/{student_id}/profile", null,refreshToken);
         }
 
-        @Given("User Send valid student Id")
+        @Given("User Send valid student Id to get student")
         public void Sending_valid_StudentId() throws SQLException {
             student.Create_Student();
             StudentID = student.studentId;
