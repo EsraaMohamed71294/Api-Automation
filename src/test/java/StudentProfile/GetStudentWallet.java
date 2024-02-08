@@ -21,7 +21,6 @@ public class GetStudentWallet {
 
     TestBase test = new TestBase();
     CreateStudent student = new CreateStudent();
-    Database_Connection Connect = new Database_Connection();
     Educator_TestData data = new Educator_TestData();
     Response Get_Student_Wallet;
     Long StudentID;
@@ -32,7 +31,6 @@ public class GetStudentWallet {
     public void Get_Student_Wallet(){
         student.getStudent_refresh_token();
         refreshToken = student.studnet_refreshToken;
-        System.out.println("token " + refreshToken);
         Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,refreshToken);
     }
 
