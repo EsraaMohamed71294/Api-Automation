@@ -40,7 +40,7 @@ public class TestBase {
 				.header("Content-Type", "application/json")
 				.header("Authorization", access_token);
 
-		if (pathParams != null) {
+		if (pathParams != null && !pathParams.isEmpty()) {
 			request.pathParams(pathParams);
 		}
 

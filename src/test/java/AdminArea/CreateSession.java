@@ -53,6 +53,7 @@ public class CreateSession {
 
 
         Create_Session = test.sendRequest("POST", "/admin/sessions", valid_body, data.Admin_Token);
+
         return sessionId = Create_Session.then().extract().path("session_id");
     }
 

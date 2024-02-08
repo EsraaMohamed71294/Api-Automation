@@ -25,11 +25,13 @@ public class GetEducator {
     Response GetEducator_with_Invalid_token;
     Response NotActive_Educator_token;
     Response Deleted_Educator_token;
+    public String EducatorEmail;
 
 
     @When("Performing the Api of Get Educator")
-    public void Get_Educator() {
+    public String Get_Educator() {
         Get_Educator = test.sendRequest("GET", "/admin/educators/{educator_id}", null,Admin_token);
+        return EducatorEmail = Get_Educator.then().extract().path("educator_email");
     }
     @Given("User Send valid educator Id to get educator data")
     public void user_send_valid_educatorId() {
@@ -44,7 +46,7 @@ public class GetEducator {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/GetEducator.json")))
-                .body("educator_first_name", hasToString(educator.firstName),"educator_last_name",hasToString(educator.lastName),"educator_email",hasToString(educator.email));
+                .body("educator_first_name", hasToString(educator.firstName),"educator_last_name",hasToString(educator.lastName),"educator_email",hasToString(educator.Email));
     }
 
     @When("Performing the Api of Get Educator with invalid educator id")
