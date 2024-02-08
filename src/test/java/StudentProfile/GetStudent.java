@@ -49,7 +49,7 @@ public class GetStudent {
             Get_Student_Profile = test.sendRequest("GET", "/students/{student_id}/profile", null,refreshToken);
         }
 
-        @Given("User Send valid student Id")
+        @Given("User Send valid student Id to get student")
         public void Sending_valid_StudentId() throws SQLException {
             student.Create_Student();
             StudentID = student.studentId;

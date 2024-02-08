@@ -1,7 +1,7 @@
 Feature: Test all scenarios of the api of Get Student wallet
 
   Scenario: Verify get student wallet successfully
-    Given   User Send valid student Id
+    Given   User Send valid student Id to get wallet
     When    Performing the Api of Get Student Wallet
     Then    I verify the appearance of status code 200 and student wallet data returned
 

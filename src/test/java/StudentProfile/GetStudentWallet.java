@@ -11,6 +11,7 @@ import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -29,8 +30,8 @@ public class GetStudentWallet {
 
     @When("Performing the Api of Get Student Wallet")
     public void Get_Student_Wallet(){
-        student.Verify_Student_OTP_already_Auth();
-        refreshToken = student.student_refresh_token;
+        student.getStudent_refresh_token();
+        refreshToken = student.studnet_refreshToken;
         System.out.println("token " + refreshToken);
         Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,refreshToken);
     }
@@ -39,7 +40,6 @@ public class GetStudentWallet {
     public void Sending_valid_StudentId() throws SQLException {
         student.Create_Student();
         StudentID = student.studentId;
-        System.out.println("StudentID "+ StudentID);
         pathParams.put("student_id",StudentID);
     }
 
@@ -50,7 +50,7 @@ public class GetStudentWallet {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentProfile/GetStudentWallet.json")))
-                .body("student_wallet.student_wallet_balance", equalTo(0.0), "student_wallet.currency", hasToString("EGP"), "wallet_transactions", empty());
+                .body("student_wallet.student_wallet_balance", equalTo(BigDecimal.valueOf(0.0).floatValue()), "student_wallet.currency", hasToString("EGP"), "wallet_transactions", empty());
     }
 
     @Given("User Send Invalid std Id to get student wallet")
