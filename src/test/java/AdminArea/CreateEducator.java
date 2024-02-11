@@ -27,8 +27,9 @@ public class CreateEducator {
     String Educator_userName = fakeDate.name().username();
     public String Email =Educator_userName + "@nagwa.com";
     Long Id = Long.valueOf(fakeDate.number().digits(12));
+    public String EducatorEmail;
 
-    String valid_body_request = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_first_last\":\""+ lastName +"\",\"educator_email\":\""+ Email +"\"," +
+    String valid_body_request = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\""+ Email +"\"," +
             "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
             "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
 
@@ -38,8 +39,11 @@ public class CreateEducator {
     public Long Create_Educator() {
         Create_Educator = test.sendRequest("POST", "/admin/educators", valid_body_request,Admin_token);
         Educator_ID = Create_Educator.then().extract().path("educator_id");
+        System.out.println("Educator_ID "+ Educator_ID);
         return Educator_ID = Create_Educator.then().extract().path("educator_id");
     }
+
+
 
     @Then("I verify the appearance of status code 200 and Educator created successfully")
     public void Validate_Response_of_create_Educator_successfully() {
@@ -52,7 +56,7 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With Invalid email")
     public void Create_Educator_with_Invalid_mail() {
-        String Invalid_email_In_Body = "{\"educator_first_name\":\""+ firstName +"\",\"educator_first_last\":\""+ lastName +"\",\"educator_email\":\"email.com\"," +
+        String Invalid_email_In_Body = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\"email.com\"," +
                 "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
                 "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
 
@@ -65,7 +69,7 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With Invalid body request")
     public void Create_Educator_with_Invalid_body() {
-        String Invalid_body = "{\"educator_first_name\":\"\",\"educator_first_last\":\"\",\"educator_email\":\"\"," +
+        String Invalid_body = "{\"educator_id\":"+ Id +",\"educator_first_name\":\"\",\"educator_last_name\":\"\",\"educator_email\":\"\"," +
                 "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
                 "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
 
@@ -78,7 +82,7 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With email already exist")
     public void Create_Educator_with_email_exist() {
-        String Email_already_exist = "{\"educator_first_name\":\"John\",\"educator_first_last\":\"Doe\",\"educator_email\":\"john.doe@example.com\"," +
+        String Email_already_exist = "{\"educator_id\":"+ Id +",\"educator_first_name\":\"John\",\"educator_last_name\":\"Doe\",\"educator_email\":\"techer@nagwa.com\"," +
                 "\"educator_bio\":\"Experiencededucatorpassionateabouttechnologyandprogramming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
                 "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
 

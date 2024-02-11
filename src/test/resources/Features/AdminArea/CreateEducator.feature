@@ -2,7 +2,7 @@ Feature: Test all scenarios of the api Create Educator
 
   Scenario: Verify create new educator successfully
     Given   Performing the Api of Create Educator With valid data
-#    Then    I verify the appearance of status code 200 and Educator created successfully
+    Then    I verify the appearance of status code 200 and Educator created successfully
 
   Scenario: Verify create new educator with invalid email
     Given   Performing the Api of Create Educator With Invalid email
