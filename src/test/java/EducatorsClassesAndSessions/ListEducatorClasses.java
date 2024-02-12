@@ -1,13 +1,9 @@
 package EducatorsClassesAndSessions;
 
-import AdminArea.CreateEducator;
-import AdminArea.CreateSession;
 import AdminArea.GetSession;
 import EducatorProfile.Educator_TestData;
-import EducatorProfile.VerifyEducator_OTP;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

@@ -24,3 +24,6 @@ Feature: Test all scenarios of the api Create Session
     Given   Performing the Api of Create session With invalid token
     Then    I verify the appearance of status code 403 and invalid token of the admin
 
+  Scenario: Verify create new session with block not exist in class
+    Given   Performing the Api of Create session With invalid block number
+    Then    I verify the appearance of status code 400 and invalid block number

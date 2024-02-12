@@ -1,5 +1,7 @@
-package EducatorProfile;
+package EducatorAuthentications;
 
+import EducatorProfile.Educator_TestData;
+import EducatorProfile.GetEducatorProfile;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -70,7 +72,7 @@ public class VerifyEducator_OTP {
         Verify_Educator_OTP.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/VerifyEducator_OTP.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorAuthentication/VerifyEducator_OTP.json")))
                 .body("message", hasToString("Existing user authenticated."),"message_id",equalTo(2001),
                         "data.email",hasToString(Email),"data.first_name",hasToString(firstNameEducator),"data.last_name",hasToString(lastNameEducator),
                         "data.role",hasToString("educator"));

@@ -85,6 +85,7 @@ public class CreateClass {
                 "\"class_block_retail_price\":10,\"class_block_discounted_price\":5}]},{\"subject_id\":787192832597,\"class_subject_retail_price\":30," +
                 "\"class_subject_discounted_price\":20,\"class_subject_session_price\":10,\"blocks\":[{\"class_block_number\":1,\"class_block_retail_price\":10,\"class_block_discounted_price\":5}," +
                 "{\"class_block_number\":2,\"class_block_retail_price\":15,\"class_block_discounted_price\":8}]}],\"educators\":[{\"educator_id\":"+ EducatorId +",\"educator_order\":20}]}" ;
+
         System.out.println(body_for_block_payment_class);
         Create_class = test.sendRequest("POST", "/admin/classes", body_for_block_payment_class, data.Admin_Token);
         return Class_ID = Create_class.then().extract().path("class_id");
