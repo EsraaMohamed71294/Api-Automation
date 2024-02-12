@@ -48,9 +48,6 @@ public class ListEducatorClasses {
         ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
         while (GetEducatorEmail.next()) {
             educator_Email = GetEducatorEmail.getString("educator_email");};
-            System.out.println(educator_Email);
-
-        System.out.println("SessionID is " + SessionID + "educator_Email "+educator_Email);
 
         Response testOTP = test.sendRequest("POST", "/educators/auth/send-otp", "{\"email\":\""+ educator_Email +"\",\"language\":\"en\"}",data.Admin_Token);
             testOTP.prettyPrint();
@@ -58,12 +55,10 @@ public class ListEducatorClasses {
         ResultSet GetEducatorOTP = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_Email +"'");
         while (GetEducatorOTP.next()) {
             OTP = GetEducatorOTP.getString("Otp");};
-            System.out.println(OTP);
 
        Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",data.Admin_Token);
             VerifyOTP.prettyPrint();
             EducatorRefreshToken = VerifyOTP.then().extract().path("tokens.refresh_token");
-            System.out.println("EducatorRefreshToken " +EducatorRefreshToken);
 
         pathParams.put("educator_id", educatorID);
             List_Educator_Classes = test.sendRequest("GET", "/educators/{educator_id}/classes", null,EducatorRefreshToken);
