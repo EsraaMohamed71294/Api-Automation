@@ -23,15 +23,20 @@ public class VerifyEducator_OTP {
     TestBase test = new TestBase();
     Database_Connection Connect = new Database_Connection();
     GetEducatorProfile profile = new GetEducatorProfile();
+    SendEducator_OTP educatorOTP = new SendEducator_OTP();
     String Educator_Token = data.refresh_token;
     String firstNameEducator;
     String lastNameEducator ;
     String OTP;
     String Email;
+    String educator_mail;
+    public String Educator_Refresh_Token;
 
     Response Verify_Educator_OTP;
     public void get_educator_OTP_from_database() throws SQLException {
-        ResultSet resultSet = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = 'Educator@nagwa.com'");
+        educatorOTP.Send_Educator_OTP();
+        educator_mail = educatorOTP.educator_email;
+        ResultSet resultSet = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_mail +"'");
 
         while (resultSet.next()) {
             Email = resultSet.getString("Email");
@@ -39,27 +44,24 @@ public class VerifyEducator_OTP {
             System.out.println("Email: " + Email + "OTP: " + OTP );
         }
     }
-    public String getEmailForEducator() {
-        return Email;
-    }
-    public String getOTPForEducator() {
-        return OTP;
-    }
 
     @And("Get Educator OTP and mail from database")
     public void getting_educator_otp_email_from_db() throws SQLException {
         get_educator_OTP_from_database();
-        profile.Get_Educator_info_from_Database();
-        Email = getEmailForEducator();
-        OTP =getOTPForEducator();
-        firstNameEducator = profile.educatorFirstName;
-        lastNameEducator =profile.educatorLastName;
+        ResultSet resultSet = Connect.connect_to_database("select  educator_first_name, educator_last_name, educator_email from public.educators where educator_email ='"+ educator_mail +"'");
+
+        while (resultSet.next()) {
+            firstNameEducator = resultSet.getString("educator_first_name");
+            lastNameEducator = resultSet.getString("educator_last_name");
+        }
+
     }
 
     @When("Performing the Api of Verify Educator OTP with valid data")
-    public void Verify_Educator_OTP() throws SQLException {
+    public String Verify_Educator_OTP() {
         String Valid_body_request = "{\"email\":\""+ Email +"\",\"otp\":\"" + OTP + "\"}";
         Verify_Educator_OTP = test.sendRequest("POST", "/educators/auth/verify-otp", Valid_body_request,Educator_Token);
+        return  Educator_Refresh_Token = Verify_Educator_OTP.then().extract().path("tokens.refresh_token");
     }
 
     @Then("I verify the appearance of status code 200 and user authenticated")

@@ -20,16 +20,15 @@ import static org.hamcrest.Matchers.*;
 
 public class GetSession {
     TestBase test = new TestBase();
-    CreateClass Class = new CreateClass();
     CreateSession session =new CreateSession();
     Database_Connection Connect = new Database_Connection();
     Educator_TestData data = new Educator_TestData();
     Map<String, Object> pathParams = test.pathParams;
-    Long SessionID;
+    public Long SessionID;
     String session_title;
     String session_start_date;
-    Long Classid;
-    Long educatorID;
+    public Long ClassID;
+    public Long educatorID;
     String session_end_date;
     Integer session_duration_in_minutes;
     Long educator_id;
@@ -45,9 +44,8 @@ public class GetSession {
     public void user_send_valid_sessionID() throws SQLException {
         session.Create_Session();
         SessionID = session.sessionId;
-        Classid =session.Class_ID;
+        ClassID =session.Class_ID;
         educatorID = session.EducatorId;
-        System.out.println(SessionID);
         pathParams.put("session_id", SessionID);
     }
     @And("Getting data of created session from database")
@@ -57,7 +55,7 @@ public class GetSession {
                 "on ce.educator_id = s.educator_id \n" +
                 "join classes_subjects cs \n" +
                 "on ce.class_id = cs.class_id \n" +
-                "where s.session_id ="+ SessionID +"  and s.educator_id = "+ educatorID +" and ce.class_id = " + Classid+ "");
+                "where s.session_id ="+ SessionID +"  and s.educator_id = "+ educatorID +" and ce.class_id = " + ClassID+ "");
 
         while (resultSet.next()) {
             session_title = resultSet.getString("session_title");
