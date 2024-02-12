@@ -45,10 +45,10 @@ public class CreateSession {
 
         System.out.println("class " + Class_ID + " Edu " + EducatorId + " sub "+ subject);
 
-        valid_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+        valid_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-12-01T18:00:00Z\"," +
                 "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
-                "\"subject_id\":"+ subject +",\"class_subject_session_price\":10}]}";
+                "\"subject_id\":"+ subject +",\"block_number\":null}]}";
                 System.out.println(valid_body);
 
 
@@ -76,10 +76,10 @@ public class CreateSession {
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
         subject = Class.Subjects;
-        String InvalidClass_into_body = "{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+        String InvalidClass_into_body = "{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-12-01T18:00:00Z\"," +
                 "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":123456789123," +
-                "\"subject_id\":"+ subject +",\"class_subject_session_price\":100}]}";
+                "\"subject_id\":"+ subject +",\"block_number\":100}]}";
 
         Create_Session_with_notExisting_class = test.sendRequest("POST", "/admin/sessions", InvalidClass_into_body, data.Admin_Token);
     }
@@ -98,10 +98,10 @@ public class CreateSession {
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
         subject = Class.Subjects;
-        String InvalidClass_into_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+        String InvalidClass_into_body ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-12-01T18:00:00Z\"," +
                 "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
-                "\"subject_id\":??????,\"class_subject_session_price\":100}]}" ;
+                "\"subject_id\":??????,\"block_number\":100}]}" ;
 
         Create_Session_with_notExisting_subject = test.sendRequest("POST", "/admin/sessions", InvalidClass_into_body, data.Admin_Token);
     }
@@ -117,7 +117,7 @@ public class CreateSession {
 
         String Invalid_body ="{\"session_title\":\"\",\"session_start_date\":\"\"," +
                 "\"session_end_date\":\"\",\"session_duration_in_minutes\":120,\"educator_id\":,\"meta_session_id\":123456789012," +
-                "\"session_order\":1,\"is_test_session\":true,\"classes_subjects\":[{\"class_id\":,\"subject_id\":123456789012,\"class_subject_session_price\":1}]}" ;
+                "\"session_order\":1,\"is_test_session\":true,\"classes_subjects\":[{\"class_id\":,\"subject_id\":123456789012,\"block_number\":1}]}" ;
 
         Create_Session_with_invalid_data = test.sendRequest("POST", "/admin/sessions", Invalid_body, data.Admin_Token);
     }
@@ -135,10 +135,10 @@ public class CreateSession {
         Class.getClassDetails ();
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
-        String body_without_subject ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+        String body_without_subject ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-12-01T18:00:00Z\"," +
                 "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
-                "\"subject_id\":123456789098,\"class_subject_session_price\":100}]}" ;
+                "\"subject_id\":123456789098,\"block_number\":100}]}" ;
 
         Create_Session_without_subject = test.sendRequest("POST", "/admin/sessions", body_without_subject, data.Admin_Token);
     }
@@ -157,10 +157,10 @@ public class CreateSession {
         Class_ID = Class.classID;
         EducatorId = Class.EducatorID;
         subject = Class.Subjects;
-        String body_request ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-10-01T18:00:00Z\"," +
+        String body_request ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-12-01T18:00:00Z\"," +
                 "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
                 "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
-                "\"subject_id\":"+ subject +",\"class_subject_session_price\":100}]}";
+                "\"subject_id\":"+ subject +",\"block_number\":null}]}";
 
         Create_Session_InvalidToken = test.sendRequest("POST", "/admin/sessions", body_request, data.refresh_token_for_notActiveEducator);
     }
@@ -171,5 +171,25 @@ public class CreateSession {
         test.Validate_Error_Messages(Invalid_token,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
 
+    @Given("Performing the Api of Create session With invalid block number")
+    public void Create_Session_invalid_block() throws SQLException {
+        Class.user_send_valid_classId();
+        Class.Get_Class();
+        Class.getClassDetails ();
+        Class_ID = Class.classID;
+        EducatorId = Class.EducatorID;
+        subject = Class.Subjects;
+        String body_request ="{\"session_title\":\""+ sessionTitle +"\",\"session_start_date\":\"2024-12-01T18:00:00Z\"," +
+                "\"session_end_date\":\"2025-02-01T20:00:00Z\",\"session_duration_in_minutes\":120,\"educator_id\":"+ EducatorId +"," +
+                "\"meta_session_id\":123456789012,\"session_order\":1,\"is_test_session\":false,\"classes_subjects\":[{\"class_id\":"+ Class_ID +"," +
+                "\"subject_id\":"+ subject +",\"block_number\":9}]}";
+
+        Create_Session_InvalidToken = test.sendRequest("POST", "/admin/sessions", body_request, data.refresh_token_for_notActiveEducator);
+    }
+    @Then("I verify the appearance of status code 400 and invalid block number")
+    public void Validate_Response_of_create_session_invalidBlock() {
+        Response Invalid_block = Create_Session_InvalidToken;
+        test.Validate_Error_Messages(Invalid_block,HttpStatus.SC_BAD_REQUEST,"class or subject not related to this block.",40421);
+    }
 
 }

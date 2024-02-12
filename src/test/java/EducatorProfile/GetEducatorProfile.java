@@ -79,7 +79,7 @@ public class GetEducatorProfile {
         Get_Educator_Profile.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/EducatorProfileSchemas/EducatorProfile.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("/src/test/resources/Schemas/EducatorProfileSchemas/EducatorProfile.json")))
                 .body("educator_first_name", hasToString(educatorFirstName), "educator_last_name", hasToString(educatorLastName), "educator_email", hasToString(educatorEmail));
     }
     @Given("User Send Invalid educator Id")
