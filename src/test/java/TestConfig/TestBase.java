@@ -35,10 +35,10 @@ public class TestBase {
 	}
 
 	public Response sendRequest(String method, String endpoint,Object requestBody,String refresh_token ) {
-		String access_token = generate_access_token(refresh_token);
+		String Access_token = generate_access_token(refresh_token);
 		RequestSpecification request = RestAssured.given()
 				.header("Content-Type", "application/json")
-				.header("Authorization", access_token);
+				.header("Authorization", Access_token);
 
 		if (pathParams != null && !pathParams.isEmpty()) {
 			request.pathParams(pathParams);

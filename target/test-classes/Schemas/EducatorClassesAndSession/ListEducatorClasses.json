@@ -3,7 +3,72 @@
   "properties": {
     "classes": {
       "type": "array",
-      "items": {}
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "class_id": {
+              "type": "integer"
+            },
+            "class_title": {
+              "type": "string"
+            },
+            "class_subjects": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "subject_id": {
+                      "type": "integer"
+                    },
+                    "grade_id": {
+                      "type": "integer"
+                    },
+                    "subject_icon": {
+                      "type": "string"
+                    },
+                    "subject_color": {
+                      "type": "string"
+                    },
+                    "subject_name": {
+                      "type": "string"
+                    },
+                    "grade_localization_code": {
+                      "type": "null"
+                    },
+                    "language_id": {
+                      "type": "integer"
+                    },
+                    "language_iso_code": {
+                      "type": "string"
+                    },
+                    "language_name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "subject_id",
+                    "grade_id",
+                    "subject_icon",
+                    "subject_color",
+                    "subject_name",
+                    "grade_localization_code",
+                    "language_id",
+                    "language_iso_code",
+                    "language_name"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "class_id",
+            "class_title",
+            "class_subjects"
+          ]
+        }
+      ]
     },
     "upcoming_sessions": {
       "type": "array",
@@ -39,15 +104,29 @@
               "type": "integer"
             },
             "class_block_number": {
-              "type": "null"
+              "type": "integer"
             },
             "materials": {
               "type": "array",
-              "items": {}
+              "items": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
             },
             "preview": {
               "type": "array",
-              "items": {}
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             }
           },
           "required": [

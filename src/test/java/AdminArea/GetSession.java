@@ -80,7 +80,7 @@ public class GetSession {
     }
     @Given("send invalid session id in the path")
     public void user_send_invalid_sessionID() {
-        pathParams.put("session_id", "SessionID");
+        pathParams.put("session_id", "SessionId");
     }
     @Then("I verify the appearance of status code 400 and invalid path")
     public void Validate_Response_of_Get_Session_with_invalid_path() {
