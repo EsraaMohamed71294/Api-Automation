@@ -61,15 +61,5 @@ pipeline {
         }
         
     }
-    post {
-        failure {
-                script {
-                    
-            }
-                          
-        }
-        cleanup{
-            cleanWs()
-        }     
-    }
+    
 }
