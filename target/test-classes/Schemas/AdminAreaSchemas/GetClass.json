@@ -62,7 +62,7 @@
               "type": "integer"
             },
             "class_subject_retail_price": {
-              "type": "number"
+              "type": "null"
             },
             "class_subject_discounted_price": {
               "type": "number"
@@ -80,7 +80,7 @@
                       "type": "integer"
                     },
                     "class_block_discounted_price": {
-                      "type": "number"
+                      "type": "null"
                     },
                     "class_block_retail_price": {
                       "type": "number"
@@ -99,26 +99,7 @@
                       "type": "integer"
                     },
                     "class_block_discounted_price": {
-                      "type": "number"
-                    },
-                    "class_block_retail_price": {
-                      "type": "number"
-                    }
-                  },
-                  "required": [
-                    "class_block_number",
-                    "class_block_discounted_price",
-                    "class_block_retail_price"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "class_block_number": {
-                      "type": "integer"
-                    },
-                    "class_block_discounted_price": {
-                      "type": "number"
+                      "type": "null"
                     },
                     "class_block_retail_price": {
                       "type": "number"
@@ -156,7 +137,7 @@
               "type": "integer"
             },
             "class_subject_retail_price": {
-              "type": "number"
+              "type": "null"
             },
             "class_subject_discounted_price": {
               "type": "number"
@@ -174,7 +155,7 @@
                       "type": "integer"
                     },
                     "class_block_discounted_price": {
-                      "type": "number"
+                      "type": "null"
                     },
                     "class_block_retail_price": {
                       "type": "number"
@@ -193,26 +174,7 @@
                       "type": "integer"
                     },
                     "class_block_discounted_price": {
-                      "type": "number"
-                    },
-                    "class_block_retail_price": {
-                      "type": "number"
-                    }
-                  },
-                  "required": [
-                    "class_block_number",
-                    "class_block_discounted_price",
-                    "class_block_retail_price"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "class_block_number": {
-                      "type": "integer"
-                    },
-                    "class_block_discounted_price": {
-                      "type": "number"
+                      "type": "null"
                     },
                     "class_block_retail_price": {
                       "type": "number"

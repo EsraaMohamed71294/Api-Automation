@@ -30,16 +30,36 @@ public class ListEducatorClasses {
     Response List_Educator_Classes;
     String EducatorRefreshToken;
     String OTP;
+    Long Class_ID;
+
+
+    public void get_Educator_classes_from_db() throws SQLException {
+        ResultSet resultSet = Connect.connect_to_database("select *  from sessions s \n" +
+                "join classes_subjects_sessions css \n" +
+                "on s.session_id = css.session_id \n" +
+                "join classes_subjects cs \n" +
+                "on cs.class_subject_id = css.class_subject_id \n" +
+                "join classes c \n" +
+                "on c.class_id = cs.class_id \n" +
+                "where cs.class_id =\""+ Class_ID +"\" and s.session_start_date >= current_timestamp ");
+
+
+        while (resultSet.next()) {
+            SessionID = resultSet.getLong("class_title");}
+
+    }
     @Given("User Create Classes and Session for Educator to list classes for educator")
     public void Create_Session_for_educator ()throws SQLException{
     session.user_send_valid_sessionID();
     session.Get_Session();
     educatorID = session.educatorID;
+
 }
 
     @When("Performing the Api of list classes for educator")
     public void List_Educator_classes() throws SQLException {
         SessionID = session.SessionID;
+        Class_ID = session.ClassID;
 
         ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
         while (GetEducatorEmail.next()) {
