@@ -61,6 +61,8 @@ public class ListEducatorSessions {
             session_id = resultSet.getLong("session_id");
             session_title = resultSet.getString("session_title");
             session_duration_in_minutes = resultSet.getInt("session_duration_in_minutes");
+
+            System.out.println("class_id**********" + class_id);
         }
 
     }
@@ -111,17 +113,18 @@ public class ListEducatorSessions {
 
     }
 
-    @Given("User Create Classes only  for Educator to list Sessions")
+    @Given("User Create Classes only for Educator to list Sessions")
     public void Create_classes_for_educator() {
         classData.user_send_valid_classId();
         classData.Get_Class();
         educatorID = classData.EducatorID;
+        Class_ID = classData.classID;
+        System .out.println("Class_ID***" + Class_ID);
 
     }
 
     @When("Performing the Api of list sessions for educator with empty data")
     public void List_Educator_sessions_empty() throws SQLException {
-        Class_ID = classData.classID;
 
         ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
         while (GetEducatorEmail.next()) {
