@@ -34,8 +34,8 @@
                     "subject_name": {
                       "type": "string"
                     },
-                    "grade_localization_code": {
-                      "type": "null"
+                    "grade_localization_key": {
+                      "type": ["string","null"]
                     },
                     "language_id": {
                       "type": "integer"
@@ -53,7 +53,7 @@
                     "subject_icon",
                     "subject_color",
                     "subject_name",
-                    "grade_localization_code",
+                    "grade_localization_key",
                     "language_id",
                     "language_iso_code",
                     "language_name"
