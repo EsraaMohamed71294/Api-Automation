@@ -61,7 +61,7 @@ public class CreateEducationalResource {
     public void Validate_Response_of_create_Educational_resource() {
         Create_Educational_Resources.prettyPrint();
         Create_Educational_Resources.then()
-                .statusCode(HttpStatus.SC_CREATED)
+                .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateEducationalResource.json")))
                 .body("message", hasToString("Educational resource created/updated successfully."),"resource_id",equalTo(resourceId));

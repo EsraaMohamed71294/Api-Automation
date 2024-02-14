@@ -1,5 +1,6 @@
 package EducatorsClassesAndSessions;
 
+import AdminArea.GetClass;
 import AdminArea.GetSession;
 import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;
@@ -22,6 +23,7 @@ import static org.hamcrest.Matchers.*;
 public class ListEducatorSessions {
     TestBase test = new TestBase();
     GetSession session =new GetSession();
+    GetClass classData =new GetClass();
     Database_Connection Connect = new Database_Connection();
     Educator_TestData data = new Educator_TestData();
     Map<String, Object> pathParams = test.pathParams;
@@ -34,7 +36,6 @@ public class ListEducatorSessions {
     Long Class_ID;
     Long class_id;
     Integer class_block_number;
-    Long grade_id;
     Long session_id;
     Integer session_duration_in_minutes;
     String class_title;
@@ -107,6 +108,49 @@ public class ListEducatorSessions {
                 .body("class_id",equalTo(class_id),"class_title",hasToString(class_title),"sessions.class_block_number",hasItem(equalTo(class_block_number)),
                         "sessions.session_id",hasItem(equalTo(session_id)),"sessions.session_title",hasItem(hasToString(session_title)),
                         "sessions.session_duration_in_minutes",hasItem(equalTo(session_duration_in_minutes)));
+
+    }
+
+    @Given("User Create Classes only  for Educator to list Sessions")
+    public void Create_classes_for_educator() {
+        classData.user_send_valid_classId();
+        classData.Get_Class();
+        educatorID = classData.EducatorID;
+
+    }
+
+    @When("Performing the Api of list sessions for educator with empty data")
+    public void List_Educator_sessions_empty() throws SQLException {
+        Class_ID = classData.classID;
+
+        ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
+        while (GetEducatorEmail.next()) {
+            educator_Email = GetEducatorEmail.getString("educator_email");};
+
+        Response testOTP = test.sendRequest("POST", "/educators/auth/send-otp", "{\"email\":\""+ educator_Email +"\",\"language\":\"en\"}",data.Admin_Token);
+        testOTP.prettyPrint();
+
+        ResultSet GetEducatorOTP = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_Email +"'");
+        while (GetEducatorOTP.next()) {
+            OTP = GetEducatorOTP.getString("Otp");};
+
+        Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",data.Admin_Token);
+        VerifyOTP.prettyPrint();
+        EducatorRefreshToken = VerifyOTP.then().extract().path("tokens.refresh_token");
+
+        pathParams.put("educator_id", educatorID);
+        pathParams.put("class_id",Class_ID);
+        List_Educator_Sessions = test.sendRequest("GET", "/educators/{educator_id}/classes/{class_id}/sessions", null,EducatorRefreshToken);
+    }
+
+    @Then("I verify the appearance of status code 200 and Educator Sessions data is empty")
+    public void Validate_Response_of_Educator_sessions_returned_empty() {
+        List_Educator_Sessions.prettyPrint();
+        List_Educator_Sessions.then()
+                .statusCode(HttpStatus.SC_OK)
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorClassesAndSession/ListEducatorSessions.json")))
+                .body("class_id",equalTo(class_id),"class_title",hasToString(class_title),"sessions",empty());
 
     }
 
