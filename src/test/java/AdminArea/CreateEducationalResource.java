@@ -31,12 +31,16 @@ public class CreateEducationalResource {
     Response Create_Educational_Resources;
     Response Invalid_Educational_Resources;
     Response unauthorized_admin;
+    Long ResourceID = Long.valueOf(fakeDate.number().digits(12));
 
-    String valid_body = "{\"name\":\""+ name +"\",\"cdn\":\""+ cdn +"\",\"bucket\":\"test_bucket_1\",\"key\":\"test_key_1\"," +
-            "\"md5\":\"kkk\",\"is_test\":true,\"file_type_id\":"+ fileTypeID +",\"resource_type_id\":"+ resourceTypeID +"}" ;
+    String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\""+ cdn +"\",\"bucket\":\"test_bucket_1\"," +
+            "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
+            "\"educational_resource_order\":"+ resourceTypeID +"}";
 
-    String Invalid_body = "{\"name\":\"\",\"cdn\":\"\",\"bucket\":\"test_bucket_1\",\"key\":\"test_key_1\"," +
-            "\"md5\":\"\",\"is_test\":true,\"file_type_id\":,\"resource_type_id\":}" ;
+
+    String Invalid_body = "{\"resource_id\":,\"name\":\"\",\"cdn\":\"\",\"bucket\":\"test_bucket_1\"," +
+            "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":,\"educational_resource_thumbnail_url\":\"https://example.com\"," +
+            "\"educational_resource_order\":}";
 
     @Given("Performing the Api of Create Educational Resources")
     public Long  Create_new_educational_resources() {
@@ -60,7 +64,7 @@ public class CreateEducationalResource {
                 .statusCode(HttpStatus.SC_CREATED)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateEducationalResource.json")))
-                .body("message", hasToString("Educational resource created successfully."),"resource_id",equalTo(resourceId));
+                .body("message", hasToString("Educational resource created/updated successfully."),"resource_id",equalTo(resourceId));
     }
 
     @Given("Performing the Api of Create Educational Resources with invalid data")
