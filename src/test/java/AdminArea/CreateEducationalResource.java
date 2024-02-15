@@ -27,16 +27,11 @@ public class CreateEducationalResource {
     String cdn = fakeDate.name().name();
     Long fileTypeID = Long.valueOf(fakeDate.number().randomDigitNotZero());
     Long resourceTypeID = Long.valueOf(fakeDate.number().randomDigitNotZero());
-    Long resourceId;
+    public Long resourceId;
     Response Create_Educational_Resources;
     Response Invalid_Educational_Resources;
     Response unauthorized_admin;
     Long ResourceID = Long.valueOf(fakeDate.number().digits(12));
-
-    String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\""+ cdn +"\",\"bucket\":\"test_bucket_1\"," +
-            "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
-            "\"educational_resource_order\":"+ resourceTypeID +"}";
-
 
     String Invalid_body = "{\"resource_id\":,\"name\":\"\",\"cdn\":\"\",\"bucket\":\"test_bucket_1\"," +
             "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":,\"educational_resource_thumbnail_url\":\"https://example.com\"," +
@@ -44,8 +39,12 @@ public class CreateEducationalResource {
 
     @Given("Performing the Api of Create Educational Resources")
     public Long  Create_new_educational_resources() {
+        String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\""+ cdn +"\",\"bucket\":\"test_bucket_1\"," +
+                "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
+                "\"educational_resource_order\":"+ resourceTypeID +"}";
+
         Create_Educational_Resources = test.sendRequest("POST", "/admin/educational-resources", valid_body, data.Admin_Token);
-        return resourceId;
+        return resourceId = Create_Educational_Resources.then().extract().path("resource_id");
     }
 
     @And("Getting educational resource from database")
@@ -80,6 +79,9 @@ public class CreateEducationalResource {
 
     @Given("Performing the Api of Create educational resource With invalid token")
     public void Create_resources_with_invalid_token() {
+        String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\""+ cdn +"\",\"bucket\":\"test_bucket_1\"," +
+                "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
+                "\"educational_resource_order\":"+ resourceTypeID +"}";
         unauthorized_admin = test.sendRequest("POST", "/admin/classes", valid_body,data.refresh_token_for_notActiveEducator);
     }
 
