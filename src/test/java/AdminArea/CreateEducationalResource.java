@@ -34,13 +34,13 @@ public class CreateEducationalResource {
     Long ResourceID = Long.valueOf(fakeDate.number().digits(12));
 
     String Invalid_body = "{\"resource_id\":,\"name\":\"\",\"cdn\":\"\",\"bucket\":\"test_bucket_1\"," +
-            "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":,\"educational_resource_thumbnail_url\":\"https://example.com\"," +
+            "\"key\":\"NagwaClasses/510130705852/869165016176.zip\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":,\"educational_resource_thumbnail_url\":\"https://example.com\"," +
             "\"educational_resource_order\":}";
 
     @Given("Performing the Api of Create Educational Resources")
     public Long  Create_new_educational_resources() {
-        String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\""+ cdn +"\",\"bucket\":\"test_bucket_1\"," +
-                "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
+        String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\"https://handouts-materials.nagwa.com/\",\"bucket\":\"handouts-materials\"," +
+                "\"key\":\"NagwaClasses/510130705852/869165016176.zip\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
                 "\"educational_resource_order\":"+ resourceTypeID +"}";
 
         Create_Educational_Resources = test.sendRequest("POST", "/admin/educational-resources", valid_body, data.Admin_Token);
@@ -60,7 +60,7 @@ public class CreateEducationalResource {
     public void Validate_Response_of_create_Educational_resource() {
         Create_Educational_Resources.prettyPrint();
         Create_Educational_Resources.then()
-                .statusCode(HttpStatus.SC_OK)
+                .statusCode(HttpStatus.SC_CREATED)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateEducationalResource.json")))
                 .body("message", hasToString("Educational resource created/updated successfully."),"resource_id",equalTo(resourceId));
@@ -79,8 +79,8 @@ public class CreateEducationalResource {
 
     @Given("Performing the Api of Create educational resource With invalid token")
     public void Create_resources_with_invalid_token() {
-        String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\""+ cdn +"\",\"bucket\":\"test_bucket_1\"," +
-                "\"key\":\"test_key_1\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
+        String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\"https://handouts-materials.nagwa.com/\",\"bucket\":\"handouts-materials\"," +
+                "\"key\":\"NagwaClasses/510130705852/869165016176.zip\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":2,\"resource_type_id\":"+ fileTypeID +",\"educational_resource_thumbnail_url\":\"https://example.com\"," +
                 "\"educational_resource_order\":"+ resourceTypeID +"}";
         unauthorized_admin = test.sendRequest("POST", "/admin/classes", valid_body,data.refresh_token_for_notActiveEducator);
     }

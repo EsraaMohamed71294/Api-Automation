@@ -10,6 +10,18 @@
     "educator_id": {
       "type": "integer"
     },
+    "session_educator_id": {
+      "type": "integer"
+    },
+    "class_public_listing_date": {
+      "type": "string"
+    },
+    "class_archive_date": {
+      "type": "string"
+    },
+    "class_subject_id": {
+      "type": "integer"
+    },
     "educator_first_name": {
       "type": "string"
     },
@@ -41,13 +53,16 @@
           "type": "object",
           "properties": {
             "educational_resource_type_id": {
-              "type": "integer"
+              "type": ["null","integer"]
             },
             "educational_resource_type": {
-              "type": "string"
+              "type": ["null","string"]
+            },
+            "educational_resource_group": {
+              "type": ["null","string"]
             },
             "educational_resources": {
-              "type": "array",
+              "type": ["null","array"],
               "items": [
                 {
                   "type": "object",
@@ -61,58 +76,22 @@
                     "educational_resource_md5": {
                       "type": "string"
                     },
-                    "educational_resource_type_id": {
+                    "file_type_id": {
                       "type": "integer"
                     },
-                    "educational_resource_cdn": {
-                      "type": "string"
-                    },
-                    "educational_resource_s3_key": {
-                      "type": "string"
+                    "file_type_icon_url": {
+                      "type": "null"
                     },
                     "educational_resource_url": {
-                      "type": "string"
+                      "type": "null"
                     }
                   },
                   "required": [
                     "educational_resource_id",
                     "educational_resource_name",
                     "educational_resource_md5",
-                    "educational_resource_url"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "educational_resource_id": {
-                      "type": "integer"
-                    },
-                    "educational_resource_name": {
-                      "type": "string"
-                    },
-                    "educational_resource_md5": {
-                      "type": "string"
-                    },
-                    "educational_resource_type_id": {
-                      "type": "integer"
-                    },
-                    "educational_resource_cdn": {
-                      "type": "string"
-                    },
-                    "educational_resource_s3_key": {
-                      "type": "string"
-                    },
-                    "educational_resource_url": {
-                      "type": ["null","string"]
-                    }
-                  },
-                  "required": [
-                    "educational_resource_id",
-                    "educational_resource_name",
-                    "educational_resource_md5",
-                    "educational_resource_type_id",
-                    "educational_resource_cdn",
-                    "educational_resource_s3_key",
+                    "file_type_id",
+                    "file_type_icon_url",
                     "educational_resource_url"
                   ]
                 }
@@ -122,6 +101,7 @@
           "required": [
             "educational_resource_type_id",
             "educational_resource_type",
+            "educational_resource_group",
             "educational_resources"
           ]
         }
@@ -150,10 +130,15 @@
       ]
     }
   },
+
   "required": [
     "class_id",
     "class_title",
     "educator_id",
+    "session_educator_id",
+    "class_public_listing_date",
+    "class_archive_date",
+    "class_subject_id",
     "educator_first_name",
     "educator_last_name",
     "session_id",
@@ -167,3 +152,4 @@
     "preview"
   ]
 }
+

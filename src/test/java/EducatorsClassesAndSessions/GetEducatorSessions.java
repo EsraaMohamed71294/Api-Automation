@@ -32,17 +32,15 @@ public class GetEducatorSessions {
     Database_Connection Connect = new Database_Connection();
     Educator_TestData data = new Educator_TestData();
     Map<String, Object> pathParams = test.pathParams;
-    Long SessionID;
     String educator_Email;
     Long educatorID;
-    Response List_Educator_Sessions;
+    Response Get_Educator_Sessions;
     String EducatorRefreshToken;
     String OTP;
     Long Class_ID;
     Long class_id;
     Long sessionId;
     Long session_id;
-    Integer class_block_number;
     Integer session_duration_in_minutes;
     String class_title;
     String session_title;
@@ -65,7 +63,8 @@ public class GetEducatorSessions {
         ResourceId = resource.resourceId;
         System.out.println("ResourceId "+ResourceId);
         String valid_body = "{\"sessions_ids\":["+ session_id +"],\"educational_resource_id\":"+ ResourceId +"}";
-        test.sendRequest("POST", "/admin/assign-educational-resource", valid_body, data.Admin_Token);
+        Response assign = test.sendRequest("POST", "/admin/assign-educational-resource", valid_body, data.Admin_Token);
+        assign.prettyPrint();
     }
 
     @When("Performing the Api of Get sessions for educator")
@@ -90,7 +89,7 @@ public class GetEducatorSessions {
         pathParams.put("class_id",Class_ID);
         pathParams.put("session_id",session_id);
 
-        List_Educator_Sessions = test.sendRequest("GET", "/educators/{educator_id}/classes/{class_id}/sessions/{session_id}", null,EducatorRefreshToken);
+        Get_Educator_Sessions = test.sendRequest("GET", "/educators/{educator_id}/classes/{class_id}/sessions/{session_id}", null,EducatorRefreshToken);
     }
 
     @And("Get Educator's Sessions from database")
@@ -128,8 +127,8 @@ public class GetEducatorSessions {
 
     @Then("I verify the appearance of status code 200 and Educator Sessions data returned successfully")
     public void Validate_Response_of_Educator_sessions_returned_successfully() {
-        List_Educator_Sessions.prettyPrint();
-        List_Educator_Sessions.then()
+        Get_Educator_Sessions.prettyPrint();
+        Get_Educator_Sessions.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorClassesAndSession/GetEducatorSessions.json")))
@@ -138,6 +137,99 @@ public class GetEducatorSessions {
                         ,hasItem(equalTo(educational_resource_type_id)),"educational_resources.educational_resource_type",hasItem(hasToString(educational_resource_type)),
                         "educational_resources.educational_resources.educational_resource_id",hasItems(hasItem(equalTo(educational_resource_id))),
                         "educational_resources.educational_resources.educational_resource_name",hasItems(hasItem(hasToString(educational_resource_name))));
+    }
+
+    @Given("User Create Classes only for Educator to Get Sessions")
+    public void Create_classes_for_educator() {
+        classData.user_send_valid_classId();
+        classData.Get_Class();
+        educatorID = classData.EducatorID;
+        Class_ID = classData.classID;
+
+    }
+
+    @When("Performing the Api of Get sessions for educator with invalid session")
+    public void List_Educator_sessions_empty() throws SQLException {
+
+        ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
+        while (GetEducatorEmail.next()) {
+            educator_Email = GetEducatorEmail.getString("educator_email");};
+
+        Response testOTP = test.sendRequest("POST", "/educators/auth/send-otp", "{\"email\":\""+ educator_Email +"\",\"language\":\"en\"}",data.Admin_Token);
+        testOTP.prettyPrint();
+
+        ResultSet GetEducatorOTP = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_Email +"'");
+        while (GetEducatorOTP.next()) {
+            OTP = GetEducatorOTP.getString("Otp");};
+
+        Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",data.Admin_Token);
+        VerifyOTP.prettyPrint();
+        EducatorRefreshToken = VerifyOTP.then().extract().path("tokens.refresh_token");
+
+        pathParams.put("educator_id", educatorID);
+        pathParams.put("class_id",Class_ID);
+        pathParams.put("session_id","123456789999");
+        Get_Educator_Sessions = test.sendRequest("GET", "/educators/{educator_id}/classes/{class_id}/sessions/{session_id}", null,EducatorRefreshToken);
+    }
+
+    @Then("I verify the appearance of status code 404 and Session is not related to the class")
+    public void Validate_Response_of_Educator_sessions_with_invalid_session() {
+        Response Invalid_session = Get_Educator_Sessions;
+        test.Validate_Error_Messages(Invalid_session,HttpStatus.SC_NOT_FOUND,"Session not found or not eligible for display.",4048);
+
+    }
+
+    @Given("User Create Educator without assigning any classes and get sessions for him")
+    public void Create_educator_only() {
+        educator.Create_Educator();
+        educatorID = educator.Educator_ID;
+
+    }
+
+    @When("Performing the Api of Get sessions for educator with invalid class")
+    public void List_Educator_sessions_invalid_class() throws SQLException {
+
+        ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
+        while (GetEducatorEmail.next()) {
+            educator_Email = GetEducatorEmail.getString("educator_email");};
+
+        Response testOTP = test.sendRequest("POST", "/educators/auth/send-otp", "{\"email\":\""+ educator_Email +"\",\"language\":\"en\"}",data.Admin_Token);
+        testOTP.prettyPrint();
+
+        ResultSet GetEducatorOTP = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_Email +"'");
+        while (GetEducatorOTP.next()) {
+            OTP = GetEducatorOTP.getString("Otp");};
+
+        Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",data.Admin_Token);
+        VerifyOTP.prettyPrint();
+        EducatorRefreshToken = VerifyOTP.then().extract().path("tokens.refresh_token");
+
+        pathParams.put("educator_id", educatorID);
+        pathParams.put("class_id","123456789076");
+        pathParams.put("session_id","123456789076");
+        Get_Educator_Sessions = test.sendRequest("GET", "/educators/{educator_id}/classes/{class_id}/sessions/{session_id}", null,EducatorRefreshToken);
+    }
+
+    @Then("I verify the appearance of status code 404 and class is not found")
+    public void Validate_Response_of_Educator_sessions_with_invalid_class() {
+        Response Invalid_class = Get_Educator_Sessions;
+        test.Validate_Error_Messages(Invalid_class,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
+
+    }
+
+    @Given("Performing the Api of Get sessions for educator with unauthorized educator")
+    public void List_Educator_sessions_unauthorized_Educator() {
+        pathParams.put("educator_id", "123456789012");
+        pathParams.put("class_id","123456789076");
+        pathParams.put("session_id","123456789076");
+        Get_Educator_Sessions = test.sendRequest("GET", "/educators/{educator_id}/classes/{class_id}/sessions/{session_id}", null,data.Admin_Token);
+    }
+
+    @Then("I verify the appearance of status code 403 and unauthorized educatorId")
+    public void Validate_Response_of_Educator_sessions_with_unauthorized_user() {
+        Response Invalid_token = Get_Educator_Sessions;
+        test.Validate_Error_Messages(Invalid_token,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+
     }
 
 
