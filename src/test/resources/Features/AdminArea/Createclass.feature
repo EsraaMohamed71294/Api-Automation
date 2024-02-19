@@ -20,3 +20,4 @@ Feature: Test all scenarios of the api Create Class
     Given   Performing the Api of Create class With invalid body
     Then    I verify the appearance of status code 400 and body incorrect
 
+

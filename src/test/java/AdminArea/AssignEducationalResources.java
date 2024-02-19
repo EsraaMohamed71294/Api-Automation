@@ -38,6 +38,7 @@ public class AssignEducationalResources {
         resource.Create_new_educational_resources();
         SessionID = session.sessionId;
         ResourceId = resource.resourceId;
+        System.out.println("ResourceId " + ResourceId);
         String valid_body = "{\"sessions_ids\":["+ SessionID +"],\"educational_resource_id\":"+ ResourceId +"}";
         Assign_Educational_Resource = test.sendRequest("POST", "/admin/assign-educational-resource", valid_body, data.Admin_Token);
     }
@@ -65,7 +66,8 @@ public class AssignEducationalResources {
     public void  Create_Assign_resources_session_notFound() {
         resource.Create_new_educational_resources();
         ResourceId = resource.resourceId;
-        String Invalid_session_body = "{\"sessions_ids\":[123456789123],\"educational_resource_id\":"+ ResourceId +"}";
+        SessionID = 123456789034L;
+        String Invalid_session_body = "{\"sessions_ids\":["+ SessionID +"],\"educational_resource_id\":"+ ResourceId +"}";
         Assign_Resource_InvalidSession = test.sendRequest("POST", "/admin/assign-educational-resource", Invalid_session_body, data.Admin_Token);
     }
 

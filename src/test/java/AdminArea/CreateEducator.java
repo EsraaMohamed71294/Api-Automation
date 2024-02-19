@@ -26,8 +26,7 @@ public class CreateEducator {
     String lastName = fakeDate.name().lastName();
     String Educator_userName = fakeDate.name().username();
     public String Email =Educator_userName + "@nagwa.com";
-    Long Id = Long.valueOf(fakeDate.number().digits(12));
-    public String EducatorEmail;
+    Long Id = Long.valueOf(String.format("%012d", fakeDate.number().randomNumber(12, true)));
 
     String valid_body_request = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\""+ Email +"\"," +
             "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
@@ -39,10 +38,10 @@ public class CreateEducator {
     public Long Create_Educator() {
         Create_Educator = test.sendRequest("POST", "/admin/educators", valid_body_request,Admin_token);
         Educator_ID = Create_Educator.then().extract().path("educator_id");
+        System.out.println("Request_body_Educator: "+ valid_body_request);
         System.out.println("Educator_ID "+ Educator_ID);
         return Educator_ID = Create_Educator.then().extract().path("educator_id");
     }
-
 
 
     @Then("I verify the appearance of status code 200 and Educator created successfully")
