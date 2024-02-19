@@ -27,7 +27,7 @@ public class DeactivateStudent {
     @When("Performing the Api of deactivate student")
     public void Deactivate_student(){
         student.getStudent_refresh_token();
-        refreshToken = student.studnet_refreshToken;
+        refreshToken = student.student_refreshToken;
         System.out.println("token " + refreshToken);
         deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,refreshToken);
     }

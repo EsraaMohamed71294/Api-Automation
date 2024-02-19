@@ -32,7 +32,7 @@ public class DeleteStudent {
     @When("Performing the Api of delete student")
     public void Delete_student(){
         student.getStudent_refresh_token();
-        refreshToken = student.studnet_refreshToken;
+        refreshToken = student.student_refreshToken;
         System.out.println("token " + refreshToken);
         delete_student = test.sendRequest("DELETE", "/students/{student_id}", null,refreshToken);
     }
