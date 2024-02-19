@@ -57,8 +57,8 @@ public class EnrollStudentIntoClass {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentHomeScreen/EnrollStudentIntoClass.json")))
-                .body("message", hasToString("Student successfully enrolled in the class."),"class_id", equalTo(String.valueOf(Class_ID))
-                        ,"student_id", equalTo(String.valueOf(student_Id)));
+                .body("message", hasToString("Student successfully enrolled in the class."),"class_id", equalTo(Class_ID.toString())
+                ,"student_id", equalTo(student_Id.toString()));
     }
 
     @And("Verify enrollment done successfully into database")
@@ -66,8 +66,8 @@ public class EnrollStudentIntoClass {
         ResultSet resultSet = Connect.connect_to_database("select * from classes_students cs where student_id = "+ student_Id +"");
 
         while (resultSet.next()) {
-            Class_ID = resultSet.getLong("class_id");
-            student_id = resultSet.getLong("student_id");
+             class_id = resultSet.getLong("class_id");
+             student_id = resultSet.getLong("student_id");
         }
         Assert.assertEquals(Class_ID,class_id);
         Assert.assertEquals(student_Id,student_id);

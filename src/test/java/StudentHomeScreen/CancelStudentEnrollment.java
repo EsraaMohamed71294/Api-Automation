@@ -35,7 +35,7 @@ public class CancelStudentEnrollment {
     Long student_Id;
 
     @Given("Create new user and enroll him into class")
-    public void create_student_and_class ()throws SQLException {
+    public void enroll_student_into_class() throws SQLException {
         classData.Create_Class_Block_Payment();
         Class_ID = classData.Class_ID;
         student.Create_Student();

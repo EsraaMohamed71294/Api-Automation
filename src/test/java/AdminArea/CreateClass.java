@@ -83,7 +83,7 @@ public class CreateClass {
         String body_for_block_payment_class = "{\"class_title\":\""+ classTitle +"\",\"meta_class_id\":785157898183,\"class_order\":1," +
                 "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-28T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2025-01-23T00:00:00Z\",\"class_enrollment_end_date\":\"2025-01-30T00:00:00Z\",\"class_archive_date\":\"2025-01-22T00:00:00Z\"," +
-                "\"class_payment_option_id\":2,\"class_block_count\":2,\"class_seats_limit\":10,\"is_test_class\":true,\"class_start_date\":\"2025-01-28T00:00:00Z\",\"class_end_date\":\"2025-12-28T00:00:00Z\"," +
+                "\"class_payment_option_id\":2,\"class_block_count\":2,\"class_seats_limit\":10,\"is_test_class\":false,\"class_start_date\":\"2025-01-28T00:00:00Z\",\"class_end_date\":\"2025-12-28T00:00:00Z\"," +
                 "\"class_semester_localization_key\":\"First_Term\",\"class_type\":\"ClassType\",\"subjects\":[{\"subject_id\":793174170262,\"class_subject_retail_price\":null," +
                 "\"class_subject_discounted_price\":5,\"class_subject_session_price\":10,\"blocks\":[{\"class_block_number\":1,\"class_block_retail_price\":20}," +
                 "{\"class_block_number\":2,\"class_block_retail_price\":30}]}]," +
