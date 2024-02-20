@@ -37,7 +37,7 @@ public class CreateStudent {
     String Valid_body_request ;
     public String student_refresh_token;
     String CreateToken;
-    public String studnet_refreshToken;
+    public String student_refreshToken;
     Response Create_Student;
     Response Verify_Student_OTP;
     @Given("Get grades from database")
@@ -81,13 +81,13 @@ public class CreateStudent {
                 .when()
                 .post("/students/create");
         Create_Student.prettyPrint();
-        studnet_refreshToken = Create_Student.then().extract().path("tokens.refresh_token");
+        student_refreshToken = Create_Student.then().extract().path("tokens.refresh_token");
         return studentId = Create_Student.then().extract().path("data.user_id") ;
 
     }
 
     public String getStudent_refresh_token() {
-        return studnet_refreshToken ;
+        return student_refreshToken ;
     }
     @Then("I verify the appearance of status code 201 and Student created successfully")
     public void Validate_Response_of_create_Student_successfully() {

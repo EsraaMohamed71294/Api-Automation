@@ -36,7 +36,7 @@ public class DownloadEducationResource {
     String EducatorRefreshToken;
     String OTP;
     Long Class_ID;
-    Long session_educational_resource_id;
+    Integer session_educational_resource_id;
     Long session_id;
     String educational_resource_md5;
     Integer educational_resource_type_id;
@@ -92,8 +92,9 @@ public class DownloadEducationResource {
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorClassesAndSession/DownloadEducationalResources.json")))
                 .body("resources.educational_resource_id",hasItem(hasToString(educational_resource_id.toString())),
-                        "resources.educational_resource_md5",hasItem(hasToString(educational_resource_md5)),"resources.educational_resource_type_id",hasItem(equalTo(educational_resource_type_id)),
-                        "resources.session_educational_resource_id",hasItem(equalTo(session_educational_resource_id)));
+                        "resources.educational_resource_md5",hasItem(hasToString(educational_resource_md5)),
+                        "resources.educational_resource_type_id",hasItem(equalTo(educational_resource_type_id)),
+                        "resources.session_educational_resource_id",hasItems(equalTo(session_educational_resource_id)));
     }
 
     @And("Get resources data from database")
@@ -107,11 +108,10 @@ public class DownloadEducationResource {
 
         while (resultSet.next()) {
             educational_resource_id = resultSet.getLong("educational_resource_id");
-//            download_link = resultSet.getString("download_link");
             educational_resource_md5 = resultSet.getString("educational_resource_md5");
             educational_resource_type_id = resultSet.getInt("educational_resource_type_id");
             educational_resource_type = resultSet.getString("educational_resource_type");
-            session_educational_resource_id = resultSet.getLong("session_educational_resource_id");
+            session_educational_resource_id = resultSet.getInt("session_educational_resource_id");
 
 
         }

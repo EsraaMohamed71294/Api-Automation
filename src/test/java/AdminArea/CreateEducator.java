@@ -30,7 +30,7 @@ public class CreateEducator {
 
     String valid_body_request = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\""+ Email +"\"," +
             "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
-            "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
+            "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\",\"is_test_educator\":true}";
 
 
 

@@ -30,7 +30,7 @@ public class GetStudentWallet {
     @When("Performing the Api of Get Student Wallet")
     public void Get_Student_Wallet(){
         student.getStudent_refresh_token();
-        refreshToken = student.studnet_refreshToken;
+        refreshToken = student.student_refreshToken;
         Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,refreshToken);
     }
 
