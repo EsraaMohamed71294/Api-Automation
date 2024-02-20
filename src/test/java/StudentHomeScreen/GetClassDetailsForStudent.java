@@ -23,7 +23,6 @@ import static org.hamcrest.Matchers.*;
 
 public class GetClassDetailsForStudent {
     TestBase test = new TestBase();
-    CreateClass classData = new CreateClass();
     CreateStudent student = new CreateStudent();
     GetSession session = new GetSession();
     Database_Connection Connect = new Database_Connection();
@@ -33,7 +32,6 @@ public class GetClassDetailsForStudent {
     Response Get_Class_Details;
     Long Class_ID;
     Long class_id;
-    Long student_id;
     Long student_Id;
     Long session_Id;
     Long educator_Id;
