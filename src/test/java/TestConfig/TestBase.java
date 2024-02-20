@@ -22,8 +22,8 @@ public class TestBase {
 	public Map<String,Object> pathParams = new HashMap<String, Object>();
 
 	public static String  generate_access_token(String refresh_token) {
-		RestAssured.baseURI ="https://aevkujc65i.execute-api.us-east-1.amazonaws.com";
-		RestAssured.basePath ="/beta/v1";
+		RestAssured.baseURI ="https://uinwyfqhul.execute-api.us-east-1.amazonaws.com";
+		RestAssured.basePath ="/demo/v1";
 		RequestSpecification request = 
 			RestAssured.given()	   
 			.header("Content-Type","application/json")
@@ -31,7 +31,13 @@ public class TestBase {
 
 			Response response = request.when()
 			.post("/token/refresh");
-		return access_token = response.then().extract().path("access_token");
+			access_token = response.then().extract().path("access_token");
+
+		if (access_token == null) {
+			System.out.println("The Refresh Token Api gives Error : Access Token is Null");
+		}
+
+		return access_token;
 	}
 
 	public Response sendRequest(String method, String endpoint,Object requestBody,String refresh_token ) {
