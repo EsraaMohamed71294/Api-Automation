@@ -30,5 +30,3 @@ Feature: Test all scenarios of the api of unlock session
     When    Performing the Api of pay_for_full_class
     Then    The Response Should Contain Status Code 400 And Error Message This class has reached full capacity.
 
-  Scenario: Remove access right of student of full paid class
-    Given user connect to database

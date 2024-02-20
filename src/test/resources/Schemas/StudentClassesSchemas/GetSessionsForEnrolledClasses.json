@@ -8,16 +8,16 @@
       "type": "string"
     },
     "class_seats_limit": {
-      "type": ["null" ,"integer"]
+      "type": ["null","integer"]
     },
     "class_seats_reserved": {
-      "type": ["null" ,"integer"]
+      "type": ["null","integer"]
     },
-    "pay_full_class_allowed": {
-      "type": "boolean"
+    "class_payment_option_id": {
+      "type": "integer"
     },
-    "pay_per_session_allowed": {
-      "type": "boolean"
+    "class_payment_option_name": {
+      "type": "string"
     },
     "educators": {
       "type": "array",
@@ -26,10 +26,10 @@
           "type": "object",
           "properties": {
             "educator_id": {
-              "type": "integer"
+              "type": ["null","integer"]
             },
             "educator_first_name": {
-              "type": "string"
+              "type": ["null","string"]
             },
             "educator_last_name": {
               "type": "string"
@@ -81,7 +81,7 @@
               "type": "integer"
             },
             "class_subject_full_price": {
-              "type": "integer"
+              "type": ["integer","number"]
             }
           },
           "required": [
@@ -95,8 +95,10 @@
   "required": [
     "class_id",
     "class_title",
-    "pay_full_class_allowed",
-    "pay_per_session_allowed",
+    "class_seats_limit",
+    "class_seats_reserved",
+    "class_payment_option_id",
+    "class_payment_option_name",
     "educators",
     "sessions",
     "prices"

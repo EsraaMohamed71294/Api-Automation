@@ -10,26 +10,64 @@ import org.apache.http.HttpStatus;
 import org.hamcrest.object.HasToString;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import javax.xml.transform.Result;
+
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 public class GetEducationalResourcesOfSession {
 
     TestBase test = new TestBase();
     TestData data = new TestData();
+    Database_Connection connect = new Database_Connection();
     String student_id = data.student_Id;
-    String class_id =   data.class_id_for_join_session;
-    String session_id = data.session_id;
-    String resource_id = data.resource_id;
-    String user_token = data.refresh_token;
+    String class_id;
+    String session_id;
+    String resource_id;
 
-    String session_with_no_Educational_resources = data.expensive_session_id;
+    String educational_resource_type;
+    String user_token = data.refresh_token;
+    String session_with_no_Educational_resources;
     Map<String,Object> PathParams = test.pathParams;
 
     public Response get_Educational_resource_of_Session;
+
+    public GetEducationalResourcesOfSession()throws SQLException{
+        get_data_of_session_Educational_resource_from_database();
+    }
+
+
+    public void get_data_of_session_Educational_resource_from_database() throws SQLException {
+        ResultSet resultSet = connect.connect_to_database("select * from sessions_educational_resources ser join public.classes_subjects_sessions css \n" +
+                "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id\n" +
+                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id\n" +
+                "join educational_resources er on er.educational_resource_id = \n" +
+                "ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id = er.educational_resource_type_id \n" +
+                "where available_post_session = false and  cs2.student_id ="+student_id);
+
+        while(resultSet.next()){
+            class_id = resultSet.getString("class_id");
+            session_id = resultSet.getString("session_id");
+            resource_id = resultSet.getString("educational_resource_id");
+            educational_resource_type= resultSet.getString("educational_resource_type");
+        }
+
+        ResultSet resultset_of_session_with_no_educational_Resoureces = connect.connect_to_database("select * from  public.classes_subjects_sessions css join classes_subjects cs on css.class_subject_id = cs.class_subject_id \n" +
+                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id left join \n" +
+                "sessions_educational_resources ser on ser.session_id  = css.session_id \n" +
+                "where student_id ="+student_id+" "+"\n" +
+                " and ser.session_educational_resource_id is null");
+
+            while(resultset_of_session_with_no_educational_Resoureces.next()) {
+             session_with_no_Educational_resources = resultset_of_session_with_no_educational_Resoureces.getString("session_id");
+            }
+    }
     @When("Performing The Api Of GetEducationalResources")
     public void get_Educational_resource_of_Session(){
         get_Educational_resource_of_Session = test.sendRequest("GET" ,"/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources" ,null,user_token);
@@ -47,7 +85,7 @@ public class GetEducationalResourcesOfSession {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/GetEducationalResourcesOfSession.json")))
-                .body("educational_resources.educational_resource_type", hasItems(hasToString("handouts")))
+                .body("educational_resources.educational_resource_type", hasItems(hasToString(educational_resource_type)))
                 .body("class_id", hasToString(class_id),"session_id" , hasToString(session_id),
                         "educational_resources.educational_resources.educational_resource_id", hasItems(hasItem(hasToString(resource_id))));
         }

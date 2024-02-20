@@ -1,5 +1,10 @@
 Feature:  All Scenarios For GetStudentLearningRecords API
 
+  Scenario: Verify Sending Valid Data In Request
+    Given User Send Valid Data To SubmitStudentLearningRecord Request
+    When  Performing The API Of SubmitStudentLearningRecord
+    Then  Response Status Code Is 200 And Body Have StudentLearning RecordId
+
   Scenario: Verify That Student Learning Records Return In Response Body After Enter Valid Parameters
     Given  User Send Valid Parameters To GetStudentLearningRecords API
     When   Performing The API Of GetStudentLearningRecord
