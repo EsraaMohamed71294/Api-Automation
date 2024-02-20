@@ -79,6 +79,8 @@ public class GetClassDetailsForStudent {
                 "on cs2.class_id = c.class_id \n" +
                 "join classes_subjects_sessions css \n" +
                 "on css.class_subject_id = cs2.class_subject_id \n" +
+                "join classes_educators ce \n" +
+                "on ce.class_id = c.class_id \n" +
                 "where cs.student_id ="+ student_Id +"");
 
         while (resultSet.next()) {
@@ -86,7 +88,7 @@ public class GetClassDetailsForStudent {
             class_title = resultSet.getString("class_title");
             class_payment_option_id = resultSet.getInt("class_payment_option_id");
             class_payment_option_name = resultSet.getString("class_payment_option_name");
-//            educator_id = resultSet.getLong("educator_id");
+            educator_id = resultSet.getLong("educator_id");
             session_id = resultSet.getLong("session_id");
             subject_id = resultSet.getLong("subject_id");
 
@@ -102,8 +104,49 @@ public class GetClassDetailsForStudent {
                     .assertThat()
                     .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentHomeScreen/GetClassDetailsForStudent.json")))
                     .body("class_id", equalTo(class_id), "class_title", hasToString(class_title), "class_payment_option_id", equalTo(class_payment_option_id),
-                            "class_payment_option_name", hasToString(class_payment_option_name), "student_is_enrolled", equalTo(true),
+                            "educators.educator_id", hasItem(equalTo(educator_id)),"class_payment_option_name", hasToString(class_payment_option_name), "student_is_enrolled", equalTo(true),
                             "sessions.session_id", hasItem(equalTo(session_id)), "subjects.subject_id", hasItem(equalTo(subject_id)));
-//        "educators.educator_id", hasItem(equalTo(educator_id)),
         }
+
+    @When("Performing the Api of Get Class Details with invalid class")
+    public void Get_Class_Details_with_invalid_class() throws SQLException {
+        student.Create_Student();
+        student_refreshToken = student.student_refreshToken;
+        student_Id = student.studentId;
+        pathParams.put("student_id",student_Id);
+        pathParams.put("class_id","123456789012");
+        Get_Class_Details = test.sendRequest("GET", "/students/{student_id}/classes/{class_id}", null,student_refreshToken);
+    }
+
+    @Then("I verify the appearance of status code 400 and this class is not exist")
+    public void Validate_Response_Get_details_with_invalid_class(){
+        Response Invalid_class = Get_Class_Details;
+        test.Validate_Error_Messages(Invalid_class,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
+    }
+
+    @When("Performing the Api of Get Class Details with student not exist")
+    public void Get_Class_Details_with_student_not_exist() throws SQLException {
+        pathParams.put("student_id","123456789012");
+        pathParams.put("class_id","123456789012");
+        Get_Class_Details = test.sendRequest("GET", "/students/{student_id}/classes/{class_id}", null,data.Admin_Token);
+    }
+
+    @Then("I verify the appearance of status code 403 and this student is not_authorized")
+    public void Validate_Response_Get_details_with_notExist_student(){
+        Response Invalid_student = Get_Class_Details;
+        test.Validate_Error_Messages(Invalid_student,HttpStatus.SC_FORBIDDEN,"Unauthorized.",4031);
+    }
+
+    @When("Performing the Api of Get Class Details with invalid student and class")
+    public void Get_Class_Details_with_invalid_params() throws SQLException {
+        pathParams.put("student_id","1234567890");
+        pathParams.put("class_id","1234567890");
+        Get_Class_Details = test.sendRequest("GET", "/students/{student_id}/classes/{class_id}", null,data.Admin_Token);
+    }
+
+    @Then("I verify the appearance of status code 400 and invalid params")
+    public void Validate_Response_Get_details_with_invalid_params(){
+        Response Invalid_student = Get_Class_Details;
+        test.Validate_Error_Messages(Invalid_student,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
+    }
 }
