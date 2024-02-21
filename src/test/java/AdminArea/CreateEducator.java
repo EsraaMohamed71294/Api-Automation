@@ -94,7 +94,7 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With invalid token")
     public void Create_Educator_with_invalid_token() {
-        Unauth_Educator = test.sendRequest("POST", "/admin/educators", valid_body_request,data.refresh_token);
+        Unauth_Educator = test.sendRequest("POST", "/admin/educators", valid_body_request,data.refresh_token_for_deletedEducator);
     }
     @Then("I verify the appearance of status code 403 and Educator is not authorized")
     public void Validate_Response_of_unauthorized_EducatorId() {

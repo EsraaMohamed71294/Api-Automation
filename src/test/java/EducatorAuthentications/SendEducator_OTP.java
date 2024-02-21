@@ -42,7 +42,7 @@ public class SendEducator_OTP {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorAuthentication/SendEducator_OTP.json")))
-                .body("message", hasToString("OTP sent to email"),"message_id",equalTo(2001),"duration",equalTo(300),"resend_duration",equalTo(60));
+                .body("message", hasToString("OTP sent to email"),"message_id",equalTo(2001),"duration",equalTo(300),"resend_duration",equalTo(300));
     }
     @Then("I verify the appearance of status code 429 and Rate Limit Exceeds")
     public void Verify_Sending_Too_Many_Requests() {

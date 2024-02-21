@@ -31,7 +31,13 @@ public class TestBase {
 
 			Response response = request.when()
 			.post("/token/refresh");
-		return access_token = response.then().extract().path("access_token");
+			access_token = response.then().extract().path("access_token");
+
+		if (access_token == null) {
+			System.out.println("The Refresh Token Api gives Error : Access Token is Null");
+		}
+
+		return access_token;
 	}
 
 	public Response sendRequest(String method, String endpoint,Object requestBody,String refresh_token ) {

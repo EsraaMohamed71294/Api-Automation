@@ -73,15 +73,17 @@ public class GetClass {
             classDescription = resultSet.getString("class_description");
             metaClassID = resultSet.getString("meta_class_id");
             classOrder = resultSet.getString("class_order");
-            classPublicListing = resultSet.getString("class_public_listing_date").replace(" ","T");
-            classPublicDelistDate = resultSet.getString("class_public_delist_date").replace(" ","T");
-            classEnrollmentEndDate = resultSet.getString("class_enrollment_end_date").replace(" ","T");
-            classArchiveDate = resultSet.getString("class_archive_date").replace(" ","T");
+            classPublicListing = resultSet.getString("class_public_listing_date").replace(" ","T").concat("Z");
+            classPublicDelistDate = resultSet.getString("class_public_delist_date").replace(" ","T").concat("Z");
+            classEnrollmentEndDate = resultSet.getString("class_enrollment_end_date").replace(" ","T").concat("Z");
+            classArchiveDate = resultSet.getString("class_archive_date").replace(" ","T").concat("Z");
             class_payment_option_name = resultSet.getString("class_payment_option_name");
             class_payment_option_id = resultSet.getInt("class_payment_option_id");
             class_seats_limit = resultSet.getString("class_seats_limit");
             class_seats_reserved = resultSet.getString("class_seats_reserved");
             Subjects = resultSet.getLong("subject_id");
+
+            System.out.println("class title is " + classTitle);
         }
     }
 

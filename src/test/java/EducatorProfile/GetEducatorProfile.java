@@ -37,7 +37,7 @@ public class GetEducatorProfile {
 
 
     public void get_educator_data_from_database() throws SQLException {
-        ResultSet resultSet = Connect.connect_to_database("select  educator_first_name, educator_last_name, educator_email from public.educators where educator_id =343256786543");
+        ResultSet resultSet = Connect.connect_to_database("select  educator_first_name, educator_last_name, educator_email from public.educators where educator_id =758047270477");
 
         while (resultSet.next()) {
             educatorFirstName = resultSet.getString("educator_first_name");
