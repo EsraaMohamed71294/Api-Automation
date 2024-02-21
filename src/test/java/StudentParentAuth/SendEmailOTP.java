@@ -37,7 +37,7 @@ public class SendEmailOTP {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentParentAuthSchemas/SendStudentOTP.json")))
-                .body("message", hasToString("OTP sent to email"),"message_id",equalTo(2001),"duration",equalTo(300),"resending_duration",equalTo(60));
+                .body("message", hasToString("OTP sent to email"),"message_id",equalTo(2001),"duration",equalTo(300),"resending_duration",equalTo(300));
     }
 
     @Then("I verify the appearance of status code 429 and rate exceeds")

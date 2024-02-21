@@ -10,3 +10,9 @@ Feature: Test all scenarios of the api of Start Session for Educator
     Given   Performing the Api of Start Session with session not exist
     Then    I verify the appearance of status code 404 and session not found for start
 
+  Scenario: Verify Start Session For Educator with educator not authorized
+    Given   Performing the Api of Start Session with educator not authorized
+    Then    I verify the appearance of status code 403 and educator unauthorized
+
+
+

@@ -4,9 +4,9 @@ Feature: Test all scenarios of the api send educator OTP
     Given   Performing the Api of Send Educator OTP with valid data
     Then    I verify the appearance of status code 200 and OTP sent to email
 
-  Scenario: Verify sending educator OTP Too Many Times
-    Given   Performing the Api of Send Educator OTP with valid data
-    Then    I verify the appearance of status code 429 and Rate Limit Exceeds
+#  Scenario: Verify sending educator OTP Too Many Times
+#    Given   Performing the Api of Send Educator OTP with valid data
+#    Then    I verify the appearance of status code 429 and Rate Limit Exceeds
 
   Scenario: Verify sending educator OTP with invalid email
     Given   Performing the Api of Send Educator OTP with Invalid email

@@ -22,8 +22,8 @@ public class TestBase {
 	public Map<String,Object> pathParams = new HashMap<String, Object>();
 
 	public static String  generate_access_token(String refresh_token) {
-		RestAssured.baseURI ="https://uinwyfqhul.execute-api.us-east-1.amazonaws.com";
-		RestAssured.basePath ="/demo/v1";
+		RestAssured.baseURI ="https://aevkujc65i.execute-api.us-east-1.amazonaws.com";
+		RestAssured.basePath ="/beta/v1";
 		RequestSpecification request = 
 			RestAssured.given()	   
 			.header("Content-Type","application/json")

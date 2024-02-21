@@ -21,12 +21,10 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.hasToString;
 
 public class StartSession {
     TestBase test = new TestBase();
     GetSession session =new GetSession();
-    GetClass classData =new GetClass();
     CreateEducator educator = new CreateEducator();
     CreateEducationalResource resource = new CreateEducationalResource();
     Database_Connection Connect = new Database_Connection();
@@ -38,17 +36,7 @@ public class StartSession {
     String EducatorRefreshToken;
     String OTP;
     Long Class_ID;
-    Long class_id;
-    Long sessionId;
     Long session_id;
-    Integer session_duration_in_minutes;
-    String class_title;
-    String session_title;
-    Integer educational_resource_type_id;
-    String educational_resource_type;
-    Long educational_resource_id;
-    String educational_resource_name;
-    Long educator_id;
     Long ResourceId;
     String agora_resource_id;
     String agora_sid;
@@ -70,7 +58,7 @@ public class StartSession {
     }
 
     @When("Performing the Api of Start Session")
-    public void Start_Session() throws SQLException {
+    public Long Start_Session() throws SQLException {
 
         ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
         while (GetEducatorEmail.next()) {
@@ -91,6 +79,7 @@ public class StartSession {
         pathParams.put("session_id",session_id);
 
         Start_Session = test.sendRequest("POST", "/educators/{educator_id}/sessions/{session_id}/start", null,EducatorRefreshToken);
+        return session_id = Start_Session.then().extract().path("session_id");
     }
 
     @And("Get Educator Session data from database")
@@ -121,7 +110,8 @@ public class StartSession {
 
     @When("Performing the Api of Start Session with session not exist")
     public void Start_Session_session_not_exist() throws SQLException {
-
+        educator.Create_Educator();
+        educatorID = educator.Educator_ID;
         ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
         while (GetEducatorEmail.next()) {
             educator_Email = GetEducatorEmail.getString("educator_email");};
@@ -146,8 +136,24 @@ public class StartSession {
     @Then("I verify the appearance of status code 404 and session not found for start")
     public void Validate_Response_start_session_with_invalid_session() {
         Response Invalid_session = Start_Session;
-        test.Validate_Error_Messages(Invalid_session,HttpStatus.SC_FORBIDDEN,"Session not found or not eligible for display.",4048);
+        test.Validate_Error_Messages(Invalid_session,HttpStatus.SC_NOT_FOUND,"Session not found or not eligible for display.",4048);
 
     }
+
+    @When("Performing the Api of Start Session with educator not authorized")
+    public void Start_Session_session_not_authorized_Educator() throws SQLException {
+        pathParams.put("educator_id", "123456789012");
+        pathParams.put("session_id","123456789012");
+        Start_Session = test.sendRequest("POST", "/educators/{educator_id}/sessions/{session_id}/start", null,data.refresh_token_for_deletedEducator);
+    }
+
+    @Then("I verify the appearance of status code 403 and educator unauthorized")
+    public void Validate_Response_start_session_with_invalid_token() {
+        Response Invalid_token = Start_Session;
+        test.Validate_Error_Messages(Invalid_token,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+
+    }
+
+
 
 }

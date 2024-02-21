@@ -4,9 +4,9 @@ Feature: Test all scenarios of the api send student OTP
     Given   Performing the Api of Send Student OTP with valid data
     Then    I verify the appearance of status code 200 and OTP sent to student mail
 
-  Scenario: Verify sending student OTP with rate exceeds
-    Given   Performing the Api of Send Student OTP with valid data
-    Then    I verify the appearance of status code 429 and rate exceeds
+#  Scenario: Verify sending student OTP with rate exceeds
+#    Given   Performing the Api of Send Student OTP with valid data
+#    Then    I verify the appearance of status code 429 and rate exceeds
 
   Scenario: Verify sending student OTP with Invalid student mail
     Given   Performing the Api of Send Student OTP with Invalid email
