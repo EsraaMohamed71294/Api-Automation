@@ -11,7 +11,7 @@ Feature: Test All Scenarios Of Edit Session API
     Then    Response code of EditSession is 400 and body returns with error message
 
   Scenario: Validate that response code is 403 and body returns with error message after send invalid token to the API
-    Given User Send Valid SessionId And Body To EditSession API
+    Given Admin Send Valid SessionId And Body To EditSession API
     When  Performing The API of Edit Session With Invalid Token
     Then  Response code of EditSession is 403 and body returns with error message
 
@@ -23,4 +23,4 @@ Feature: Test All Scenarios Of Edit Session API
   Scenario: Validate that response code is 404 and body returns with error message after enter Educator That Doesn't Exist
     Given User Send Educator that doesn't exist In Request Body To EditSession API
     When  Performing The API of EditSession With Eductor Id That Doesn't Exist In Request Body
-    Then  Response code of EditSession is 404 and body returns with error message That Educator Doesnt Exist
+    Then  Response code of EditSession is 404 and body returns with error message That Educator Doesn't Exist

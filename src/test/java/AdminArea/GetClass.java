@@ -82,7 +82,6 @@ public class GetClass {
             class_seats_limit = resultSet.getString("class_seats_limit");
             class_seats_reserved = resultSet.getString("class_seats_reserved");
             Subjects = resultSet.getLong("subject_id");
-
             System.out.println("class title is " + classTitle);
         }
     }
@@ -99,6 +98,8 @@ public class GetClass {
                         "class_enrollment_end_date",hasToString(classEnrollmentEndDate),"class_archive_date",hasToString(classArchiveDate),
                         "class_payment_option_name",hasToString(class_payment_option_name),"class_payment_option_id",equalTo(class_payment_option_id),
                         "class_seats_limit",hasToString(class_seats_limit),"class_seats_reserved",equalTo(class_seats_reserved));
+
+
 //        ,"subjects.subject_id",containsInAnyOrder(Subjects)
     }
 
