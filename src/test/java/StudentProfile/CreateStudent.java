@@ -45,7 +45,7 @@ public class CreateStudent {
         ResultSet GradeResult = Connect.connect_to_database("SELECT * FROM public.grades g\n" +
                 "join stages s \n" +
                 "on s.stage_id = g.stage_id \n" +
-                "where s.country_id = 102123867837 and g.grade_url_name = '11'");
+                "where s.country_id = 102123867837 and g.grade_url_text = '11'");
         while (GradeResult.next()) {
             Grade_ID = GradeResult.getLong("grade_id");
         }

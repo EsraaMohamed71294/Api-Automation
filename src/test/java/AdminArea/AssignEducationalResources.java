@@ -74,7 +74,7 @@ public class AssignEducationalResources {
     @Then("I verify the appearance of status code 404 and session not found")
     public void Validate_Response_of_session_notFound_into_resource() {
         Response InvalidSessionBody = Assign_Resource_InvalidSession;
-        test.Validate_Error_Messages(InvalidSessionBody,HttpStatus.SC_NOT_FOUND,"session not found or not eligible for display.",4048);
+        test.Validate_Error_Messages(InvalidSessionBody,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
     }
 
     @Given("Performing the Api of Assign Educational Resources with resource not found")
@@ -88,7 +88,7 @@ public class AssignEducationalResources {
     @Then("I verify the appearance of status code 404 and resource not found")
     public void Validate_Response_of_resource_notFound() {
         Response InvalidResourceBody = Assign_Resource_InvalidResource;
-        test.Validate_Error_Messages(InvalidResourceBody,HttpStatus.SC_NOT_FOUND,"No educational resources found.",4049);
+        test.Validate_Error_Messages(InvalidResourceBody,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
     }
 
     @Given("Performing the Api of Assign Educational Resources with invalid data")

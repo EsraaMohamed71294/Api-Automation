@@ -131,7 +131,7 @@ public class CreateClass {
     @Then("I verify the appearance of status code 400 and body incorrect")
     public void Validate_Response_of_unauthorized_EducatorId(){
         Response invalidBodyData = Invalid_body_data;
-        test.Validate_Error_Messages(invalidBodyData,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
+        test.Validate_Error_Messages(invalidBodyData,HttpStatus.SC_BAD_REQUEST,"Class Creation failed, invalid request body.",40016);
     }
 
 

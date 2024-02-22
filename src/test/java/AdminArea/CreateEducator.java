@@ -57,7 +57,7 @@ public class CreateEducator {
     public void Create_Educator_with_Invalid_mail() {
         String Invalid_email_In_Body = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\"email.com\"," +
                 "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
-                "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
+                "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\",\"is_test_educator\":true}";
 
         Create_Educator = test.sendRequest("POST", "/admin/educators", Invalid_email_In_Body,Admin_token);
     }
@@ -81,9 +81,9 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With email already exist")
     public void Create_Educator_with_email_exist() {
-        String Email_already_exist = "{\"educator_id\":"+ Id +",\"educator_first_name\":\"John\",\"educator_last_name\":\"Doe\",\"educator_email\":\"techer@nagwa.com\"," +
-                "\"educator_bio\":\"Experiencededucatorpassionateabouttechnologyandprogramming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
-                "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
+        String Email_already_exist = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\"nora.schmitt@nagwa.com\"," +
+                "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
+                "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\",\"is_test_educator\":true}";
 
         Create_Educator = test.sendRequest("POST", "/admin/educators", Email_already_exist,Admin_token);
     }
