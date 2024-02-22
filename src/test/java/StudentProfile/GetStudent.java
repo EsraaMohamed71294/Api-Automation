@@ -41,7 +41,9 @@ public class GetStudent {
             studentLastName = resultSet.getString("student_last_name");
             studentEmail = resultSet.getString("student_email");
             gradeId = resultSet.getLong("grade_id");
-        }}
+        }
+        System.out.println("studentFirstName "+studentFirstName);
+    }
 
         @When("Performing the Api of Get Student Profile")
         public void Get_Student_Profile() throws SQLException {

@@ -99,7 +99,7 @@ public class DeleteStudent {
 
     @When("Performing the Api of delete student with not valid token")
     public void delete_student_with_not_valid_token() throws SQLException {
-        delete_student = test.sendRequest("DELETE", "/students/{student_id}", null,data.refresh_token_for_notActiveEducator);
+        delete_student = test.sendRequest("DELETE", "/students/{student_id}", null,data.refresh_token_for_deletedEducator);
     }
 
     @Then("I verify the appearance of status code 403 and this student account is unauthorized")

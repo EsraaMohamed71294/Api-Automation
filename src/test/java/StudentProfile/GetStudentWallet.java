@@ -80,7 +80,7 @@ public class GetStudentWallet {
 
     @When("Performing the Api of get wallet with student that not authorized")
     public void get_Student_wallet_student_not_auth() {
-        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,data.refresh_token_for_notActiveEducator);
+        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,data.refresh_token_for_deletedEducator);
     }
 
     @Then("I verify the appearance of status code 403 and student not auth")

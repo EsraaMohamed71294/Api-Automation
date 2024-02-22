@@ -68,7 +68,7 @@ public class DeactivateStudent {
 
     @When("Performing the Api of deactivate student with not valid token")
     public void deactivate_student_with_not_valid_token() throws SQLException {
-        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,data.refresh_token_for_notActiveEducator);
+        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,data.refresh_token_for_deletedEducator);
     }
 
     @Then("I verify the appearance of status code 403 and this student is unauthorized")
