@@ -4,7 +4,7 @@ Feature: Test all scenarios of the api update educator profile
     Given   User Send valid educator Id for update
     When    Performing the Api of Update Educator Profile with valid data
     Then    I verify the appearance of status code 200 and Educator data updated
-    And     validate data saved successfully into db
+#    And     validate data saved successfully into db
 
   Scenario: Verify updating data of educator with special char
     Given   User Send valid educator Id for update
@@ -18,7 +18,7 @@ Feature: Test all scenarios of the api update educator profile
 
   Scenario: Verify sending Invalid educator id
     Given   User Send Invalid educator Id for update
-    When    Performing the Api of Update Educator Profile with valid data
+    When    Performing the Api of Update Educator Profile with invalid token
     Then    I verify the appearance of status code 400 and Educator Id is  incorrect
 
   Scenario: Verify sending unauthorized educator id

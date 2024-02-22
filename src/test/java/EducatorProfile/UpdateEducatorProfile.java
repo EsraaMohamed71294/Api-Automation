@@ -1,4 +1,6 @@
 package EducatorProfile;
+import AdminArea.CreateEducator;
+import TestConfig.Database_Connection;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,6 +11,7 @@ import org.apache.http.HttpStatus;
 import TestConfig.TestBase;
 
 import java.io.File;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -18,8 +21,9 @@ import static org.hamcrest.Matchers.hasToString;
 public class UpdateEducatorProfile {
     Educator_TestData data = new Educator_TestData();
     TestBase test = new TestBase();
+    Database_Connection Connect = new Database_Connection();
     GetEducatorProfile profile = new GetEducatorProfile();
-
+    CreateEducator educator = new CreateEducator();
     Map<String, Object> pathParams = test.pathParams;
     String Educator_Id = data.educator_id;
     String Valid_body_request = "{\"educator_first_name\":\"Test\",\"educator_last_name\":\"Account\"}";
@@ -34,10 +38,42 @@ public class UpdateEducatorProfile {
     public Response NotActive_Educator_token;
     public Response unauthorized_Educator;
     public Response Deleted_Educator_token;
+    Long educatorID;
+    String educator_Email;
+    String OTP;
+    String EducatorRefreshToken;
 
+
+    @And("User Send valid educator Id for update")
+    public void Sending_valid_EducatorId() throws SQLException {
+        educator.Create_Educator();
+        educatorID = educator.Educator_ID;
+
+        ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
+        while (GetEducatorEmail.next()) {
+            educator_Email = GetEducatorEmail.getString("educator_email");};
+
+        Response testOTP = test.sendRequest("POST", "/educators/auth/send-otp", "{\"email\":\""+ educator_Email +"\",\"language\":\"en\"}",data.Admin_Token);
+        testOTP.prettyPrint();
+
+        ResultSet GetEducatorOTP = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_Email +"'");
+        while (GetEducatorOTP.next()) {
+            OTP = GetEducatorOTP.getString("Otp");};
+
+        Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",data.Admin_Token);
+        VerifyOTP.prettyPrint();
+
+        EducatorRefreshToken = VerifyOTP.then().extract().path("tokens.refresh_token");
+        pathParams.put("educator_id", educatorID);
+    }
     @When("Performing the Api of Update Educator Profile with valid data")
     public void Update_Educator_Profile() {
-        Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", Valid_body_request,Educator_refresh_token);
+        Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", Valid_body_request,EducatorRefreshToken);
+    }
+
+    @When("Performing the Api of Update Educator Profile with invalid token")
+    public void Update_Educator_Profile_invalid_token() {
+        Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", Valid_body_request,data.refresh_token_for_notActiveEducator);
     }
     @Given("User Send Invalid educator Id for update")
     public void user_send_invalid_educatorId() {pathParams.put("educator_id", "34325678622222");
@@ -50,7 +86,7 @@ public class UpdateEducatorProfile {
     }
     @And("validate data saved successfully into db")
     public void validate_educator_data_update_into_db() throws SQLException {
-        profile.Get_Educator_info_from_Database();
+        profile.get_educator_data_from_database();
         profile.educatorFirstName.contains("Test") ;
         profile.educatorLastName.contains("Account");
     }
@@ -60,12 +96,12 @@ public class UpdateEducatorProfile {
         Update_Educator_Profile.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("/Users/esraamohamed/Api_Automation/src/test/resources/Schemas/EducatorProfileSchemas/UpdateEducatorProfile.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorProfileSchemas/UpdateEducatorProfile.json")))
                 .body("message", hasToString("Profile updated successfully."));
     }
     @When("Performing the Api of Update Educator Profile with special char")
     public void Update_Educator_Profile_with_special_char() {
-        Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", body_with_special_char,Educator_refresh_token);
+        Update_Educator_Profile = test.sendRequest("PATCH", "/educators/{educator_id}/profile", body_with_special_char,EducatorRefreshToken);
     }
     @When("Performing the Api of Update Educator Profile with empty body")
     public void Update_Educator_Profile_with_empty_fields() {
@@ -77,10 +113,7 @@ public class UpdateEducatorProfile {
         test.Validate_Error_Messages(Educator_With_Empty_Fields,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
     }
 
-    @And("User Send valid educator Id for update")
-    public void Sending_valid_EducatorId() {
-        pathParams.put("educator_id", Educator_Id);
-    }
+
 
     @Given("User Send unauthorized educator for update")
     public void user_send_unauthorized_educatorId() {pathParams.put("educator_id",Educator_Id);
