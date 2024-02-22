@@ -17,7 +17,7 @@
       "type": "integer"
     },
     "class_block_count": {
-      "type": "integer"
+      "type": ["null","integer"]
     },
     "class_seats_limit": {
       "type": "integer"
@@ -62,10 +62,10 @@
               "type": "integer"
             },
             "class_subject_retail_price": {
-              "type": "null"
+              "type": ["null","number"]
             },
             "class_subject_discounted_price": {
-              "type": "number"
+              "type": ["null","number"]
             },
             "class_subject_session_price": {
               "type": "number"
@@ -137,10 +137,10 @@
               "type": "integer"
             },
             "class_subject_retail_price": {
-              "type": "null"
+              "type": ["null","number"]
             },
             "class_subject_discounted_price": {
-              "type": "number"
+              "type": ["null","number"]
             },
             "class_subject_session_price": {
               "type": "number"

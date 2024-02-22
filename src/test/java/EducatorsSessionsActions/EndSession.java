@@ -1,13 +1,10 @@
 package EducatorsSessionsActions;
 
-import AdminArea.CreateEducationalResource;
 import EducatorProfile.Educator_TestData;
-import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
