@@ -21,7 +21,7 @@ public class Database_Connection {
 
 
 
-	//******credential  of OTP Database****
+								//******credential  of OTP Database  Beta/Demo ****
 	public final String host_name = "jdbc:postgresql://beta-1.cluster-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/mmOtpDataBase";
 	public final String userName = "qc_testing";
 	public final String pass = "UsB7cKKz6RbBD$(T";

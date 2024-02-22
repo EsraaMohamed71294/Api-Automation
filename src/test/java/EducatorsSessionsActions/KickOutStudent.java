@@ -100,4 +100,11 @@ public class KickOutStudent {
                         "student_id",equalTo(student_Id));
     }
 
+    @Then("I verify the appearance of status code 404 and student is not currently part of the session")
+    public void Validate_Response_start_session_with_invalid_session() {
+        Response Invalid_session = Kick_OUt;
+        test.Validate_Error_Messages(Invalid_session,HttpStatus.SC_NOT_FOUND,"Session not found or student is not currently part of the session.",40412);
+
+    }
+
 }
