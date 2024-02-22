@@ -14,6 +14,7 @@ import org.apache.http.HttpStatus;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class UpdateStudentProfile {
     GetStudent studentData = new GetStudent();
     CreateStudent student = new CreateStudent();
     Educator_TestData data = new Educator_TestData();
+    Database_Connection Connect = new Database_Connection();
     Faker fakeDate =new Faker();
     String firstName = fakeDate.name().firstName();
     String lastName = fakeDate.name().lastName();
@@ -68,13 +70,17 @@ public class UpdateStudentProfile {
 
     @And("Validate data updated successfully into database")
     public void validate_update_student_into_database() throws SQLException {
-         studentData.get_student_data_from_database();
-         student_firstName_DB= studentData.studentFirstName;
-         student_lastName_DB = studentData.studentLastName;
-         student_grade_DB = studentData.gradeId;
-            assertEquals(student_firstName_DB,firstName);
-            assertEquals(student_lastName_DB,lastName);
-            assertEquals(student_grade_DB,grade);
+        ResultSet resultSet = Connect.connect_to_database("select student_first_name,student_last_name,student_email,grade_id from students s where student_id ="+ StudentID +"");
+
+        while (resultSet.next()) {
+            student_firstName_DB = resultSet.getString("student_first_name");
+            student_lastName_DB = resultSet.getString("student_last_name");
+            student_grade_DB = resultSet.getLong("grade_id");
+        }
+        assertEquals(student_firstName_DB,firstName);
+        assertEquals(student_lastName_DB,lastName);
+        assertEquals(student_grade_DB,grade);
+
     }
 
     @When("Performing the Api of Update Student Profile with invalid data")
@@ -114,7 +120,7 @@ public class UpdateStudentProfile {
     }
     @Given("User Send Invalid student Id to update profile")
     public void Sending_Invalid_StudentId_update_profile() throws SQLException {
-        pathParams.put("student_id","123456789045");
+        pathParams.put("student_id",data.notActive_educator);
     }
 
     @When("Performing the Api of Update Student with invalid student id")
@@ -123,7 +129,7 @@ public class UpdateStudentProfile {
         grade = student.Grade_ID;
         System.out.println(grade);
         String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":"+ grade +"}";
-        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,data.refresh_token_for_notActiveEducator);
+        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,data.refresh_token_for_deletedEducator);
     }
     @Then("I verify the appearance of status code 403 and student is unauthorized")
     public void Validate_Response_of_update_student_Profile_invalid_student() {
@@ -137,8 +143,7 @@ public class UpdateStudentProfile {
         grade = student.Grade_ID;
         System.out.println(grade);
         String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":"+ grade +"}";
-        String refreshToken_notFound = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTA0NSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNzY2NDczMC4xNDkxMDksInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNDU5YTExZjAzYzhlNDBhMThiMjJlMWEwYTBjZGJiMTcifQ.zKkIqWNquXalosQOGOrzzOXuqZ4UNBl7_9-nveghj0Y";
-        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,refreshToken_notFound);
+        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,data.refresh_token_for_notActiveEducator);
     }
 
     @Then("I verify the appearance of status code 404 and student is not found")
