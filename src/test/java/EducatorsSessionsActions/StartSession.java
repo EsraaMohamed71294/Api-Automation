@@ -2,7 +2,6 @@ package EducatorsSessionsActions;
 
 import AdminArea.CreateEducationalResource;
 import AdminArea.CreateEducator;
-import AdminArea.GetClass;
 import AdminArea.GetSession;
 import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;

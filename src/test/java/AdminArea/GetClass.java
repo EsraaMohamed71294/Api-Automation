@@ -49,7 +49,7 @@ public class GetClass {
     }
     @Given("User Send valid Class Id to get class data")
     public void user_send_valid_classId() {
-        Class.Create_Class_Block_Payment();
+        Class.Create_Class_per_session();
         classID = Class.Class_ID;
         System.out.println("classID"+classID);
         EducatorID = Class.EducatorId;
@@ -83,7 +83,7 @@ public class GetClass {
             class_seats_reserved = resultSet.getString("class_seats_reserved");
             Subjects = resultSet.getLong("subject_id");
 
-            System.out.println("class title is " + classTitle);
+            System.out.println("Subjects is " + Subjects);
         }
     }
 
