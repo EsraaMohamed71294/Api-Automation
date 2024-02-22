@@ -8,7 +8,7 @@ Feature: Test all scenarios of the api Get educator profile
 
     Scenario: Verify sending Invalid educator id
       Given   User Send Invalid educator Id
-      When    Performing the Api of Get Educator Profile
+      When    performing the api with invalid educator id
       Then    I verify the appearance of status code 400 and Educator Id not correct
 
     Scenario: Verify sending not active educator id
