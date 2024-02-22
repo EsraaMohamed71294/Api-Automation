@@ -24,8 +24,8 @@ public class AssignEducationalResources {
     CreateEducationalResource resource = new CreateEducationalResource();
     Educator_TestData data = new Educator_TestData();
     Database_Connection Connect = new Database_Connection();
-    Long SessionID;
-    Long ResourceId;
+    public Long SessionID;
+    public Long ResourceId;
     Response Assign_Educational_Resource;
     Response Assign_Resource_InvalidSession;
     Response Assign_Resource_InvalidResource;

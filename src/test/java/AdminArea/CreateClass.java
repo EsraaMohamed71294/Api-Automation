@@ -20,7 +20,7 @@ public class CreateClass {
     CreateEducator educator = new CreateEducator();
     Faker fakeDate =new Faker();
     String classTitle = fakeDate.name().title();
-    Long EducatorId;
+    public Long EducatorId;
     public Long Class_ID;
     Response unauthorized_user;
     Response Invalid_body_data;
