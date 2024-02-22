@@ -38,7 +38,7 @@
       "type": "integer"
     },
     "class_block_number": {
-      "type": "integer"
+      "type": ["null","integer"]
     },
     "status": {
       "type": "string"
@@ -83,7 +83,7 @@
                       "type": "null"
                     },
                     "educational_resource_url": {
-                      "type": "null"
+                      "type": ["string","null"]
                     }
                   },
                   "required": [

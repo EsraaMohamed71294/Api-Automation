@@ -104,7 +104,7 @@
               "type": "integer"
             },
             "class_block_number": {
-              "type": "integer"
+              "type": ["null","integer"]
             },
             "materials": {
               "type": "array",
