@@ -126,13 +126,12 @@ public class ListEducatorClasses {
 
     @Given("User Send EducatorId  not exist to list classes")
     public void Sending_Educator_not_exist() throws SQLException {
-        pathParams.put("educator_id","123456789045");
+        pathParams.put("educator_id",data.notActive_educator);
     }
 
     @When("list classes for educator with educator not exist")
     public void get_Student_wallet_student_not_exist() throws SQLException {
-        String refreshToken_notFound = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTA0NSIsInJvbGUiOiJlZHVjYXRvciJ9LCJleHAiOjE3MTgyODA1MDEuNDc2NjIyLCJ0eXBlIjoicmVmcmVzaCIsImp0aSI6IjYxMTFkNWY5OWZmMjQ1Njk5YjBjMWQ5ZDkzNDFjODc4In0.kuZjrk-qHOdIslFXUz1YSrQEnaANCoxOBFNbcgkl-G8";
-        List_Educator_Classes = test.sendRequest("GET", "/educators/{educator_id}/classes", null, refreshToken_notFound);
+        List_Educator_Classes = test.sendRequest("GET", "/educators/{educator_id}/classes", null, data.refresh_token_for_notActiveEducator);
     }
 
     @Then("I verify the appearance of status code 404 and educator is not exist")

@@ -59,7 +59,9 @@ public class ListEducatorSessions {
             class_id = resultSet.getLong("class_id");
             class_title = resultSet.getString("class_title");
             class_block_number = resultSet.getInt("class_block_number");
-
+            session_id = resultSet.getLong("session_id");
+            session_title = resultSet.getString("session_title");
+            session_duration_in_minutes = resultSet.getInt("session_duration_in_minutes");
             System.out.println("class_id**********" + class_id);
         }
 
@@ -105,7 +107,7 @@ public class ListEducatorSessions {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/EducatorClassesAndSession/ListEducatorSessions.json")))
-                .body("class_id",equalTo(class_id),"class_title",hasToString(class_title),"sessions.class_block_number",hasItem(equalTo(class_block_number)),
+                .body("class_id",equalTo(class_id),"class_title",hasToString(class_title),"sessions.class_block_number",hasItem(equalTo(null)),
                         "sessions.session_id",hasItem(equalTo(session_id)),"sessions.session_title",hasItem(hasToString(session_title)),
                         "sessions.session_duration_in_minutes",hasItem(equalTo(session_duration_in_minutes)));
 

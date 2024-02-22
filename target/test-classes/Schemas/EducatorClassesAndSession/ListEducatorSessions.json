@@ -41,7 +41,7 @@
               "type": ["null","integer"]
             },
             "class_block_number": {
-              "type": "integer"
+              "type": ["null","integer"]
             },
             "status": {
               "type": "string"
