@@ -31,7 +31,7 @@ public class UpdateStudentProfile {
     String student_lastName_DB;
     Long student_grade_DB;
     Long StudentID;
-    String grade;
+    Long grade;
     Map<String, Object> pathParams = test.pathParams;
     String refreshToken;
     Response Update_Student;
@@ -39,9 +39,9 @@ public class UpdateStudentProfile {
     @When("Performing the Api of Update Student Profile")
     public void Update_Student_Profile() throws SQLException {
         student.get_grade_from_database ();
-        grade = student.Grade_ID.toString();
+        grade = student.Grade_ID;
         System.out.println(grade);
-        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":\""+ grade +"\"}";
+        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":"+ grade +"}";
         student.Verify_Student_OTP_already_Auth();
         refreshToken = student.student_refresh_token;
         System.out.println(refreshToken);
@@ -80,7 +80,7 @@ public class UpdateStudentProfile {
     @When("Performing the Api of Update Student Profile with invalid data")
     public void Update_Student_Profile_with_invalidData() throws SQLException {
         student.get_grade_from_database ();
-        grade = student.Grade_ID.toString();
+        grade = student.Grade_ID;
         System.out.println(grade);
         String valid_body = "{\"student_first_name\":\"\",\"student_last_name\":\"\",\"grade_id\":\"\"}";
         student.Verify_Student_OTP_already_Auth();
@@ -98,9 +98,9 @@ public class UpdateStudentProfile {
     @When("Performing the Api of Update Student Profile with invalid grade")
     public void Update_Student_Profile_invalidGrade() throws SQLException {
         student.get_grade_from_database ();
-        grade = student.Grade_ID.toString();
+        grade = student.Grade_ID;
         System.out.println(grade);
-        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":\"123456789098\"}";
+        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":123456789098}";
         student.Verify_Student_OTP_already_Auth();
         refreshToken = student.student_refresh_token;
         System.out.println(refreshToken);
@@ -120,9 +120,9 @@ public class UpdateStudentProfile {
     @When("Performing the Api of Update Student with invalid student id")
     public void Update_Student_Profile_invalid_studentId() throws SQLException {
         student.get_grade_from_database ();
-        grade = student.Grade_ID.toString();
+        grade = student.Grade_ID;
         System.out.println(grade);
-        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":\""+ grade +"\"}";
+        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":"+ grade +"}";
         Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,data.refresh_token_for_notActiveEducator);
     }
     @Then("I verify the appearance of status code 403 and student is unauthorized")
@@ -134,9 +134,9 @@ public class UpdateStudentProfile {
     @When("Performing the Api of Update Student Profile with student not exist")
     public void Update_Student_Profile_student_not_exist() throws SQLException {
         student.get_grade_from_database ();
-        grade = student.Grade_ID.toString();
+        grade = student.Grade_ID;
         System.out.println(grade);
-        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":\""+ grade +"\"}";
+        String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":"+ grade +"}";
         String refreshToken_notFound = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTA0NSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNzY2NDczMC4xNDkxMDksInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNDU5YTExZjAzYzhlNDBhMThiMjJlMWEwYTBjZGJiMTcifQ.zKkIqWNquXalosQOGOrzzOXuqZ4UNBl7_9-nveghj0Y";
         Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,refreshToken_notFound);
     }
