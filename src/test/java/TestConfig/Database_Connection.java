@@ -22,9 +22,14 @@ public class Database_Connection {
 
 
 								//******credential  of OTP Database  Beta/Demo ****
-	public final String host_name = "jdbc:postgresql://beta-1.cluster-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/mmOtpDataBase";
-	public final String userName = "qc_testing";
-	public final String pass = "UsB7cKKz6RbBD$(T";
+//	public final String host_name = "jdbc:postgresql://beta-1.cluster-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/mmOtpDataBase";
+//	public final String userName = "qc_testing";
+//	public final String pass = "UsB7cKKz6RbBD$(T";
+
+									//******credential  of OTP Database  LIVE ****
+	public final String host_name = "jdbc:postgresql://live-nagwa-otp.cluster-ro-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/live-mmOtpDataBase";
+	public final String userName = "postgres";
+	public final String pass = "gufQl5nCa94kC6wqBEPomP";
 
 
 	public ResultSet resultSet;

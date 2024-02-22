@@ -52,13 +52,12 @@ public class DeactivateStudent {
     @Given("User Send Invalid student Id to deactivate student")
     public void Sending_Invalid_StudentId_Deactivate_student()  {
         StudentID = student.studentId;
-        pathParams.put("student_id","123456789045");
+        pathParams.put("student_id",data.notActive_educator);
     }
 
     @When("Performing the Api of deactivate student with student not exist")
-    public void deactivate_student_with_student_not_exist() throws SQLException {
-        String refreshToken_notFound = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTA0NSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNzY2NDczMC4xNDkxMDksInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNDU5YTExZjAzYzhlNDBhMThiMjJlMWEwYTBjZGJiMTcifQ.zKkIqWNquXalosQOGOrzzOXuqZ4UNBl7_9-nveghj0Y";
-        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,refreshToken_notFound);
+    public void deactivate_student_with_student_not_exist() {
+        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,data.refresh_token_for_notActiveEducator);
     }
 
     @Then("I verify the appearance of 404 status code and student is not found")

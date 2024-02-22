@@ -64,13 +64,12 @@ public class GetStudentWallet {
 
     @Given("User Send Invalid StudentId to get student wallet")
     public void Sending_Invalid_StudentId_to_getWallet() throws SQLException {
-        pathParams.put("student_id","123456789045");
+        pathParams.put("student_id",data.notActive_educator);
     }
 
     @When("Performing the Api of get wallet with student not exist")
     public void get_Student_wallet_student_not_exist() throws SQLException {
-        String refreshToken_notFound = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTA0NSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNzY2NDczMC4xNDkxMDksInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNDU5YTExZjAzYzhlNDBhMThiMjJlMWEwYTBjZGJiMTcifQ.zKkIqWNquXalosQOGOrzzOXuqZ4UNBl7_9-nveghj0Y";
-        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,refreshToken_notFound);
+        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,data.refresh_token_for_notActiveEducator);
     }
 
     @Then("I verify the appearance of status code 404 and student is not exist")

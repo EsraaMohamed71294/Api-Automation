@@ -1,5 +1,6 @@
 package StudentProfile;
 
+import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
@@ -20,6 +21,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class GetStudent {
     TestBase test = new TestBase();
     CreateStudent student = new CreateStudent();
+    Educator_TestData data = new Educator_TestData();
     Database_Connection Connect = new Database_Connection();
     Response Get_Student_Profile;
     String refreshToken;
@@ -92,13 +94,12 @@ public class GetStudent {
 
     @Given("User Send inactive student Id")
     public void Sending_inactive_StudentId() throws SQLException {
-        pathParams.put("student_id","589109586999");
+        pathParams.put("student_id",data.notActive_educator);
     }
 
     @When("Performing the Api of Get Student Profile with inactive student")
     public void Get_Student_Profile_with_InactiveStudent() {
-        String InactiveStudent_refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjU4OTEwOTU4Njk5OSIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNzQ5MjE0MS4zNDA1NzksInR5cGUiOiJyZWZyZXNoIiwianRpIjoiYTM3MzBhNmM3NGIzNDcyMGJhZWJjYjhjZTg1NzUxM2EifQ.LUilV0jINIQzbKpWglXaQ6_k3hamyPfQxTkHyXRVTk4";
-        Get_Student_Profile = test.sendRequest("GET", "/students/{student_id}/profile", null,InactiveStudent_refreshToken);
+        Get_Student_Profile = test.sendRequest("GET", "/students/{student_id}/profile", null,data.refresh_token_for_notActiveEducator);
     }
 
     @Then("I verify the appearance of status code 404 and Id is inactive")
