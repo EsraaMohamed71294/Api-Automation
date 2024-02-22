@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.apache.http.HttpStatus;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.*;
 
