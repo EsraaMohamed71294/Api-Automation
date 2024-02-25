@@ -34,6 +34,7 @@ public class DeactivateStudentAccount {
     }
     @Then("Response code of Deactivate account API is 200 and body returns with success message")
     public void validate_deactivate_request_valid_request(){
+        deactivate_student.prettyPrint();
         deactivate_student.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
