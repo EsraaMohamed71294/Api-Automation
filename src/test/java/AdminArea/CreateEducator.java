@@ -81,7 +81,7 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With email already exist")
     public void Create_Educator_with_email_exist() {
-        String Email_already_exist = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\"nora.schmitt@nagwa.com\"," +
+        String Email_already_exist = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\"intutor1@nagwaclassesus.com\"," +
                 "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
                 "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\",\"is_test_educator\":true}";
 

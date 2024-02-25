@@ -51,7 +51,7 @@ public class EducatorSessionReport {
     Long ResourceId;
 
     @Given("User Create Classes and Session for Educator to Get Session Report")
-    public void Get_Educator_Session_Report ()throws SQLException {
+    public void Get_Educator_Session_Report () throws SQLException, InterruptedException {
         session.user_send_valid_sessionID();
         session.Get_Session();
         educatorID = session.educatorID;

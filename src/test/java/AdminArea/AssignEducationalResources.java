@@ -33,7 +33,7 @@ public class AssignEducationalResources {
     Response unauthorized_admin;
 
     @Given("Performing the Api of Assign Educational Resources")
-    public void  Create_new_Assign_resources() throws SQLException {
+    public void  Create_new_Assign_resources() throws SQLException, InterruptedException {
         session.Create_Session();
         resource.Create_new_educational_resources();
         SessionID = session.sessionId;
@@ -63,7 +63,7 @@ public class AssignEducationalResources {
     }
 
     @Given("Performing the Api of Assign Educational Resources with session not found")
-    public void  Create_Assign_resources_session_notFound() {
+    public void  Create_Assign_resources_session_notFound() throws InterruptedException {
         resource.Create_new_educational_resources();
         ResourceId = resource.resourceId;
         SessionID = 123456789034L;

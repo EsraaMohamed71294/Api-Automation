@@ -41,7 +41,7 @@ public class StartSession {
     String agora_sid;
 
     @Given("User Create Classes and Session for Educator to start session")
-    public void Create_Session_for_educator ()throws SQLException {
+    public void Create_Session_for_educator () throws SQLException, InterruptedException {
         session.user_send_valid_sessionID();
         session.Get_Session();
         educatorID = session.educatorID;

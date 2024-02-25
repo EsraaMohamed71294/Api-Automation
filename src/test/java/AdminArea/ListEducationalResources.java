@@ -22,7 +22,7 @@ public class ListEducationalResources {
     public Long session_id;
     public  Long educational_resource_id;
     @Given("User Create New Session and EducationalResource")
-    public void create_valid_Data() throws SQLException {
+    public void create_valid_Data() throws SQLException, InterruptedException {
         assign.Create_new_Assign_resources();
     }
     @When("Performing The API of ListEducationalResource")
