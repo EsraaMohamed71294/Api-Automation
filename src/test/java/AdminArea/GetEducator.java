@@ -84,11 +84,11 @@ public class GetEducator {
     }
 
     @Given("User Send not active educatorID to GetEducator")
-    public void user_send_notActive_educatorId() {pathParams.put("educator_id", data.notActive_educator);
+    public void user_send_notActive_educatorId() {pathParams.put("educator_id", data.deleted_educator);
     }
     @When("performing the api of GetEducator with notActive educator token")
     public void send_notActive_educator_token(){
-         NotActive_Educator_token = test.sendRequest("GET", "/educators/{educator_id}/profile", null,data.refresh_token_for_notActiveEducator);
+         NotActive_Educator_token = test.sendRequest("GET", "/educators/{educator_id}/profile", null,data.refresh_token_for_deletedEducator);
     }
     @Then("I verify the appearance of status code 404 and Educator is not active")
     public void Validate_Response_of_notActive_EducatorId() {
