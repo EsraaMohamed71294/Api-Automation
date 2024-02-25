@@ -3,7 +3,7 @@ package EducatorProfile;
 public class Educator_TestData {
     public String educator_id = "758047270477";
     public String deleted_educator = "206130172222";
-    public String notActive_educator = "955759223701";
+    public String notActive_educator = "273159257174";
 
     //****************beta***************
 //    public String Admin_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidG9rZW5fc2NvcGUiOiJhZG1pbl9hcmVhIiwicm9sZSI6ImFkbWluIn0sImV4cCI6MTcxNjQ2MzQxOC41MzcxNzUsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiYThmZmViYTk5M2NiNDFhYjgzY2ExNGQ4ZGUxNmE2Y2YifQ.kB14Ij4UcKH-xevvB93r8lC98ntpqx8Uief_SZf0XxY";
@@ -22,5 +22,5 @@ public class Educator_TestData {
     public String Admin_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidG9rZW5fc2NvcGUiOiJhZG1pbl9hcmVhIiwicm9sZSI6ImFkbWluIn0sImV4cCI6MTcxODg5MDg0Mi4yMTIzMzQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiYWZjNmVlOTExYTlmNDllMmJiZjRiYjY3OWJmYjk2YzYifQ.-gsJg5F4ot13yNMlRTyGJ0y7KOT3H6wspK4KnNjhDDk";
     public String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6Ijc1ODA0NzI3MDQ3NyIsInJvbGUiOiJlZHVjYXRvciJ9LCJleHAiOjE3MTg5NTQxODMuNTU0NTIzLCJ0eXBlIjoicmVmcmVzaCIsImp0aSI6ImNlNGE5M2JmMDg1OTRmM2E4MDFjM2EwMGE4ZjAxNGI0In0.biE1JHzBzH2Ezhxs9pjM6zn4g8OyhUoJTkdk4SQEbcM";
     public String refresh_token_for_deletedEducator = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjIwNjEzMDE3MjIyMiIsInJvbGUiOiJlZHVjYXRvciJ9LCJleHAiOjE3MTg5NTQyNDguMDA3MDQxLCJ0eXBlIjoicmVmcmVzaCIsImp0aSI6IjZkNjFhN2M2NDYzYjRkMTJhNWNkMGJkNGVmODk3MjI3In0.rjkARENtc2CWY8RkA9nHWOvNoPbGkkaq-SyMyQRuH34";
-    public String refresh_token_for_notActiveEducator = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6Ijk1NTc1OTIyMzcwMSIsInJvbGUiOiJlZHVjYXRvciJ9LCJleHAiOjE3MTg5NzA2ODkuODI2NDc2LCJ0eXBlIjoicmVmcmVzaCIsImp0aSI6IjlhMGQ3ZmFjNmUyNDRkNmJiMDZiMDJlYjc4MzI5ZWVlIn0.2KnXXGdq5oSNqZoX8mdVibGHgLsFKtGnjzYi30cxpc4";
+    public String refresh_token_for_notActiveEducator = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjI3MzE1OTI1NzE3NCIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxOTIxMjAyMS4xNDMzMTQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNWQyMjFjZDJjMDRiNGFmNjkyOThhZGVmYzhlNWQ2ZDYifQ.FAKcqqm-l0HNz_QTrEedgtEKPvVZ5ljA05leg7m8ezU";
 }

@@ -38,12 +38,13 @@ public class CreateEducationalResource {
             "\"educational_resource_order\":}";
 
     @Given("Performing the Api of Create Educational Resources")
-    public Long  Create_new_educational_resources() {
+    public Long  Create_new_educational_resources() throws InterruptedException {
          String valid_body = "{\"resource_id\":"+ ResourceID +",\"name\":\""+ name +"\",\"cdn\":\"https://handouts-materials.nagwa.com/\",\"bucket\":\"handouts-materials\"," +
                 "\"key\":\"NagwaClasses/510130705852/869165016176.zip\",\"md5\":\"test1\",\"is_test\":false,\"file_type_id\":"+ fileTypeID +",\"resource_type_id\":1," +
                 "\"educational_resource_thumbnail_url\":\"https://example.com\",\"educational_resource_order\":"+ resourceTypeID +"}";
 
         Create_Educational_Resources = test.sendRequest("POST", "/admin/educational-resources", valid_body, data.Admin_Token);
+        Thread.sleep(4000);
         return resourceId = Create_Educational_Resources.then().extract().path("resource_id");
     }
 

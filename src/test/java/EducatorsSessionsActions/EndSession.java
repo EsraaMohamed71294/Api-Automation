@@ -29,7 +29,7 @@ public class EndSession {
 
 
     @Given("User Start new session")
-    public void educator_start_session ()throws SQLException {
+    public void educator_start_session () throws SQLException, InterruptedException {
        session.Create_Session_for_educator ();
        session.Start_Session();
        session_Id = session.session_id;

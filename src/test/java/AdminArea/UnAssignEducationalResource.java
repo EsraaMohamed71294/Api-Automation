@@ -26,7 +26,7 @@ public class UnAssignEducationalResource {
     String Body_with_invalid_session;
     String Body_with_invalid_resource;
     @Given("User Send Valid SessionId and EducationalResourceId")
-    public void unAssign_EducationalResource_valid_Data()throws SQLException {
+    public void unAssign_EducationalResource_valid_Data() throws SQLException, InterruptedException {
         assign.Create_new_Assign_resources();
          valid_Body = "{\"sessions_ids\":["+ assign.SessionID +"],\"educational_resource_id\":"+ assign.ResourceId +"}";
     }
@@ -45,7 +45,7 @@ public class UnAssignEducationalResource {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/UnAssignEducationalResource.json")));
     }
     @Given("User Send List Of Sessions contain session that educational resource doesn't assigned to")
-    public void Define_request_body_with_invalid_session_id()throws SQLException{
+    public void Define_request_body_with_invalid_session_id() throws SQLException, InterruptedException {
         assign.Create_new_Assign_resources();
         Body_with_invalid_session = "{\"sessions_ids\":["+ assign.SessionID +","+ invalid_session_id +"],\"educational_resource_id\":"+ assign.ResourceId +"}";
     }
@@ -72,7 +72,7 @@ public class UnAssignEducationalResource {
        test.Validate_Error_Messages(UnAssign_EducationalResource,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
     @Given("User Send Invalid Body To Request With EducationalResource Isn't Assigned To Session")
-    public void invalid_educational_resource_id()throws SQLException{
+    public void invalid_educational_resource_id() throws SQLException, InterruptedException {
         assign.Create_new_Assign_resources();
         Body_with_invalid_resource = "{\"sessions_ids\":["+ assign.SessionID +"],\"educational_resource_id\":"+ invalid_educational_resource +"}";
     }

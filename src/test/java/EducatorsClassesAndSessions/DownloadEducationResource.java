@@ -45,7 +45,7 @@ public class DownloadEducationResource {
     Long ResourceId;
 
     @Given("User Create Sessions and Educational Resources for Educator")
-    public void Create_Session_with_resources_for_educator ()throws SQLException {
+    public void Create_Session_with_resources_for_educator () throws SQLException, InterruptedException {
         session.user_send_valid_sessionID();
         session.Get_Session();
         educatorID = session.educatorID;
