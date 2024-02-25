@@ -31,6 +31,8 @@ public class TestData {
     public static String Not_Activate_Student_Refresh_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjY1NzEzMjUwNDQyMyIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxNjIxMDgyNi4yODk2MzUsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZjQyOGRlNTQyNzc2NDRkYjk2MTkxZjY4MmJkYzRiM2UifQ.x531NqNxk37b92mtIeyhO5B_B4GPsU3Y9eiTCM42HPY";
 
 
+    public String student_not_exist = "123456789012";
+    public String student_refreshToken_not_exist = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjEyMzQ1Njc4OTAxMiIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxOTIxMjc2My41MjA0NCwidHlwZSI6InJlZnJlc2giLCJqdGkiOiJlNTVlYTFhZmJhNzY0ZTVjYWExNTNjMWNhZWNlZTc5NyJ9.6Kbi3--N5vRiRiBlPQ8qjVVZrK3EF_BHRveYbMcBGyQ";
 
 
 
