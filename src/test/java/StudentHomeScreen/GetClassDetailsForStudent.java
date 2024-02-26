@@ -94,6 +94,12 @@ public class GetClassDetailsForStudent {
     }
 
 
+    @Then("I verify the appearance of status code 404 and this class is test class")
+    public void Class_is_test () {
+        test.Validate_Error_Messages(Get_Class_Details,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
+    }
+
+
     @Then("I verify the appearance of status code 200 and student classes details returned")
     public void Validate_Response_classes_details_returned_successfully () {
             Get_Class_Details.prettyPrint();

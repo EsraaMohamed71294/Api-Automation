@@ -31,7 +31,7 @@ public class CreateStudent {
     String email ;
     VerifyEmailOTP verifyEmail = new VerifyEmailOTP();
     public Long studentId;
-    Long Grade_ID;
+    public Long Grade_ID;
     Long walletId;
     String OTP;
     String Valid_body_request ;

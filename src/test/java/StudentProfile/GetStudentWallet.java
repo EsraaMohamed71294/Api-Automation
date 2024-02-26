@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.*;
 
 public class GetStudentWallet {
-
+    TestData studentData = new TestData();
     TestBase test = new TestBase();
     CreateStudent student = new CreateStudent();
     Educator_TestData data = new Educator_TestData();
@@ -64,12 +65,12 @@ public class GetStudentWallet {
 
     @Given("User Send Invalid StudentId to get student wallet")
     public void Sending_Invalid_StudentId_to_getWallet() throws SQLException {
-        pathParams.put("student_id",data.notActive_educator);
+        pathParams.put("student_id",studentData.student_not_exist);
     }
 
     @When("Performing the Api of get wallet with student not exist")
     public void get_Student_wallet_student_not_exist() throws SQLException {
-        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,data.refresh_token_for_notActiveEducator);
+        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,studentData.student_refreshToken_not_exist);
     }
 
     @Then("I verify the appearance of status code 404 and student is not exist")
@@ -80,7 +81,7 @@ public class GetStudentWallet {
 
     @When("Performing the Api of get wallet with student that not authorized")
     public void get_Student_wallet_student_not_auth() {
-        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,data.refresh_token_for_deletedEducator);
+        Get_Student_Wallet = test.sendRequest("GET", "/students/{student_id}/wallet", null,studentData.student_refreshToken_deleted);
     }
 
     @Then("I verify the appearance of status code 403 and student not auth")

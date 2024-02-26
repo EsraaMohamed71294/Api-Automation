@@ -67,7 +67,7 @@ public class SendEmailOTP {
     @Then("I verify the appearance of status code 400 and Invalid Language")
     public void validate_Response_with_Invalid_Lang(){
         Response Invalid_lang = Send_Student_OTP;
-        test.Validate_Error_Messages(Invalid_lang,HttpStatus.SC_BAD_REQUEST,"Invalid Input Language! The language should be letters only and of 2 characters length.",40011);
+        test.Validate_Error_Messages(Invalid_lang,HttpStatus.SC_BAD_REQUEST,"Send OTP failed. BadRequest",40011);
     }
 
     @When("Performing the Api of Send Student OTP with missing email input")

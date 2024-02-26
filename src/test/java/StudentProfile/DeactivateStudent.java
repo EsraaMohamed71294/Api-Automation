@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import static org.hamcrest.Matchers.*;
 
 public class DeactivateStudent {
     TestBase test = new TestBase();
+    TestData studentData = new TestData();
     CreateStudent student = new CreateStudent();
     Educator_TestData data = new Educator_TestData();
     Response deactivate_student;
@@ -52,12 +54,12 @@ public class DeactivateStudent {
     @Given("User Send Invalid student Id to deactivate student")
     public void Sending_Invalid_StudentId_Deactivate_student()  {
         StudentID = student.studentId;
-        pathParams.put("student_id",data.notActive_educator);
+        pathParams.put("student_id",studentData.student_not_exist);
     }
 
     @When("Performing the Api of deactivate student with student not exist")
     public void deactivate_student_with_student_not_exist() {
-        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,data.refresh_token_for_notActiveEducator);
+        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,studentData.student_refreshToken_not_exist);
     }
 
     @Then("I verify the appearance of 404 status code and student is not found")
@@ -68,7 +70,7 @@ public class DeactivateStudent {
 
     @When("Performing the Api of deactivate student with not valid token")
     public void deactivate_student_with_not_valid_token() throws SQLException {
-        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,data.refresh_token_for_deletedEducator);
+        deactivate_student = test.sendRequest("POST", "/students/{student_id}/deactivate", null,studentData.student_refreshToken_deleted);
     }
 
     @Then("I verify the appearance of status code 403 and this student is unauthorized")

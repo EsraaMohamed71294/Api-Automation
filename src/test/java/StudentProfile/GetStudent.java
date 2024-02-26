@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class GetStudent {
     TestBase test = new TestBase();
+    TestData studentData = new TestData();
     CreateStudent student = new CreateStudent();
     Educator_TestData data = new Educator_TestData();
     Database_Connection Connect = new Database_Connection();
@@ -96,12 +98,12 @@ public class GetStudent {
 
     @Given("User Send inactive student Id")
     public void Sending_inactive_StudentId() throws SQLException {
-        pathParams.put("student_id",data.notActive_educator);
+        pathParams.put("student_id",studentData.student_not_exist);
     }
 
     @When("Performing the Api of Get Student Profile with inactive student")
     public void Get_Student_Profile_with_InactiveStudent() {
-        Get_Student_Profile = test.sendRequest("GET", "/students/{student_id}/profile", null,data.refresh_token_for_notActiveEducator);
+        Get_Student_Profile = test.sendRequest("GET", "/students/{student_id}/profile", null,studentData.student_refreshToken_not_exist);
     }
 
     @Then("I verify the appearance of status code 404 and Id is inactive")
