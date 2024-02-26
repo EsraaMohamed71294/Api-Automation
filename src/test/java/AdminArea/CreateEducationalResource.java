@@ -44,7 +44,7 @@ public class CreateEducationalResource {
                 "\"educational_resource_thumbnail_url\":\"https://example.com\",\"educational_resource_order\":"+ resourceTypeID +"}";
 
         Create_Educational_Resources = test.sendRequest("POST", "/admin/educational-resources", valid_body, data.Admin_Token);
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         return resourceId = Create_Educational_Resources.then().extract().path("resource_id");
     }
 

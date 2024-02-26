@@ -226,6 +226,10 @@ public class ListEducatorSessions {
 
     }
 
-
+//    @Then("I verify the appearance of status code 400 and class is for test")
+//    public void Validate_Response_of_Educator_sessions_with_test_class() {
+//        test.Validate_Error_Messages(List_Educator_Sessions,HttpStatus.SC_NOT_FOUND,"Unauthorized",4031);
+//
+//    }
 
 }
