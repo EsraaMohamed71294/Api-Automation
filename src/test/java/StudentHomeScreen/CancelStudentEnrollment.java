@@ -36,7 +36,7 @@ public class CancelStudentEnrollment {
 
     @Given("Create new user and enroll him into class")
     public void enroll_student_into_class() throws SQLException {
-        classData.Create_Class_Block_Payment();
+        classData.Create_Class_per_session();
         Class_ID = classData.Class_ID;
         student.Create_Student();
         student_Id = student.studentId;
