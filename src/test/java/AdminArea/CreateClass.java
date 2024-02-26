@@ -68,7 +68,7 @@ public class CreateClass {
                 "\"class_end_date\":\"2025-12-28T00:00:00Z\",\"class_semester_localization_key\":\"First_Term\",\"class_type\":\"ClassType\",\"subjects\":[{\"subject_id\":793174170262," +
                 "\"class_subject_retail_price\":50,\"class_subject_discounted_price\":null,\"class_subject_session_price\":10,\"blocks\":[]}],\"educators\":[{\"educator_order\":1," +
                 "\"educator_id\":"+ EducatorId +"}]}";
-
+            System.out.println("Create Class Per Session "+body_for_per_session_class);
         Create_class = test.sendRequest("POST", "/admin/classes", body_for_per_session_class, data.Admin_Token);
         return Class_ID = Create_class.then().extract().path("class_id");
     }
@@ -78,7 +78,7 @@ public class CreateClass {
         educator.Create_Educator();
         EducatorId = educator.Educator_ID;
         System.out.println("educator " +EducatorId);
-        System.out.println("class" +classTitle);
+        System.out.println("class" + classTitle);
         String body_for_block_payment_class = "{\"class_title\":\""+ classTitle +"\",\"meta_class_id\":785157898183,\"class_order\":1," +
                 "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-28T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2025-01-23T00:00:00Z\",\"class_enrollment_end_date\":\"2025-01-30T00:00:00Z\",\"class_archive_date\":\"2025-01-22T00:00:00Z\"," +

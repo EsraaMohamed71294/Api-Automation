@@ -11,6 +11,8 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
@@ -22,7 +24,7 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class UpdateStudentProfile {
     TestBase test = new TestBase();
-    GetStudent studentData = new GetStudent();
+    TestData studentData = new TestData();
     CreateStudent student = new CreateStudent();
     Educator_TestData data = new Educator_TestData();
     Database_Connection Connect = new Database_Connection();
@@ -120,7 +122,7 @@ public class UpdateStudentProfile {
     }
     @Given("User Send Invalid student Id to update profile")
     public void Sending_Invalid_StudentId_update_profile() throws SQLException {
-        pathParams.put("student_id",data.notActive_educator);
+        pathParams.put("student_id",studentData.student_not_exist);
     }
 
     @When("Performing the Api of Update Student with invalid student id")
@@ -129,7 +131,7 @@ public class UpdateStudentProfile {
         grade = student.Grade_ID;
         System.out.println(grade);
         String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":"+ grade +"}";
-        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,data.refresh_token_for_deletedEducator);
+        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,studentData.student_refreshToken_deleted);
     }
     @Then("I verify the appearance of status code 403 and student is unauthorized")
     public void Validate_Response_of_update_student_Profile_invalid_student() {
@@ -143,7 +145,7 @@ public class UpdateStudentProfile {
         grade = student.Grade_ID;
         System.out.println(grade);
         String valid_body = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"grade_id\":"+ grade +"}";
-        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,data.refresh_token_for_notActiveEducator);
+        Update_Student = test.sendRequest("PATCH", "/students/{student_id}/profile", valid_body,studentData.student_refreshToken_not_exist);
     }
 
     @Then("I verify the appearance of status code 404 and student is not found")

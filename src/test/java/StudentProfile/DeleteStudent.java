@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteStudent {
     TestBase test = new TestBase();
+    TestData studentData = new TestData();
     CreateStudent student = new CreateStudent();
     Database_Connection Connect = new Database_Connection();
     Educator_TestData data = new Educator_TestData();
@@ -83,12 +85,12 @@ public class DeleteStudent {
     @Given("User Send Invalid student Id to delete student")
     public void Sending_Invalid_StudentId_Delete_student()  {
         StudentID = student.studentId;
-        pathParams.put("student_id",data.notActive_educator);
+        pathParams.put("student_id",studentData.student_not_exist);
     }
 
     @When("Performing the Api of delete student with student not exist")
     public void delete_student_with_student_not_exist() throws SQLException {
-        delete_student = test.sendRequest("DELETE", "/students/{student_id}", null,data.refresh_token_for_notActiveEducator);
+        delete_student = test.sendRequest("DELETE", "/students/{student_id}", null,studentData.student_refreshToken_not_exist);
     }
 
     @Then("I verify the appearance of 404 status code and student id is not found")

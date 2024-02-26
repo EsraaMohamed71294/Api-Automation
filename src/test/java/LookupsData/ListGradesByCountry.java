@@ -27,8 +27,7 @@ public class ListGradesByCountry {
     String grade_url_text;
     String grade_title;
     String grade_localization_key;
-    Long grade_order;
-
+    Integer grade_order;
     Long countryId = 102123867837L;
     Map<String, Object> pathParams = test.pathParams;
 
@@ -40,19 +39,20 @@ public class ListGradesByCountry {
 
     @And("Getting Grades by country from database")
     public void getGrade_ByCountriesList () throws SQLException {
-        ResultSet resultSet = Connect.connect_to_database(" select * from grades g \n" +
+        ResultSet resultSet = Connect.connect_to_database("  select * from grades g \n" +
                 " join stages s\n" +
                 " on g.stage_id = s.stage_id\n" +
                 " join countries c\n" +
                 " on c.country_id = s.country_id\n" +
-                " where g.country_id ="+ countryId +"");
+                " where c.country_id ="+ countryId +"\n" +
+                " and g.grade_url_text ='1'");
 
         while (resultSet.next()) {
             grade_id = resultSet.getLong("grade_id");
             grade_url_text = resultSet.getString("grade_url_text");
             grade_title = resultSet.getString("grade_title");
             grade_localization_key = resultSet.getString("grade_localization_key");
-            grade_order = resultSet.getLong("grade_order");
+            grade_order = resultSet.getInt("grade_order");
         }
     }
 

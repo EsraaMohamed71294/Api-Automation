@@ -3,7 +3,7 @@ package EducatorProfile;
 public class Educator_TestData {
     public String educator_id = "758047270477";
     public String deleted_educator = "206130172222";
-    public String notActive_educator = "273159257174";
+    public String notActive_educator = "799188532061";
 
     //****************beta***************
 //    public String Admin_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidG9rZW5fc2NvcGUiOiJhZG1pbl9hcmVhIiwicm9sZSI6ImFkbWluIn0sImV4cCI6MTcxNjQ2MzQxOC41MzcxNzUsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiYThmZmViYTk5M2NiNDFhYjgzY2ExNGQ4ZGUxNmE2Y2YifQ.kB14Ij4UcKH-xevvB93r8lC98ntpqx8Uief_SZf0XxY";
@@ -22,5 +22,5 @@ public class Educator_TestData {
     public String Admin_Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidG9rZW5fc2NvcGUiOiJhZG1pbl9hcmVhIiwicm9sZSI6ImFkbWluIn0sImV4cCI6MTcxODg5MDg0Mi4yMTIzMzQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiYWZjNmVlOTExYTlmNDllMmJiZjRiYjY3OWJmYjk2YzYifQ.-gsJg5F4ot13yNMlRTyGJ0y7KOT3H6wspK4KnNjhDDk";
     public String refresh_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6Ijc1ODA0NzI3MDQ3NyIsInJvbGUiOiJlZHVjYXRvciJ9LCJleHAiOjE3MTg5NTQxODMuNTU0NTIzLCJ0eXBlIjoicmVmcmVzaCIsImp0aSI6ImNlNGE5M2JmMDg1OTRmM2E4MDFjM2EwMGE4ZjAxNGI0In0.biE1JHzBzH2Ezhxs9pjM6zn4g8OyhUoJTkdk4SQEbcM";
     public String refresh_token_for_deletedEducator = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjIwNjEzMDE3MjIyMiIsInJvbGUiOiJlZHVjYXRvciJ9LCJleHAiOjE3MTkyMTUwMjkuMDM3Nzg3LCJ0eXBlIjoicmVmcmVzaCIsImp0aSI6ImExOTk4YWM1MTE0OTRkMDg5Mzk0Y2FjMjYxZWI4MDU0In0.4hBbB5lOVE3SIwW2Z-IHRmgG2WNBnX6n2AD3-tz2KYc";
-    public String refresh_token_for_notActiveEducator = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjI3MzE1OTI1NzE3NCIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcxOTIxMjAyMS4xNDMzMTQsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiNWQyMjFjZDJjMDRiNGFmNjkyOThhZGVmYzhlNWQ2ZDYifQ.FAKcqqm-l0HNz_QTrEedgtEKPvVZ5ljA05leg7m8ezU";
+    public String refresh_token_for_notActiveEducator = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6Ijc5OTE4ODUzMjA2MSIsInJvbGUiOiJlZHVjYXRvciJ9LCJleHAiOjE3MTkzMDI2OTcuMTA5ODY4LCJ0eXBlIjoicmVmcmVzaCIsImp0aSI6IjQyMDgwM2JkNzNmOTQ3MWE5YWVlOGY0MWE5OGZiMzNiIn0.5PWqowkbRaklg9WecMRvi_4MdC1a2HZ7gUspKB4DuG0";
 }
