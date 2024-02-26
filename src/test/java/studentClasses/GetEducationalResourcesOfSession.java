@@ -34,6 +34,8 @@ public class GetEducationalResourcesOfSession {
     String educational_resource_type;
     String user_token = data.refresh_token;
     String session_with_no_Educational_resources;
+
+    String class_id_of_session_with_no_er;
     Map<String,Object> PathParams = test.pathParams;
 
     public Response get_Educational_resource_of_Session;
@@ -44,12 +46,15 @@ public class GetEducationalResourcesOfSession {
 
 
     public void get_data_of_session_Educational_resource_from_database() throws SQLException {
-        ResultSet resultSet = connect.connect_to_database("select * from sessions_educational_resources ser join public.classes_subjects_sessions css \n" +
-                "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id\n" +
-                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id\n" +
-                "join educational_resources er on er.educational_resource_id = \n" +
-                "ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id = er.educational_resource_type_id \n" +
-                "where available_post_session = false and  cs2.student_id ="+student_id);
+        ResultSet resultSet = connect.connect_to_database("\n" +
+                "select * from sessions_educational_resources ser join public.classes_subjects_sessions css  \n" +
+                "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id \n" +
+                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id \n" +
+                "join educational_resources er on er.educational_resource_id =  \n" +
+                "ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id = er.educational_resource_type_id join\n" +
+                " \t\t\t\tpublic.students_access_rights sar on sar.student_access_right_session_id = ser.session_id or sar.student_access_right_class_id = cs2.class_id \n" +
+                " \t\t\t\tjoin sessions s on s.session_id  = ser.session_id \n" +
+                " \t\t\t\twhere cs2.student_id ="+student_id+" "+"and s.is_test_session = false and s.session_ended_date notnull ");
 
         while(resultSet.next()){
             class_id = resultSet.getString("class_id");
@@ -58,22 +63,29 @@ public class GetEducationalResourcesOfSession {
             educational_resource_type= resultSet.getString("educational_resource_type");
         }
 
-        ResultSet resultset_of_session_with_no_educational_Resoureces = connect.connect_to_database("select * from  public.classes_subjects_sessions css join classes_subjects cs on css.class_subject_id = cs.class_subject_id \n" +
-                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id left join \n" +
-                "sessions_educational_resources ser on ser.session_id  = css.session_id \n" +
-                "where student_id ="+student_id+" "+"\n" +
-                " and ser.session_educational_resource_id is null");
+        ResultSet resultSet_of_session_with_no_educational_Resources = connect.connect_to_database("select * from  public.classes_subjects_sessions css join classes_subjects cs on css.class_subject_id = cs.class_subject_id  \n" +
+                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id left join  \n" +
+                "sessions_educational_resources ser on ser.session_id  = css.session_id  join\n" +
+                " \t\t\t\tpublic.students_access_rights sar on sar.student_access_right_session_id = ser.session_id or sar.student_access_right_class_id = cs2.class_id \n" +
+                " \t\t\t\tjoin sessions s on s.session_id = css.session_id  \n" +
+                " \t\t\t\twhere cs2.student_id ="+student_id+" "+"and s.session_ended_date notnull\n" +
+                " \t\t\t\tand ser.session_educational_resource_id is null \n" +
+                " \t\t\t\t\n" +
+                " \t\t\t\t");
 
-            while(resultset_of_session_with_no_educational_Resoureces.next()) {
-             session_with_no_Educational_resources = resultset_of_session_with_no_educational_Resoureces.getString("session_id");
+            while(resultSet_of_session_with_no_educational_Resources.next()) {
+             session_with_no_Educational_resources = resultSet_of_session_with_no_educational_Resources.getString("session_id");
+                class_id_of_session_with_no_er = resultSet_of_session_with_no_educational_Resources.getString("class_id");
             }
     }
     @When("Performing The Api Of GetEducationalResources")
     public void get_Educational_resource_of_Session(){
+        System.out.println(session_with_no_Educational_resources + "   " + class_id_of_session_with_no_er);
         get_Educational_resource_of_Session = test.sendRequest("GET" ,"/students/{student_id}/classes/{class_id}/sessions/{session_id}/resources" ,null,user_token);
     }
     @Given("User Send Valid Parameters To The Request")
     public void get_EducationalResource(){
+
         PathParams.put("student_id", student_id);
         PathParams.put("class_id",class_id);
         PathParams.put("session_id",session_id);
@@ -103,7 +115,7 @@ public class GetEducationalResourcesOfSession {
     @Given("User Send SessionId That Doesn't Have Educational Resources")
     public void No_educational_resource_found(){
         PathParams.put("student_id", student_id);
-        PathParams.put("class_id",class_id);
+        PathParams.put("class_id",class_id_of_session_with_no_er);
         PathParams.put("session_id",session_with_no_Educational_resources);
          }
     @Then("The Response Should Contains Status Code 404 And Message That No Educational resources Found")

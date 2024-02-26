@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database_Connection {
-	public final String host = "jdbc:postgresql://nagwa-classes-beta.cluster-c4iigfolsbo7.us-east-1.rds.amazonaws.com:5432/nagwa_classes";
+	public final String host = "jdbc:postgresql://nagwa-classes-prod.cluster-c4iigfolsbo7.us-east-1.rds.amazonaws.com:5432/nagwa_classes";
 
 	public final String user = "testing_readwrite";
 	public final String password = "8yZ%`6!e?~0q6<MM?hHO";

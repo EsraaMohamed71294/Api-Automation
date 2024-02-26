@@ -117,8 +117,6 @@ public class JoinSession {
 
     @When("Performing the Api of Joining Session")
     public void Join_Session() {
-        System.out.println(session_id  + " " + class_id_for_join_session);
-        System.out.print(test.access_token);
         joinSession =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/join",null,user_token);
 
     }
@@ -262,4 +260,5 @@ public class JoinSession {
         Response join_SessionResponse = joinSession;
         test.Validate_Error_Messages(join_SessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. insufficient student wallet balance.",4226);
     }
+
 }

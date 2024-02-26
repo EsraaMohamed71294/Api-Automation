@@ -38,22 +38,25 @@ public class payForFullClass {
     }
 
     public void get_classes_data_from_database()throws SQLException {
-        ResultSet resultSet = Connect.connect_to_database("select * from public.classes_students cs join classes c ON cs.class_id = c.class_id \n" +
+        ResultSet resultSet = Connect.connect_to_database(" \n" +
+                "  select * from public.classes_students cs join classes c ON cs.class_id = c.class_id \n" +
                 "join students s on cs.student_id = s.student_id join grades g\n" +
                 "on s.grade_id = g.grade_id join stages s2 on g.stage_id = s2.stage_id join countries c2\n" +
-                "on s2.country_id = c2.country_id\n" +
+                " on s2.country_id = c2.country_id\n" +
                 "join public.students_wallets sw on cs.student_id = sw.student_id join\n" +
                 "classes_subjects cs2 on cs.class_id = cs2.class_id left join students_access_rights sar \n" +
-                "on sar.student_id = cs.student_id  \n" +
-                "where cs.student_id ="+student_Id+" "+ "and \n" +
-                " c.class_payment_option_id = 1 and cs2.class_subject_retail_price <= sw.student_wallet_balance and \n" +
-                "cs.class_id not in \n" +
-                "(select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id ="+student_Id+" "+")\n" +
-                "and c.class_archive_date > now() and c.class_public_listing_date < now()");
+                " on sar.student_id = cs.student_id  \n" +
+                " where cs.student_id ="+student_Id+" "+"and \n" +
+                "c.class_payment_option_id = 1 and cs2.class_subject_retail_price <= sw.student_wallet_balance and \n" +
+                "c.class_seats_reserved != c.class_seats_limit\n" +
+                "and\n" +
+                "  cs.class_id not in \n" +
+                " (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id ="+student_Id+" "+")\n" +
+                "and c.class_archive_date > now() and c.class_public_listing_date < now()      ");
         while (resultSet.next()) {
             valid_fullPayment_class = resultSet.getString("class_id");
             class_currency = resultSet.getString("country_currency_iso_code");
-            if (resultSet.getString("class_subject_discounted_price") == null) {
+            if (resultSet.getString("class_subject_discounted_price") == null){
                 amount_paid_for_class = resultSet.getInt("class_subject_retail_price");
             } else {
                 amount_paid_for_class = resultSet.getInt("class_subject_discounted_price");
@@ -67,8 +70,8 @@ public class payForFullClass {
                 " join public.students_wallets sw on cs.student_id = sw.student_id join\n" +
                 " classes_subjects cs2 on cs.class_id = cs2.class_id join students_access_rights sar \n" +
                 " on sar.student_id = cs.student_id  and cs.class_id = sar.student_access_right_class_id  \n" +
-                " where cs.student_id = 674143580350\n" +
-                "and c.class_payment_option_id = 1 and cs2.class_subject_retail_price <=  sw.student_wallet_balance and cs.class_id in (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id = 674143580350)\n" +
+                " where cs.student_id ="+student_Id+"\n" +
+                "and c.class_payment_option_id = 1 and cs2.class_subject_retail_price <=  sw.student_wallet_balance and cs.class_id in (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id ="+student_Id+")\n" +
                 " and c.class_archive_date > now() and c.class_public_listing_date < now()   ");
         while (resultSet_of_purchased_class.next()) {
             purchased_class = resultSet_of_purchased_class.getString("class_id");
@@ -92,8 +95,8 @@ public class payForFullClass {
 
         ResultSet resultSet_of_archived_class = Connect.connect_to_database("select * from public.classes_students cs join classes c on cs.class_id = c.class_id \n" +
                 "left join students_access_rights sar on cs.student_id = sar.student_id \n" +
-                "where cs.student_id = 674143580350 and c.class_archive_date < now() and c.class_payment_option_id = 1 and cs.class_id not in\n" +
-                "  (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id = 674143580350) ");
+                "where cs.student_id ="+student_Id+" "+"and c.class_archive_date < now() and c.class_payment_option_id = 1 and cs.class_id not in\n" +
+                "  (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id ="+student_Id+") ");
         while (resultSet_of_archived_class.next()) {
             Archived_Class = resultSet_of_archived_class.getString("class_id");
         }
@@ -106,7 +109,7 @@ public class payForFullClass {
                 " classes_subjects cs2 on cs.class_id = cs2.class_id left join students_access_rights sar \n" +
                 " on sar.student_id = cs.student_id  \n" +
                 " where cs.student_id ="+student_Id+" "+"\n" +
-                "and c.class_payment_option_id = 1 and cs2.class_subject_retail_price > sw.student_wallet_balance and cs.class_id not in (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id = 674143580350)\n" +
+                "and c.class_payment_option_id = 1 and cs2.class_subject_retail_price > sw.student_wallet_balance and cs.class_id not in (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id ="+student_Id+")\n" +
                 " and c.class_archive_date > now() and c.class_public_listing_date < now()   \n");
         while (resultSet_of_expensive_class.next()) {
             expensive_class = resultSet_of_expensive_class.getString("class_id");
@@ -118,14 +121,18 @@ public class payForFullClass {
     @When("Performing the Api of pay_for_full_class")
     public void pay_for_full_class() {
         pay_for_full_class =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/pay-full",null,user_token);
-        System.out.println(valid_fullPayment_class +" " + Full_Capacity_Class);
 
     }
 
-    @Given("User enrolled into fully paid class")
+    @Given("User enrolled into fully paid class successfully")
     public void successful_payment_for_full_class() {
         pathParams.put("student_id", student_Id);
-        pathParams.put("class_id",purchased_class);
+        pathParams.put("class_id",valid_fullPayment_class);
+    }
+
+    @Then("When it's test class it should return with error message and response code 400")
+    public void test_class_case(){
+        test.Validate_Error_Messages(pay_for_full_class,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display",4046);
     }
     @Then("I verify the appearance of status code 200 and Full class payment successful.")
     public void Validate_Response_of_success_payment_fullClass () {
@@ -141,6 +148,11 @@ public class payForFullClass {
     public void Validate_Response_already_purchased_Class () {
          Response PayForFullClass = pay_for_full_class;
         test.Validate_Error_Messages(PayForFullClass,HttpStatus.SC_BAD_REQUEST,"Class already purchased.",4004);
+    }
+    @Given("User enrolled into fully paid class that already enrolled in")
+    public void send_class_that_student_already_bought(){
+        pathParams.put("student_id", student_Id);
+        pathParams.put("class_id",purchased_class);
     }
     @Given("User Send unauthorized user id")
     public void unauthorized_user() {

@@ -39,13 +39,13 @@ public class GetStudentLearningRecord {
     }
 
     public void get_data_of_get_learning_Record()throws SQLException {
-        ResultSet get_data_to_get_learning_record = connect.connect_to_database("select * from sessions_educational_resources ser join public.classes_subjects_sessions css \n" +
-                "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id \n" +
-                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id join students_access_rights sar\n" +
-                "\t\t\t\ton sar.student_id  = cs2.student_id and sar.student_access_right_class_id = cs2.class_id join educational_resources er \n" +
-                "\t\t\t\ton er.educational_resource_id  = ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id \n" +
-                "\t\t\t\t= er.educational_resource_type_id join public.student_learning_records slr on slr.session_educational_resource_id = ser.session_educational_resource_id  \n" +
-                "\t\t\t\twhere cs2.student_id ="+student_id+" "+"and slr.student_learning_record_is_deleted = false");
+        ResultSet get_data_to_get_learning_record = connect.connect_to_database("select * from sessions_educational_resources ser join public.classes_subjects_sessions css  \n" +
+                "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id  \n" +
+                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id join students_access_rights sar \n" +
+                "on sar.student_id  = cs2.student_id and sar.student_access_right_class_id = cs2.class_id join educational_resources er  \n" +
+                "on er.educational_resource_id  = ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id  \n" +
+                "= er.educational_resource_type_id join public.student_learning_records slr on slr.session_educational_resource_id = ser.session_educational_resource_id   \n" +
+                "where cs2.student_id ="+student_id+" "+"and slr.student_learning_record_is_deleted = false\n");
 
         while(get_data_to_get_learning_record.next()){
             session_id= get_data_to_get_learning_record.getString("session_id");

@@ -1,6 +1,6 @@
   Feature:  Test All Scenarios Of GetEducationalResourcesOfSession API
 
-    Scenario: Verify That EducationalResources Of Session Return After Enter Valid Paramters
+    Scenario: Verify That EducationalResources Of Session Return After Enter Valid Parameters
       Given   User Send Valid Parameters To The Request
       When    Performing The Api Of GetEducationalResources
       Then    The Response Should Contain Status Code 200 And The Educational Resources Of The Session

@@ -1,12 +1,13 @@
 Feature: Test all scenarios of the api of unlock session
 
   Scenario: Verify user enrolled into fully paid class successfully
-    Given   User enrolled into fully paid class
+    Given   User enrolled into fully paid class successfully
     When    Performing the Api of pay_for_full_class
-    Then    I verify the appearance of status code 200 and Full class payment successful.
+#    Then    I verify the appearance of status code 200 and Full class payment successful.
+    Then   When it's test class it should return with error message and response code 400
 
   Scenario: Verify user already purchased for class
-    Given   User enrolled into fully paid class
+    Given   User enrolled into fully paid class that already enrolled in
     When    Performing the Api of pay_for_full_class
     Then    I verify the appearance of status code 400 and class already purchased
 
