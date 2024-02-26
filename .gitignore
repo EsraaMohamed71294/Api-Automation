@@ -1,2 +1,46 @@
-'**/.DS_Store'
+# Ignore log directory and logs, especially test.log
+**/**.log
+**.log
+
+# Ignore tmp diretory
+/tmp
+
+# ignore vim swap files
+**.swp
+**.swo
+
+# ignore emacs temp files
+**.#*
+.project
+.idea
+.settings
+
+failures*.txt
+
+# ignore MS Office files
+.DS_Store
+~$**
+
+# ignore OpenOffice files
+.~lock.*
+
+chromedriver.log
+
+#no code coverage
+/default
+
+#no vagrant folder
+.vagrant
+
+# HTML Results files and rerun files
+/rerun*txt
+/*.html
+*.html
+node_modules/
+screenshots
+videos
+reports
+cypress/screenshots
+package-lock.json
+.DS_Store
 Jenkinsfile
