@@ -6,7 +6,7 @@ Feature: Test all scenarios of the api of leave ongoing session
     Then    The Response should contains status code 200 and message Successfully left the session
 
   Scenario: Verify user can't leave session he isn't part of it yet
-    Given   User left the session
+    Given   User send session_id that he isn't part of
     When    Performing the Api leave on going session
     Then    I verify status code 404 and message student is not currently part of the session
 
@@ -16,6 +16,7 @@ Feature: Test all scenarios of the api of leave ongoing session
     Then    I verify Status Code 403 And Error Message user unauthorized
 
   Scenario: Join session again
-    Given   user join the session again
+    Given   user send the same sessionId and class_id that he left from
+    When    Performing the Api of Joining Session Again
 
 

@@ -41,7 +41,7 @@ public class getEnrolledClasses{
 		ResultSet resultSet = connect.connect_to_database("\n" +
 				"select * from public.classes_students cs  inner join classes_subjects cs2 on cs.class_id = cs2.class_id left join \n" +
 				"classes_subjects_sessions css on css.class_subject_id = cs2.class_subject_id join sessions s on s.session_id = css.session_id join classes c\n" +
-				"on c.class_id = cs.class_id  where cs.student_id = 653172829211");
+				"on c.class_id = cs.class_id  where cs.student_id ="+student_id);
 
 			while(resultSet.next()){
 				class_Id = resultSet.getString("class_id");
@@ -53,6 +53,7 @@ public class getEnrolledClasses{
 	@When("Perform the api of Get_Enrolled_Classes")
 	public void Get_Enrolled_Classes(){
 		Get_Enrolled_Classes =  test.sendRequest("GET", "/students/{studentId}/enrolled-classes", null,user_token);
+				System.out.print(class_Id);
 	}
 	@Given("user send user id to get all upcoming sessions")
 	public void get_Enrolled_Classes_And_Upcoming_Sessions() {

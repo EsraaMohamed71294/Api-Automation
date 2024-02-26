@@ -13,6 +13,7 @@ import io.cucumber.java.en.When;
 import org.apache.http.HttpStatus;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.*;
 
@@ -41,10 +42,11 @@ public class getSessionsForEnrolledClasses{
 		ResultSet resultSet_with_sessions = connect.connect_to_database("\n" +
 				"select * from public.classes_students cs  inner join classes_subjects cs2 on cs.class_id = cs2.class_id left join \n" +
 				"classes_subjects_sessions css on css.class_subject_id = cs2.class_subject_id join sessions s on s.session_id = css.session_id join classes c\n" +
-				"on c.class_id = cs.class_id  where cs.student_id = 653172829211");
+				"on c.class_id = cs.class_id  where cs.student_id ="+student_id);
 
-		ResultSet resultSet_without_sessions = connect.connect_to_database("select*from public.classes c join public.classes_subjects cs on c.class_id  = cs.class_id left outer join classes_subjects_sessions css on css.class_subject_id \n" +
-				"= cs.class_subject_id join classes_students cs2 on cs2.class_id = c.class_id where css.class_subject_session_id is null and cs2.student_id = 653172829211");
+		ResultSet resultSet_without_sessions = connect.connect_to_database("select*from public.classes c join public.classes_subjects cs" +
+				" on c.class_id  = cs.class_id left outer join classes_subjects_sessions css on css.class_subject_id \n" +
+				"= cs.class_subject_id join classes_students cs2 on cs2.class_id = c.class_id where css.class_subject_session_id is null and cs2.student_id ="+student_id);
 
 		while(resultSet_with_sessions.next()){
 			class_Id = resultSet_with_sessions.getString("class_id");
@@ -61,6 +63,7 @@ public class getSessionsForEnrolledClasses{
 	@When("Perform then api of get_sessions_for_enrolled_class")
 	public void get_sessions_for_enrolled_class () {
 		get_sessions_for_enrolled_class =  test.sendRequest("GET", "/students/{studentId}/classes/{classId}/sessions",null,user_token);
+		System.out.println(class_Id + " " +class_id_has_no_sessions);
 	}
 	@Given("user send class contains sessions that user enrolled in")
     public void Get_Sessions_for_Enrolled_Classes () {

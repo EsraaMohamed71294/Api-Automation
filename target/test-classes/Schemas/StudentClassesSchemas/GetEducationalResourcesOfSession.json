@@ -4,11 +4,14 @@
     "class_id": {
       "type": "integer"
     },
+    "sessions_count": {
+      "type": "integer"
+    },
     "class_title": {
       "type": "string"
     },
-    "pay_per_session_allowed": {
-      "type": "boolean"
+    "class_payment_option_id": {
+      "type": ["string","integer"]
     },
     "educator_id": {
       "type": "integer"
@@ -25,14 +28,150 @@
     "session_title": {
       "type": "string"
     },
-    "student_has_access": {
-      "type": "boolean"
-    },
     "session_price": {
-      "type": "number"
+      "type": ["integer","number"]
+    },
+    "block_number": {
+      "type": ["integer","null"]
     },
     "currency_iso_code": {
-      "type": "string"
+      "type": ["string","null"]
+    },
+    "class_seats_limit": {
+      "type": "integer"
+    },
+    "class_seats_reserved": {
+      "type": "integer"
+    },
+    "class_seats_available": {
+      "type": "integer"
+    },
+    "class_block_count": {
+      "type": ["integer","null"]
+    },
+    "subjects": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "subject_id": {
+              "type": "integer"
+            },
+            "grade_id": {
+              "type": "integer"
+            },
+            "subject_icon": {
+              "type": ["string","null"]
+            },
+            "subject_color": {
+              "type": "string"
+            },
+            "subject_name": {
+              "type": "string"
+            },
+            "class_subject_retail_price": {
+              "type": "null"
+            },
+            "class_subject_discounted_price": {
+              "type": "null"
+            },
+            "class_subject_session_price": {
+              "type": ["null","integer"]
+            },
+            "grade_localization_key": {
+              "type": ["null","string"]
+            },
+            "currency_iso_code": {
+              "type": ["null","string"]
+            },
+            "language_id": {
+              "type": "integer"
+            },
+            "language_iso_code": {
+              "type": "string"
+            },
+            "language_name": {
+              "type": "string"
+            },
+            "class_blocks": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_first_session": {
+                      "type": "integer"
+                    },
+                    "class_block_end_session": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_retail_price",
+                    "class_block_discounted_price",
+                    "class_block_first_session",
+                    "class_block_end_session"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "class_block_number": {
+                      "type": "integer"
+                    },
+                    "class_block_retail_price": {
+                      "type": "number"
+                    },
+                    "class_block_discounted_price": {
+                      "type": "number"
+                    },
+                    "class_block_first_session": {
+                      "type": "integer"
+                    },
+                    "class_block_end_session": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "class_block_number",
+                    "class_block_retail_price",
+                    "class_block_discounted_price",
+                    "class_block_first_session",
+                    "class_block_end_session"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "subject_id",
+            "grade_id",
+            "subject_icon",
+            "subject_color",
+            "subject_name",
+            "class_subject_retail_price",
+            "class_subject_discounted_price",
+            "class_subject_session_price",
+            "grade_localization_key",
+            "currency_iso_code",
+            "language_id",
+            "language_iso_code",
+            "language_name",
+            "class_blocks"
+          ]
+        }
+      ]
     },
     "educational_resources": {
       "type": "array",
@@ -44,6 +183,12 @@
               "type": "integer"
             },
             "educational_resource_type": {
+              "type": "string"
+            },
+            "educational_resource_type_group": {
+              "type": "string"
+            },
+            "educational_resource_type_engine_code": {
               "type": "string"
             },
             "educational_resources": {
@@ -61,19 +206,36 @@
                     "educational_resource_md5": {
                       "type": "string"
                     },
+                    "educational_resource_thumbnail_url": {
+                      "type": ["string","null"]
+                    },
                     "file_type_id": {
                       "type": "integer"
                     },
                     "file_type_icon_url": {
-                      "type": "string"
+                      "type": ["string","null"]
+                    },
+                    "student_learning_record_progress": {
+                      "type": ["integer","null"]
+                    },
+                    "student_learning_record_score": {
+                      "type": ["integer","null"]
+
+                    },
+                    "educational_resource_order": {
+                      "type": ["integer","null"]
                     }
                   },
                   "required": [
                     "educational_resource_id",
                     "educational_resource_name",
                     "educational_resource_md5",
+                    "educational_resource_thumbnail_url",
                     "file_type_id",
-                    "file_type_icon_url"
+                    "file_type_icon_url",
+                    "student_learning_record_progress",
+                    "student_learning_record_score",
+                    "educational_resource_order"
                   ]
                 }
               ]
@@ -82,24 +244,51 @@
           "required": [
             "educational_resource_type_id",
             "educational_resource_type",
+            "educational_resource_type_engine_code",
             "educational_resources"
           ]
         }
+      ]
+    },
+    "access_rights": {
+      "type": "object",
+      "properties": {
+        "class_id": {
+          "type": ["null","integer"]
+        },
+        "blocks_numbers": {
+          "type": ["null","integer"]
+        },
+        "sessions_id": {
+          "type": "array"
+        }
+      },
+      "required": [
+        "class_id",
+        "blocks_numbers",
+        "sessions_id"
       ]
     }
   },
   "required": [
     "class_id",
+    "sessions_count",
     "class_title",
-    "pay_per_session_allowed",
+    "class_payment_option_id",
     "educator_id",
     "educator_first_name",
     "educator_last_name",
     "session_id",
     "session_title",
-    "student_has_access",
     "session_price",
+    "block_number",
     "currency_iso_code",
-    "educational_resources"
+    "class_seats_limit",
+    "class_seats_reserved",
+    "class_seats_available",
+    "class_block_count",
+    "subjects",
+    "educational_resources",
+    "access_rights"
   ]
 }

@@ -26,7 +26,7 @@
               "type": "integer"
             },
             "resources_engines": {
-              "type": "array",
+              "type": ["null","array"],
               "items": {}
             }
           },
@@ -36,8 +36,7 @@
             "educational_resource_md5",
             "educational_resource_type_id",
             "educational_resource_type",
-            "session_educational_resource_id",
-            "resources_engines"
+            "session_educational_resource_id"
           ]
         }
       ]
