@@ -208,9 +208,7 @@ public class ListEducatorSessions {
     public void Validate_Response_of_Educator_sessions_with_invalid_class() {
         Response Invalid_class = List_Educator_Sessions;
         test.Validate_Error_Messages(Invalid_class,HttpStatus.SC_NOT_FOUND,"Class not found or not eligible for display.",4046);
-
     }
-
 
     @When("Performing the Api of list sessions for educator with unauthorized educator")
     public void List_Educator_sessions_unauthorized_Educator() {
