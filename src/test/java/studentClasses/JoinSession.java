@@ -2,6 +2,7 @@ package studentClasses;
 
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,6 +16,8 @@ import javax.xml.transform.Result;
 import java.io.File;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.containsString;
@@ -27,14 +30,18 @@ public class JoinSession {
 
     Database_Connection connect = new Database_Connection();
     String student_Id = data.student_Id;
-    String class_Id = data.class_Id;
+
+    String Inactive_Student = data.student_not_exist;
+
+    String refresh_token_of_student_not_exist = data.student_refreshToken_not_exist;
+
     String session_id;
     String expensive_session_id;
+
+    String class_id_of_expensive_session;
     String class_id_for_join_session;
     public String fully_Paid_class;
     public  String fully_Paid_class_Session;
-
-    String NotActive_student_Id =data.NotActive_student_Id;
     String ended_Session;
 
     String kickedOut_Session;
@@ -43,11 +50,20 @@ public class JoinSession {
     public Response joinSession ;
 
 
-    public void get_sessions_data_from_database() throws SQLException {
-        ResultSet resultSet = connect.connect_to_database("\n" +
-                "select * from public.classes_subjects_sessions css join sessions s ON  s.session_id = css.session_id join public.classes_subjects cs on\n" +
-                "cs.class_subject_id = css.class_subject_id join classes c on c.class_id = cs.class_id join classes_students cs2 on cs2.class_id \n" +
-                "= c.class_id  where cs2.student_id ="+student_Id+" "+"and c.class_payment_option_id =1  and s.session_started_date notnull  and s.session_ended_date isnull");
+    public void get_sessions_data_from_database() throws  SQLException {
+        ResultSet resultSet = connect.connect_to_database("\tselect * from public.sessions s join classes_subjects_sessions css on s.session_id = css.session_id  \n" +
+                " join classes_subjects cs on cs.class_subject_id = css.class_subject_id join classes_students cs2 on cs2.class_id  \n" +
+                " = cs.class_id inner join subjects s2 on s2.subject_id = cs.subject_id join students s3 on s3.grade_id = s2.grade_id  \n" +
+                " join students_wallets sw on sw.student_id  = cs2.student_id  join classes c on c.class_id = cs.class_id left join students_access_rights sar   \n" +
+                "on sar.student_id = cs2.student_id  \n" +
+                "where cs2.student_id =657132504423  \n" +
+                " and  \n" +
+                "c.class_payment_option_id = 1  \n" +
+                "and  \n" +
+                " s.session_id not in   \n" +
+                " (select sar2.student_access_right_class_id from public.students_access_rights sar2 where sar2.student_id ="+student_Id+" "+")\n" +
+                "and s.session_started_date notnull\n" +
+                "limit 10 \n");
 
         while(resultSet.next()){
             fully_Paid_class = resultSet.getString("class_id");
@@ -80,7 +96,7 @@ public class JoinSession {
         ResultSet resultSet_of_not_started_session = connect.connect_to_database("select * from public.sessions s join classes_subjects_sessions css on s.session_id = css.session_id join classes_subjects cs \n" +
                 " on cs.class_subject_id =css.class_subject_id  join classes_students cs2 on cs2.class_id = cs.class_id \n" +
                 " join students_access_rights sar on sar.student_access_right_session_id  = css.session_id or sar.student_access_right_class_id = cs2.class_student_id \n" +
-                " where cs2.student_id =  657132504423 and s.session_started_date isnull and s.session_ended_date  isnull ");
+                " where cs2.student_id ="+student_Id+" "+"and s.session_started_date isnull and s.session_ended_date  isnull ");
 
         while(resultSet_of_not_started_session.next()){
             Not_Started_Session = resultSet_of_not_started_session.getString("session_id");
@@ -97,13 +113,14 @@ public class JoinSession {
             kickedOut_Session = resultSet_of_kicked_out_session.getString("session_id");
         }
 
-        ResultSet resultSet_of_expesnive_session = connect.connect_to_database("select * from public.sessions s join classes_subjects_sessions css on s.session_id = css.session_id join classes_subjects cs \n" +
+        ResultSet resultSet_of_expensive_session = connect.connect_to_database("select * from public.sessions s join classes_subjects_sessions css on s.session_id = css.session_id join classes_subjects cs \n" +
                 "on cs.class_subject_id =css.class_subject_id  join classes_students cs2 on cs2.class_id = cs.class_id join \n" +
                 "public.students_wallets sw on sw.student_id = cs2.student_id \n" +
-                "where cs2.student_id ="+student_Id+" " + "and  s.session_started_date notnull and  sw.student_wallet_balance < css.class_subject_session_price ");
+                "where cs2.student_id ="+student_Id+" " + "and  s.session_started_date notnull and  sw.student_wallet_balance < cs.class_subject_session_price ");
 
-        while (resultSet_of_expesnive_session.next()){
-            expensive_session_id = resultSet_of_expesnive_session.getString("session_id");
+        while (resultSet_of_expensive_session.next()){
+            expensive_session_id = resultSet_of_expensive_session.getString("session_id");
+            class_id_of_expensive_session = resultSet_of_expensive_session.getString("class_id");
         }
 
         }
@@ -169,9 +186,8 @@ public class JoinSession {
     }
     @Given("User Send InActive StudentId")
     public RequestSpecification Student_Not_Found_OR_NotActive () {
-        String Not_Activate_Student_Refresh_Token = data.Not_Activate_Student_Refresh_Token;
-        String Not_Activate_Student_access_token = test.generate_access_token(Not_Activate_Student_Refresh_Token);
-        pathParams.put("student_id", "430192963192");
+        String Not_Activate_Student_access_token = test.generate_access_token(refresh_token_of_student_not_exist);
+        pathParams.put("student_id", Inactive_Student);
         pathParams.put("class_id", class_id_for_join_session);
         pathParams.put("session_id",session_id);
         RequestSpecification request = RestAssured.
@@ -225,13 +241,13 @@ public class JoinSession {
         Response join_SessionResponse = joinSession;
         test.Validate_Error_Messages(join_SessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. student kicked out from session.",4225);
     }
-    @Given("User Send SessionId That Doesnt Related To Class Or Student")
+    @Given("User Send SessionId That Doesn't Related To Class Or Student")
     public void Session_Not_Related_To_Student () {
         pathParams.put("student_id", student_Id);
         pathParams.put("class_id", class_id_for_join_session);
-        pathParams.put("session_id","209195414546");
+        pathParams.put("session_id",fully_Paid_class_Session);
     }
-    @Then("The Response Should Contains Status Code 422 And Error Message Session Isnt Related To Class Or Student")
+    @Then("The Response Should Contains Status Code 422 And Error Message Session Isn't Related To Class Or Student")
     public void Validate_Response_Session_Not_Related_To_Student (){
         Response join_SessionResponse = joinSession;
         test.Validate_Error_Messages(join_SessionResponse,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Cannot join the session. session not related to this class or this student",4223);
@@ -249,8 +265,9 @@ public class JoinSession {
     }
     @Given("User Send StudentId With InSufficient Balance")
     public void Insufficient_Student_Wallet () {
+        System.out.println(expensive_session_id);
         pathParams.put("student_id", student_Id);
-        pathParams.put("class_id", class_id_for_join_session);
+        pathParams.put("class_id", class_id_of_expensive_session);
         pathParams.put("session_id",expensive_session_id);
     }
     @Then("The Response Should Contains Status Code 422 And Error Message Student Wallet Is Insufficient")

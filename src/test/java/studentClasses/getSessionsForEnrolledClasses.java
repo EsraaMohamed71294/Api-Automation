@@ -1,6 +1,8 @@
 package studentClasses;
 
 import java.io.File;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
@@ -40,13 +42,15 @@ public class getSessionsForEnrolledClasses{
 	}
 	public void get_sessions_of_enrolled_classes_data() throws SQLException {
 		ResultSet resultSet_with_sessions = connect.connect_to_database("\n" +
-				"select * from public.classes_students cs  inner join classes_subjects cs2 on cs.class_id = cs2.class_id left join \n" +
-				"classes_subjects_sessions css on css.class_subject_id = cs2.class_subject_id join sessions s on s.session_id = css.session_id join classes c\n" +
-				"on c.class_id = cs.class_id  where cs.student_id ="+student_id);
+				"select * from public.classes_students cs  inner join classes_subjects cs2 on cs.class_id = cs2.class_id left join  \n" +
+				"\t\t\t\tclasses_subjects_sessions css on css.class_subject_id = cs2.class_subject_id join sessions s on s.session_id = css.session_id join classes c \n" +
+				"\t\t\t\ton c.class_id = cs.class_id  where cs.student_id ="+student_id+" "+"\n" +
+				"\t\t\t\tand c.class_archive_date > now() and c.class_public_listing_date < now()");
 
-		ResultSet resultSet_without_sessions = connect.connect_to_database("select*from public.classes c join public.classes_subjects cs" +
-				" on c.class_id  = cs.class_id left outer join classes_subjects_sessions css on css.class_subject_id \n" +
-				"= cs.class_subject_id join classes_students cs2 on cs2.class_id = c.class_id where css.class_subject_session_id is null and cs2.student_id ="+student_id);
+		ResultSet resultSet_without_sessions = connect.connect_to_database("select*from public.classes c join public.classes_subjects cs \n" +
+				"\t\t\t\t on c.class_id  = cs.class_id left join classes_subjects_sessions css on css.class_subject_id  \n" +
+				"\t\t\t\t= cs.class_subject_id join classes_students cs2 on cs2.class_id = c.class_id where css.class_subject_session_id is null and cs2.student_id ="+student_id+" "+"\n" +
+				"\t\t\t\tand c.class_archive_date > now() and c.class_public_listing_date < now() ");
 
 		while(resultSet_with_sessions.next()){
 			class_Id = resultSet_with_sessions.getString("class_id");

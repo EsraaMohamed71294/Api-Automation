@@ -1,6 +1,6 @@
 package studentClasses;
 
-
+import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,8 +10,6 @@ import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 
 
-import javax.xml.crypto.Data;
-import javax.xml.transform.Result;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;

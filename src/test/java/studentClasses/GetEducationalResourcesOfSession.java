@@ -1,4 +1,6 @@
 package studentClasses;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -121,7 +123,7 @@ public class GetEducationalResourcesOfSession {
     @Then("The Response Should Contains Status Code 404 And Message That No Educational resources Found")
     public void Validate_Response_For_NotFound_Response(){
         Response Educational_Resources_Response = get_Educational_resource_of_Session;
-         test.Validate_Error_Messages(Educational_Resources_Response , HttpStatus.SC_NOT_FOUND ,"No educational resources found." , 4049 );
+         test.Validate_Error_Messages(Educational_Resources_Response , HttpStatus.SC_NOT_FOUND ,"Session not found or not eligible for display." , 4048 );
         }
 
 }

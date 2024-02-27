@@ -6,12 +6,10 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.hamcrest.core.StringContains;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import TestConfig.Database_Connection;
+import TestConfig.TestBase;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
