@@ -57,18 +57,19 @@ public class NavigationMenu {
             country_currency_iso_code = resultSet.getString("country_currency_iso_code");
             stage_id = resultSet.getInt("stage_id");
             stage_localization_key = resultSet.getString("stage_localization_key");
-            stage_localization_key = resultSet.getString("stage_localization_key");
+            stage_color = resultSet.getString("stage_color");
             stage_url_text = resultSet.getString("stage_url_text");
             stage_order = resultSet.getInt("stage_order");
+
         }
 
-        ResultSet languages = Connect.connect_to_database(" select * from languages l where language_order =2");
+        ResultSet ui_languages = Connect.connect_to_database("select * from ui_languages ul where ui_language_order = 2");
 
-        while (resultSet.next()) {
-            language_id = resultSet.getLong("language_name");
-            language_name = resultSet.getString("language_name");
-            language_iso_code = resultSet.getString("language_iso_code");
-            language_order = resultSet.getInt("language_order");
+        while (ui_languages.next()) {
+            language_id = ui_languages.getLong("ui_language_id");
+            language_name = ui_languages.getString("language_name");
+            language_iso_code = ui_languages.getString("ui_language_iso_code");
+            language_order = ui_languages.getInt("ui_language_order");
         }
     }
 
@@ -79,12 +80,13 @@ public class NavigationMenu {
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/LookupsData/NavigationMenu.json")))
-                .body("languages.language_id", equalTo(language_id),"languages.language_name",hasToString(language_name),
-                        "languages.language_iso_code",hasToString(language_iso_code),"languages.language_order",equalTo(language_order))
-                .body("countries.country_id", equalTo(country_id),"countries.country_iso_code",hasToString(country_iso_code),
-                        "countries.country_currency_iso_code",hasToString(country_currency_iso_code),"countries.country_localization_key",hasToString(country_localization_key))
-                .body("countries.stages.stage_id", equalTo(stage_id),"countries.stages.stage_localization_key",hasToString(stage_localization_key),
-                        "countries.stages.stage_color",hasToString(stage_color),"countries.stages.stage_url_text",hasToString(stage_url_text),"countries.stages.stage_order",equalTo(stage_order));
+                .body("languages.language_id[1]", equalTo(language_id),"languages.language_name[1]",hasToString(language_name),
+                        "languages.language_iso_code[1]",hasToString(language_iso_code),"languages.language_order[1]",equalTo(language_order))
+                .body("countries.country_id[0]", equalTo(country_id),"countries.country_iso_code[0]",hasToString(country_iso_code),
+                        "countries.country_currency_iso_code[0]",hasToString(country_currency_iso_code),"countries.country_localization_key[0]",hasToString(country_localization_key))
+                .body("countries.stages[0].stage_id", hasItem(equalTo(stage_id)),"countries.stages[0].stage_localization_key",hasItem(hasToString(stage_localization_key)),
+                        "countries.stages[0].stage_color",hasItem(hasToString(stage_color)),"countries.stages[0].stage_url_text",hasItem(hasToString(stage_url_text)),
+                        "countries.stages[0].stage_order",hasItem(equalTo(stage_order)));
     }
 
 }

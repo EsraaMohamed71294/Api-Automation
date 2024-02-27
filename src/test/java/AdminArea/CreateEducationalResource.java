@@ -45,6 +45,8 @@ public class CreateEducationalResource {
 
         Create_Educational_Resources = test.sendRequest("POST", "/admin/educational-resources", valid_body, data.Admin_Token);
         Thread.sleep(8000);
+        System.out.println(valid_body);
+        Create_Educational_Resources.prettyPrint();
         return resourceId = Create_Educational_Resources.then().extract().path("resource_id");
     }
 
