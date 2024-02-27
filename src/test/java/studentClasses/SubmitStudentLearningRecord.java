@@ -36,14 +36,14 @@ public class SubmitStudentLearningRecord {
         get_data_of_submit_learning_Record();
     }
     public void get_data_of_submit_learning_Record()throws SQLException {
-        ResultSet get_data_to_submit_learning_record = connect.connect_to_database("\n" +
-                "select * from sessions_educational_resources ser join public.classes_subjects_sessions css \n" +
-                "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id \n" +
-                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id join students_access_rights sar\n" +
-                " on sar.student_id  = cs2.student_id and sar.student_access_right_session_id = ser.session_id or sar.student_access_right_class_id = cs.class_id join educational_resources er \n" +
-                "on er.educational_resource_id  = ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id \n" +
-                "= er.educational_resource_type_id  \n" +
-                " where cs2.student_id ="+student_id);
+        ResultSet get_data_to_submit_learning_record = connect.connect_to_database(" \n" +
+                "select * from sessions_educational_resources ser join public.classes_subjects_sessions css  \n" +
+                "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id  \n" +
+                "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id join students_access_rights sar \n" +
+                "on sar.student_id  = cs2.student_id and sar.student_access_right_session_id = ser.session_id and sar.student_access_right_class_id = cs.class_id join educational_resources er  \n" +
+                "on er.educational_resource_id  = ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id  \n" +
+                "= er.educational_resource_type_id   \n" +
+                "where cs2.student_id ="+student_id);
 
             while(get_data_to_submit_learning_record.next()){
                 session_id= get_data_to_submit_learning_record.getString("session_id");
@@ -52,19 +52,18 @@ public class SubmitStudentLearningRecord {
             }
     }
     public void get_data_of_assertion_submit_learning_Record()throws SQLException {
-        ResultSet get_data_to_submit_learning_record = connect.connect_to_database("select * from sessions_educational_resources ser join public.classes_subjects_sessions css   \n" +
+        ResultSet get_data_to_get_submit_learning_record = connect.connect_to_database("select * from sessions_educational_resources ser join public.classes_subjects_sessions css   \n" +
                 "on ser.session_id = css.session_id  join classes_subjects cs on css.class_subject_id = cs.class_subject_id   \n" +
                 "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id \n" +
                 "join students_access_rights sar  \n" +
-                "on sar.student_id  = cs2.student_id and sar.student_access_right_session_id = ser.session_id\n" +
+                "on sar.student_id  = cs2.student_id and sar.student_access_right_class_id = cs2.class_id and sar.student_access_right_session_id = ser.session_id\n" +
                 "join educational_resources er   \n" +
                 "on er.educational_resource_id  = ser.educational_resource_id  join educational_resources_types ert on ert.educational_resource_type_id   \n" +
-                "  = er.educational_resource_type_id join public.student_learning_records slr on slr.session_educational_resource_id = ser.session_educational_resource_id    \n" +
-                "where cs2.student_id ="+student_id+" "+"and slr.student_learning_record_is_deleted = false\n" +
-                " ");
+                "= er.educational_resource_type_id join public.student_learning_records slr on slr.session_educational_resource_id = ser.session_educational_resource_id    \n" +
+                "where cs2.student_id ="+student_id+" "+"and slr.student_learning_record_is_deleted = false and ser.session_id ="+session_id+" "+"and ser.educational_resource_id ="+resource_id+"");
 
-        while(get_data_to_submit_learning_record.next()){
-            Student_learning_Record_id= get_data_to_submit_learning_record.getString("student_learning_record_id");
+        while(get_data_to_get_submit_learning_record.next()){
+            Student_learning_Record_id= get_data_to_get_submit_learning_record.getString("student_learning_record_id");
         }
     }
 
