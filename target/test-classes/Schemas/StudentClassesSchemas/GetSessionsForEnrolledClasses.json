@@ -21,10 +21,10 @@
       "type": "string"
     },
     "class_seats_limit": {
-      "type": "integer"
+      "type": ["integer","null"]
     },
     "class_seats_reserved": {
-      "type": "integer"
+      "type": ["integer","null"]
     },
     "class_block_count": {
       "type": "null"
@@ -36,10 +36,10 @@
       "type": ["string","null"]
     },
     "class_start_date": {
-      "type": "string"
+      "type": ["string","null"]
     },
     "class_semester_localization_key": {
-      "type": "string"
+      "type": ["string","null"]
     },
     "educators": {
       "type": "array",
@@ -284,7 +284,7 @@
               "type": "string"
             },
             "class_subject_retail_price": {
-              "type": ["integer","null"]
+              "type": ["number","null","integer"]
             },
             "class_subject_discounted_price": {
               "type": ["integer","null"]

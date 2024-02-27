@@ -1,5 +1,9 @@
 Feature: Test all scenarios of the api of leave ongoing session
 
+  Scenario: Join session
+    Given   user send the same sessionId and class_id that he left from
+    When    Performing the Api of Joining Session Again
+
   Scenario: Verify user can leave the joined session successfully
     Given   User left the session
     When    Performing the Api leave on going session
@@ -15,8 +19,5 @@ Feature: Test all scenarios of the api of leave ongoing session
     When    Performing the Api leave on going session
     Then    I verify Status Code 403 And Error Message user unauthorized
 
-  Scenario: Join session again
-    Given   user send the same sessionId and class_id that he left from
-    When    Performing the Api of Joining Session Again
 
 

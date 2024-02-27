@@ -16,8 +16,6 @@
   },
   "required": [
     "session_id",
-    "agora_resource_id",
-    "agora_sid",
-    "agora_token"
+    "firebase_token"
   ]
 }

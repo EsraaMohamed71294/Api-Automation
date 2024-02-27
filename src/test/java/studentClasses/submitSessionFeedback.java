@@ -1,6 +1,7 @@
 package studentClasses;
 
 import TestConfig.TestBase;
+import TestConfig.Database_Connection;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -133,9 +134,9 @@ public class submitSessionFeedback {
     @Given("User Send studentId not participate into session to submit feedback")
     public void notParticipate_Student_submit_feedback()throws SQLException {
         get_data_of_leave_session();
-        pathParams.put("student_id", session_id);
-        pathParams.put("class_id", class_Id);
-        pathParams.put("session_id", session_id);
+        pathParams.put("student_id", student_Id);
+        pathParams.put("class_id", Class_id_of_session_no_participate);
+        pathParams.put("session_id", not_participate_session);
 
     }
     @Then("The Response of not participate student Should Contain Status Code 403 And Error Message Unauthorized access")

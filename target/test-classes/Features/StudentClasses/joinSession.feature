@@ -18,7 +18,7 @@
       When    Performing the Api of Joining Session
       Then    The Response Should Contain Status Code 404 And Error Message That Session Doesnt Exist
 
-    Scenario: Verify that student cant join session for class doesnt exist
+    Scenario: Verify that student cant join session for class doesn't exist
       And     Get Data Of Sessions
       Given   User send class id that not exist
       When    Performing the Api of Joining Session
@@ -48,13 +48,13 @@
       When    Performing the Api of Joining Session
       Then    The Response Should Contains StatusCode 422 And Error Message Student Is KickedOut
 
-    Scenario: Verify That Student Cant Join Session That Isnt Related To The Class Or The Student
+    Scenario: Verify That Student Cant Join Session That Isn't Related To The Class Or The Student
       And       Get Data Of Sessions
-      Given   User Send SessionId That Doesnt Related To Class Or Student
+      Given   User Send SessionId That Doesn't Related To Class Or Student
       When    Performing the Api of Joining Session
-      Then    The Response Should Contains Status Code 422 And Error Message Session Isnt Related To Class Or Student
+      Then    The Response Should Contains Status Code 422 And Error Message Session Isn't Related To Class Or Student
 
-    Scenario: Verify That Student Cant Join Session That Doesnt Have AccessRight On And The Class Doesnt Allow PayPerSession
+    Scenario: Verify That Student Cant Join Session That Doesn't Have AccessRight On And The Class Doesn't Allow PayPerSession
       And       Get Data Of Sessions
       Given   User Send ClassId That Doesnt Allow PayPerSession And SessionId That Doesnt Have AccessRight On
       When    Performing the Api of Joining Session
