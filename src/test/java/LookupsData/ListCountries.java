@@ -33,7 +33,7 @@ public class ListCountries {
     }
 
     @And("Getting Countries List from database")
-    public void getCoutriesList () throws SQLException {
+    public void getCountriesList () throws SQLException {
         ResultSet resultSet = Connect.connect_to_database(" select * from countries c " +
                 "LIMIT 1");
 
