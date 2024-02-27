@@ -25,7 +25,6 @@ public class CurriculumStructure {
     Long country_id =102123867837L ;
     String country_iso_code;
     String country_localization_key;
-    String country_currency_iso_code;
     Integer country_order;
     String stage_localization_key;
     Integer stage_id ;
@@ -37,7 +36,6 @@ public class CurriculumStructure {
     String grade_icon_text;
     String grade_url_text ;
     Integer grade_order ;
-    String grade_title;
     Long subject_id ;
     String subject_name ;
     Integer subject_order;
@@ -73,7 +71,6 @@ public class CurriculumStructure {
             stage_order = resultSet.getInt("stage_order");
 
             grade_id = resultSet.getLong("grade_id");
-            grade_title = resultSet.getString("grade_title");
             grade_localization_key = resultSet.getString("grade_localization_key");
             grade_icon_text = resultSet.getString("grade_icon_text");
             grade_url_text = resultSet.getString("grade_url_text");
@@ -98,7 +95,7 @@ public class CurriculumStructure {
                 .body( "[0].stages[0].stage_id",equalTo(stage_id),"[0].stages[0].stage_localization_key",hasToString(stage_localization_key),
                         "[0].stages[0].stage_color",hasToString(stage_color),"[0].stages[0].stage_url_text",hasToString(stage_url_text),
                         "[0].stages[0].stage_order",equalTo(stage_order))
-                .body("[0].stages[0].grades.grade_id[0]",equalTo(grade_id),"[0].stages[0].grades.grade_title[0]",hasToString(grade_title),
+                .body("[0].stages[0].grades.grade_id[0]",equalTo(grade_id),
                         "[0].stages[0].grades.grade_url_text[0]",hasToString(grade_url_text),
                         "[0].stages[0].grades.grade_localization_key[0]",hasToString(grade_localization_key),
                         "[0].stages[0].grades.grade_order[0]",equalTo(grade_order));
