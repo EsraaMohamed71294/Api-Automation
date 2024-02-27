@@ -110,6 +110,30 @@
           <artifactId>javafaker</artifactId>
           <version>1.0.2</version>
       </dependency>
+
+<!--      &lt;!&ndash; https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin &ndash;&gt;-->
+<!--      <dependency>-->
+<!--          <groupId>org.codehaus.mojo</groupId>-->
+<!--          <artifactId>exec-maven-plugin</artifactId>-->
+<!--          <version>1.6.0</version>-->
+<!--      </dependency>-->
+
+
   </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Exec Plugin Configuration -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <!-- Specify the main class of your application -->
+                    <mainClass>com.example.MainClass</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
