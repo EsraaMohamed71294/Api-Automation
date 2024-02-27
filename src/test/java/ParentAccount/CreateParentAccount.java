@@ -20,17 +20,14 @@ public class CreateParentAccount {
     TestBase test = new TestBase();
     Educator_TestData data = new Educator_TestData();
     Faker fakeDate =new Faker();
-    String Admin_token = data.Admin_Token;
     Parent_TestData parentData = new Parent_TestData();
     Response Create_Educator;
-
     public Long parent_id;
     String Parent_Access_Token;
     String firstName = fakeDate.name().firstName();
     String lastName = fakeDate.name().lastName();
-    String Parent_userName = fakeDate.name().username();
-    public String Email =Parent_userName + "@nagwa.com";
-    String valid_body_request ="{\"parent_first_name\":\""+ firstName +"\",\"parent_last_name\":\""+ lastName +"\",\"parent_email\":\"student_parent@nagwa.com\",\"country_id\":102123867837}";
+    public String Email ="Parent_userName@nagwa.com";
+    String valid_body_request ="{\"parent_first_name\":\""+ firstName +"\",\"parent_last_name\":\""+ lastName +"\",\"parent_email\":\""+ Email +"\",\"parent_country_id\":102123867837}";
 
     @Given("Performing the Api of Create parent With valid data")
     public Long Create_Educator() {
@@ -46,7 +43,7 @@ public class CreateParentAccount {
         Create_Educator.then()
                 .statusCode(HttpStatus.SC_CREATED)
                 .assertThat()
-//                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateEducator.json")))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/CreateEducator.json")))
                 .body("message", hasToString("Parent account created successfully."),"parent_id",equalTo(parent_id));
     }
 }
