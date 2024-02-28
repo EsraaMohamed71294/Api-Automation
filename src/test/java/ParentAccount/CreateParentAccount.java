@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
 
 import java.io.File;
 
@@ -18,9 +19,8 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class CreateParentAccount {
     TestBase test = new TestBase();
-    Educator_TestData data = new Educator_TestData();
     Faker fakeDate =new Faker();
-    Parent_TestData parentData = new Parent_TestData();
+    TestData parentData = new TestData();
     Response Create_Educator;
     public Long parent_id;
     String Parent_Access_Token;

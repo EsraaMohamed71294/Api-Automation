@@ -1,6 +1,0 @@
-package ParentAccount
-
-class Parent_TestData {
-    public String Parent_refreshToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiY3JlYXRlX2FjY291bnRfZm9yIjoiUGFyZW50X3VzZXJOYW1lQG5hZ3dhLmNvbSIsInRva2VuX3Njb3BlIjoiY3JlYXRlX2FjY291bnQifSwiZXhwIjoxNzE5NDAxNDg5LjI1MDM4MiwidHlwZSI6InJlZnJlc2giLCJqdGkiOiIxZWE4MjQyYjllODM0ZmY0OTUzNzdiOTc0NGI2ZmI3MSJ9.3plGSyt2Gavir3hI_-93s4K4WpqSFquNniIDBigrOzA";
-
-}
