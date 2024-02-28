@@ -29,7 +29,7 @@
               "type": ["integer","null"]
             },
             "class_block_count": {
-              "type": "null"
+              "type": ["null","integer"]
             },
             "class_educators": {
               "type": "array",
@@ -122,7 +122,7 @@
                           "type": "object",
                           "properties": {
                             "class_block_number": {
-                              "type": "integer"
+                              "type": ["integer","null"]
                             },
                             "class_block_retail_price": {
                               "type": "number"
@@ -149,7 +149,7 @@
                           "type": "object",
                           "properties": {
                             "class_block_number": {
-                              "type": "integer"
+                              "type": ["integer","null"]
                             },
                             "class_block_retail_price": {
                               "type": "number"
@@ -265,7 +265,7 @@
               "type": "integer"
             },
             "class_block_number": {
-              "type": "null"
+              "type": ["integer","null"]
             },
             "educator_id": {
               "type": "integer"

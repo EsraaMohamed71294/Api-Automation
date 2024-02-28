@@ -27,7 +27,7 @@
       "type": ["integer","null"]
     },
     "class_block_count": {
-      "type": "null"
+      "type": ["integer","null"]
     },
     "student_is_enrolled": {
       "type": "boolean"
@@ -130,7 +130,7 @@
               "type": "integer"
             },
             "class_block_number": {
-              "type": "null"
+              "type": ["integer","null"]
             },
             "status": {
               "type": "string"
@@ -197,7 +197,7 @@
               "type": "integer"
             },
             "class_block_number": {
-              "type": "null"
+              "type": ["integer","null"]
             },
             "status": {
               "type": "string"
@@ -287,7 +287,7 @@
               "type": ["number","null","integer"]
             },
             "class_subject_discounted_price": {
-              "type": ["integer","null"]
+              "type": ["integer","null","number"]
             },
             "class_subject_session_price": {
               "type": ["number","null"]
@@ -302,13 +302,13 @@
                   "type": "object",
                   "properties": {
                     "class_block_number": {
-                      "type": "integer"
+                      "type": ["integer","null"]
                     },
                     "class_block_retail_price": {
-                      "type": "integer"
+                      "type": ["integer","number","null"]
                     },
                     "class_block_discounted_price": {
-                      "type": "integer"
+                      "type": ["integer","null"]
                     },
                     "class_block_first_session": {
                       "type": "integer"
@@ -329,13 +329,13 @@
                   "type": "object",
                   "properties": {
                     "class_block_number": {
-                      "type": "integer"
+                      "type": ["integer","null"]
                     },
                     "class_block_retail_price": {
-                      "type": "integer"
+                      "type": ["integer","number","null"]
                     },
                     "class_block_discounted_price": {
-                      "type": "integer"
+                      "type": ["integer","null"]
                     },
                     "class_block_first_session": {
                       "type": "integer"
