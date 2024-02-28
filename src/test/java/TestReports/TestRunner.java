@@ -5,7 +5,8 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = {"src/test/resources/Features/AdminArea"}
                 ,glue = "AdminArea"
-                ,plugin = {"pretty", "html:target/Reports/TestReport_AdminArea.html"})
+                ,plugin = {"pretty", "html:target/Reports/TestRunner.html"})
 
-public class TestReport_AdminArea extends AbstractTestNGCucumberTests {
+public class TestRunner extends AbstractTestNGCucumberTests {
+
 }

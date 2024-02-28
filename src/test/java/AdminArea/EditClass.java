@@ -46,9 +46,9 @@ public class EditClass {
                 "\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2024-02-10T00:00:00Z\"," +
                 "\"class_enrollment_end_date\":\"2024-02-05T23:59:59Z\"," +
-                "\"class_archive_date\":\"2024-03-01T00:00:00Z\"," +
+                "\"class_archive_date\":\"2025-03-01T00:00:00Z\"," +
                 "\"class_start_date\":\"2024-01-10T00:00:00Z\"," +
-                "\"class_end_date\":\"2024-02-10T00:00:00Z\"," +
+                "\"class_end_date\":\"2025-02-10T00:00:00Z\"," +
                 "\"class_semester_localization_key\":\"semester1\"," +
                 "\"class_type\":\"type1\",\"class_seats_limit\":20," +
                 "\"is_test_class\":true,\"educators\":[{\"educator_id\":"+educator.Educator_ID+",\"educator_first_name\":\""+educator.firstName+"\"," +
@@ -96,15 +96,15 @@ public class EditClass {
         educator.Create_Educator();
         pathParams.put("class_id"," ");
         body_for_pay_full_class = "{\"class_title\":\""+classTitle+"\",\"class_order\":2," +
-                "\"class_description\":\"learncondingbypython\"," +
+                "\"class_description\":\"This class provides an introduction to programming concepts.\"," +
                 "\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2024-02-10T00:00:00Z\"," +
                 "\"class_enrollment_end_date\":\"2024-02-05T23:59:59Z\"," +
-                "\"class_archive_date\":\"2024-03-01T00:00:00Z\"," +
+                "\"class_archive_date\":\"2025-03-01T00:00:00Z\"," +
                 "\"class_start_date\":\"2024-01-10T00:00:00Z\"," +
-                "\"class_end_date\":\"2024-02-10T00:00:00Z\"," +
-                "\"class_semester_localization_key\":\"semester1\"," +
-                "\"class_type\":\"type1\",\"class_seats_limit\":20," +
+                "\"class_end_date\":\"2025-02-10T00:00:00Z\"," +
+                "\"class_semester_localization_key\":\"First_Term\"," +
+                "\"class_type\":\"ClassType\",\"class_seats_limit\":20," +
                 "\"is_test_class\":true,\"educators\":[{\"educator_id\":"+educator.Educator_ID+",\"educator_first_name\":\""+educator.firstName+"\"," +
                 "\"educator_last_name\":\""+educator.lastName+"\",\"educator_email\":\""+educator.Email+"\",\"educator_order\":20}]}";
     }
@@ -117,11 +117,11 @@ public class EditClass {
         class_data.Create_Class_full_pay();
         educator.Create_Educator();
         pathParams.put("class_id",class_data.Class_ID);
-        Body_of_not_Exist_educator = "{\"class_title\":\"conding\",\"class_order\":2,\"class_description\":\"learncondingbypython\",\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"" +
+        Body_of_not_Exist_educator = "{\"class_title\":\"Coding\",\"class_order\":2,\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"" +
                 ",\"class_public_delist_date\":\"2024-02-10T00:00:00Z\",\"class_enrollment_end_date\":\"2024-02-05T23:59:59Z\"" +
                 ",\"class_archive_date\":\"2024-03-01T00:00:00Z\",\"class_start_date\":\"2024-01-10T00:00:00Z\"," +
-                "\"class_end_date\":\"2025-02-10T00:00:00Z\",\"class_semester_localization_key\":\"semester1\"" +
-                ",\"class_type\":\"type1\",\"class_seats_limit\":20,\"is_test_class\":true" +
+                "\"class_end_date\":\"2025-02-10T00:00:00Z\",\"class_semester_localization_key\":\"First_Term\"" +
+                ",\"class_type\":\"ClassType\",\"class_seats_limit\":20,\"is_test_class\":true" +
                 ",\"educators\":[{\"educator_id\":123456789012,\"educator_first_name\":\"fName\"," +
                 "\"educator_last_name\":\"lName\",\"educator_email\":\"test@example.com\",\"educator_order\":20}]}";
     }
@@ -139,15 +139,15 @@ public class EditClass {
         educator.Create_Educator();
         pathParams.put("class_id","123456789012");
         body_for_pay_full_class = "{\"class_title\":\""+classTitle+"\",\"class_order\":2," +
-                "\"class_description\":\"learncondingbypython\"," +
+                "\"class_description\":\"This class provides an introduction to programming concepts.\"," +
                 "\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2024-02-10T00:00:00Z\"," +
                 "\"class_enrollment_end_date\":\"2024-02-05T23:59:59Z\"," +
                 "\"class_archive_date\":\"2024-03-01T00:00:00Z\"," +
                 "\"class_start_date\":\"2024-01-10T00:00:00Z\"," +
                 "\"class_end_date\":\"2024-02-10T00:00:00Z\"," +
-                "\"class_semester_localization_key\":\"semester1\"," +
-                "\"class_type\":\"type1\",\"class_seats_limit\":20," +
+                "\"class_semester_localization_key\":\"First_Term\"," +
+                "\"class_type\":\"ClassType\",\"class_seats_limit\":20," +
                 "\"is_test_class\":true,\"educators\":[{\"educator_id\":"+educator.Educator_ID+",\"educator_first_name\":\""+educator.firstName+"\"," +
                 "\"educator_last_name\":\""+educator.lastName+"\",\"educator_email\":\""+educator.Email+"\",\"educator_order\":20}]}" ;
     }
