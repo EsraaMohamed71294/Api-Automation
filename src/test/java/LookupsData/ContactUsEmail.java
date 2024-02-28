@@ -1,13 +1,12 @@
 package LookupsData;
 
-import ParentAccount.Parent_TestData;
 import TestConfig.TestBase;
-import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
 
 import java.io.File;
 
@@ -15,13 +14,13 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class ContactUsEmail {
     TestBase test = new TestBase();
-    Parent_TestData data = new Parent_TestData();
+    TestData data = new TestData();
     Response Send_ContactUs;
     String valid_body_request = "{\"first_name\":\"John\",\"last_name\":\"Doe\",\"email\":\"student_parent@nagwa.com\",\"email_body\":\"Automation Test For nagwa.com\"}";
 
     @Given("Performing the Api of Sent Contact Us Email")
     public void Send_ContactUS_Email() {
-        Send_ContactUs = test.sendRequest("POST", "/contact-us/email", valid_body_request, data.Parent_refreshToken);
+        Send_ContactUs = test.sendRequest("POST", "/contact-us/email", valid_body_request,data.Parent_refreshToken );
 
     }
 

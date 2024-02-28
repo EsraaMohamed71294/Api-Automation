@@ -1,6 +1,5 @@
 package LookupsData;
 
-import ParentAccount.Parent_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.And;
@@ -9,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import studentClasses.TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class ListGradesByCountry {
     Database_Connection Connect = new Database_Connection();
     TestBase test = new TestBase();
-    Parent_TestData data = new Parent_TestData();
+    TestData data = new TestData();
     Response List_Grades_ByCountry;
     Long grade_id ;
     String grade_url_text;
