@@ -110,7 +110,7 @@ public class CreateClass {
         body_for_pay_full_class = "{\"class_title\":\"IntroductiontoProgramming\",\"meta_class_id\":123123123123,\"class_order\":1," +
                 "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-10T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2025-02-10T00:00:00Z\",\"class_enrollment_end_date\":\"2025-02-05T23:59:59Z\",\"class_archive_date\":\"2025-03-01T00:00:00Z\"," +
-                "\"class_payment_option_id\":1,\"class_block_count\":0,\"class_seats_limit\":50,\"is_test_class\":false,\"subjects\":[{\"subject_id\":123456789012," +
+                "\"class_payment_option_id\":1,\"class_block_count\":0,\"class_seats_limit\":50,\"is_test_class\":true,\"subjects\":[{\"subject_id\":123456789012," +
                 "\"class_subject_retail_price\":30,\"class_subject_discounted_price\":30,\"class_subject_session_price\":10,\"blocks\":[]},{\"subject_id\":787192832597," +
                 "\"class_subject_retail_price\":30,\"class_subject_discounted_price\":20,\"class_subject_session_price\":10,\"blocks\":[]}],\"educators\":[{\"educator_id\":328148357020," +
                 "\"educator_order\":20}]}";
