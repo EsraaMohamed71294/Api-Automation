@@ -27,7 +27,7 @@
       "type": ["integer","null"]
     },
     "class_block_count": {
-      "type": ["integer","null"]
+      "type": ["null","integer"]
     },
     "student_is_enrolled": {
       "type": "boolean"
@@ -305,10 +305,10 @@
                       "type": ["integer","null"]
                     },
                     "class_block_retail_price": {
-                      "type": ["integer","number","null"]
+                      "type": ["integer","null","number"]
                     },
                     "class_block_discounted_price": {
-                      "type": ["integer","null"]
+                      "type": ["integer","null","number"]
                     },
                     "class_block_first_session": {
                       "type": "integer"
@@ -332,10 +332,10 @@
                       "type": ["integer","null"]
                     },
                     "class_block_retail_price": {
-                      "type": ["integer","number","null"]
+                      "type": ["integer","null","number"]
                     },
                     "class_block_discounted_price": {
-                      "type": ["integer","null"]
+                      "type": ["integer","null","number"]
                     },
                     "class_block_first_session": {
                       "type": "integer"

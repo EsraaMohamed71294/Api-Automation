@@ -29,7 +29,7 @@
               "type": ["integer","null"]
             },
             "class_block_count": {
-              "type": ["null","integer"]
+              "type": "null"
             },
             "class_educators": {
               "type": "array",
@@ -265,7 +265,7 @@
               "type": "integer"
             },
             "class_block_number": {
-              "type": ["integer","null"]
+              "type": ["null","integer"]
             },
             "educator_id": {
               "type": "integer"
