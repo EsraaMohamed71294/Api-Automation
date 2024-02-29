@@ -1,4 +1,4 @@
-package Nagwa.comAPIs;
+package NagwaPagesAPIs;
 
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
@@ -58,7 +58,7 @@ public class LandingPage {
                 .body("[0].stage_order",equalTo(stage_order))
                 .body("[0].stage_localization_key",hasToString(stage_localization_key))
                 .body("[0].stage_color",hasToString(stage_color))
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/Nagwa.comAPIs/LandingPage.json")));
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/NagwaPagesAPIs/LandingPage.json")));
     }
     @Given("User send Invalid Country Code In query params of the request Landing Page")
     public void send_invalid_Country_code(){

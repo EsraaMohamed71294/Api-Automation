@@ -1,4 +1,4 @@
-package Nagwa.comAPIs;
+package NagwaPagesAPIs;
 
 import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;
@@ -56,7 +56,7 @@ public class GradePage {
                 .body("grade_id",equalTo(grade_id))
                 .body("grade_order",equalTo(grade_order))
                 .body("stage_localization_key",containsString(stage_localization_key))
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/Nagwa.comAPIs/GradePage.json")));
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/NagwaPagesAPIs/GradePage.json")));
     }
     @Given("User send Invalid Data In query params of the request Grade Page")
     public void send_invalid_data_to_grade_page(){
