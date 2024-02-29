@@ -1,4 +1,4 @@
-package Nagwa.comAPIs;
+package NagwacomAPIs;
 
 
 import TestConfig.Database_Connection;

@@ -1,4 +1,4 @@
-package Nagwa.comAPIs;
+package NagwacomAPIs;
 
 import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;

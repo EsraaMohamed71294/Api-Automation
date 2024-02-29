@@ -43,7 +43,7 @@ public class unlockSession {
     }
 
     public void get_classes_data_from_database() throws SQLException {
-        ResultSet resultSet = Connect.connect_to_database("         select * from public.classes_subjects_sessions css join sessions s ON  s.session_id = css.session_id join public.classes_subjects cs on  \n" +
+        ResultSet resultSet = Connect.connect_to_database("select * from public.classes_subjects_sessions css join sessions s ON  s.session_id = css.session_id join public.classes_subjects cs on  \n" +
                 "cs.class_subject_id = css.class_subject_id join classes c on c.class_id = cs.class_id join classes_students cs2 on cs2.class_id   \n" +
                 "= c.class_id   \n" +
                 "left join students_access_rights sar    \n" +
