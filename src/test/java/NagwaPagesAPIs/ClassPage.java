@@ -1,4 +1,4 @@
-package Nagwa.comAPIs;
+package NagwaPagesAPIs;
 
 import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;
@@ -54,7 +54,7 @@ public class ClassPage {
                 .body("class_title",containsString(class_title))
                 .body("class_payment_option_id",equalTo(class_payment_option))
                 .body("class_description",containsString(class_description))
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/Nagwa.comAPIs/ClassPage.json")));
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/NagwaPagesAPIs/ClassPage.json")));
     }
     @Given("User send valid ClassId and StudentId in query params of the request")
     public void send_classId_and_studentId_to_request(){

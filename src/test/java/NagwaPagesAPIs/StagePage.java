@@ -1,4 +1,4 @@
-package Nagwa.comAPIs;
+package NagwaPagesAPIs;
 
 
 import TestConfig.Database_Connection;
@@ -61,7 +61,7 @@ public class StagePage {
                 .body("stage_order",equalTo(stage_order))
                 .body("stage_localization_key",containsString(stage_localization_key))
                 .body("stage_color",containsString(stage_color))
-                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/Nagwa.comAPIs/StagePage.json")));
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/NagwaPagesAPIs/StagePage.json")));
     }
     @Given("User send Invalid Data In query params of the request Stage Page")
     public void send_not_exist_data_stagePage(){

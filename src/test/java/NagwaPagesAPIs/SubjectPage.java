@@ -1,4 +1,4 @@
-package Nagwa.comAPIs;
+package NagwaPagesAPIs;
 
 import EducatorProfile.Educator_TestData;
 import TestConfig.Database_Connection;
@@ -59,7 +59,7 @@ public class SubjectPage {
              .body("subject_id",equalTo(subject_id))
              .body("country_id",equalTo(country_id))
              .body("country_iso_code",containsString(country_iso_code))
-             .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/Nagwa.comAPIs/SubjectPage.json")));
+             .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/NagwaPagesAPIs/SubjectPage.json")));
  }
  @Given("User send validId and data in query params of the request")
     public void enter_student_id_in_query_param(){
