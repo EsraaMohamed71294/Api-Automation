@@ -21,7 +21,6 @@ import io.restassured.response.Response;
 
 import static org.hamcrest.Matchers.*;
 
-
 public class getEnrolledClasses{
 	TestBase test = new TestBase();
 	TestData data = new TestData();
