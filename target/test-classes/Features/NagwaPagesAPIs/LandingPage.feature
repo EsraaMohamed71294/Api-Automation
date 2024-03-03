@@ -1,4 +1,4 @@
-Feature:  Testing All Scenarios Of GradePage API
+Feature:  Testing All Scenarios Of LandingPage API
 
   Scenario: Validate That Data Of Values In Query Params Returns After Enter Valid Data In The Request
     Given  User Send CountryIso Code To Landing Page API
