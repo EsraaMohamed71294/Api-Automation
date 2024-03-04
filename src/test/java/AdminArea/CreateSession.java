@@ -18,7 +18,6 @@ import static org.hamcrest.Matchers.hasToString;
 public class CreateSession {
     TestBase test = new TestBase();
     Educator_TestData data = new Educator_TestData();
-    CreateEducator educator = new CreateEducator();
     GetClass Class = new GetClass();
     Faker fakeDate =new Faker();
     String sessionTitle = fakeDate.name().title();
