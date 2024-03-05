@@ -26,6 +26,7 @@ public class AssignEducationalResources {
     Database_Connection Connect = new Database_Connection();
     public Long SessionID;
     public Long ResourceId;
+    public Long Class_Id;
     Response Assign_Educational_Resource;
     Response Assign_Resource_InvalidSession;
     Response Assign_Resource_InvalidResource;
@@ -36,6 +37,7 @@ public class AssignEducationalResources {
     public void  Create_new_Assign_resources() throws SQLException, InterruptedException {
         session.Create_Session();
         resource.Create_new_educational_resources();
+        Class_Id = session.Class_ID;
         SessionID = session.sessionId;
         ResourceId = resource.resourceId;
         System.out.println("ResourceId " + ResourceId);
