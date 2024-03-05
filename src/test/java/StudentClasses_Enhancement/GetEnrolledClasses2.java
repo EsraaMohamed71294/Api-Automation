@@ -39,9 +39,9 @@ public class GetEnrolledClasses2 {
     Integer class_block_count ;
     Long educator_id;
     Long subject_id;
-    Number class_subject_retail_price ;
-    Number class_subject_discounted_price;
-    Number class_subject_session_price ;
+    Float class_subject_retail_price ;
+    Float class_subject_discounted_price;
+    Float class_subject_session_price ;
     Response Get_Enrolled_Classes;
 
 
@@ -97,64 +97,15 @@ public class GetEnrolledClasses2 {
     @Then("I Verify The appearance of status code 200 and all upcoming sessions2")
     public void Validate_Response_of_Upcoming_Sessions() {
         Get_Enrolled_Classes.prettyPrint();
-        //        body("upcoming_sessions.findAll{it.class_id=="+ class_Id +"}", hasItem(allOf(hasEntry("class_title",class_title),
-        //                hasEntry("session_title",session_title))))
-        //                .body("classes.findAll{it.class_id=="+class_Id+"}" , hasItems(hasEntry("class_title",class_title)))
-        //                .body("classes.findAll{it.class_id=="+ class_Id +"}",hasItem(hasEntry("class_title",class_title),
-        //                        hasEntry("class_payment_option_name",class_payment_option_name),hasEntry("class_payment_option_id",class_payment_option_id),
-        //                        hasEntry("class_seats_limit",class_seats_limit), hasEntry("class_block_count",null)))
-        //                body("upcoming_sessions.findAll{it.class_id=="+ class_Id +"}", hasItem(allOf(hasEntry("class_title",class_title),
-        //                hasEntry("session_title",session_title))))
-        //                .body("classes.findAll{it.class_id=="+class_Id+"}" , hasItems(hasEntry("class_title",class_title)))
-        //                .body("classes.findAll{it.class_id=="+ class_Id +"}",hasItem(hasEntry("class_title",class_title),
-        //                        hasEntry("class_payment_option_name",class_payment_option_name),hasEntry("class_payment_option_id",class_payment_option_id),
-        //                        hasEntry("class_seats_limit",class_seats_limit), hasEntry("class_block_count",null)))
-        //                .body("classes.findAll{it.class_id=="+ class_Id +"}" , hasItems(hasEntry("class_title",class_title)
-        //                , hasEntry("class_payment_option_name",class_payment_option_name), hasEntry("class_payment_option_id",class_payment_option_id), hasEntry("class_seats_limit",class_seats_limit), hasEntry("class_block_count",null)))
-        //                .body("classes.findAll{it.class_id=="+ class_Id +"}", hasItem(
-        //                        allOf(
-        //                        hasEntry("class_id", class_Id),
-        //                        hasEntry("class_title", class_title),
-        //                        hasEntry("class_payment_option_name", class_payment_option_name),
-        //                        hasEntry("class_payment_option_id", class_payment_option_id),
-        //                        hasEntry("class_seats_limit", class_seats_limit),
-        //                        hasEntry("class_block_count", null)
-        //                )))
         Get_Enrolled_Classes.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-//                body("upcoming_sessions.findAll{it.class_id=="+ class_Id +"}", hasItem(allOf(hasEntry("class_title",class_title),
-//                hasEntry("session_title",session_title))))
-//                .body("classes.findAll{it.class_id=="+class_Id+"}" , hasItems(hasEntry("class_title",class_title)))
 
-//                .body("classes.findAll{it.class_id=="+ class_Id +"}",hasItem(hasEntry("class_title",class_title),
-//                        hasEntry("class_payment_option_name",class_payment_option_name),hasEntry("class_payment_option_id",class_payment_option_id),
-//                        hasEntry("class_seats_limit",class_seats_limit), hasEntry("class_block_count",null)))
-
-//                .body("classes.findAll{it.class_id=="+ class_Id +"}" , hasItems(hasEntry("class_title",class_title)
-//                , hasEntry("class_payment_option_name",class_payment_option_name), hasEntry("class_payment_option_id",class_payment_option_id), hasEntry("class_seats_limit",class_seats_limit), hasEntry("class_block_count",null)))
-
-//                .body("classes.findAll{it.class_id=="+ class_Id +"}", hasItem(
-//                        allOf(
-//                        hasEntry("class_id", class_Id),
-//                        hasEntry("class_title", class_title),
-//                        hasEntry("class_payment_option_name", class_payment_option_name),
-//                        hasEntry("class_payment_option_id", class_payment_option_id),
-//                        hasEntry("class_seats_limit", class_seats_limit),
-//                        hasEntry("class_block_count", null)
-//                )))
-
-
-
-                .body("classes.findAll{it.class_id=="+ class_Id +"}", hasItem(
-                        hasEntry("class_id", equalTo(class_Id))),
-                        hasItem(hasEntry("class_title", hasToString(class_title))),
-                        hasItem(hasEntry("class_payment_option_name", hasToString(class_payment_option_name))),
-                        hasItem(hasEntry("class_payment_option_id", equalTo(class_payment_option_id))),
-                        hasItem(hasEntry("class_seats_limit", equalTo(class_seats_limit))),
-                        hasItem(hasEntry("class_block_count", equalTo(null))))
-
-
+                .body("classes.findAll{it.class_id=="+ class_Id +"}", hasItem(allOf(hasEntry("class_title",class_title),
+                        hasEntry("class_payment_option_name",class_payment_option_name))))
+                .body("classes.findAll{it.class_id=="+ class_Id +"}", hasItem(allOf(hasEntry("class_payment_option_id",class_payment_option_id),
+                        hasEntry("class_seats_limit",class_seats_limit),
+                        hasEntry("class_block_count",null))))
                 .body("classes.class_educators.educator_id",hasItems(hasItem(equalTo(educator_id))))
                 .body("classes.class_subjects.subject_id",hasItems(hasItem(equalTo(subject_id))),"classes.class_subjects[0].class_subject_retail_price[0]",equalTo(class_subject_retail_price),
                         "classes.class_subjects.class_subject_discounted_price",hasItems(hasItem(equalTo(null))),"classes.class_subjects[0].class_subject_session_price[0]",equalTo(class_subject_session_price))
@@ -162,7 +113,16 @@ public class GetEnrolledClasses2 {
                         "upcoming_sessions.session_id",hasItem(equalTo(session_Id)),"upcoming_sessions.session_title",hasItem(hasToString(session_title)),"upcoming_sessions.educator_id",hasItem(equalTo(educator_id)))
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClasses_Enhancement/GetStudentClasses2.json")));
 
+    }
 
+    @Given("user send invalid user id")
+    public void Invalid_User_ID() {
+        pathParams.put("studentId", "123456789111");
+    }
+    @Then("I verify the appearance of  status code 403 and user unauthorized in getEnrolledClasses")
+    public void Validate_Response_of_unauthorized_user() {
+        Response getEnrolledClassesResponse = Get_Enrolled_Classes;
+        test.Validate_Error_Messages(getEnrolledClassesResponse,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
     }
 
 }

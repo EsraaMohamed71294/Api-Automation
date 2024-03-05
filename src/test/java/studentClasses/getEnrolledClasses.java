@@ -69,8 +69,6 @@ public class getEnrolledClasses{
 				.assertThat().body("upcoming_sessions.findAll{it.class_id=="+ class_Id +"}", hasItem(allOf(hasEntry("class_title",class_title),
 				hasEntry("session_title",session_title))))
 
-
-
 				.body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/GetEnrolledClasses_Schema.json")))
 				.body("classes.findAll{it.class_id=="+class_Id+"}" , hasItems(hasEntry("class_title",class_title)));
 

@@ -7,3 +7,9 @@ Feature: Test all scenarios of the api of Getting upcoming sessions for enrolled
     And     Get Enrolled Classes from database2
     Then    I Verify The appearance of status code 200 and all upcoming sessions2
 
+
+  Scenario: Verify sending invalid user id
+    Given   user send invalid user id
+    When    Perform the api of Get_Enrolled_Classes
+    Then    I verify the appearance of  status code 403 and user unauthorized in getEnrolledClasses
+
