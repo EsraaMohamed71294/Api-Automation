@@ -35,7 +35,7 @@ public class ListEducationalResourcesTypes {
     @And("Getting Educational Resources Types from database")
     public void getEducational_Resources_Types () throws SQLException {
         ResultSet EducationalResourcesTypes = Connect.connect_to_database("select * from educational_resources_types ert \n" +
-                "where educational_resource_type_id = 2");
+                "where educational_resource_type_id = 1");
 
         while (EducationalResourcesTypes.next()) {
             educational_resource_type_id = EducationalResourcesTypes.getInt("educational_resource_type_id");
