@@ -40,7 +40,7 @@ public class AssignEducationalResources {
         Class_Id = session.Class_ID;
         SessionID = session.sessionId;
         ResourceId = resource.resourceId;
-        System.out.println("ResourceId " + ResourceId);
+        System.out.println("SessionID "+ SessionID +"ResourceId " + ResourceId);
         String valid_body = "{\"sessions_ids\":["+ SessionID +"],\"educational_resource_id\":"+ ResourceId +"}";
         Assign_Educational_Resource = test.sendRequest("POST", "/admin/assign-educational-resource", valid_body, data.Admin_Token);
     }

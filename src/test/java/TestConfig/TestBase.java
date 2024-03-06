@@ -22,7 +22,7 @@ public class TestBase {
 	public Map<String,Object> pathParams = new HashMap<String, Object>();
 
 	public static String  generate_access_token(String refresh_token) {
-		RestAssured.baseURI ="https://api.nagwa.io";
+		RestAssured.baseURI ="https://demo-api.nagwa.io";
 		RestAssured.basePath ="/v1";
 		RequestSpecification request = 
 			RestAssured.given()	   
