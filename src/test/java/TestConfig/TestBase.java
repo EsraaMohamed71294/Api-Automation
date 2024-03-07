@@ -22,16 +22,15 @@ public class TestBase {
 	public Map<String,Object> pathParams = new HashMap<String, Object>();
 
 	public static String  generate_access_token(String refresh_token) {
-		RestAssured.baseURI ="https://demo-api.nagwa.io";
-		RestAssured.basePath ="/v1";
-		RequestSpecification request = 
-			RestAssured.given()	   
-			.header("Content-Type","application/json")
-			.header("Authorization",refresh_token);
+		EnvironmentSetup.setEnvironment(EnvironmentSetup.env);
+		RequestSpecification request =
+				RestAssured.given()
+						.header("Content-Type","application/json")
+						.header("Authorization",refresh_token);
 
-			Response response = request.when()
-			.post("/token/refresh");
-			access_token = response.then().extract().path("access_token");
+		Response response = request.when()
+				.post("/token/refresh");
+		access_token = response.then().extract().path("access_token");
 
 		if (access_token == null) {
 			System.out.println("The Refresh Token Api gives Error : Access Token is Null");
@@ -85,6 +84,7 @@ public class TestBase {
 				.assertThat()
 				.body("error_message" ,containsString(error_message) ,"error_id" ,equalTo(error_id) );
 	}
+
 
 
 }
