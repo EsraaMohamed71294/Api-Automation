@@ -3,7 +3,9 @@ package TestConfig;
 import io.restassured.RestAssured;
 
 public class EnvironmentSetup {
+
     public static String env = "DEMO";
+    //env :{ "DEMO", "BETA","LIVE"}
 
     public static void setEnvironment(String environment) {
         switch (environment) {

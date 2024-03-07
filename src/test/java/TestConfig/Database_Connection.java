@@ -17,12 +17,16 @@ public class Database_Connection {
 	public void OTP_DatabaseEnvironment (String environment){
 		switch (environment) {
 			case "BETA":
-			case "DEMO":
 				host = "jdbc:postgresql://beta-1.cluster-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/mmOtpDataBase";
 				user = "qc_testing";
 				password = "UsB7cKKz6RbBD$(T";
 				break;
-			case "LIVE":
+			case "DEMO1":
+				host = "jdbc:postgresql://beta-1.cluster-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/mmOtpDataBase_demo";
+				user = "qc_testing";
+				password = "UsB7cKKz6RbBD$(T";
+				break;
+			case "DEMO":
 				host = "jdbc:postgresql://live-nagwa-otp.cluster-ro-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/live-mmOtpDataBase";
 				user = "postgres";
 				password = "gufQl5nCa94kC6wqBEPomP";

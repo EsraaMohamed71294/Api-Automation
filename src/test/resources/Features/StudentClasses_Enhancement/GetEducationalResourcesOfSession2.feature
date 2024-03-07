@@ -11,7 +11,7 @@ Feature:  Test All Scenarios Of GetEducationalResourcesOfSession API
     When    Performing The Api Of GetEducationalResources
     Then    The Response Should Contain Status Code 403 And Error Message
 
-  Scenario:  Verify Sending SessionId That Contains No EducationalResources
-    Given  User Send SessionId That Doesn't Have Educational Resources
-    When   Performing The Api Of GetEducationalResources
-    Then   The Response Should Contains Status Code 404 And Message That No Educational resources Found
+  Scenario: Verify Sending SessionId That Contains No EducationalResources
+    Given   User Send SessionId That Doesn't Have Educational Resources
+    When    Performing The Api Of GetEducationalResources
+    Then    The Response Should Contains Status Code 404 And Message That No Educational resources Found

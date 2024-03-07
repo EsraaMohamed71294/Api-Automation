@@ -12,7 +12,6 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -44,8 +43,8 @@ public class GetEducationalResourcesOfSession2 {
     Integer class_payment_option_id;
     String session_title;
     Integer class_seats_limit;
-    Float class_subject_retail_price;
-    Float class_subject_session_price;
+    Integer class_subject_retail_price;
+    Integer class_subject_session_price;
     Integer educational_resource_type_id;
     String educational_resources_name;
     Long educational_resource_id;
@@ -84,29 +83,14 @@ public class GetEducationalResourcesOfSession2 {
             session_title = resultSet.getString("session_title");
             class_seats_limit = resultSet.getInt("class_seats_limit");
             subject_id = resultSet.getLong("subject_id");
-            class_subject_retail_price = resultSet.getFloat("class_subject_retail_price");
-            class_subject_session_price = resultSet.getFloat("class_subject_session_price");
+            class_subject_retail_price = resultSet.getInt("class_subject_retail_price");
+            class_subject_session_price = resultSet.getInt("class_subject_session_price");
             educational_resource_type_id = resultSet.getInt("educational_resource_type_id");
             educational_resources_name = resultSet.getString("educational_resources_name");
             educational_resource_id = resultSet.getLong("educational_resource_id");
             educational_resource_md5 = resultSet.getString("educational_resource_md5");
             file_type_id = resultSet.getInt("file_type_id");
         }
-
-//            ResultSet resultSet_of_session_with_no_educational_Resources = connect.connect_to_database("select * from  public.classes_subjects_sessions css join classes_subjects cs on css.class_subject_id = cs.class_subject_id  \n" +
-//                    "join classes_students cs2 on cs2.class_id = cs.class_id join classes c on c.class_id = cs2.class_id left join  \n" +
-//                    "sessions_educational_resources ser on ser.session_id  = css.session_id  join\n" +
-//                    " \t\t\t\tpublic.students_access_rights sar on sar.student_access_right_session_id = ser.session_id or sar.student_access_right_class_id = cs2.class_id \n" +
-//                    " \t\t\t\tjoin sessions s on s.session_id = css.session_id  \n" +
-//                    " \t\t\t\twhere cs2.student_id ="+student_id+" "+"and s.session_ended_date notnull\n" +
-//                    " \t\t\t\tand ser.session_educational_resource_id is null \n" +
-//                    " \t\t\t\t\n" +
-//                    " \t\t\t\t");
-
-//            while(resultSet_of_session_with_no_educational_Resources.next()) {
-//                session_with_no_Educational_resources = resultSet_of_session_with_no_educational_Resources.getString("session_id");
-//                class_id_of_session_with_no_er = resultSet_of_session_with_no_educational_Resources.getString("class_id");
-//            }
     }
 
     public void EducationalResourceForEndedSession() throws SQLException, InterruptedException {
@@ -130,8 +114,9 @@ public class GetEducationalResourcesOfSession2 {
         Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",AdminData.Admin_Token);
         VerifyOTP.prettyPrint();
         EducatorRefreshToken = VerifyOTP.then().extract().path("tokens.refresh_token");
-
-        Response End_Session = test.sendRequest("POST", "/educators/{educator_id}/sessions/{session_id}/end", null,EducatorRefreshToken);
+        Response Start_Session = test.sendRequest("POST", "/educators/"+ educator_id +"/sessions/"+ session_id +"/start", null,EducatorRefreshToken);
+        Start_Session.prettyPrint();
+        Response End_Session = test.sendRequest("POST", "/educators/"+ educator_id +"/sessions/"+ session_id +"/end", null,EducatorRefreshToken);
         End_Session.prettyPrint();
 
     }
@@ -152,11 +137,6 @@ public class GetEducationalResourcesOfSession2 {
         get_Educational_resource_of_Session.then()
                 .statusCode(HttpStatus.SC_OK)
                 .assertThat()
-//
-//                    .body("educational_resources.educational_resource_type", hasItems(hasToString(educational_resource_type)))
-//                    .body("class_id", equalTo(class_id),"session_id" , equalTo(session_id),
-//                            "educational_resources.educational_resources.educational_resource_id", hasItems(hasItem(equalTo(resource_id))))
-
                 .body("class_id",equalTo(class_id),"class_title",hasToString(class_title),
                         "class_payment_option_name",hasToString(class_payment_option_name),"sessions_count",equalTo(1),
                         "class_payment_option_id",equalTo(class_payment_option_id), "class_seats_limit",equalTo(class_seats_limit),
@@ -170,7 +150,8 @@ public class GetEducationalResourcesOfSession2 {
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/StudentClassesSchemas/GetEducationalResourcesOfSession.json")));
     }
     @Given("User Send Invalid UserId In The Request")
-    public void unAuthorized_User(){
+    public void unAuthorized_User() throws SQLException, InterruptedException {
+        EducationalResourceForEndedSession();
         PathParams.put("student_id", "123456754223");
         PathParams.put("class_id",class_id);
         PathParams.put("session_id",session_id);
@@ -181,10 +162,13 @@ public class GetEducationalResourcesOfSession2 {
         test.Validate_Error_Messages(Educational_Resources_Response, HttpStatus.SC_FORBIDDEN,"Unauthorized" , 4031);
     }
     @Given("User Send SessionId That Doesn't Have Educational Resources")
-    public void No_educational_resource_found(){
+    public void No_educational_resource_found() throws SQLException {
+        session.Create_Session();
+        class_id = session.Class_ID;
+        session_id = session.sessionId;
         PathParams.put("student_id", student_id);
-        PathParams.put("class_id",class_id_of_session_with_no_er);
-        PathParams.put("session_id",session_with_no_Educational_resources);
+        PathParams.put("class_id",class_id);
+        PathParams.put("session_id",session_id);
     }
     @Then("The Response Should Contains Status Code 404 And Message That No Educational resources Found")
     public void Validate_Response_For_NotFound_Response(){

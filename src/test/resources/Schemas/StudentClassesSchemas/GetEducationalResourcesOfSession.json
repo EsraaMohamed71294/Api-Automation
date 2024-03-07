@@ -41,7 +41,7 @@
       "type": "integer"
     },
     "class_seats_reserved": {
-      "type": "integer"
+      "type": ["null","integer"]
     },
     "class_seats_available": {
       "type": "integer"
@@ -71,7 +71,7 @@
               "type": "string"
             },
             "class_subject_retail_price": {
-              "type": "null"
+              "type": ["integer","null"]
             },
             "class_subject_discounted_price": {
               "type": "null"
@@ -251,7 +251,7 @@
       ]
     },
     "access_rights": {
-      "type": "object",
+      "type": ["null","object"],
       "properties": {
         "class_id": {
           "type": ["null","integer"]
