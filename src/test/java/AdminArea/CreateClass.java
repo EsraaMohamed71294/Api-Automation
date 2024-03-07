@@ -65,7 +65,7 @@ public class CreateClass {
                 "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-28T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2025-01-23T00:00:00Z\",\"class_enrollment_end_date\":\"2025-01-30T00:00:00Z\",\"class_archive_date\":\"2025-01-22T00:00:00Z\"," +
                 "\"class_payment_option_id\":3,\"class_block_count\":null,\"class_seats_limit\":10,\"is_test_class\":true,\"class_start_date\":\"2025-01-28T00:00:00Z\"," +
-                "\"class_end_date\":\"2025-12-28T00:00:00Z\",\"class_semester_localization_key\":\"First_Term\",\"class_type\":\"ClassType\",\"subjects\":[{\"subject_id\":793174170262," +
+                "\"class_end_date\":\"2025-12-28T00:00:00Z\",\"class_semester_localization_key\":\"First_Term\",\"class_type\":\"ClassType\",\"subjects\":[{\"subject_id\":364128042486," +
                 "\"class_subject_retail_price\":50,\"class_subject_discounted_price\":null,\"class_subject_session_price\":10,\"blocks\":[]}],\"educators\":[{\"educator_order\":1," +
                 "\"educator_id\":"+ EducatorId +"}]}";
             System.out.println("Create Class Per Session "+body_for_per_session_class);

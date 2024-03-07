@@ -27,6 +27,7 @@ public class AssignEducationalResources {
     public Long SessionID;
     public Long ResourceId;
     public Long Class_Id;
+    public Long EducatorId;
     Response Assign_Educational_Resource;
     Response Assign_Resource_InvalidSession;
     Response Assign_Resource_InvalidResource;
@@ -38,6 +39,7 @@ public class AssignEducationalResources {
         session.Create_Session();
         resource.Create_new_educational_resources();
         Class_Id = session.Class_ID;
+        EducatorId = session.EducatorId;
         SessionID = session.sessionId;
         ResourceId = resource.resourceId;
         System.out.println("SessionID "+ SessionID +"ResourceId " + ResourceId);

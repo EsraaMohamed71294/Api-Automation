@@ -63,6 +63,7 @@ public class VerifyEducator_OTP {
     public String Verify_Educator_OTP() {
         String Valid_body_request = "{\"email\":\""+ Email +"\",\"otp\":\"" + OTP + "\"}";
         Verify_Educator_OTP = test.sendRequest("POST", "/educators/auth/verify-otp", Valid_body_request,Educator_Token);
+        System.out.println(Valid_body_request);
         return  Educator_Refresh_Token = Verify_Educator_OTP.then().extract().path("tokens.refresh_token");
     }
 
