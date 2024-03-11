@@ -19,7 +19,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasEntry;
 
-public class GetEnrolledClasses2 {
+public class GetEnrolledClasses {
     TestBase test = new TestBase();
     Student_TestData data = new Student_TestData();
     CreateSession sessionData = new CreateSession();

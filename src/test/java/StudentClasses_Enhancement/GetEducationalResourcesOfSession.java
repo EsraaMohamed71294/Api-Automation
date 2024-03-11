@@ -21,7 +21,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasToString;
 
-public class GetEducationalResourcesOfSession2 {
+public class GetEducationalResourcesOfSession {
     TestBase test = new TestBase();
     Student_TestData data = new Student_TestData();
     Educator_TestData AdminData = new Educator_TestData();
@@ -29,13 +29,10 @@ public class GetEducationalResourcesOfSession2 {
     CreateSession session = new CreateSession();
     AssignEducationalResources sessionData = new AssignEducationalResources();
     Long student_id = data.student_Id;
-    Long class_id;
-    Long session_id;
+    public Long class_id;
+    public Long session_id;
     Long resource_id;
-    String educational_resource_type;
     String student_refresh_token = data.Student_refresh_Token;
-    String session_with_no_Educational_resources;
-    String class_id_of_session_with_no_er;
     String class_title;
     String class_payment_option_name;
     Long educator_id;
@@ -118,7 +115,6 @@ public class GetEducationalResourcesOfSession2 {
         Start_Session.prettyPrint();
         Response End_Session = test.sendRequest("POST", "/educators/"+ educator_id +"/sessions/"+ session_id +"/end", null,EducatorRefreshToken);
         End_Session.prettyPrint();
-
     }
     @Given("User Send Valid Parameters To The Request")
     public void get_EducationalResource() throws InterruptedException, SQLException {

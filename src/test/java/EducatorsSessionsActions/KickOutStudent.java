@@ -2,10 +2,13 @@ package EducatorsSessionsActions;
 
 import AdminArea.CreateEducationalResource;
 import AdminArea.CreateEducator;
+import AdminArea.CreateSession;
 import AdminArea.GetSession;
 import EducatorProfile.Educator_TestData;
+import StudentClasses_Enhancement.Student_TestData;
 import StudentHomeScreen.EnrollStudentIntoClass;
 import StudentHomeScreen.StudentWallet;
+import StudentProfile.CreateStudent;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
@@ -28,65 +31,64 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class KickOutStudent {
     TestBase test = new TestBase();
-    EnrollStudentIntoClass student = new EnrollStudentIntoClass();
-    StudentWallet wallet = new StudentWallet();
-    Database_Connection Connect = new Database_Connection();
-    Educator_TestData data = new Educator_TestData();
+    Student_TestData data = new Student_TestData();
+    Database_Connection connect = new Database_Connection();
+    Educator_TestData adminData = new Educator_TestData();
+    CreateSession session = new CreateSession();
+    String student_token = data.Student_refresh_Token;
     Map<String, Object> pathParams = test.pathParams;
     String educator_Email;
     Long educatorID;
     Response Kick_OUt;
     String EducatorRefreshToken;
     String OTP;
-    Long Class_ID;
-    Long session_id;
-    Long student_Id;
+    public Long class_id;
+    Long educator_Id;
+    public Long session_id;
+    Long student_Id = data.student_Id;
     String student_refreshToken;
 
     @Given("student join started session")
-    public void student_join_session () throws SQLException, InterruptedException {
-        student. create_student_and_class ();
-        student.Enroll_Student_Into_Class();
-        Class_ID = student.Class_ID;
-        educatorID = student.Educator_Id;
-        session_id = student.Session_Id;
-        student_Id = student.student_Id;
-        student_refreshToken = student.student_refreshToken;
+    public void student_join_session () throws SQLException {
+        session.Create_Session();
+        class_id = session.Class_ID;
+        session_id = session.sessionId;
+        educator_Id = session.EducatorId;
 
-//            RestAssured.defaultParser = Parser.JSON;
-//            wallet.NagwaClasses_Checkout(student_Id);
-//            wallet.test_call_back();
 
-        ResultSet GetEducatorEmail = Connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educatorID +"");
+        ResultSet GetEducatorEmail = connect.connect_to_database("select educator_email from public.educators e where educator_id ="+ educator_Id +"");
         while (GetEducatorEmail.next()) {
             educator_Email = GetEducatorEmail.getString("educator_email");};
 
-        Response testOTP = test.sendRequest("POST", "/educators/auth/send-otp", "{\"email\":\""+ educator_Email +"\",\"language\":\"en\"}",data.Admin_Token);
+        Response testOTP = test.sendRequest("POST", "/educators/auth/send-otp", "{\"email\":\""+ educator_Email +"\",\"language\":\"en\"}",adminData.Admin_Token);
         testOTP.prettyPrint();
 
-        ResultSet GetEducatorOTP = Connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_Email +"'");
+        ResultSet GetEducatorOTP = connect.Connect_to_OTP_Database("select \"Email\" ,\"Otp\"  from \"UserMailOtp\" umo where \"Email\" = '"+ educator_Email +"'");
         while (GetEducatorOTP.next()) {
             OTP = GetEducatorOTP.getString("Otp");};
 
-        Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",data.Admin_Token);
+        Response VerifyOTP = test.sendRequest("POST", "/educators/auth/verify-otp", "{\"email\":\""+ educator_Email +"\",\"otp\":\""+ OTP +"\"}",adminData.Admin_Token);
         VerifyOTP.prettyPrint();
         EducatorRefreshToken = VerifyOTP.then().extract().path("tokens.refresh_token");
 
-        Response Start_Session = test.sendRequest("POST", "/educators/"+ educatorID +"/sessions/"+ session_id+ "/start", null,EducatorRefreshToken);
+        Response Enroll_Student_Into_Class = test.sendRequest("POST", "/students/"+ student_Id +"/classes/"+ class_id +"/enroll", null,student_token);
+        Enroll_Student_Into_Class.prettyPrint();
+
+        Response Start_Session = test.sendRequest("POST", "/educators/"+ educator_Id +"/sessions/"+ session_id +"/start", null,EducatorRefreshToken);
         Start_Session.prettyPrint();
-        Response joinSession =  test.sendRequest("POST", "/students/"+ student_Id +"/classes/"+ Class_ID +"/sessions/"+ session_id +"/join",null,student_refreshToken);
+        Response joinSession =  test.sendRequest("POST", "/students/"+ student_Id +"/classes/"+ class_id +"/sessions/"+ session_id +"/join",null,student_token);
         joinSession.prettyPrint();
 
     }
 
     @When("Performing the Api of Kick Out Student From Session")
-    public void  Kick_Out() throws SQLException {
-        pathParams.put("educator_id",educatorID);
+    public void  Kick_Out()  {
+        pathParams.put("educator_id",educator_Id);
         pathParams.put("session_id",session_id);
         pathParams.put("student_id",student_Id);
 
         Kick_OUt = test.sendRequest("POST", "/educators/{educator_id}/sessions/{session_id}/kickout/{student_id}",null,EducatorRefreshToken);
-
+        Kick_OUt.prettyPrint();
     }
 
     @Then("I verify the appearance of status code 200 and student kicked out successfully")
