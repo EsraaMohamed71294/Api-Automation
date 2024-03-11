@@ -21,7 +21,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasToString;
 
-public class GetEducationalResourcesOfSession2 {
+public class GetEducationalResourcesOfSession {
     TestBase test = new TestBase();
     Student_TestData data = new Student_TestData();
     Educator_TestData AdminData = new Educator_TestData();

@@ -35,7 +35,7 @@ public class StartSession {
     String EducatorRefreshToken;
     String OTP;
     Long Class_ID;
-    Long session_id;
+    public Long session_id;
     Long ResourceId;
     String agora_resource_id;
     String agora_sid;

@@ -21,12 +21,12 @@ public class Database_Connection {
 				user = "qc_testing";
 				password = "UsB7cKKz6RbBD$(T";
 				break;
-			case "DEMO1":
+			case "DEMO":
 				host = "jdbc:postgresql://beta-1.cluster-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/mmOtpDataBase_demo";
 				user = "qc_testing";
 				password = "UsB7cKKz6RbBD$(T";
 				break;
-			case "DEMO":
+			case "LIVE":
 				host = "jdbc:postgresql://live-nagwa-otp.cluster-ro-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/live-mmOtpDataBase";
 				user = "postgres";
 				password = "gufQl5nCa94kC6wqBEPomP";

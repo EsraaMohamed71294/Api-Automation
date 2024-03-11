@@ -11,8 +11,6 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.checkerframework.checker.units.qual.C;
-import studentClasses.TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -21,7 +19,7 @@ import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
 
-public class GetSessionsForEnrolledClasses2 {
+public class GetSessionsForEnrolledClasses {
         TestBase test = new TestBase();
         Student_TestData data = new Student_TestData();
         Database_Connection connect =new Database_Connection();
