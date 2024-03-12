@@ -7,6 +7,8 @@ public class Student_TestData {
     public Long student_Id;
     public String Student_refresh_Token;
     public Long student_not_exist;
+    public Long Archived_Class;
+    public Long Class_Has_No_Seats;
     public String student_refreshToken_not_exist;
     public String student_refreshToken_deleted;
     public String Parent_refreshToken;
@@ -25,6 +27,9 @@ public class Student_TestData {
                 student_refreshToken_not_exist = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjcxNDEyOTQ5Njg3MyIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcyMDA3NjgyOS44OTgzOCwidHlwZSI6InJlZnJlc2giLCJqdGkiOiIzNmY2ODEzNzNlOWE0YmNkODYzMjVmNjg3N2M1NGEwNCJ9.h5-bM6kXSqHcioMlQg5AchGUrLpVgo38OidU8ab34sc";
                 student_refreshToken_deleted = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsidXNlcl9pZCI6IjcxNDEyOTQ5Njg3MiIsInJvbGUiOiJzdHVkZW50In0sImV4cCI6MTcyMDA3Njg2Ni4zNjU3NDIsInR5cGUiOiJyZWZyZXNoIiwianRpIjoiZWEwYTBlYjViMjA0NDZmYzg4ODU3MDM4YTU2MGJmNWQifQ.8NewRVoTcK069xgJvgyYpvuMqpdxVPYmELkhxr-p9H0";
                 Parent_refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiY3JlYXRlX2FjY291bnRfZm9yIjoiUGFyZW50X3VzZXJOYW1lQG5hZ3dhLmNvbSIsInRva2VuX3Njb3BlIjoiY3JlYXRlX2FjY291bnQifSwiZXhwIjoxNzIwMDc2OTkwLjUwOTg4NSwidHlwZSI6InJlZnJlc2giLCJqdGkiOiIxZWM3NmU3M2MzMjI0YTI4YWM5NzBlOWE1YWUzYjE2OSJ9.Ssq2d5D_Cipxcg2UAZMAHwaNJ_jdvhnBwGHrxEcKLUo";
+                Archived_Class = 125193641793L;
+                Class_Has_No_Seats = 838130681495l;
+
                 break;
             case "LIVE":
                 student_Id = 870198947097L;

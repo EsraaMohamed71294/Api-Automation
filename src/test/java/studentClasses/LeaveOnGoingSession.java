@@ -17,7 +17,7 @@ import java.util.Map;
 
 import static org.hamcrest.Matchers.hasToString;
 
-public class LeaveOnGoingSession {
+//public class LeaveOnGoingSession {
 //    TestBase test = new TestBase();
 //    TestData data = new TestData();
 //    String user_token = data.refresh_token;
@@ -126,5 +126,5 @@ public class LeaveOnGoingSession {
 //        join_session_again =  test.sendRequest("POST", "/students/{student_id}/classes/{class_id}/sessions/{session_id}/join",null,user_token);
 //        join_session_again.prettyPrint();
 //    }
-
-}
+//
+//}

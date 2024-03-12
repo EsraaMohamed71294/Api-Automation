@@ -24,22 +24,12 @@ public class SubmitSessionFeedback {
     KickOutStudent student_KickedOut = new KickOutStudent();
     String student_token = data.Student_refresh_Token;
     Long student_Id = data.student_Id;
-    Database_Connection connect = new Database_Connection();
     Long class_Id;
-    String class_Id_of_kicked_out;
-    String Class_id_of_session_no_participate;
     Long session_id;
-    String not_participate_session;
-    String kickedOut_session;
     Map<String,Object> pathParams = test.pathParams;
     public Response submit_session_feedback ;
     String valid_request_body = "{\"session_feedback\":1}";
     String Invalid_request_body = "{\"session_feedback\":5}";
-
-
-
-    public void get_data_of_leave_session() throws SQLException {
-    }
 
 
     @Given("User Send feedback for session")
