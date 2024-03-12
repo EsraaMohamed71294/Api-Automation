@@ -17,7 +17,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasToString;
 
-public class submitSessionFeedback {
+//public class submitSessionFeedback {
 //    TestBase test = new TestBase();
 //    TestData data = new TestData();
 //
@@ -144,5 +144,5 @@ public class submitSessionFeedback {
 //        Response submit_feedback = submit_session_feedback;
 //        test.Validate_Error_Messages(submit_feedback,HttpStatus.SC_FORBIDDEN,"Unauthorized access. Student did not participate in this session.",4037);
 //    }
-
-}
+//
+//}
