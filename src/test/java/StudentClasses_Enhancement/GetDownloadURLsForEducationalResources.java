@@ -26,11 +26,11 @@ public class GetDownloadURLsForEducationalResources {
     AssignEducationalResources sessionData = new AssignEducationalResources();
     Long student_id = data.student_Id;
     Database_Connection connect = new Database_Connection();
-    Long class_id;
-    Long session_id;
-    Long educator_Id;
+    public Long class_id;
+    public Long session_id;
+    public Long educator_Id;
     String educator_Email;
-    String EducatorRefreshToken;
+    public String EducatorRefreshToken;
     String OTP;
     public Long resource_id;
     String student_refresh_token = data.Student_refresh_Token;
