@@ -1,23 +1,14 @@
 package EducatorsSessionsActions;
 
-import AdminArea.CreateEducationalResource;
-import AdminArea.CreateEducator;
 import AdminArea.CreateSession;
-import AdminArea.GetSession;
 import EducatorProfile.Educator_TestData;
-import StudentClasses_Enhancement.Student_TestData;
-import StudentHomeScreen.EnrollStudentIntoClass;
-import StudentHomeScreen.StudentWallet;
-import StudentProfile.CreateStudent;
+import StudentClasses.Student_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.parsing.Parser;
-import io.restassured.path.json.exception.JsonPathException;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 

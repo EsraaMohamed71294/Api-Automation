@@ -1,11 +1,7 @@
 Feature: Test all scenarios of the api of leave ongoing session
 
-  Scenario: Join session
-    Given   user send the same sessionId and class_id that he left from
-    When    Performing the Api of Joining Session Again
-
   Scenario: Verify user can leave the joined session successfully
-    Given   User left the session
+    Given   user send valid data to leave the joined session
     When    Performing the Api leave on going session
     Then    The Response should contains status code 200 and message Successfully left the session
 

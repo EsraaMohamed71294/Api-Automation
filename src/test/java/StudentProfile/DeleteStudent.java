@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses.TestData;
+import studentClasses_old.TestData;
 
 import java.io.File;
 import java.sql.ResultSet;

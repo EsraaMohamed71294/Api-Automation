@@ -1,4 +1,4 @@
-Feature: Testing All Scenarios For PayForBlock API
+Feature: Testing All Scenarios For Pay For Block API
 
   Scenario: Validate that student can buy block successfully
    Given   User Enter Valid ClassId And Valid Blocks Value In Right Sequential
