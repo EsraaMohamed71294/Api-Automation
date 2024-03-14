@@ -3,6 +3,7 @@ Feature:  Test All Scenarios For Get Download URLs For Educational Resources
   Scenario: Verify That ResourceId And DownloadLink Return In Response Body After Enter Valid Parameters
     Given User Send Valid Parameters To GetDownloadURLs Request
     When  Performing The APi Of GetDownload URLs Of Educational Resources
+    And   Get educational resources data from database
     Then  Response Status Code Is 200 And Response Body Contains EducationalResourceId And DownloadLink
 
   Scenario: Verify Sending Invalid UserId To GetDownLoadEducationalResources Request

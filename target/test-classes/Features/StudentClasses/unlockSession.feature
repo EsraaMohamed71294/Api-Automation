@@ -5,14 +5,14 @@ Feature: Test all scenarios of the api of unlock session
     When    Performing the Api of Unlock Session
     Then    I verify the appearance of status code 201 and Session successfully unlocked
 
-
   Scenario: Verify unlock session already unlocked
-    Given   User Send Session Id already unlocked to unlock session for user
+    Given   User Send Session Id to unlock session for user
     When    Performing the Api of Unlock Session
+    And     Performing the Api of Unlock Session
     Then    I verify the appearance of status code 200 and Session already unlocked
 
   Scenario: Verify can't unlock session for user not authorized
-    Given   User Send unauthorized session id
+    Given   User Send unauthorized student id
     When    Performing the Api of Unlock Session
     Then    The Response of unlockSession Should Contain Status Code 403 And Error Message Unauthorized
 
@@ -26,8 +26,5 @@ Feature: Test all scenarios of the api of unlock session
     When    Performing the Api of Unlock Session
     Then    The Response Should Contain Status Code 422 And Error Message pay per session not allowed
 
-
-Scenario:  delete access right
-  Given  delete the access Right From The Student To This Session
 
 

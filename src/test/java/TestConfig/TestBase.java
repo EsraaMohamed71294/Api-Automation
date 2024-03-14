@@ -1,12 +1,10 @@
 package TestConfig;
 
-import io.cucumber.java.en.Given;
-
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import studentClasses.TestData;
+import studentClasses_old.TestData;
 
 import java.util.HashMap;
 import java.util.Map;

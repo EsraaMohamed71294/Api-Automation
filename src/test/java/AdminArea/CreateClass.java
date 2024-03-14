@@ -36,7 +36,6 @@ public class CreateClass {
             "\"educator_id\":"+ EducatorId +"}]}";
 
 
-
     @Given("Performing the Api of Create class full pay With valid data")
     public Long Create_Class_full_pay() {
         educator.Create_Educator();

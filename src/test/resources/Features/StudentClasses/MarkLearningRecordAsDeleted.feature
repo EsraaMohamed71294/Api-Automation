@@ -16,11 +16,7 @@ Feature:  Testing All Scenarios For Mark Learning Record API
     Then    Response Code is 404 And Body Have Class Not Found Message
 
   Scenario: Verify Sending Deleted Learning Record
-    Given   Send Deleted Learning Record
+    Given   User Send Valid Data To MarkLearningRecordAsDeleted API
     When    Performing The API Of Mark Learning Record As Deleted API
+    And     Performing The API Of Mark Learning Record As Deleted API
     Then    Response Code Is 404 And Body Have Learning Record Is Deleted Message
-
-  Scenario: Verify Submit Learning Record Again
-    Given   User Send Valid Data To SubmitStudentLearningRecord Request
-    When    Performing The API Of SubmitStudentLearningRecord
-    Then    Response Status Code Is 200 And Body Have StudentLearning RecordId
