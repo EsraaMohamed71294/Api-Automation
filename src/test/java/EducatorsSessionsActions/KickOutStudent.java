@@ -29,7 +29,6 @@ public class KickOutStudent {
     String student_token = data.Student_refresh_Token;
     Map<String, Object> pathParams = test.pathParams;
     String educator_Email;
-    Long educatorID;
     Response Kick_OUt;
     String EducatorRefreshToken;
     String OTP;
@@ -37,7 +36,6 @@ public class KickOutStudent {
     Long educator_Id;
     public Long session_id;
     Long student_Id = data.student_Id;
-    String student_refreshToken;
 
     @Given("student join started session")
     public void student_join_session () throws SQLException {
