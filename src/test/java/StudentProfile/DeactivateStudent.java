@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.*;
 
 public class DeactivateStudent {
     TestBase test = new TestBase();
-    TestData studentData = new TestData();
+    Student_TestData studentData = new Student_TestData();
     CreateStudent student = new CreateStudent();
     Educator_TestData data = new Educator_TestData();
     Response deactivate_student;

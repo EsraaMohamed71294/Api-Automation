@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class ListGradesByCountry {
     Database_Connection Connect = new Database_Connection();
     TestBase test = new TestBase();
-    TestData data = new TestData();
+    Student_TestData data = new Student_TestData();
     Response List_Grades_ByCountry;
     Long grade_id ;
     String grade_url_text;

@@ -43,7 +43,10 @@ public class AssignEducationalResources {
         SessionID = session.sessionId;
         ResourceId = resource.resourceId;
         System.out.println("SessionID "+ SessionID +"ResourceId " + ResourceId);
-        String valid_body = "{\"sessions_ids\":["+ SessionID +"],\"educational_resource_id\":"+ ResourceId +"}";
+        String valid_body = "{" +
+                            "\"sessions_ids\":["+ SessionID +"]," +
+                            "\"educational_resource_id\":"+ ResourceId +
+                            "}";
         Assign_Educational_Resource = test.sendRequest("POST", "/admin/assign-educational-resource", valid_body, data.Admin_Token);
     }
 
@@ -71,7 +74,10 @@ public class AssignEducationalResources {
         resource.Create_new_educational_resources();
         ResourceId = resource.resourceId;
         SessionID = 123456789034L;
-        String Invalid_session_body = "{\"sessions_ids\":["+ SessionID +"],\"educational_resource_id\":"+ ResourceId +"}";
+        String Invalid_session_body =   "{" +
+                                        "\"sessions_ids\":["+ SessionID +"]," +
+                                        "\"educational_resource_id\":"+ ResourceId +
+                                        "}";
         Assign_Resource_InvalidSession = test.sendRequest("POST", "/admin/assign-educational-resource", Invalid_session_body, data.Admin_Token);
     }
 
@@ -85,7 +91,10 @@ public class AssignEducationalResources {
     public void  Create_Assign_resources_resource_notFound() throws SQLException {
         session.Create_Session();
         SessionID = session.sessionId;
-        String Invalid_session_body = "{\"sessions_ids\":["+ SessionID +"],\"educational_resource_id\":123456789034}";
+        String Invalid_session_body =   "{" +
+                                        "\"sessions_ids\":["+ SessionID +"]," +
+                                        "\"educational_resource_id\":123456789034" +
+                                        "}";
         Assign_Resource_InvalidResource = test.sendRequest("POST", "/admin/assign-educational-resource", Invalid_session_body, data.Admin_Token);
     }
 
@@ -97,7 +106,10 @@ public class AssignEducationalResources {
 
     @Given("Performing the Api of Assign Educational Resources with invalid data")
     public void  new_assign_educational_resources_InvalidData() {
-        String  Invalid_body = "{\"sessions_ids\":[???],\"educational_resource_id\":????}";
+        String  Invalid_body = "{" +
+                "\"sessions_ids\":[???]," +
+                "\"educational_resource_id\":????" +
+                "}";
         Invalid_Assign_Educational_Resources = test.sendRequest("POST", "/admin/educational-resources", Invalid_body, data.Admin_Token);
     }
 
@@ -111,7 +123,8 @@ public class AssignEducationalResources {
     public void Create_Assign_resources_with_invalid_token() throws SQLException {
         session.Create_Session();
         SessionID = session.sessionId;
-        String Invalid_session_body = "{\"sessions_ids\":["+ SessionID +"],\"educational_resource_id\":123456789034}";
+        String Invalid_session_body = "{\"sessions_ids\":["+ SessionID +"]," +
+                                       "\"educational_resource_id\":123456789034}";
         unauthorized_admin = test.sendRequest("POST", "/admin/classes", Invalid_session_body,data.refresh_token_for_notActiveEducator);
     }
 

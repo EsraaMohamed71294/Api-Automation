@@ -1,6 +1,7 @@
 package LookupsData;
 
 import StudentProfile.CreateStudent;
+import StudentClasses.Student_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.And;
@@ -9,7 +10,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class ListSubjectByGrade {
     Database_Connection Connect = new Database_Connection();
     TestBase test = new TestBase();
-    TestData data = new TestData();
+    Student_TestData data = new Student_TestData();
     CreateStudent student = new CreateStudent();
     Response List_Subject_ByGrade;
     Long grade_id ;

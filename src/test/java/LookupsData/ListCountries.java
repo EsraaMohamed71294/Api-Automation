@@ -1,5 +1,6 @@
 package LookupsData;
 
+import StudentClasses.Student_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.And;
@@ -8,7 +9,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 public class ListCountries {
     TestBase test = new TestBase();
     Database_Connection Connect = new Database_Connection();
-    TestData data = new TestData();
+    Student_TestData data = new Student_TestData();
     Response List_Countries;
     Long country_id ;
     String country_iso_code;

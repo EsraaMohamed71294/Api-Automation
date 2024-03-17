@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 
@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class ContactUsEmail {
     TestBase test = new TestBase();
-    TestData data = new TestData();
+    Student_TestData data = new Student_TestData();
     Response Send_ContactUs;
     String valid_body_request = "{\"first_name\":\"John\",\"last_name\":\"Doe\",\"email\":\"student_parent@nagwa.com\",\"email_body\":\"Automation Test For nagwa.com\"}";
 

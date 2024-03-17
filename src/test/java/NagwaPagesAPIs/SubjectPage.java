@@ -1,6 +1,7 @@
 package NagwaPagesAPIs;
 
 import EducatorProfile.Educator_TestData;
+import StudentClasses.Student_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.Given;
@@ -8,7 +9,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -18,12 +19,12 @@ import static org.hamcrest.Matchers.*;
 public class SubjectPage {
     TestBase test = new TestBase();
 
-    TestData data = new TestData();
+    Student_TestData data = new Student_TestData();
 
     Educator_TestData data_admin = new Educator_TestData();
     Response SubjectsPage;
-    String student_id = data.student_Id;
-    String user_token = data.refresh_token;
+    Long student_id = data.student_Id;
+    String user_token = data.Student_refresh_Token;
     Database_Connection connect = new Database_Connection();
     Long subject_id;
     String subject_name;

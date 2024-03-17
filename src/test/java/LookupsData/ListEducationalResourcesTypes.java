@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class ListEducationalResourcesTypes {
     TestBase test = new TestBase();
     Database_Connection Connect = new Database_Connection();
-    TestData data = new TestData();
+    Student_TestData data = new Student_TestData();
     Response Educational_Resources_Types;
     Integer educational_resource_type_id ;
     String educational_resource_type;

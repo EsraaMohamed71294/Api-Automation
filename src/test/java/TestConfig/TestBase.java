@@ -1,10 +1,8 @@
 package TestConfig;
 
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import studentClasses_old.TestData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +12,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class TestBase {
 
-	TestData data =new TestData();
 	public static String access_token;
 
 	public Map<String,Object> pathParams = new HashMap<String, Object>();

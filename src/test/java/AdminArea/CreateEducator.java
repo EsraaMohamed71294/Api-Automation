@@ -28,9 +28,16 @@ public class CreateEducator {
     public String Email =Educator_userName + "@nagwa.com";
     Long Id = Long.valueOf(String.format("%012d", fakeDate.number().randomNumber(12, true)));
 
-    String valid_body_request = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\""+ Email +"\"," +
-            "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
-            "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\",\"is_test_educator\":true}";
+    String valid_body_request = "{\"educator_id\":"+ Id +"," +
+            "\"educator_first_name\":\""+ firstName +"\"," +
+            "\"educator_last_name\":\""+ lastName +"\"," +
+            "\"educator_email\":\""+ Email +"\"," +
+            "\"educator_bio\":\"Experienced educator passionate about technology and programming.\"," +
+            "\"educator_is_active\":true," +
+            "\"educator_image_bucket\":\"educators-images\"," +
+            "\"educator_image_key\":\"123123123123/profile.jpg\"," +
+            "\"educator_image_cdn\":\"https://educators.images.com\"," +
+            "\"is_test_educator\":true}";
 
 
 
@@ -43,7 +50,6 @@ public class CreateEducator {
         return Educator_ID = Create_Educator.then().extract().path("educator_id");
     }
 
-
     @Then("I verify the appearance of status code 200 and Educator created successfully")
     public void Validate_Response_of_create_Educator_successfully() {
         Create_Educator.prettyPrint();
@@ -55,9 +61,16 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With Invalid email")
     public void Create_Educator_with_Invalid_mail() {
-        String Invalid_email_In_Body = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\"email.com\"," +
-                "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
-                "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\",\"is_test_educator\":true}";
+        String Invalid_email_In_Body = "{\"educator_id\":"+ Id +"," +
+                "\"educator_first_name\":\""+ firstName +"\"," +
+                "\"educator_last_name\":\""+ lastName +"\"," +
+                "\"educator_email\":\"email.com\"," +
+                "\"educator_bio\":\"Experienced educator passionate about technology and programming.\"," +
+                "\"educator_is_active\":true," +
+                "\"educator_image_bucket\":\"educators-images\"," +
+                "\"educator_image_key\":\"123123123123/profile.jpg\"," +
+                "\"educator_image_cdn\":\"https://educators.images.com\"," +
+                "\"is_test_educator\":true}";
 
         Create_Educator = test.sendRequest("POST", "/admin/educators", Invalid_email_In_Body,Admin_token);
     }
@@ -68,9 +81,15 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With Invalid body request")
     public void Create_Educator_with_Invalid_body() {
-        String Invalid_body = "{\"educator_id\":"+ Id +",\"educator_first_name\":\"\",\"educator_last_name\":\"\",\"educator_email\":\"\"," +
-                "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
-                "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\"}";
+        String Invalid_body = "{\"educator_id\":"+ Id +"," +
+                "\"educator_first_name\":\"\"," +
+                "\"educator_last_name\":\"\"," +
+                "\"educator_email\":\"\"," +
+                "\"educator_bio\":\"Experienced educator passionate about technology and programming.\"," +
+                "\"educator_is_active\":true," +
+                "\"educator_image_bucket\":\"educators-images\"," +
+                "\"educator_image_key\":\"123123123123/profile.jpg\"," +
+                "\"educator_image_cdn\":\"https://educators.images.com\"}";
 
         Create_Educator = test.sendRequest("POST", "/admin/educators", Invalid_body,Admin_token);
     }
@@ -81,9 +100,16 @@ public class CreateEducator {
     }
     @Given("Performing the Api of Create Educator With email already exist")
     public void Create_Educator_with_email_exist() {
-        String Email_already_exist = "{\"educator_id\":"+ Id +",\"educator_first_name\":\""+ firstName +"\",\"educator_last_name\":\""+ lastName +"\",\"educator_email\":\"intutor1@nagwaclassesus.com\"," +
-                "\"educator_bio\":\"Experienced educator passionate about technology and programming.\",\"educator_is_active\":true,\"educator_image_bucket\":\"educators-images\"," +
-                "\"educator_image_key\":\"123123123123/profile.jpg\",\"educator_image_cdn\":\"https://educators.images.com\",\"is_test_educator\":true}";
+        String Email_already_exist = "{\"educator_id\":"+ Id +"," +
+                "\"educator_first_name\":\""+ firstName +"\"," +
+                "\"educator_last_name\":\""+ lastName +"\"," +
+                "\"educator_email\":\"intutor1@nagwaclassesus.com\"," +
+                "\"educator_bio\":\"Experienced educator passionate about technology and programming.\"," +
+                "\"educator_is_active\":true," +
+                "\"educator_image_bucket\":\"educators-images\"," +
+                "\"educator_image_key\":\"123123123123/profile.jpg\"," +
+                "\"educator_image_cdn\":\"https://educators.images.com\"," +
+                "\"is_test_educator\":true}";
 
         Create_Educator = test.sendRequest("POST", "/admin/educators", Email_already_exist,Admin_token);
     }

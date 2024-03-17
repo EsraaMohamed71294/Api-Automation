@@ -1,5 +1,6 @@
 package ParentAccount;
 
+import StudentClasses.Student_TestData;
 import TestConfig.TestBase;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
@@ -7,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 
@@ -17,7 +18,7 @@ import static org.hamcrest.Matchers.hasToString;
 public class CreateParentAccount {
     TestBase test = new TestBase();
     Faker fakeDate =new Faker();
-    TestData parentData = new TestData();
+    Student_TestData parentData = new Student_TestData();
     Response Create_Educator;
     public Long parent_id;
     String Parent_Access_Token;

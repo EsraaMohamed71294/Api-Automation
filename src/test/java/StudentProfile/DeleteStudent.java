@@ -1,6 +1,7 @@
 package StudentProfile;
 
 import EducatorProfile.Educator_TestData;
+import StudentClasses.Student_TestData;
 import TestConfig.Database_Connection;
 import TestConfig.TestBase;
 import io.cucumber.java.en.And;
@@ -10,7 +11,7 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import studentClasses_old.TestData;
+import StudentClasses.Student_TestData;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteStudent {
     TestBase test = new TestBase();
-    TestData studentData = new TestData();
+    Student_TestData studentData = new Student_TestData();
     CreateStudent student = new CreateStudent();
     Database_Connection Connect = new Database_Connection();
     Educator_TestData data = new Educator_TestData();
