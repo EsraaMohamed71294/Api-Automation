@@ -27,7 +27,8 @@ public class ResetSession {
     Response reset_session;
     public Map<String, Object> pathParams = test.pathParams;
 
-    String valid_body = "{\"session_start_date\":\"2026-05-01T18:00:00Z\",\"session_end_date\":\"2026-05-01T20:00:00Z\"}";
+    String valid_body = "{\"session_start_date\":\"2026-05-01T18:00:00Z\"," +
+                        "\"session_end_date\":\"2026-05-01T20:00:00Z\"}";
 
    @Given("User Send Valid SessionId And Body To The API")
     public void send_valid_data()throws SQLException {

@@ -14,7 +14,7 @@ public class Database_Connection {
 	public Connection connection;
 	public Statement statement;
 
-	public void OTP_DatabaseEnvironment (String environment){
+	public void OTP_Database_Configuration (String environment){
 		switch (environment) {
 			case "BETA":
 				host = "jdbc:postgresql://beta-1.cluster-cmmuo3lde4yu.us-east-1.rds.amazonaws.com:5432/mmOtpDataBase";
@@ -36,7 +36,7 @@ public class Database_Connection {
 		}
 	}
 
-	public void NagwaClasses_DatabaseEnvironment (String environment){
+	public void NagwaClasses_Database_Configuration (String environment){
 		switch (environment) {
 			case "BETA":
 				host = "jdbc:postgresql://nagwa-classes-beta.cluster-c4iigfolsbo7.us-east-1.rds.amazonaws.com:5432/nagwa_classes";
@@ -58,7 +58,7 @@ public class Database_Connection {
 		}
 	}
 	public ResultSet connect_to_database (String query) {
-		NagwaClasses_DatabaseEnvironment(EnvironmentSetup.env);
+		NagwaClasses_Database_Configuration(EnvironmentSetup.env);
 		try {
 			connection = DriverManager.getConnection(host, user, password);
 			statement = connection.createStatement();
@@ -71,7 +71,7 @@ public class Database_Connection {
 	}
 
 	public ResultSet Connect_to_OTP_Database (String query){
-		OTP_DatabaseEnvironment(EnvironmentSetup.env);
+		OTP_Database_Configuration(EnvironmentSetup.env);
 		try {
 			connection = DriverManager.getConnection(host, user, password);
 			statement = connection.createStatement();

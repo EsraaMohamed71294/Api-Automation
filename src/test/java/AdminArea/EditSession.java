@@ -23,7 +23,6 @@ public class EditSession {
     Educator_TestData data = new Educator_TestData();
     CreateEducator educator_data = new CreateEducator();
     CreateSession session_data = new CreateSession();
-
     Long new_educator_id;
     Database_Connection connect = new Database_Connection();
     public Map<String, Object> pathParams = test.pathParams;

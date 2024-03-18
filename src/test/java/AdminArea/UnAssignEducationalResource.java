@@ -32,7 +32,8 @@ public class UnAssignEducationalResource {
     }
     @When("Performing The API of UnAssignEducationalResource")
     public void unAssign_Educational_Resource_Successfully(){
-        String valid_Body = "{\"sessions_ids\":["+ assign.SessionID +"],\"educational_resource_id\":"+ assign.ResourceId +"}";
+        String valid_Body = "{\"sessions_ids\":["+ assign.SessionID +"]," +
+                            "\"educational_resource_id\":"+ assign.ResourceId +"}";
         UnAssign_EducationalResource = test.sendRequest("POST","/admin/unassign-educational-resource", valid_Body , data.Admin_Token);
     }
     @Then("Response code is 200 and body returns with success message")
