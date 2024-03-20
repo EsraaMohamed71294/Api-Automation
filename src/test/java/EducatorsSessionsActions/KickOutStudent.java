@@ -98,4 +98,40 @@ public class KickOutStudent {
 
     }
 
+    @When("Performing the Api of Kick Out Student From Session With session not exist")
+    public void Kick_Out_Session_NotFound()  {
+        Response EndSession =  test.sendRequest("POST", "/educators/"+educator_Id+"/sessions/"+session_id+"/end",null,EducatorRefreshToken);
+        EndSession.prettyPrint();
+        pathParams.put("educator_id",educator_Id);
+        pathParams.put("session_id",session_id);
+        pathParams.put("student_id",student_Id);
+
+        Kick_OUt = test.sendRequest("POST", "/educators/{educator_id}/sessions/{session_id}/kickout/{student_id}",null,EducatorRefreshToken);
+        Kick_OUt.prettyPrint();
+    }
+
+    @Then("I verify the appearance of status code 422 and session is not eligible or ended")
+    public void Validate_Response_kickOut_with_invalid_session() {
+        Response Invalid_session = Kick_OUt;
+        test.Validate_Error_Messages(Invalid_session,HttpStatus.SC_UNPROCESSABLE_ENTITY,"Session not eligible or already ended.",4224);
+
+    }
+
+    @When("Performing the Api of Kick Out Student From Session With educator not exist")
+    public void KickOut_Student_educator_NotFound()  {
+        pathParams.put("educator_id",adminData.notActive_educator);
+        pathParams.put("session_id",session_id);
+        pathParams.put("student_id",student_Id);
+
+        Kick_OUt = test.sendRequest("POST", "/educators/{educator_id}/sessions/{session_id}/kickout/{student_id}",null,adminData.refresh_token_for_notActiveEducator);
+        Kick_OUt.prettyPrint();
+    }
+
+    @Then("I verify the appearance of status code 404 and educator is not assigned to this session")
+    public void Validate_Response_kickOut_with_Educator_notFound() {
+        Response Invalid_session = Kick_OUt;
+        test.Validate_Error_Messages(Invalid_session,HttpStatus.SC_FORBIDDEN,"Unauthorized access. Educator is not assigned to this session.",40311);
+
+    }
+
 }

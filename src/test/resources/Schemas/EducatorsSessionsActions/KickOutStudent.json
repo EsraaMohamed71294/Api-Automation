@@ -5,10 +5,10 @@
       "type": "string"
     },
     "session_id": {
-      "type": "string"
+      "type": "integer"
     },
     "student_id": {
-      "type": "string"
+      "type": "integer"
     }
   },
   "required": [

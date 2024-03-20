@@ -70,11 +70,13 @@ public class CreateStudent {
         get_grade_from_database ();
         verifyEmail.Verify_Student_OTP();
         CreateToken = verifyEmail.create_account_token;
+        System.out.println("CreateToken "+CreateToken);
         email = verifyEmail.Email;
         OTP = verifyEmail.OTP;
-        System.out.println(email + OTP);
+        System.out.println(email +" "+ OTP);
         Valid_body_request = "{\"student_first_name\":\""+ firstName +"\",\"student_last_name\":\""+ lastName +"\",\"student_email\":\""+ email +"\"" +
                 ",\"grade_id\":"+ Grade_ID +",\"social_media_id\":null}" ;
+        System.out.println(Valid_body_request);
         Create_Student =  RestAssured.given()
                 .header("Content-Type", "application/json")
                 .header("Authorization", CreateToken)
