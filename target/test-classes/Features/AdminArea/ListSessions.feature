@@ -1,4 +1,4 @@
-Feature:  Test all Scenarios Of ListSessionsAPI
+Feature:  Test all Scenarios Of List Stages API
 
   Scenario:  Validate that body returns with valid data after execute the request successfully
     Given User Create New Session

@@ -30,7 +30,6 @@ public class Student_TestData {
                 Archived_Class = 125193641793L;
                 Class_Has_No_Seats = 838130681495l;
                 resource_id_with_deleted_learning_record = 882207477853L;
-
                 break;
             case "LIVE":
                 student_Id = 870198947097L;

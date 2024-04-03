@@ -18,7 +18,6 @@ import java.sql.SQLException;
 import static org.hamcrest.Matchers.*;
 
 public class NavigationMenu {
-
     TestBase test = new TestBase();
     Database_Connection Connect = new Database_Connection();
     Student_TestData data = new Student_TestData();

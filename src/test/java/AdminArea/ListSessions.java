@@ -27,7 +27,6 @@ public class ListSessions {
     }
     @When("Performing The API of ListSessions")
     public void List_sessions(){
-        System.out.println(session_data.sessionId);
         List_Sessions = test.sendRequest("GET", "/admin/sessions?session-id="+ session_data.sessionId, null , data.Admin_Token);
     }
     @Then("The Session should return in response body")

@@ -85,14 +85,13 @@ public class EditEducator {
         test.Validate_Error_Messages(Edit_Educator,HttpStatus.SC_BAD_REQUEST,"Invalid email format.",4003);
 
     }
-
     @When("Performing the Api of Edit Educator With Invalid body")
     public void Edit_Educator_Invalid_body() {
         String Invalid_body =
-                        "{\"educator_first_name\":\"\"," +
-                        "\"educator_last_name\":\"\"," +
-                        "\"educator_email\":\"\"," +
-                        "\"educator_bio\":\"Experienced educator passionate about technology and programming.\"," +
+                        "{\"educator_first_name\":," +
+                        "\"educator_last_name\":," +
+                        "\"educator_email\":," +
+                        "\"educator_bio\":," +
                         "\"educator_image_bucket\":\"educators-images\"," +
                         "\"educator_image_key\":\"123123123123/profile.jpg\"," +
                         "\"educator_image_cdn\":\"https://educators.images.com\"," +
@@ -102,12 +101,17 @@ public class EditEducator {
 
         Edit_Educator = test.sendRequest("PATCH", "/admin/educators/{educator_id}", Invalid_body,Admin_token);
     }
-
     @Then("I verify the appearance of status code 400 and parameter is invalid")
     public void Validate_Response_of_edit_Educator_with_invalid_body() {
         test.Validate_Error_Messages(Edit_Educator,HttpStatus.SC_BAD_REQUEST,"Invalid request. Please check the path parameters and request context for accuracy.",4002);
     }
-
-
+    @When("Performing the Api of Edit Educator With invalid token")
+    public void Edit_Educator_invalid_token() {
+        Edit_Educator = test.sendRequest("PATCH", "/admin/educators/{educator_id}", valid_body_request,data.refresh_token);
+    }
+    @Then("I verify the appearance of status code 403 and unauthorized user")
+    public void Validate_Response_of_edit_Educator_with_invalid_token() {
+        test.Validate_Error_Messages(Edit_Educator,HttpStatus.SC_FORBIDDEN,"Unauthorized",4031);
+    }
 
 }

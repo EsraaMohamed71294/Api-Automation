@@ -1,0 +1,36 @@
+{
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "stage_id": {
+          "type": "integer"
+        },
+        "country_iso_code": {
+          "type": "string"
+        },
+        "stage_url_text": {
+          "type": "string"
+        },
+        "stage_order": {
+          "type": "integer"
+        },
+        "stage_localization_key": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "stage_id",
+        "country_iso_code",
+        "stage_url_text",
+        "stage_order",
+        "stage_localization_key",
+        "is_active"
+      ]
+    }
+  ]
+}
