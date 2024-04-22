@@ -28,6 +28,7 @@ public class ListStages {
     String stage_url_text;
     Integer stage_order;
     boolean is_active;
+    Integer total_stages;
 
     @Given("Get Stage Data From Database")
     public void get_stages_data()throws SQLException {
@@ -41,7 +42,7 @@ public class ListStages {
             country_iso_code = resultSet.getString("country_iso_code");
             localization_key = resultSet.getString("stage_localization_key");
             stage_order = resultSet.getInt("stage_order");
-            stage_id = resultSet.getInt("stage_id");
+            stage_id = resultSet.getLong("stage_id");
             stage_url_text = resultSet.getString("stage_url_text");
             is_active = resultSet.getBoolean("stage_is_active");
         }
@@ -55,9 +56,9 @@ public class ListStages {
         List_Stages.then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
-                .body("stage_id",hasItem(equalTo(stage_id)),"country_iso_code",hasItem(hasToString(country_iso_code)),
-                        "stage_url_text",hasItem(hasToString(stage_url_text)),"stage_localization_key",hasItem(hasToString(localization_key)),
-                        "stage_order",hasItem(equalTo(stage_order)),"is_active",hasItem(equalTo(is_active)))
+                .body("data.stage_id",hasItem(equalTo(stage_id)),"data.country_iso_code",hasItem(hasToString(country_iso_code)),
+                        "data.stage_url_text",hasItem(hasToString(stage_url_text)),"data.stage_localization_key",hasItem(hasToString(localization_key)),
+                        "data.stage_order",hasItem(equalTo(stage_order)),"data.stage_is_active",hasItem(equalTo(is_active)))
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/ListStages.json")));
     }
     @When("Performing The API of List Stages with stage not exist")
@@ -67,6 +68,30 @@ public class ListStages {
     @Then("I should see Status code 404 with error message stage not exist")
     public void List_sessions_unauthorized_Response(){
         test.Validate_Error_Messages(List_Stages,HttpStatus.SC_NOT_FOUND,"No data found for the specified country or stage or grade.",40417);
+    }
+
+    @Given("Get Stages count From Database")
+    public void get_grades_count()throws SQLException {
+        ResultSet resultSet = Connect.connect_to_database("select count(*) as total_stages from stages s ");
+
+        while (resultSet.next()) {
+            total_stages = resultSet.getInt("total_stages");
+        }
+    }
+
+    @When("Performing The API of List Stages To List All Stages")
+    public void List_All_Grades_(){
+        List_Stages  = test.sendRequest("GET", "/admin/stages", null , data.Admin_Token);
+    }
+
+    @Then("validate the total number of stages returned successfully")
+    public void validate_total_no_of_grades(){
+        List_Stages.prettyPrint();
+        List_Stages.then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("total_count",equalTo(total_stages))
+                .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/Schemas/AdminAreaSchemas/ListStages.json")));
     }
 
 }

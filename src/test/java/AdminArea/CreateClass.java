@@ -41,7 +41,7 @@ public class CreateClass {
             "\"class_start_date\":\"\"," +
             "\"class_end_date\":\"2025-01-28T00:00:00Z\"," +
             "\"class_semester_localization_key\":\"First_Term\"," +
-            "\"class_type\":\"ClassType\"," +
+            "\"class_type\":\"Exam Prep\"," +
             "\"subjects\":[{\"subject_id\":793174170262," +
             "\"class_subject_retail_price\":50," +
             "\"class_subject_discounted_price\":null," +
@@ -78,7 +78,7 @@ public class CreateClass {
                 "\"class_start_date\":\"2025-01-28T00:00:00Z\"," +
                 "\"class_end_date\":\"2025-12-28T00:00:00Z\"," +
                 "\"class_semester_localization_key\":\"First_Term\"," +
-                "\"class_type\":\"ClassType\"," +
+                "\"class_type\":\"Exam Prep\"," +
                 "\"subjects\":[{\"subject_id\":364128042486," +
                 "\"class_subject_retail_price\":50," +
                 "\"class_subject_discounted_price\":null," +
@@ -111,7 +111,7 @@ public class CreateClass {
                 "\"class_start_date\":\"2025-01-28T00:00:00Z\"," +
                 "\"class_end_date\":\"2025-12-28T00:00:00Z\",\"" +
                 "class_semester_localization_key\":\"First_Term\"," +
-                "\"class_type\":\"ClassType\"," +
+                "\"class_type\":\"Exam Prep\"," +
                 "\"subjects\":[{\"subject_id\":364128042486," +
                 "\"class_subject_retail_price\":50," +
                 "\"class_subject_discounted_price\":null," +
@@ -145,7 +145,7 @@ public class CreateClass {
                 "\"class_start_date\":\"2025-01-28T00:00:00Z\"," +
                 "\"class_end_date\":\"2025-12-28T00:00:00Z\"," +
                 "\"class_semester_localization_key\":\"First_Term\"," +
-                "\"class_type\":\"ClassType\"," +
+                "\"class_type\":\"Exam Prep\"," +
                 "\"subjects\":[{\"subject_id\":364128042486," +
                 "\"class_subject_retail_price\":null," +
                 "\"class_subject_discounted_price\":5," +

@@ -27,7 +27,6 @@ public class PayForBlock {
     Faker fakeData = new Faker();
     Educator_TestData data_of_admin = new Educator_TestData();
     CreateClass classData = new CreateClass();
-    Long student_id = data.student_Id;
     Database_Connection connect = new Database_Connection();
     CreateEducator educator= new CreateEducator();
     String user_token = data.Student_refresh_Token;
@@ -35,7 +34,9 @@ public class PayForBlock {
     String classTitle = fakeData.name().title();
     Map<String,Object> pathParams = test.pathParams;
     Long EducatorId;
-    Long Class_ID;
+    public Long student_id = data.student_Id;
+
+    public Long Class_ID;
     String valid_body;
     String  body_for_block_payment_class;
     Response PayForBlock;
@@ -54,7 +55,7 @@ public class PayForBlock {
                 "\"class_description\":\"This class provides an introduction to programming concepts.\",\"class_public_listing_date\":\"2024-01-28T00:00:00Z\"," +
                 "\"class_public_delist_date\":\"2025-01-23T00:00:00Z\",\"class_enrollment_end_date\":\"2025-01-30T00:00:00Z\",\"class_archive_date\":\"2025-01-22T00:00:00Z\"," +
                 "\"class_payment_option_id\":2,\"class_block_count\":2,\"class_seats_limit\":10,\"is_test_class\":true,\"class_start_date\":\"2024-01-28T00:00:00Z\",\"class_end_date\":\"2027-12-28T00:00:00Z\"," +
-                "\"class_semester_localization_key\":\"First_Term\",\"class_type\":\"ClassType\",\"subjects\":[{\"subject_id\":364128042486,\"class_subject_retail_price\":null," +
+                "\"class_semester_localization_key\":\"First_Term\",\"class_type\":\"Exam Prep\",\"subjects\":[{\"subject_id\":364128042486,\"class_subject_retail_price\":null," +
                 "\"class_subject_discounted_price\":5,\"class_subject_session_price\":10,\"blocks\":[{\"class_block_number\":1,\"class_block_retail_price\":"+ block1_price +"}," +
                 "{\"class_block_number\":2,\"class_block_retail_price\":"+ block1_price +"}]}]," +
                 "\"educators\":[{\"educator_order\":1,\"educator_id\":"+ EducatorId +"}]}";
